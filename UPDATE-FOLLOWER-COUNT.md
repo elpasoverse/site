@@ -43,10 +43,10 @@ The social media follower/subscriber counts are displayed on the website in the 
 
 ## Current Counts:
 
-- **X (Twitter):** 1.2K
-- **Instagram:** 850
-- **YouTube:** 420
-- **Discord:** 300+
+- **X (Twitter):** 685
+- **Instagram:** 243
+- **YouTube:** 46
+- **Discord:** 129
 
 *(Update these when you change them!)*
 
