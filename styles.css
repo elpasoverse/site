@@ -1280,28 +1280,13 @@ p {
     background: #F5E6D3;
 }
 
-.social-link-card {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    background: #FFFFFF;
-    padding: 1rem 1.5rem;
-    border-radius: 8px;
-    border: 2px solid #EDD9C0;
-    text-decoration: none;
-    transition: all 0.3s ease;
-    min-width: 200px;
+/* Social Media Icons */
+.instagram-section a svg {
+    transition: fill 0.3s ease;
 }
 
-.social-link-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(139, 69, 19, 0.2);
-    border-color: #C9A961;
-}
-
-.social-link-card svg {
-    color: #8B4513;
-    flex-shrink: 0;
+.instagram-section a:hover svg {
+    fill: #C9A961;
 }
 
 .instagram-feed {
@@ -1940,12 +1925,6 @@ p {
         font-size: 0.9rem;
     }
 
-    .social-link-card {
-        min-width: auto;
-        width: 100%;
-        max-width: 300px;
-        padding: 0.875rem 1.25rem;
-    }
 
     .contact-signup-box {
         padding: 2rem 1.5rem;

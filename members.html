@@ -38,8 +38,8 @@
         <nav class="tabs-navigation">
             <button class="tab-button active" data-tab="dashboard">Dashboard</button>
             <button class="tab-button" data-tab="exclusive">Exclusive Content</button>
-            <button class="tab-button" data-tab="governance">Governance</button>
             <button class="tab-button" data-tab="land">Land Targets</button>
+            <button class="tab-button" data-tab="governance">Governance</button>
             <button class="tab-button" data-tab="browse">Browse Ideas</button>
             <button class="tab-button" data-tab="submit">Submit Your Idea</button>
             <button class="tab-button" data-tab="activity">My Activity</button>
@@ -291,113 +291,6 @@
                 </div>
             </div>
 
-            <!-- Governance Tab -->
-            <div id="governance-tab" class="tab-pane">
-                <h3 style="font-family: 'Playfair Display', Georgia, serif; font-size: 2rem; font-weight: 900; color: #3A2820; margin-bottom: 1rem;">Governance & Voting</h3>
-                <p style="color: #000000; margin-bottom: 2rem;">Help shape the physical frontier destination through community-driven decisions. Your PASO holdings determine your voting power in building the 1880 world.</p>
-
-                <!-- Governance Overview -->
-                <div style="background: linear-gradient(135deg, #2c1810 0%, #4a2511 100%); border: 3px solid #c9a860; padding: 2rem; margin-bottom: 2rem; border-radius: 8px;">
-                    <div style="display: flex; align-items: center; gap: 1.5rem; margin-bottom: 1.5rem;">
-                        <div style="font-size: 3rem;">🗳️</div>
-                        <div>
-                            <h4 style="font-family: 'Playfair Display', Georgia, serif; font-size: 1.8rem; font-weight: 700; color: #f9f3e3; margin: 0;">Your Voting Power</h4>
-                            <p style="color: #a89178; font-size: 0.9rem; margin: 0.5rem 0 0 0;">Community-driven decisions on building the physical destination</p>
-                        </div>
-                    </div>
-
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
-                        <div style="background: rgba(0,0,0,0.3); padding: 1.25rem; border-radius: 4px; border-left: 3px solid #c9a860;">
-                            <div style="color: #c9a860; font-size: 0.75rem; letter-spacing: 0.1em; font-weight: 600; margin-bottom: 0.5rem;">YOUR VOTING POWER</div>
-                            <div id="votingPower" style="font-size: 2rem; font-weight: 900; color: #f9f3e3;">0</div>
-                        </div>
-                        <div style="background: rgba(0,0,0,0.3); padding: 1.25rem; border-radius: 4px; border-left: 3px solid #c9a860;">
-                            <div style="color: #c9a860; font-size: 0.75rem; letter-spacing: 0.1em; font-weight: 600; margin-bottom: 0.5rem;">PROPOSALS VOTED</div>
-                            <div style="font-size: 2rem; font-weight: 900; color: #f9f3e3;">0</div>
-                        </div>
-                        <div style="background: rgba(0,0,0,0.3); padding: 1.25rem; border-radius: 4px; border-left: 3px solid #c9a860;">
-                            <div style="color: #c9a860; font-size: 0.75rem; letter-spacing: 0.1em; font-weight: 600; margin-bottom: 0.5rem;">PARTICIPATION RATE</div>
-                            <div style="font-size: 2rem; font-weight: 900; color: #f9f3e3;">0%</div>
-                        </div>
-                    </div>
-
-                    <div style="background: rgba(0,0,0,0.3); padding: 1.5rem; border-radius: 4px;">
-                        <h5 style="color: #c9a860; font-weight: 700; margin-bottom: 1rem; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.1em;">What You Can Vote On:</h5>
-                        <ul style="color: #d4c4a8; font-size: 0.9rem; line-height: 1.8; margin: 0; padding-left: 1.2rem;">
-                            <li><strong>Infrastructure Priorities</strong> - Which areas of the frontier to develop first</li>
-                            <li><strong>Economic Incentives</strong> - How commerce and trade operates in the 1880s world</li>
-                            <li><strong>Community Projects</strong> - Use of community-funded initiatives for real-world development</li>
-                            <li><strong>Land Development</strong> - Town layouts, buildings, and infrastructure projects</li>
-                            <li><strong>Currency Management</strong> - Community decisions on PASO distribution and rewards</li>
-                            <li><strong>Frontier Expansion</strong> - New experiences, locations, and opportunities to add</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- Active Proposals -->
-                <div style="background: linear-gradient(135deg, #1a1a1a 0%, #2d2416 100%); border: 2px solid #c9a860; padding: 2rem; margin-bottom: 2rem; border-radius: 8px;">
-                    <h4 style="font-family: 'Playfair Display', Georgia, serif; font-size: 1.5rem; font-weight: 700; color: #f9f3e3; margin-bottom: 1.5rem;">Active Proposals</h4>
-
-                    <div id="activeProposals">
-                        <!-- Demo Proposal -->
-                        <div style="background: rgba(0,0,0,0.3); border: 2px solid #c9a860; padding: 1.5rem; border-radius: 8px; margin-bottom: 1.5rem;">
-                            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem;">
-                                <div>
-                                    <div style="display: inline-block; background: #c9a860; color: #1a1a1a; padding: 0.25rem 0.75rem; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; margin-bottom: 0.75rem; border-radius: 2px;">ACTIVE</div>
-                                    <h5 style="font-family: 'Playfair Display', Georgia, serif; font-size: 1.3rem; font-weight: 700; color: #f9f3e3; margin: 0 0 0.5rem 0;">Land Development Priority: Hub Portal Construction</h5>
-                                    <p style="color: #a89178; font-size: 0.85rem; margin: 0;">Proposal to prioritize construction of the Hub Portal as the central point for managing tourism and resident logistics.</p>
-                                </div>
-                                <div style="background: #1a1a1a; padding: 0.75rem 1rem; border-radius: 4px; text-align: center; border: 1px solid #c9a860;">
-                                    <div style="color: #c9a860; font-size: 0.7rem; letter-spacing: 0.1em; font-weight: 600;">ENDS IN</div>
-                                    <div style="font-size: 1.2rem; font-weight: 900; color: #f9f3e3;">7 DAYS</div>
-                                </div>
-                            </div>
-
-                            <!-- Vote Stats -->
-                            <div style="margin: 1.5rem 0;">
-                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
-                                    <span style="color: #d4c4a8; font-size: 0.85rem;">Current Results</span>
-                                    <span style="color: #f9f3e3; font-size: 0.85rem; font-weight: 700;">67% For • 33% Against</span>
-                                </div>
-                                <div style="background: #1a1a1a; height: 20px; border-radius: 10px; overflow: hidden;">
-                                    <div style="background: linear-gradient(90deg, #2d8a2d 0%, #90ee90 100%); width: 67%; height: 100%;"></div>
-                                </div>
-                                <div style="display: flex; justify-content: space-between; margin-top: 0.5rem;">
-                                    <span style="color: #90ee90; font-size: 0.8rem;">For: 6,700,000 PASO</span>
-                                    <span style="color: #ff9090; font-size: 0.8rem;">Against: 3,300,000 PASO</span>
-                                </div>
-                            </div>
-
-                            <!-- Vote Buttons -->
-                            <div style="display: flex; gap: 1rem; margin-top: 1.5rem;">
-                                <button onclick="alert('Demo Mode: Voting will be enabled when governance contracts are deployed.')" style="flex: 1; background: #2d8a2d; color: #fff; padding: 1rem; font-weight: 700; border: 2px solid #2d8a2d; border-radius: 4px; cursor: pointer; transition: all 0.3s ease;">
-                                    ✓ Vote For
-                                </button>
-                                <button onclick="alert('Demo Mode: Voting will be enabled when governance contracts are deployed.')" style="flex: 1; background: transparent; color: #ff9090; padding: 1rem; font-weight: 700; border: 2px solid #8a2d2d; border-radius: 4px; cursor: pointer; transition: all 0.3s ease;">
-                                    ✗ Vote Against
-                                </button>
-                            </div>
-                        </div>
-
-                        <!-- Coming Soon Message -->
-                        <div style="text-align: center; padding: 2rem; background: rgba(0,0,0,0.3); border-radius: 8px; border: 1px dashed rgba(201, 168, 97, 0.5);">
-                            <p style="color: #d4c4a8; font-size: 0.95rem; margin: 0;">More proposals will appear as the community grows. Check back soon!</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Recent Votes -->
-                <div style="background: linear-gradient(135deg, #2c1810 0%, #4a2511 100%); border: 2px solid #c9a860; padding: 2rem; border-radius: 8px;">
-                    <h4 style="font-family: 'Playfair Display', Georgia, serif; font-size: 1.5rem; font-weight: 700; color: #f9f3e3; margin-bottom: 1.5rem;">Your Vote History</h4>
-
-                    <div style="text-align: center; padding: 3rem 2rem; background: rgba(0,0,0,0.3); border-radius: 8px;">
-                        <div style="font-size: 3rem; margin-bottom: 1rem; opacity: 0.5;">📊</div>
-                        <p style="color: #a89178; font-size: 0.95rem; margin: 0;">You haven't participated in any votes yet.</p>
-                        <p style="color: #999; font-size: 0.85rem; margin-top: 0.5rem;">Your vote history will appear here once you start voting on proposals.</p>
-                    </div>
-                </div>
-            </div>
-
             <!-- Exclusive Content Tab -->
             <div id="exclusive-tab" class="tab-pane">
                 <h3>Exclusive Content</h3>
@@ -509,7 +402,7 @@
 
                             <!-- Reference Photo -->
                             <div style="height: 200px; overflow: hidden; background: #1a1a1a;">
-                                <img src="assets/brownsville-reference.jpg" alt="Verse Hotel" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.8;">
+                                <img src="assets/verse-hotel-reference.png" alt="Verse Hotel" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.8;">
                             </div>
 
                             <div style="padding: 1.5rem; flex: 1; display: flex; flex-direction: column;">
@@ -553,7 +446,7 @@
 
                             <!-- Reference Photo -->
                             <div style="height: 200px; overflow: hidden; background: #1a1a1a;">
-                                <img src="assets/story-pillar-bg.jpg" alt="Western Leone" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.8;">
+                                <img src="assets/western-leone-reference.png" alt="Western Leone" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.8;">
                             </div>
 
                             <div style="padding: 1.5rem; flex: 1; display: flex; flex-direction: column;">
@@ -597,7 +490,7 @@
 
                             <!-- Reference Photo -->
                             <div style="height: 200px; overflow: hidden; background: #1a1a1a;">
-                                <img src="assets/canyon-background.jpg" alt="Rio Texaco" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.8;">
+                                <img src="assets/rio-texaco-reference.png" alt="Rio Texaco" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.8;">
                             </div>
 
                             <div style="padding: 1.5rem; flex: 1; display: flex; flex-direction: column;">
@@ -636,6 +529,113 @@
                     <p style="color: #8B4513; font-size: 0.95rem; line-height: 1.8; margin: 0;">
                         <strong>Learn more:</strong> Review the complete vision and land strategy in the <a href="https://drive.google.com/file/d/1D_xbK8tDvH35-UsiSHx7cH91E3nz6ySO/view" target="_blank" style="color: #C9A961; text-decoration: underline;">VisionPaper</a>.
                     </p>
+                </div>
+            </div>
+
+            <!-- Governance Tab -->
+            <div id="governance-tab" class="tab-pane">
+                <h3 style="font-family: 'Playfair Display', Georgia, serif; font-size: 2rem; font-weight: 900; color: #3A2820; margin-bottom: 1rem;">Governance & Voting</h3>
+                <p style="color: #000000; margin-bottom: 2rem;">Help shape the physical frontier destination through community-driven decisions. Your PASO holdings determine your voting power in building the 1880 world.</p>
+
+                <!-- Governance Overview -->
+                <div style="background: linear-gradient(135deg, #2c1810 0%, #4a2511 100%); border: 3px solid #c9a860; padding: 2rem; margin-bottom: 2rem; border-radius: 8px;">
+                    <div style="display: flex; align-items: center; gap: 1.5rem; margin-bottom: 1.5rem;">
+                        <div style="font-size: 3rem;">🗳️</div>
+                        <div>
+                            <h4 style="font-family: 'Playfair Display', Georgia, serif; font-size: 1.8rem; font-weight: 700; color: #f9f3e3; margin: 0;">Your Voting Power</h4>
+                            <p style="color: #a89178; font-size: 0.9rem; margin: 0.5rem 0 0 0;">Community-driven decisions on building the physical destination</p>
+                        </div>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
+                        <div style="background: rgba(0,0,0,0.3); padding: 1.25rem; border-radius: 4px; border-left: 3px solid #c9a860;">
+                            <div style="color: #c9a860; font-size: 0.75rem; letter-spacing: 0.1em; font-weight: 600; margin-bottom: 0.5rem;">YOUR VOTING POWER</div>
+                            <div id="votingPower" style="font-size: 2rem; font-weight: 900; color: #f9f3e3;">0</div>
+                        </div>
+                        <div style="background: rgba(0,0,0,0.3); padding: 1.25rem; border-radius: 4px; border-left: 3px solid #c9a860;">
+                            <div style="color: #c9a860; font-size: 0.75rem; letter-spacing: 0.1em; font-weight: 600; margin-bottom: 0.5rem;">PROPOSALS VOTED</div>
+                            <div style="font-size: 2rem; font-weight: 900; color: #f9f3e3;">0</div>
+                        </div>
+                        <div style="background: rgba(0,0,0,0.3); padding: 1.25rem; border-radius: 4px; border-left: 3px solid #c9a860;">
+                            <div style="color: #c9a860; font-size: 0.75rem; letter-spacing: 0.1em; font-weight: 600; margin-bottom: 0.5rem;">PARTICIPATION RATE</div>
+                            <div style="font-size: 2rem; font-weight: 900; color: #f9f3e3;">0%</div>
+                        </div>
+                    </div>
+
+                    <div style="background: rgba(0,0,0,0.3); padding: 1.5rem; border-radius: 4px;">
+                        <h5 style="color: #c9a860; font-weight: 700; margin-bottom: 1rem; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.1em;">What You Can Vote On:</h5>
+                        <ul style="color: #d4c4a8; font-size: 0.9rem; line-height: 1.8; margin: 0; padding-left: 1.2rem;">
+                            <li><strong>Infrastructure Priorities</strong> - Which areas of the frontier to develop first</li>
+                            <li><strong>Economic Incentives</strong> - How commerce and trade operates in the 1880s world</li>
+                            <li><strong>Community Projects</strong> - Use of community-funded initiatives for real-world development</li>
+                            <li><strong>Land Development</strong> - Town layouts, buildings, and infrastructure projects</li>
+                            <li><strong>Currency Management</strong> - Community decisions on PASO distribution and rewards</li>
+                            <li><strong>Frontier Expansion</strong> - New experiences, locations, and opportunities to add</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Active Proposals -->
+                <div style="background: linear-gradient(135deg, #1a1a1a 0%, #2d2416 100%); border: 2px solid #c9a860; padding: 2rem; margin-bottom: 2rem; border-radius: 8px;">
+                    <h4 style="font-family: 'Playfair Display', Georgia, serif; font-size: 1.5rem; font-weight: 700; color: #f9f3e3; margin-bottom: 1.5rem;">Active Proposals</h4>
+
+                    <div id="activeProposals">
+                        <!-- Demo Proposal -->
+                        <div style="background: rgba(0,0,0,0.3); border: 2px solid #c9a860; padding: 1.5rem; border-radius: 8px; margin-bottom: 1.5rem;">
+                            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem;">
+                                <div>
+                                    <div style="display: inline-block; background: #c9a860; color: #1a1a1a; padding: 0.25rem 0.75rem; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; margin-bottom: 0.75rem; border-radius: 2px;">ACTIVE</div>
+                                    <h5 style="font-family: 'Playfair Display', Georgia, serif; font-size: 1.3rem; font-weight: 700; color: #f9f3e3; margin: 0 0 0.5rem 0;">Land Development Priority: Hub Portal Construction</h5>
+                                    <p style="color: #a89178; font-size: 0.85rem; margin: 0;">Proposal to prioritize construction of the Hub Portal as the central point for managing tourism and resident logistics.</p>
+                                </div>
+                                <div style="background: #1a1a1a; padding: 0.75rem 1rem; border-radius: 4px; text-align: center; border: 1px solid #c9a860;">
+                                    <div style="color: #c9a860; font-size: 0.7rem; letter-spacing: 0.1em; font-weight: 600;">ENDS IN</div>
+                                    <div style="font-size: 1.2rem; font-weight: 900; color: #f9f3e3;">7 DAYS</div>
+                                </div>
+                            </div>
+
+                            <!-- Vote Stats -->
+                            <div style="margin: 1.5rem 0;">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                                    <span style="color: #d4c4a8; font-size: 0.85rem;">Current Results</span>
+                                    <span style="color: #f9f3e3; font-size: 0.85rem; font-weight: 700;">67% For • 33% Against</span>
+                                </div>
+                                <div style="background: #1a1a1a; height: 20px; border-radius: 10px; overflow: hidden;">
+                                    <div style="background: linear-gradient(90deg, #2d8a2d 0%, #90ee90 100%); width: 67%; height: 100%;"></div>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; margin-top: 0.5rem;">
+                                    <span style="color: #90ee90; font-size: 0.8rem;">For: 6,700,000 PASO</span>
+                                    <span style="color: #ff9090; font-size: 0.8rem;">Against: 3,300,000 PASO</span>
+                                </div>
+                            </div>
+
+                            <!-- Vote Buttons -->
+                            <div style="display: flex; gap: 1rem; margin-top: 1.5rem;">
+                                <button onclick="alert('Demo Mode: Voting will be enabled when governance contracts are deployed.')" style="flex: 1; background: #2d8a2d; color: #fff; padding: 1rem; font-weight: 700; border: 2px solid #2d8a2d; border-radius: 4px; cursor: pointer; transition: all 0.3s ease;">
+                                    ✓ Vote For
+                                </button>
+                                <button onclick="alert('Demo Mode: Voting will be enabled when governance contracts are deployed.')" style="flex: 1; background: transparent; color: #ff9090; padding: 1rem; font-weight: 700; border: 2px solid #8a2d2d; border-radius: 4px; cursor: pointer; transition: all 0.3s ease;">
+                                    ✗ Vote Against
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Coming Soon Message -->
+                        <div style="text-align: center; padding: 2rem; background: rgba(0,0,0,0.3); border-radius: 8px; border: 1px dashed rgba(201, 168, 97, 0.5);">
+                            <p style="color: #d4c4a8; font-size: 0.95rem; margin: 0;">More proposals will appear as the community grows. Check back soon!</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Votes -->
+                <div style="background: linear-gradient(135deg, #2c1810 0%, #4a2511 100%); border: 2px solid #c9a860; padding: 2rem; border-radius: 8px;">
+                    <h4 style="font-family: 'Playfair Display', Georgia, serif; font-size: 1.5rem; font-weight: 700; color: #f9f3e3; margin-bottom: 1.5rem;">Your Vote History</h4>
+
+                    <div style="text-align: center; padding: 3rem 2rem; background: rgba(0,0,0,0.3); border-radius: 8px;">
+                        <div style="font-size: 3rem; margin-bottom: 1rem; opacity: 0.5;">📊</div>
+                        <p style="color: #a89178; font-size: 0.95rem; margin: 0;">You haven't participated in any votes yet.</p>
+                        <p style="color: #999; font-size: 0.85rem; margin-top: 0.5rem;">Your vote history will appear here once you start voting on proposals.</p>
+                    </div>
                 </div>
             </div>
 
