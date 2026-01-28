@@ -860,6 +860,59 @@ p {
     font-size: 0.9rem;
 }
 
+/* Active Phase Card */
+.phase-card.active {
+    border: 3px solid #2d8a2d;
+    background-color: #e8f5e8;
+    box-shadow: 0 4px 12px rgba(45, 138, 45, 0.2);
+}
+
+.phase-card.active .phase-number {
+    background-color: #2d8a2d;
+    color: #fff;
+}
+
+.phase-card.active .phase-number:after {
+    content: ' • ACTIVE NOW';
+    font-size: 0.7rem;
+    letter-spacing: 0.05em;
+}
+
+/* Inactive Phase Card */
+.phase-card.inactive {
+    opacity: 0.5;
+    border: 2px solid #999;
+    background-color: #e8e8e8;
+}
+
+.phase-card.inactive .phase-number {
+    background-color: #999;
+    color: #ccc;
+}
+
+.phase-card.inactive .phase-number:after {
+    content: ' • COMING SOON';
+    font-size: 0.7rem;
+    letter-spacing: 0.05em;
+}
+
+.phase-card.inactive h4 {
+    color: #999;
+}
+
+.phase-card.inactive ul li {
+    color: #999;
+}
+
+.phase-card.inactive ul li:before {
+    color: #bbb;
+}
+
+.phase-card.inactive:hover {
+    transform: none;
+    box-shadow: none;
+}
+
 /* PASO Distribution */
 .paso-distribution {
     display: flex;
