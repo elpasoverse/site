@@ -8,26 +8,29 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Email Capture Popup -->
-    <div id="emailPopup" class="email-popup">
-        <button class="popup-close" onclick="closeEmailPopup()">&times;</button>
-        <div class="popup-content">
-            <img src="assets/paso-token.png" alt="PASO Coin" style="width: 50px; height: 50px; margin-bottom: 0.5rem;">
-            <h3 style="font-family: 'Playfair Display', Georgia, serif; font-size: 1.3rem; color: #3A2820; font-weight: 900; margin-bottom: 0.25rem;">Get 25 PASO</h3>
-            <p style="color: #8B4513; font-size: 0.9rem; margin-bottom: 1rem; line-height: 1.4;">Join the founding pioneers</p>
-
-            <form id="emailCaptureForm" onsubmit="submitEmail(event)">
+    <!-- Email Capture Bar -->
+    <div id="emailBar" class="email-bar">
+        <div class="email-bar-container">
+            <div class="email-bar-content">
+                <img src="assets/paso-token.png" alt="PASO Coin" class="email-bar-coin">
+                <div class="email-bar-text">
+                    <strong>Join the Frontier</strong>
+                    <span>Get 25 PASO coins • Exclusive updates</span>
+                </div>
+            </div>
+            <form id="emailCaptureForm" onsubmit="submitEmail(event)" class="email-bar-form">
                 <input
                     type="email"
                     id="emailInput"
-                    placeholder="Your email"
+                    placeholder="Enter your email"
                     required
-                    class="popup-email-input"
+                    class="email-bar-input"
                 />
-                <button type="submit" class="popup-submit-btn">
-                    Claim →
+                <button type="submit" class="email-bar-submit">
+                    Claim PASO
                 </button>
             </form>
+            <button class="email-bar-close" onclick="closeEmailBar()" aria-label="Close">&times;</button>
         </div>
     </div>
 
@@ -282,17 +285,20 @@
 
     <!-- JavaScript -->
     <script>
-        // Email Capture Popup Functions
-        function showEmailPopup() {
-            // Check if user has already submitted email
+        // Email Capture Bar Functions
+        function showEmailBar() {
+            // Check if user has already submitted email or dismissed
             const emailSubmitted = localStorage.getItem('emailSubmitted');
-            if (!emailSubmitted) {
-                document.getElementById('emailPopup').classList.add('show');
+            const barDismissed = localStorage.getItem('emailBarDismissed');
+
+            if (!emailSubmitted && !barDismissed) {
+                document.getElementById('emailBar').classList.add('show');
             }
         }
 
-        function closeEmailPopup() {
-            document.getElementById('emailPopup').classList.remove('show');
+        function closeEmailBar() {
+            document.getElementById('emailBar').classList.remove('show');
+            localStorage.setItem('emailBarDismissed', 'true');
         }
 
         function submitEmail(event) {
@@ -308,22 +314,19 @@
             localStorage.setItem('userEmail', email);
 
             // Show success message
-            const popupContent = document.querySelector('.popup-content');
-            popupContent.innerHTML = `
-                <div style="text-align: center; padding: 1rem 0;">
-                    <div style="font-size: 3rem; margin-bottom: 0.5rem; color: #2d8a2d;">✓</div>
-                    <h3 style="font-family: 'Playfair Display', Georgia, serif; font-size: 1.3rem; color: #2d8a2d; margin-bottom: 0.5rem; font-weight: 900;">Welcome!</h3>
-                    <p style="color: #3A2820; font-size: 0.9rem; line-height: 1.5; margin-bottom: 0.75rem;">
-                        <strong>25 PASO</strong> reserved for you.
-                    </p>
-                    <p style="color: #8B4513; font-size: 0.8rem; line-height: 1.4;">
-                        Check your email for next steps.
-                    </p>
+            const barContainer = document.querySelector('.email-bar-container');
+            barContainer.innerHTML = `
+                <div style="display: flex; align-items: center; justify-content: center; gap: 1rem; padding: 0.5rem;">
+                    <div style="font-size: 2rem; color: #D4A745;">✓</div>
+                    <div>
+                        <strong style="color: #3A2820; font-size: 1.05rem;">Welcome, Pioneer!</strong>
+                        <p style="color: #8B4513; font-size: 0.9rem; margin: 0.25rem 0 0 0;">25 PASO reserved. Check your email for next steps.</p>
+                    </div>
                 </div>
             `;
 
-            // Auto-close after 3 seconds
-            setTimeout(closeEmailPopup, 3000);
+            // Auto-close after 4 seconds
+            setTimeout(closeEmailBar, 4000);
 
             // TODO: In production, integrate with your email service provider
             // Example: Mailchimp, ConvertKit, Sendinblue, etc.
@@ -334,9 +337,9 @@
             // });
         }
 
-        // Show popup 3 seconds after page load
+        // Show bar 3 seconds after page load
         window.addEventListener('load', function() {
-            setTimeout(showEmailPopup, 3000);
+            setTimeout(showEmailBar, 3000);
         });
 
         function toggleVision() {
