@@ -1165,9 +1165,19 @@ p {
 }
 
 .footer-credits {
-    margin-top: 0.5rem !important;
-    font-size: 0.8rem !important;
-    color: #C9A961;
+    margin-top: 1rem !important;
+    text-align: center;
+}
+
+.footer-logo {
+    height: 30px;
+    width: auto;
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+}
+
+.footer-logo:hover {
+    opacity: 1;
 }
 
 /* Email Capture Bar - Sticky Bottom Bar */
