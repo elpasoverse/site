@@ -359,40 +359,63 @@
             localStorage.setItem('emailBarDismissed', 'true');
         }
 
-        function submitEmail(event) {
+        async function submitEmail(event) {
             event.preventDefault();
 
             const email = document.getElementById('emailInput').value;
+            const submitButton = document.querySelector('.email-bar-submit');
+            const originalButtonText = submitButton.textContent;
 
-            // Store email submission (in production, send to your backend/email service)
-            console.log('Email captured:', email);
+            // Show loading state
+            submitButton.textContent = 'Submitting...';
+            submitButton.disabled = true;
 
-            // Mark as submitted
-            localStorage.setItem('emailSubmitted', 'true');
-            localStorage.setItem('userEmail', email);
+            try {
+                // GOOGLE FORMS INTEGRATION
+                const formURL = 'https://docs.google.com/forms/d/e/1FAIpQLSdgBN_4kKKwNxah9h2qJInXgYlGexgp12XYFphfvwqtID8sTg/formResponse';
 
-            // Show success message
-            const barContainer = document.querySelector('.email-bar-container');
-            barContainer.innerHTML = `
-                <div style="display: flex; align-items: center; justify-content: center; gap: 1rem; padding: 0.5rem;">
-                    <div style="font-size: 2rem; color: #D4A745;">✓</div>
-                    <div>
-                        <strong style="color: #3A2820; font-size: 1.05rem;">Welcome, Pioneer!</strong>
-                        <p style="color: #8B4513; font-size: 0.9rem; margin: 0.25rem 0 0 0;">25 PASO reserved. Check your email for next steps.</p>
+                // Create form data
+                const formData = new FormData();
+                formData.append('entry.1894748129', email);
+
+                // Submit to Google Forms
+                await fetch(formURL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    body: formData
+                });
+
+                // Mark as submitted
+                localStorage.setItem('emailSubmitted', 'true');
+                localStorage.setItem('userEmail', email);
+
+                // Show success message
+                const barContainer = document.querySelector('.email-bar-container');
+                barContainer.innerHTML = `
+                    <div style="display: flex; align-items: center; justify-content: center; gap: 1rem; padding: 0.5rem;">
+                        <div style="font-size: 2rem; color: #D4A745;">✓</div>
+                        <div>
+                            <strong style="color: #3A2820; font-size: 1.05rem;">Welcome, Pioneer!</strong>
+                            <p style="color: #8B4513; font-size: 0.9rem; margin: 0.25rem 0 0 0;">25 PASO reserved. Check your email for next steps.</p>
+                        </div>
                     </div>
-                </div>
-            `;
+                `;
 
-            // Auto-close after 4 seconds
-            setTimeout(closeEmailBar, 4000);
+                // Auto-close after 4 seconds
+                setTimeout(closeEmailBar, 4000);
 
-            // TODO: In production, integrate with your email service provider
-            // Example: Mailchimp, ConvertKit, Sendinblue, etc.
-            // fetch('/api/subscribe', {
-            //     method: 'POST',
-            //     headers: { 'Content-Type': 'application/json' },
-            //     body: JSON.stringify({ email: email })
-            // });
+                console.log('Email successfully submitted:', email);
+
+            } catch (error) {
+                console.error('Error submitting email:', error);
+
+                // Show error message
+                alert('Oops! There was an issue submitting your email. Please try again or contact us directly.');
+
+                // Reset button
+                submitButton.textContent = originalButtonText;
+                submitButton.disabled = false;
+            }
         }
 
         // Show bar 3 seconds after page load
