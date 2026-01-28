@@ -402,35 +402,23 @@ p {
     grid-template-columns: repeat(2, 1fr);
     gap: 1.5rem;
     margin-top: 3rem;
-    max-width: 1200px;
+    max-width: 1400px;
     margin-left: auto;
     margin-right: auto;
 }
 
 .pillar-card {
     position: relative;
-    height: 500px;
-    overflow: hidden;
-    transition: all 0.5s ease;
+    min-height: 600px;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    border: 3px solid #C9A961;
-    border-radius: 8px;
-    cursor: pointer;
-    box-shadow: 0 6px 20px rgba(139, 69, 19, 0.25);
-}
-
-.pillar-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 12px 35px rgba(139, 69, 19, 0.35);
-    border-color: #D4A745;
-}
-
-.pillar-card.expanded {
-    height: auto;
-    min-height: 500px;
-    overflow: visible;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 2.5rem;
+    transition: all 0.3s ease;
+    overflow: hidden;
 }
 
 .pillar-card::before {
@@ -440,110 +428,57 @@ p {
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.6));
+    background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.5));
     z-index: 1;
-    transition: all 0.5s ease;
 }
 
-.pillar-card.expanded::before {
-    background: linear-gradient(to bottom, rgba(0,0,0,0.5), rgba(0,0,0,0.85));
+.pillar-card:hover::before {
+    background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.6));
 }
 
-/* Opacity Banner Behind Text */
-.pillar-overlay {
+/* Text Box with Opacity Background */
+.pillar-text-box {
     position: relative;
     z-index: 2;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 3rem 2rem;
-    text-align: center;
-}
-
-.pillar-overlay::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 85%;
-    height: 70%;
-    background: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(3px);
-    border-radius: 8px;
-    z-index: -1;
-    transition: all 0.3s ease;
-}
-
-.pillar-card:hover .pillar-overlay::before {
-    background: rgba(212, 167, 69, 0.25);
+    background: rgba(0, 0, 0, 0.6);
     backdrop-filter: blur(5px);
+    padding: 2rem;
+    border-radius: 6px;
+    max-width: 100%;
 }
 
-.pillar-overlay h3 {
+.pillar-text-box h3 {
     font-family: 'Playfair Display', Georgia, serif;
-    font-size: 2.2rem;
+    font-size: 2rem;
     color: #FFFFFF;
-    margin-bottom: 1rem;
+    margin-bottom: 0.75rem;
     text-transform: uppercase;
-    letter-spacing: 0.15em;
-    text-shadow: 2px 2px 12px rgba(0, 0, 0, 0.9);
+    letter-spacing: 0.12em;
     font-weight: 900;
+    text-align: left;
 }
 
 .pillar-subtitle {
     color: #F5E6D3;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    text-align: left;
+    margin: 0 0 1.25rem 0;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 600;
+}
+
+.pillar-description {
+    color: #E8DCC8;
     font-size: 0.95rem;
     line-height: 1.7;
-    text-align: center;
-    margin: 0;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.9);
-    font-weight: 400;
-    max-width: 90%;
-}
-
-/* Expanded Details */
-.pillar-details {
-    position: relative;
-    z-index: 2;
-    padding: 0;
-    height: 0;
-    overflow: hidden;
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.5s ease, visibility 0s 0.5s;
-}
-
-.pillar-card.expanded .pillar-details {
-    padding: 0 3rem 3rem 3rem;
-    height: auto;
-    opacity: 1;
-    visibility: visible;
-    transition: all 0.5s ease, visibility 0s 0s;
-}
-
-.pillar-details h4 {
-    font-family: 'Playfair Display', Georgia, serif;
-    font-size: 1.5rem;
-    color: #D4A745;
     margin-bottom: 1rem;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    font-weight: 700;
-    text-align: center;
+    text-align: left;
 }
 
-.pillar-details p {
-    color: #F5E6D3;
-    font-size: 1rem;
-    line-height: 1.8;
-    margin-bottom: 1rem;
-    text-align: center;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+.pillar-description:last-child {
+    margin-bottom: 0;
 }
 
 /* Pillar Background Images */
@@ -1550,31 +1485,24 @@ p {
     }
 
     .pillar-card {
-        height: 400px;
+        min-height: 500px;
+        padding: 2rem;
     }
 
-    .pillar-card.expanded {
-        min-height: 400px;
+    .pillar-text-box {
+        padding: 1.5rem;
     }
 
-    .pillar-overlay h3 {
-        font-size: 1.8rem;
+    .pillar-text-box h3 {
+        font-size: 1.6rem;
     }
 
     .pillar-subtitle {
-        font-size: 0.85rem;
+        font-size: 0.8rem;
     }
 
-    .pillar-card.expanded .pillar-details {
-        padding: 0 2rem 2rem 2rem;
-    }
-
-    .pillar-details h4 {
-        font-size: 1.3rem;
-    }
-
-    .pillar-details p {
-        font-size: 0.95rem;
+    .pillar-description {
+        font-size: 0.9rem;
     }
 
     .pillar-subtitle {
