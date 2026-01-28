@@ -1267,6 +1267,35 @@ p {
     background: #F5E6D3;
 }
 
+.social-stats {
+    display: flex;
+    justify-content: center;
+    margin: 2rem 0 0.5rem 0;
+}
+
+.stat-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: linear-gradient(135deg, #EDD9C0 0%, #E8D5C0 100%);
+    padding: 0.75rem 1.5rem;
+    border-radius: 50px;
+    border: 2px solid #C9A961;
+    box-shadow: 0 4px 12px rgba(139, 69, 19, 0.15);
+}
+
+.stat-number {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #8B4513;
+}
+
+.stat-label {
+    color: #5a4a3a;
+    font-size: 0.95rem;
+}
+
 .instagram-feed {
     max-width: 1200px;
     margin: 0 auto;
@@ -1901,6 +1930,18 @@ p {
 
     .instagram-section p {
         font-size: 0.9rem;
+    }
+
+    .stat-badge {
+        padding: 0.6rem 1.2rem;
+    }
+
+    .stat-number {
+        font-size: 1.2rem;
+    }
+
+    .stat-label {
+        font-size: 0.85rem;
     }
 
     .contact-signup-box {
