@@ -356,18 +356,11 @@ p {
 /* About Section */
 .about {
     background-image: url('assets/canyon-background.jpg');
-    background-size: cover;
-    background-position: center center;
+    background-size: 120%;
+    background-position: center 50%;
     background-repeat: no-repeat;
-    background-attachment: fixed;
+    background-attachment: scroll;
     position: relative;
-    will-change: transform;
-    transform: translate3d(0, 0, 0);
-    -webkit-transform: translate3d(0, 0, 0);
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-    -webkit-perspective: 1000;
-    perspective: 1000;
 }
 
 .about::before {
@@ -406,19 +399,37 @@ p {
 
 .pillars-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1rem;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
     margin-top: 3rem;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .pillar-card {
     position: relative;
-    height: 600px;
+    height: 500px;
     overflow: hidden;
-    transition: all 0.3s ease;
+    transition: all 0.5s ease;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+    border: 3px solid #C9A961;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 6px 20px rgba(139, 69, 19, 0.25);
+}
+
+.pillar-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 35px rgba(139, 69, 19, 0.35);
+    border-color: #D4A745;
+}
+
+.pillar-card.expanded {
+    height: auto;
+    min-height: 500px;
 }
 
 .pillar-card::before {
@@ -428,11 +439,17 @@ p {
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(to bottom, rgba(0,0,0,0.6), rgba(0,0,0,0.8));
+    background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.6));
     z-index: 1;
+    transition: all 0.5s ease;
 }
 
-.pillar-content {
+.pillar-card.expanded::before {
+    background: linear-gradient(to bottom, rgba(0,0,0,0.5), rgba(0,0,0,0.85));
+}
+
+/* Opacity Banner Behind Text */
+.pillar-overlay {
     position: relative;
     z-index: 2;
     height: 100%;
@@ -440,69 +457,88 @@ p {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 2rem;
+    padding: 3rem 2rem;
     text-align: center;
 }
 
-.pillar-card h3 {
+.pillar-overlay::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 85%;
+    height: 70%;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(3px);
+    border-radius: 8px;
+    z-index: -1;
+    transition: all 0.3s ease;
+}
+
+.pillar-card:hover .pillar-overlay::before {
+    background: rgba(212, 167, 69, 0.25);
+    backdrop-filter: blur(5px);
+}
+
+.pillar-overlay h3 {
     font-family: 'Playfair Display', Georgia, serif;
-    font-size: 1.4rem;
+    font-size: 2.2rem;
     color: #FFFFFF;
-    margin-bottom: 0.8rem;
+    margin-bottom: 1rem;
     text-transform: uppercase;
     letter-spacing: 0.15em;
-    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.9);
-    font-weight: 700;
+    text-shadow: 2px 2px 12px rgba(0, 0, 0, 0.9);
+    font-weight: 900;
 }
 
 .pillar-subtitle {
-    color: #FFFFFF;
-    font-size: 0.8rem;
-    line-height: 1.6;
+    color: #F5E6D3;
+    font-size: 0.95rem;
+    line-height: 1.7;
     text-align: center;
     margin: 0;
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.9);
+    text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.9);
     font-weight: 400;
     max-width: 90%;
+}
+
+/* Expanded Details */
+.pillar-details {
+    position: relative;
+    z-index: 2;
+    padding: 0 3rem 3rem 3rem;
     max-height: 0;
     overflow: hidden;
     opacity: 0;
-    transition: max-height 0.5s ease, opacity 0.5s ease;
+    transition: all 0.5s ease;
 }
 
-.pillars-grid.expanded .pillar-subtitle {
-    max-height: 200px;
+.pillar-card.expanded .pillar-details {
+    max-height: 500px;
     opacity: 1;
 }
 
-.pillars-read-more {
-    display: block;
-    margin: 2rem auto 0;
-    padding: 0.8rem 2rem;
-    background: transparent;
-    color: #8B4513;
-    border: 2px solid #C9A961;
+.pillar-details h4 {
     font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.5rem;
+    color: #D4A745;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 700;
+    text-align: center;
+}
+
+.pillar-details p {
+    color: #F5E6D3;
     font-size: 1rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.pillars-read-more:hover {
-    background-color: rgba(201, 169, 97, 0.1);
-    transform: translateY(-2px);
-}
-
-.pillars-read-more::after {
-    content: ' ▼';
-    transition: transform 0.3s ease;
-    display: inline-block;
-}
-
-.pillars-read-more.expanded::after {
-    transform: rotate(180deg);
+    line-height: 1.8;
+    margin-bottom: 1rem;
+    text-align: center;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
 }
 
 /* Pillar Background Images */
@@ -526,18 +562,11 @@ p {
 /* El Paso Verse Land Section */
 .el-paso-verse {
     background-image: url('assets/land-bg-new.png');
-    background-size: cover;
-    background-position: center;
+    background-size: 120%;
+    background-position: center 50%;
     background-repeat: no-repeat;
-    background-attachment: fixed;
+    background-attachment: scroll;
     position: relative;
-    will-change: transform;
-    transform: translate3d(0, 0, 0);
-    -webkit-transform: translate3d(0, 0, 0);
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-    -webkit-perspective: 1000;
-    perspective: 1000;
 }
 
 .el-paso-verse::before {
@@ -1511,16 +1540,36 @@ p {
     }
 
     .pillars-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1rem;
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
     }
 
     .pillar-card {
         height: 400px;
     }
 
-    .pillar-card h3 {
-        font-size: 1.1rem;
+    .pillar-card.expanded {
+        min-height: 400px;
+    }
+
+    .pillar-overlay h3 {
+        font-size: 1.8rem;
+    }
+
+    .pillar-subtitle {
+        font-size: 0.85rem;
+    }
+
+    .pillar-details {
+        padding: 0 2rem 2rem 2rem;
+    }
+
+    .pillar-details h4 {
+        font-size: 1.3rem;
+    }
+
+    .pillar-details p {
+        font-size: 0.95rem;
     }
 
     .pillar-subtitle {

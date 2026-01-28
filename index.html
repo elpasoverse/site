@@ -101,32 +101,58 @@
             <h2>Four Pillars of the Frontier</h2>
             <div class="divider"></div>
             <div class="pillars-grid">
-                <div class="pillar-card pillar-story">
-                    <div class="pillar-content">
-                        <h3>Story</h3>
+                <!-- Story Pillar -->
+                <div class="pillar-card pillar-story" onclick="togglePillar('story')">
+                    <div class="pillar-overlay">
+                        <h3>STORY</h3>
                         <p class="pillar-subtitle">Launching world through film</p>
                     </div>
+                    <div class="pillar-details" id="pillar-story">
+                        <h4>Cinematic Universe</h4>
+                        <p>El Paso Verse begins on the silver screen—a series of authentic Western films shot on Kodak film stock, capturing the beauty and brutality of the 1880s frontier.</p>
+                        <p>Each production introduces characters, locations, and stories that will come to life in the physical destination.</p>
+                    </div>
                 </div>
-                <div class="pillar-card pillar-token">
-                    <div class="pillar-content">
-                        <h3>Coin</h3>
+
+                <!-- Coin Pillar -->
+                <div class="pillar-card pillar-token" onclick="togglePillar('coin')">
+                    <div class="pillar-overlay">
+                        <h3>COIN</h3>
                         <p class="pillar-subtitle">PASO is the currency of the 1880 frontier</p>
                     </div>
-                </div>
-                <div class="pillar-card pillar-participation">
-                    <div class="pillar-content">
-                        <h3>Partake</h3>
-                        <p class="pillar-subtitle">Community decides what gets built and experienced</p>
+                    <div class="pillar-details" id="pillar-coin">
+                        <h4>Frontier Currency</h4>
+                        <p>PASO is the key to everything in El Paso Verse—from owning exclusive film frames to accessing the physical frontier towns.</p>
+                        <p>Use PASO to participate in community governance, purchase land, and unlock exclusive experiences.</p>
                     </div>
                 </div>
-                <div class="pillar-card pillar-land">
-                    <div class="pillar-content">
-                        <h3>Land</h3>
+
+                <!-- Partake Pillar -->
+                <div class="pillar-card pillar-participation" onclick="togglePillar('partake')">
+                    <div class="pillar-overlay">
+                        <h3>PARTAKE</h3>
+                        <p class="pillar-subtitle">Community decides what gets built and experienced</p>
+                    </div>
+                    <div class="pillar-details" id="pillar-partake">
+                        <h4>Community Driven</h4>
+                        <p>This isn't a top-down project. The community votes on everything—from which buildings get constructed to what storylines unfold.</p>
+                        <p>Your voice shapes the frontier. Together, we build something unprecedented.</p>
+                    </div>
+                </div>
+
+                <!-- Land Pillar -->
+                <div class="pillar-card pillar-land" onclick="togglePillar('land')">
+                    <div class="pillar-overlay">
+                        <h3>LAND</h3>
                         <p class="pillar-subtitle">Physical frontier towns built in real desert territory</p>
+                    </div>
+                    <div class="pillar-details" id="pillar-land">
+                        <h4>Real Frontier</h4>
+                        <p>90,000 acres of authentic Western territory transformed into a living, breathing 1880s frontier town.</p>
+                        <p>Walk dusty streets, ride horses across the open range, own businesses, and live the adventure.</p>
                     </div>
                 </div>
             </div>
-            <button id="pillarsReadMore" class="pillars-read-more" onclick="togglePillars()">Reveal More</button>
         </div>
     </section>
 
@@ -370,17 +396,18 @@
             }
         }
 
-        function togglePillars() {
-            const pillarsGrid = document.querySelector('.pillars-grid');
-            const button = document.getElementById('pillarsReadMore');
+        function togglePillar(pillarName) {
+            const pillarCard = event.currentTarget;
+            const details = document.getElementById('pillar-' + pillarName);
 
-            pillarsGrid.classList.toggle('expanded');
-            button.classList.toggle('expanded');
+            // Toggle expanded state
+            pillarCard.classList.toggle('expanded');
 
-            if (pillarsGrid.classList.contains('expanded')) {
-                button.textContent = 'Show Less';
-            } else {
-                button.textContent = 'Reveal More';
+            // Smooth scroll to show expanded content
+            if (pillarCard.classList.contains('expanded')) {
+                setTimeout(() => {
+                    details.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }, 300);
             }
         }
 
