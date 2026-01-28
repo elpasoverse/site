@@ -578,6 +578,17 @@
                 submitButton.disabled = false;
             }
         }
+
+        // Four Pillars Toggle Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const pillarCards = document.querySelectorAll('.pillar-card');
+
+            pillarCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    this.classList.toggle('expanded');
+                });
+            });
+        });
     </script>
 </body>
 </html>
