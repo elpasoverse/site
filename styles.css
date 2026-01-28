@@ -625,12 +625,14 @@ p {
 }
 
 .film-caption {
-    color: #C9A961;
-    font-size: 0.9rem;
+    color: #E8D7C3;
+    font-size: 0.95rem;
     font-style: italic;
     margin-top: 0.75rem;
     text-align: center;
     letter-spacing: 0.05em;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    width: 100%;
 }
 
 .film-poster {
