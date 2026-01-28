@@ -1280,41 +1280,28 @@ p {
     background: #F5E6D3;
 }
 
-.social-stats {
+.social-link-card {
     display: flex;
-    justify-content: center;
-    margin: 2rem 0 0.5rem 0;
-}
-
-.stat-badge {
-    display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
-    background: linear-gradient(135deg, #EDD9C0 0%, #E8D5C0 100%);
-    padding: 0.75rem 1.5rem;
-    border-radius: 50px;
-    border: 2px solid #C9A961;
-    box-shadow: 0 4px 12px rgba(139, 69, 19, 0.15);
+    gap: 0.75rem;
+    background: #FFFFFF;
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    border: 2px solid #EDD9C0;
+    text-decoration: none;
     transition: all 0.3s ease;
-    cursor: pointer;
+    min-width: 200px;
 }
 
-.stat-badge:hover {
+.social-link-card:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(139, 69, 19, 0.25);
-    border-color: #D4A745;
+    box-shadow: 0 4px 12px rgba(139, 69, 19, 0.2);
+    border-color: #C9A961;
 }
 
-.stat-number {
-    font-family: 'Playfair Display', Georgia, serif;
-    font-size: 1.4rem;
-    font-weight: 700;
+.social-link-card svg {
     color: #8B4513;
-}
-
-.stat-label {
-    color: #8B4513;
-    font-size: 0.95rem;
+    flex-shrink: 0;
 }
 
 .instagram-feed {
@@ -1953,16 +1940,11 @@ p {
         font-size: 0.9rem;
     }
 
-    .stat-badge {
-        padding: 0.6rem 1.2rem;
-    }
-
-    .stat-number {
-        font-size: 1.2rem;
-    }
-
-    .stat-label {
-        font-size: 0.85rem;
+    .social-link-card {
+        min-width: auto;
+        width: 100%;
+        max-width: 300px;
+        padding: 0.875rem 1.25rem;
     }
 
     .contact-signup-box {
