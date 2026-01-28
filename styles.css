@@ -574,16 +574,15 @@ p {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: 3rem;
-    margin: 3rem 0;
+    margin: 3rem auto;
     max-width: 1200px;
-    margin-left: auto;
-    margin-right: auto;
 }
 
 .film-poster-card {
     display: block;
     text-decoration: none;
     transition: all 0.3s ease;
+    color: inherit;
 }
 
 .film-poster-card:hover {
@@ -592,9 +591,12 @@ p {
 
 .film-poster {
     position: relative;
-    aspect-ratio: 2 / 3;
+    width: 100%;
+    height: 0;
+    padding-bottom: 150%; /* 2:3 aspect ratio (600px height / 400px width = 1.5) */
     background-size: cover;
     background-position: center;
+    background-repeat: no-repeat;
     border: 4px solid #C9A961;
     border-radius: 6px;
     overflow: hidden;
