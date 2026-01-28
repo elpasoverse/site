@@ -1,0 +1,1181 @@
+/* ===================================
+   The El Paso Verse Gazette
+   1880s New York Times Newspaper Style
+   =================================== */
+
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Aged Newsprint Background */
+body {
+    font-family: 'Libre Baskerville', Georgia, 'Times New Roman', serif;
+    font-size: 16px;
+    line-height: 1.7;
+    color: #1a1a1a;
+    background: #f9f3e3;
+    background-image:
+        repeating-linear-gradient(
+            0deg,
+            transparent,
+            transparent 1px,
+            rgba(139, 69, 19, 0.018) 1px,
+            rgba(139, 69, 19, 0.018) 2px
+        ),
+        repeating-linear-gradient(
+            90deg,
+            transparent,
+            transparent 1px,
+            rgba(139, 69, 19, 0.018) 1px,
+            rgba(139, 69, 19, 0.018) 2px
+        ),
+        radial-gradient(ellipse at top left, rgba(139, 69, 19, 0.03) 0%, transparent 50%),
+        radial-gradient(ellipse at bottom right, rgba(139, 69, 19, 0.025) 0%, transparent 50%),
+        radial-gradient(ellipse at center, rgba(139, 69, 19, 0.015) 0%, transparent 70%);
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 3rem 2rem;
+}
+
+/* Newspaper Masthead */
+.newspaper-masthead {
+    text-align: center;
+    border: 3px double #1a1a1a;
+    padding: 2rem 1rem 1.5rem;
+    margin-bottom: 2rem;
+    background: linear-gradient(to bottom, #faf5e8 0%, #f9f3e3 100%);
+}
+
+.masthead-ornament-top {
+    width: 200px;
+    height: 20px;
+    margin: 0 auto 1rem;
+    background-image:
+        repeating-linear-gradient(
+            90deg,
+            #1a1a1a 0px,
+            #1a1a1a 2px,
+            transparent 2px,
+            transparent 4px,
+            #1a1a1a 4px,
+            #1a1a1a 6px,
+            transparent 6px,
+            transparent 10px
+        );
+    border-top: 2px solid #1a1a1a;
+    border-bottom: 2px solid #1a1a1a;
+}
+
+.masthead-date {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+}
+
+.masthead-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-weight: 900;
+    line-height: 1;
+    margin: 0.5rem 0;
+}
+
+.masthead-the {
+    display: block;
+    font-size: 1.5rem;
+    letter-spacing: 0.3em;
+    font-weight: 400;
+}
+
+.masthead-name {
+    display: block;
+    font-size: 4rem;
+    letter-spacing: 0.1em;
+    margin: 0.2rem 0;
+    text-transform: uppercase;
+}
+
+.masthead-gazette {
+    display: block;
+    font-size: 2rem;
+    letter-spacing: 0.2em;
+    font-weight: 700;
+}
+
+.masthead-motto {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-style: italic;
+    font-size: 0.9rem;
+    margin: 1rem 0 0.5rem;
+    padding: 0 2rem;
+}
+
+.masthead-date-bottom {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-top: 1rem;
+}
+
+.masthead-rule {
+    width: 100%;
+    height: 4px;
+    background: #1a1a1a;
+    margin-top: 1rem;
+    border-top: 1px solid #1a1a1a;
+    border-bottom: 1px solid #1a1a1a;
+}
+
+/* Main Content */
+.newspaper-content {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+/* Headlines */
+.article-headline {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 2.5rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    line-height: 1.1;
+    text-align: center;
+    margin-bottom: 0.5rem;
+}
+
+.article-subhead {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-size: 1.1rem;
+    font-style: italic;
+    text-align: center;
+    margin-bottom: 0.75rem;
+    color: #333;
+}
+
+.column-headline {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    line-height: 1.2;
+    margin-bottom: 0.75rem;
+}
+
+.subheadline {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 1.5rem 0 1rem;
+    text-align: center;
+}
+
+/* Byline */
+.byline {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 0.85rem;
+    font-style: italic;
+    text-align: center;
+    margin-bottom: 0.75rem;
+}
+
+/* Decorative Rules */
+.article-rule {
+    width: 100%;
+    height: 3px;
+    background: #1a1a1a;
+    margin: 1rem 0 1.5rem;
+    border-top: 1px solid #1a1a1a;
+}
+
+.article-rule-thin {
+    width: 100%;
+    height: 1px;
+    background: #1a1a1a;
+    margin: 0.75rem 0 1rem;
+}
+
+/* Articles */
+.lead-article,
+.feature-article {
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 3px double #1a1a1a;
+}
+
+/* Column Layout */
+.article-columns {
+    column-count: 2;
+    column-gap: 2.5rem;
+    column-rule: 1px solid #ccc;
+    text-align: justify;
+    hyphens: auto;
+}
+
+.article-columns p {
+    margin-bottom: 1rem;
+}
+
+.article-columns strong {
+    font-weight: 700;
+}
+
+/* Drop Cap */
+.drop-cap {
+    position: relative;
+}
+
+.drop-cap-letter {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 4.5rem;
+    font-weight: 900;
+    line-height: 0.8;
+    float: left;
+    margin: 0.1rem 0.15rem 0 0;
+    color: #1a1a1a;
+}
+
+/* Continue Reading Button */
+.continue-reading {
+    display: block;
+    width: fit-content;
+    margin: 1.5rem auto 0;
+    padding: 0.5rem 1.5rem;
+    background: transparent;
+    border: 2px solid #1a1a1a;
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.continue-reading:hover {
+    background: #1a1a1a;
+    color: #f9f3e3;
+}
+
+/* Expandable Content */
+.article-more,
+.paso-more {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.6s ease, opacity 0.6s ease;
+}
+
+.article-more.expanded,
+.paso-more.expanded {
+    max-height: 5000px;
+    opacity: 1;
+    margin-top: 1rem;
+}
+
+.article-closing {
+    font-style: italic;
+    margin-top: 1.5rem;
+}
+
+.article-signature {
+    text-align: right;
+    font-style: italic;
+    margin-top: 1rem;
+    font-weight: 700;
+}
+
+/* Two Column Section */
+.two-column-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 3px double #1a1a1a;
+}
+
+.column-article {
+    text-align: justify;
+    hyphens: auto;
+}
+
+.column-article p {
+    margin-bottom: 1rem;
+}
+
+.column-article.full-width {
+    grid-column: 1 / -1;
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 3px double #1a1a1a;
+}
+
+.article-emphasis {
+    font-style: italic;
+    font-weight: 700;
+    text-align: center;
+    margin-top: 1.5rem;
+}
+
+/* Pillars List */
+.pillars-list {
+    margin-top: 1rem;
+}
+
+.pillar-item {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #ccc;
+}
+
+.pillar-item:last-child {
+    border-bottom: none;
+}
+
+.pillar-item h4 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.5rem;
+}
+
+.pillar-item p {
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+/* Phases Grid */
+.phases-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin: 2rem 0;
+    column-span: all;
+    break-inside: avoid;
+}
+
+.phase-box {
+    border: 2px solid #1a1a1a;
+    padding: 1rem;
+    background: rgba(139, 69, 19, 0.03);
+}
+
+.phase-box h4 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.75rem;
+    text-align: center;
+    line-height: 1.3;
+}
+
+.phase-box ul {
+    list-style: none;
+    font-size: 0.85rem;
+    line-height: 1.6;
+}
+
+.phase-box li {
+    margin-bottom: 0.4rem;
+    padding-left: 1rem;
+    position: relative;
+}
+
+.phase-box li:before {
+    content: '•';
+    position: absolute;
+    left: 0;
+}
+
+/* Distribution Grid */
+.distribution-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin: 2rem 0;
+    column-span: all;
+    break-inside: avoid;
+}
+
+.distribution-box {
+    border: 2px solid #1a1a1a;
+    padding: 1.5rem 1rem;
+    text-align: center;
+    background: rgba(139, 69, 19, 0.03);
+}
+
+.distribution-number {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 3rem;
+    font-weight: 900;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+}
+
+.distribution-box p {
+    font-size: 0.85rem;
+    line-height: 1.5;
+}
+
+.distribution-box small {
+    display: block;
+    font-size: 0.75rem;
+    margin-top: 0.25rem;
+    font-style: italic;
+}
+
+/* Two Column List */
+.two-column-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin: 2rem 0;
+    column-span: all;
+    break-inside: avoid;
+}
+
+.two-column-list h5 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.75rem;
+}
+
+.two-column-list ul {
+    list-style: none;
+    font-size: 0.9rem;
+    line-height: 1.7;
+}
+
+.two-column-list li {
+    margin-bottom: 0.5rem;
+    padding-left: 1rem;
+    position: relative;
+}
+
+.two-column-list li:before {
+    content: '•';
+    position: absolute;
+    left: 0;
+}
+
+/* Disclaimer */
+.disclaimer {
+    margin-top: 2rem;
+    padding: 1rem;
+    border: 1px solid #1a1a1a;
+    font-size: 0.8rem;
+    text-align: center;
+    background: rgba(139, 69, 19, 0.05);
+    column-span: all;
+}
+
+/* Engravings and Images */
+.engraving-large,
+.engraving-medium,
+.engraving-small {
+    margin: 2rem 0;
+    text-align: center;
+}
+
+.engraving-small {
+    width: 200px;
+    margin: 0 0 1rem 0;
+}
+
+.engraving-small.engraving-right {
+    float: right;
+    margin: 0 0 1rem 1.5rem;
+}
+
+.engraving-small.engraving-left {
+    float: left;
+    margin: 0 1.5rem 1rem 0;
+}
+
+.engraving-medium {
+    max-width: 400px;
+}
+
+.engraving-frame {
+    border: 4px double #1a1a1a;
+    padding: 0.5rem;
+    background: #f4ead5;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    position: relative;
+}
+
+.engraving-frame::before {
+    content: '';
+    position: absolute;
+    top: 0.25rem;
+    left: 0.25rem;
+    right: 0.25rem;
+    bottom: 0.25rem;
+    border: 1px solid #1a1a1a;
+    pointer-events: none;
+}
+
+.engraving-frame img {
+    width: 100%;
+    display: block;
+    filter: grayscale(100%) contrast(1.2) brightness(0.95);
+    border: 1px solid #666;
+}
+
+figcaption {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 0.85rem;
+    font-style: italic;
+    text-align: center;
+    margin-top: 0.75rem;
+    padding: 0 1rem;
+}
+
+/* Pull Quotes */
+.pull-quote {
+    column-span: all;
+    text-align: center;
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.4rem;
+    font-style: italic;
+    line-height: 1.5;
+    padding: 2rem 3rem;
+    margin: 2rem 0;
+    border-top: 3px double #1a1a1a;
+    border-bottom: 3px double #1a1a1a;
+    background: rgba(139, 69, 19, 0.03);
+}
+
+.quote-ornament-top,
+.quote-ornament-bottom {
+    font-size: 1.5rem;
+    color: #666;
+    margin: 0.5rem 0;
+}
+
+/* Advertisement Box */
+.advertisement-box {
+    column-span: all;
+    margin: 2rem 0;
+    break-inside: avoid;
+}
+
+.ad-border-ornate {
+    border: 5px double #1a1a1a;
+    padding: 2rem;
+    background:
+        linear-gradient(45deg, transparent 48%, #1a1a1a 48%, #1a1a1a 52%, transparent 52%) 0 0 / 8px 8px,
+        linear-gradient(-45deg, transparent 48%, #1a1a1a 48%, #1a1a1a 52%, transparent 52%) 0 0 / 8px 8px,
+        #f9f3e3;
+    background-repeat: repeat;
+    background-position: 0 0, 4px 4px;
+    text-align: center;
+    position: relative;
+}
+
+.ad-border-ornate::before {
+    content: '';
+    position: absolute;
+    top: 0.5rem;
+    left: 0.5rem;
+    right: 0.5rem;
+    bottom: 0.5rem;
+    border: 2px solid #1a1a1a;
+}
+
+.ad-header {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    margin-bottom: 1rem;
+    position: relative;
+    z-index: 1;
+}
+
+.paso-token-illustration {
+    width: 150px;
+    height: 150px;
+    margin: 1.5rem auto;
+    border: 3px solid #1a1a1a;
+    padding: 0.5rem;
+    background: white;
+    position: relative;
+    z-index: 1;
+}
+
+.paso-token-illustration img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: grayscale(100%) contrast(1.3);
+}
+
+.ad-text {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin: 1.5rem 0;
+    position: relative;
+    z-index: 1;
+}
+
+.ad-text strong {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 900;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.5rem;
+}
+
+.ad-footer {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    margin-top: 1rem;
+    position: relative;
+    z-index: 1;
+}
+
+/* Ornate Box */
+.ornate-box {
+    border: 3px solid #1a1a1a;
+    padding: 1.5rem;
+    margin: 1rem 0;
+    background: rgba(139, 69, 19, 0.04);
+    position: relative;
+}
+
+.box-border-top,
+.box-border-bottom {
+    height: 8px;
+    background:
+        repeating-linear-gradient(
+            90deg,
+            #1a1a1a 0px,
+            #1a1a1a 4px,
+            transparent 4px,
+            transparent 8px
+        );
+    margin: -0.5rem 0 1rem;
+}
+
+.box-border-bottom {
+    margin: 1rem 0 -0.5rem;
+}
+
+/* Destination Layout */
+.destination-layout {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 2rem;
+    align-items: start;
+}
+
+.destination-text {
+    text-align: justify;
+}
+
+/* Section Banner */
+.section-banner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.banner-ornament-left,
+.banner-ornament-right {
+    font-size: 1.5rem;
+    color: #666;
+}
+
+.article-rule-ornate {
+    width: 100%;
+    height: 5px;
+    background:
+        repeating-linear-gradient(
+            90deg,
+            #1a1a1a 0px,
+            #1a1a1a 10px,
+            transparent 10px,
+            transparent 20px
+        );
+    margin: 1.5rem 0;
+    border-top: 2px solid #1a1a1a;
+    border-bottom: 2px solid #1a1a1a;
+}
+
+/* Motion Pictures Section */
+.intro-text {
+    text-align: center;
+    font-style: italic;
+    margin-bottom: 2rem;
+    font-size: 1.05rem;
+}
+
+.film-section {
+    margin-bottom: 4rem;
+}
+
+.film-header-ornate {
+    position: relative;
+    border: 3px double #1a1a1a;
+    padding: 2rem 1.5rem 1.5rem;
+    margin-bottom: 2rem;
+    text-align: center;
+    background: rgba(139, 69, 19, 0.03);
+}
+
+.ornate-corner {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #1a1a1a;
+}
+
+.ornate-corner.tl {
+    top: -2px;
+    left: -2px;
+    border-right: none;
+    border-bottom: none;
+}
+
+.ornate-corner.tr {
+    top: -2px;
+    right: -2px;
+    border-left: none;
+    border-bottom: none;
+}
+
+.ornate-corner.bl {
+    bottom: -2px;
+    left: -2px;
+    border-right: none;
+    border-top: none;
+}
+
+.ornate-corner.br {
+    bottom: -2px;
+    right: -2px;
+    border-left: none;
+    border-top: none;
+}
+
+.film-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.8rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    text-align: center;
+    margin-bottom: 0.5rem;
+}
+
+.film-subtitle {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-size: 1rem;
+    font-style: italic;
+    text-align: center;
+    color: #333;
+}
+
+.film-frames {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+}
+
+.frame-wrapper {
+    border: 4px double #1a1a1a;
+    padding: 0.75rem;
+    background:
+        linear-gradient(to bottom, #ebe0c8 0%, #e8dfc8 50%, #e0d5be 100%);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    position: relative;
+}
+
+.frame-wrapper::before {
+    content: '';
+    position: absolute;
+    top: 0.25rem;
+    left: 0.25rem;
+    right: 0.25rem;
+    bottom: 0.25rem;
+    border: 1px solid #1a1a1a;
+}
+
+.film-frame {
+    aspect-ratio: 1.66 / 1;
+    background-size: cover;
+    background-position: center;
+    border: 3px solid #1a1a1a;
+    position: relative;
+    filter: grayscale(100%) contrast(1.15) brightness(0.98);
+    transition: all 0.3s ease;
+}
+
+.film-frame:hover {
+    filter: grayscale(100%) contrast(1.25) brightness(1.02);
+    transform: scale(1.02);
+}
+
+.film-frame::after {
+    content: 'KODAK';
+    position: absolute;
+    bottom: 4px;
+    right: 6px;
+    font-size: 7px;
+    color: rgba(26, 26, 26, 0.4);
+    font-weight: 700;
+    letter-spacing: 1px;
+    font-family: 'Courier New', monospace;
+}
+
+.frame-number {
+    display: block;
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 0.75rem;
+    font-style: italic;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-top: 0.5rem;
+}
+
+/* Frame Images */
+.frame-1 {
+    background-image: url('assets/frame-1.png');
+}
+
+.frame-2 {
+    background-image: url('assets/frame-2.png');
+}
+
+.frame-3 {
+    background-image: url('assets/frame-3.jpg');
+}
+
+.frame-4 {
+    background-image: url('assets/frame-4.png');
+}
+
+.sombra-1 {
+    background-image: url('assets/sombra-1.jpg');
+}
+
+.sombra-2 {
+    background-image: url('assets/sombra-2.jpg');
+}
+
+.sombra-3 {
+    background-image: url('assets/sombra-3.jpg');
+}
+
+.sombra-4 {
+    background-image: url('assets/sombra-4.jpg');
+}
+
+/* Collection Notice */
+.collection-notice {
+    margin-top: 3rem;
+    text-align: center;
+}
+
+.notice-border {
+    border: 3px double #1a1a1a;
+    padding: 1.5rem 2rem;
+    background: rgba(139, 69, 19, 0.05);
+    display: inline-block;
+}
+
+.notice-border p {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    margin-bottom: 1rem;
+}
+
+/* Links */
+.center-text {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.inline-link {
+    color: #1a1a1a;
+    text-decoration: none;
+    border-bottom: 1px solid #1a1a1a;
+    font-weight: 700;
+    transition: all 0.3s ease;
+    font-family: 'Playfair Display', Georgia, serif;
+    letter-spacing: 0.05em;
+}
+
+.inline-link:hover {
+    border-bottom: 2px solid #1a1a1a;
+    letter-spacing: 0.1em;
+}
+
+/* Footer */
+.newspaper-footer {
+    margin-top: 3rem;
+    text-align: center;
+}
+
+.footer-rule {
+    width: 100%;
+    height: 3px;
+    background: #1a1a1a;
+    margin-bottom: 2rem;
+    border-top: 1px solid #1a1a1a;
+}
+
+.footer-links {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 0.95rem;
+    margin: 1.5rem 0;
+    letter-spacing: 0.05em;
+}
+
+.footer-links a {
+    color: #1a1a1a;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-bottom 0.3s ease;
+}
+
+.footer-links a:hover {
+    border-bottom: 1px solid #1a1a1a;
+}
+
+.footer-text {
+    font-size: 0.85rem;
+    margin: 1rem 0 0.5rem;
+}
+
+.footer-producer {
+    font-size: 0.8rem;
+    font-style: italic;
+    color: #666;
+}
+
+/* Responsive Design */
+@media (max-width: 900px) {
+    body {
+        padding: 2rem 1.5rem;
+    }
+
+    .masthead-name {
+        font-size: 3rem;
+    }
+
+    .masthead-gazette {
+        font-size: 1.5rem;
+    }
+
+    .article-headline {
+        font-size: 2rem;
+    }
+
+    .article-columns {
+        column-count: 1;
+        column-rule: none;
+    }
+
+    .two-column-section {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .phases-grid,
+    .distribution-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .two-column-list {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .film-frames {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+
+    .engraving-large {
+        margin: 1.5rem 0;
+    }
+
+    .engraving-small.engraving-right,
+    .engraving-small.engraving-left {
+        float: none;
+        width: 100%;
+        max-width: 250px;
+        margin: 1.5rem auto;
+    }
+
+    .destination-layout {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .destination-layout .engraving-medium {
+        margin: 1.5rem auto;
+        max-width: 100%;
+    }
+
+    .pull-quote {
+        font-size: 1.2rem;
+        padding: 1.5rem 2rem;
+    }
+
+    .advertisement-box {
+        margin: 1.5rem 0;
+    }
+
+    .paso-token-illustration {
+        width: 120px;
+        height: 120px;
+    }
+
+    .section-banner {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+}
+
+@media (max-width: 600px) {
+    body {
+        font-size: 15px;
+        padding: 1.5rem 1rem;
+    }
+
+    .newspaper-masthead {
+        padding: 1.5rem 0.75rem;
+    }
+
+    .masthead-name {
+        font-size: 2.5rem;
+    }
+
+    .masthead-gazette {
+        font-size: 1.25rem;
+    }
+
+    .masthead-motto {
+        font-size: 0.8rem;
+        padding: 0 1rem;
+    }
+
+    .article-headline {
+        font-size: 1.75rem;
+    }
+
+    .column-headline {
+        font-size: 1.25rem;
+    }
+
+    .drop-cap-letter {
+        font-size: 3.5rem;
+    }
+
+    .film-frames {
+        grid-template-columns: 1fr;
+    }
+
+    .phase-box,
+    .distribution-box {
+        padding: 1rem 0.75rem;
+    }
+
+    .distribution-number {
+        font-size: 2.5rem;
+    }
+
+    .engraving-frame {
+        border-width: 3px;
+        padding: 0.35rem;
+    }
+
+    .film-frame {
+        border-width: 2px;
+    }
+
+    .frame-wrapper {
+        border-width: 3px;
+        padding: 0.5rem;
+    }
+
+    .pull-quote {
+        font-size: 1.1rem;
+        padding: 1.25rem 1.5rem;
+    }
+
+    .ad-border-ornate {
+        border-width: 3px;
+        padding: 1.5rem 1rem;
+    }
+
+    .paso-token-illustration {
+        width: 100px;
+        height: 100px;
+    }
+
+    .ad-header {
+        font-size: 1.2rem;
+    }
+
+    .ad-text {
+        font-size: 1rem;
+    }
+
+    .ad-text strong {
+        font-size: 1.25rem;
+    }
+
+    .film-header-ornate {
+        padding: 1.5rem 1rem;
+    }
+
+    .film-title {
+        font-size: 1.4rem;
+        letter-spacing: 0.15em;
+    }
+
+    .film-subtitle {
+        font-size: 0.9rem;
+    }
+
+    .ornate-corner {
+        width: 15px;
+        height: 15px;
+    }
+
+    .notice-border {
+        padding: 1.25rem 1.5rem;
+    }
+
+    .notice-border p {
+        font-size: 0.95rem;
+    }
+}

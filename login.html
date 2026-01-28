@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="El Paso Verse Community - Member Login">
+    <title>Community Login | El Paso Verse</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-image: url('assets/hero-bg.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1;
+        }
+
+        .login-container {
+            position: relative;
+            z-index: 2;
+            max-width: 450px;
+            width: 90%;
+            background-color: rgba(245, 230, 211, 0.95);
+            padding: 3rem 2.5rem;
+            border: 3px solid #8B4513;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .login-header h1 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 2.5rem;
+            color: #3A2820;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .login-header p {
+            color: #8B4513;
+            font-style: italic;
+            margin: 0;
+        }
+
+        .ornament {
+            width: 80px;
+            height: 2px;
+            background: linear-gradient(to right, transparent, #C9A961, transparent);
+            margin: 1.5rem auto;
+            position: relative;
+        }
+
+        .ornament::after {
+            content: '★';
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            color: #C9A961;
+            font-size: 1rem;
+            background-color: #F5E6D3;
+            padding: 0 0.5rem;
+        }
+
+        .login-form {
+            margin-top: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #3A2820;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 0.05em;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            font-size: 1rem;
+            font-family: Georgia, 'Times New Roman', serif;
+            background-color: #fff;
+            border: 2px solid #8B4513;
+            color: #3A2820;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #C9A961;
+        }
+
+        .login-button {
+            width: 100%;
+            padding: 1rem;
+            background-color: #8B4513;
+            color: #F5E6D3;
+            border: none;
+            font-size: 1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: Georgia, 'Times New Roman', serif;
+        }
+
+        .login-button:hover {
+            background-color: #C9A961;
+            color: #3A2820;
+        }
+
+        .login-button:active {
+            transform: translateY(1px);
+        }
+
+        .error-message {
+            display: none;
+            background-color: rgba(139, 69, 19, 0.1);
+            border-left: 4px solid #8B4513;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            color: #8B4513;
+            font-size: 0.9rem;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        .back-link {
+            text-align: center;
+            margin-top: 1.5rem;
+        }
+
+        .back-link a {
+            color: #8B4513;
+            text-decoration: none;
+            font-size: 0.9rem;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.3s ease;
+        }
+
+        .back-link a:hover {
+            border-bottom-color: #C9A961;
+        }
+
+        @media (max-width: 480px) {
+            .login-container {
+                padding: 2rem 1.5rem;
+            }
+
+            .login-header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-header">
+            <h1>Community</h1>
+            <div class="ornament"></div>
+            <p>Members of the Frontier</p>
+        </div>
+
+        <div class="error-message" id="errorMessage">
+            Incorrect password. Please try again.
+        </div>
+
+        <form class="login-form" id="loginForm">
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    placeholder="Enter community password"
+                    required
+                    autocomplete="current-password"
+                >
+            </div>
+
+            <button type="submit" class="login-button">
+                Enter the Frontier
+            </button>
+        </form>
+
+        <div class="back-link">
+            <a href="index.html">← Back to Main Site</a>
+        </div>
+    </div>
+
+    <script src="auth.js"></script>
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const password = document.getElementById('password').value;
+            const errorMessage = document.getElementById('errorMessage');
+
+            if (attemptLogin(password)) {
+                // Redirect to members portal
+                window.location.href = 'members.html';
+            } else {
+                // Show error
+                errorMessage.classList.add('show');
+                document.getElementById('password').value = '';
+
+                // Hide error after 3 seconds
+                setTimeout(() => {
+                    errorMessage.classList.remove('show');
+                }, 3000);
+            }
+        });
+    </script>
+</body>
+</html>

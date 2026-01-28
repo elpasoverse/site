@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Motion Print Stream - Exclusive El Paso Verse Film Frames">
+    <title>Motion Print Screening Room | El Paso Verse</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Georgia, 'Times New Roman', serif;
+            background: #0a0a0a;
+            color: #f9f3e3;
+            line-height: 1.6;
+        }
+
+        .stream-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .stream-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid rgba(201, 168, 97, 0.3);
+        }
+
+        .stream-header h1 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 3rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.5rem;
+            color: #c9a860;
+        }
+
+        .stream-header p {
+            font-style: italic;
+            color: #a89178;
+            font-size: 1.1rem;
+        }
+
+        .back-link {
+            display: inline-block;
+            color: #c9a860;
+            text-decoration: none;
+            margin-bottom: 2rem;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+        }
+
+        .back-link:hover {
+            color: #f9f3e3;
+        }
+
+        .video-player {
+            background: #000;
+            border: 4px solid #c9a860;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 3rem;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+        }
+
+        .video-player video {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .video-placeholder {
+            aspect-ratio: 16 / 9;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2416 50%, #1a1a1a 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .video-placeholder img {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+            opacity: 0.8;
+        }
+
+        .play-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100px;
+            height: 100px;
+            background: rgba(201, 168, 97, 0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .play-overlay:hover {
+            background: #c9a860;
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+
+        .play-icon {
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 20px 0 20px 35px;
+            border-color: transparent transparent transparent #1a1a1a;
+            margin-left: 8px;
+        }
+
+        .film-info {
+            background: linear-gradient(135deg, #2c1810 0%, #4a2511 100%);
+            border: 2px solid #c9a860;
+            padding: 2rem;
+            border-radius: 8px;
+            margin-bottom: 3rem;
+        }
+
+        .film-info h2 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #f9f3e3;
+            margin-bottom: 1rem;
+            letter-spacing: 0.05em;
+        }
+
+        .film-info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .info-item {
+            background: rgba(0,0,0,0.3);
+            padding: 1rem;
+            border-radius: 4px;
+            border-left: 3px solid #c9a860;
+        }
+
+        .info-label {
+            font-size: 0.85rem;
+            color: #c9a860;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+
+        .info-value {
+            font-size: 1.1rem;
+            color: #f9f3e3;
+        }
+
+        .frame-collection {
+            margin-bottom: 3rem;
+        }
+
+        .frame-collection h3 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #c9a860;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .frame-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .frame-card {
+            background: #1a1a1a;
+            border: 2px solid #c9a860;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .frame-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(201, 168, 97, 0.3);
+        }
+
+        .frame-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .frame-card-info {
+            padding: 1rem;
+        }
+
+        .frame-title {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #f9f3e3;
+            margin-bottom: 0.5rem;
+        }
+
+        .frame-meta {
+            font-size: 0.85rem;
+            color: #a89178;
+            font-style: italic;
+        }
+
+        .access-gate {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+        }
+
+        .access-gate.hidden {
+            display: none;
+        }
+
+        .gate-box {
+            background: linear-gradient(135deg, #2c1810 0%, #4a2511 100%);
+            border: 4px solid #c9a860;
+            padding: 3rem 2rem;
+            max-width: 500px;
+            text-align: center;
+            border-radius: 8px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.7);
+        }
+
+        .gate-box h2 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 2rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1rem;
+            color: #c9a860;
+        }
+
+        .gate-requirement {
+            background: #1a1a1a;
+            border: 2px solid #c9a860;
+            padding: 1rem;
+            margin: 1.5rem 0;
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #f9f3e3;
+        }
+
+        .gate-button {
+            background: #c9a860;
+            color: #1a1a1a;
+            padding: 1rem 2rem;
+            font-weight: 700;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s;
+            letter-spacing: 0.05em;
+            font-size: 1rem;
+            margin: 0.5rem;
+        }
+
+        .gate-button:hover {
+            background: #f9f3e3;
+            transform: translateY(-2px);
+        }
+
+        .gate-button.secondary {
+            background: transparent;
+            border: 2px solid #c9a860;
+            color: #c9a860;
+        }
+
+        .gate-button.secondary:hover {
+            background: #c9a860;
+            color: #1a1a1a;
+        }
+    </style>
+</head>
+<body>
+    <!-- Access Gate -->
+    <div id="accessGate" class="access-gate">
+        <div class="gate-box">
+            <h2>★ Exclusive Content ★</h2>
+            <p style="color: #e8dcc8; margin-bottom: 1rem;">Motion Print streaming is reserved for Genesis Collection NFT holders.</p>
+            <div class="gate-requirement">Requires: Genesis NFT</div>
+            <p style="color: #d4c4a8; font-style: italic; font-size: 0.9rem; margin-bottom: 1.5rem;">
+                Connect your wallet in the Community Portal to verify NFT ownership.
+            </p>
+            <button class="gate-button" onclick="checkNFTAccess()">Verify Access</button>
+            <button class="gate-button secondary" onclick="window.location.href='members.html'">Return to Portal</button>
+        </div>
+    </div>
+
+    <div class="stream-container">
+        <a href="members.html" class="back-link">← Back to Community Portal</a>
+
+        <div class="stream-header">
+            <h1>Motion Print Screening Room</h1>
+            <p>El Paso Verse Closed Screening Room - Before Public Release</p>
+        </div>
+
+        <!-- Video Player -->
+        <div class="video-player">
+            <div class="video-placeholder" id="videoPlayer">
+                <img src="assets/frame-1.png" alt="Motion Print Frame">
+                <div class="play-overlay" onclick="playVideo()">
+                    <div class="play-icon"></div>
+                </div>
+            </div>
+            <!-- <video id="mainVideo" controls style="display: none;">
+                <source src="your-video.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video> -->
+        </div>
+
+        <!-- Film Info -->
+        <div class="film-info">
+            <h2>The Closed Screening Room</h2>
+            <p style="color: #e8dcc8; line-height: 1.8; margin-bottom: 1rem;">
+                Welcome to the El Paso Verse closed screening room. As a Genesis Collection NFT holder, you have exclusive access to stream Motion Prints before they're released to the public. Each Motion Print is a one-of-one digital collectible featuring authentic Kodak motion picture film frames from El Paso Verse productions - shot on film stock and carefully preserved as individual moments of cinematic storytelling.
+            </p>
+
+            <div class="film-info-grid">
+                <div class="info-item">
+                    <div class="info-label">Format</div>
+                    <div class="info-value">Kodak Film Stock</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Era</div>
+                    <div class="info-value">1880 El Paso Verse</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Collection</div>
+                    <div class="info-value">Genesis Series</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Exclusivity</div>
+                    <div class="info-value">NFT Holders Only</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Frame Collection -->
+        <div class="frame-collection">
+            <h3>Available Motion Prints</h3>
+            <div class="frame-grid">
+                <div class="frame-card">
+                    <img src="assets/frame-1.png" alt="Frame 1">
+                    <div class="frame-card-info">
+                        <div class="frame-title">Frame I: The Vista</div>
+                        <div class="frame-meta">El Paso Verse • Frontier Landscape</div>
+                    </div>
+                </div>
+                <div class="frame-card">
+                    <img src="assets/frame-2.png" alt="Frame 2">
+                    <div class="frame-card-info">
+                        <div class="frame-title">Frame II: Desert Light</div>
+                        <div class="frame-meta">El Paso Verse • Golden Hour</div>
+                    </div>
+                </div>
+                <div class="frame-card">
+                    <img src="assets/frame-4.png" alt="Frame 4">
+                    <div class="frame-card-info">
+                        <div class="frame-title">Frame III: The Journey</div>
+                        <div class="frame-meta">El Paso Verse • Open Territory</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="wallet-connect.js"></script>
+    <script>
+        function checkNFTAccess() {
+            const hasNFT = localStorage.getItem('nftVerified') === 'true';
+
+            if (hasNFT) {
+                grantStreamAccess();
+            } else {
+                alert('Please connect your wallet in the Community Portal to verify NFT ownership.\n\nGenesis Collection NFT holders have unlimited streaming access.');
+                window.location.href = 'members.html';
+            }
+        }
+
+        function grantStreamAccess() {
+            document.getElementById('accessGate').classList.add('hidden');
+        }
+
+        function checkExistingAccess() {
+            const hasNFT = localStorage.getItem('nftVerified') === 'true';
+            if (hasNFT) {
+                document.getElementById('accessGate').classList.add('hidden');
+            }
+        }
+
+        function playVideo() {
+            alert('Video streaming functionality coming soon!\n\nThis is where your Motion Print collection videos will play.');
+            // In production, replace with actual video player
+            // const placeholder = document.getElementById('videoPlayer');
+            // const video = document.getElementById('mainVideo');
+            // placeholder.style.display = 'none';
+            // video.style.display = 'block';
+            // video.play();
+        }
+
+        // Check access on page load
+        window.addEventListener('DOMContentLoaded', checkExistingAccess);
+    </script>
+</body>
+</html>

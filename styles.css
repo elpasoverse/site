@@ -1,0 +1,1309 @@
+/* ===================================
+   El Paso Verse - Minimalistic Website
+   Western/Vintage Theme
+   =================================== */
+
+/* CSS Reset & Base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
+    background: #f4ead5;
+    background-image:
+        repeating-linear-gradient(0deg, transparent, transparent 1px, rgba(139, 69, 19, 0.015) 1px, rgba(139, 69, 19, 0.015) 2px),
+        repeating-linear-gradient(90deg, transparent, transparent 1px, rgba(139, 69, 19, 0.015) 1px, rgba(139, 69, 19, 0.015) 2px),
+        radial-gradient(circle at 20% 50%, rgba(139, 69, 19, 0.02) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(139, 69, 19, 0.02) 0%, transparent 50%);
+    color: #1a1a1a;
+    line-height: 1.8;
+    font-size: 17px;
+}
+
+/* Container */
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.container-wide {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+/* Sections */
+.section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem 0;
+}
+
+/* Typography */
+h1, h2 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-weight: 700;
+    color: #3A2820;
+    letter-spacing: 0.05em;
+}
+
+h1 {
+    font-size: 4.5rem;
+    margin-bottom: 1rem;
+}
+
+h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+p {
+    margin-bottom: 1.5rem;
+    text-align: justify;
+}
+
+/* Hero Section */
+.hero {
+    text-align: center;
+    background-image: url('assets/hero-bg.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+}
+
+.hero .container {
+    position: relative;
+    z-index: 2;
+}
+
+.hero-title {
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: #F5E6D3;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.hero-logo {
+    max-width: 700px;
+    width: 90%;
+    height: auto;
+    margin: 0 auto 2rem auto;
+    display: block;
+    filter: drop-shadow(2px 2px 8px rgba(0, 0, 0, 0.9));
+}
+
+.hero-subtitle {
+    font-size: 1.4rem;
+    font-style: italic;
+    color: #C9A961;
+    margin-bottom: 3rem;
+    text-align: center;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+}
+
+/* Ornaments */
+.ornament-top,
+.ornament-bottom {
+    width: 120px;
+    height: 2px;
+    background: linear-gradient(to right, transparent, #C9A961, transparent);
+    margin: 2rem auto;
+    position: relative;
+}
+
+.ornament-top::after,
+.ornament-bottom::after {
+    content: '★';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    color: #C9A961;
+    font-size: 1rem;
+    background-color: transparent;
+    padding: 0 0.5rem;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+}
+
+/* Divider */
+.divider {
+    width: 60px;
+    height: 2px;
+    background-color: #C9A961;
+    margin: 0 auto 2.5rem;
+}
+
+/* Call to Action Button */
+.cta-button {
+    display: inline-block;
+    padding: 1rem 2.5rem;
+    background-color: transparent;
+    color: #F5E6D3;
+    border: 2px solid #C9A961;
+    text-decoration: none;
+    font-size: 1rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    margin-top: 2rem;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+.cta-button:hover {
+    background-color: #C9A961;
+    color: #3A2820;
+    border-color: #C9A961;
+    text-shadow: none;
+}
+
+/* Vision Section */
+.vision {
+    background-color: #F5E6D3;
+}
+
+.vision-intro {
+    text-align: center;
+    margin: 2rem 0 3rem 0;
+}
+
+.vision-lead {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.3rem;
+    font-style: italic;
+    color: #8B4513;
+    text-align: center !important;
+    margin-bottom: 2rem;
+}
+
+.vision-content {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.vision-content p {
+    text-align: left;
+    margin-bottom: 1.8rem;
+    line-height: 1.9;
+    font-size: 1.05rem;
+}
+
+.vision-content p em {
+    font-style: italic;
+    color: #8B4513;
+}
+
+.vision-content p strong {
+    color: #8B4513;
+    font-weight: 600;
+}
+
+.vision-closing {
+    margin-top: 2.5rem !important;
+    font-style: italic;
+}
+
+.vision-signature {
+    text-align: right !important;
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.2rem;
+    color: #8B4513;
+    margin-top: 2rem !important;
+    font-style: normal;
+}
+
+.vision-content {
+    position: relative;
+}
+
+.vision-content::after {
+    content: '';
+    position: absolute;
+    bottom: 70px;
+    left: 0;
+    right: 0;
+    height: 200px;
+    background: linear-gradient(to bottom, rgba(245, 230, 211, 0) 0%, rgba(245, 230, 211, 0.4) 20%, rgba(245, 230, 211, 0.7) 40%, rgba(245, 230, 211, 0.9) 60%, rgba(245, 230, 211, 1) 80%);
+    pointer-events: none;
+    opacity: 1;
+    transition: opacity 0.5s ease;
+}
+
+.vision-content:has(.vision-more.expanded)::after {
+    opacity: 0;
+}
+
+.vision-more {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease;
+}
+
+.vision-more.expanded {
+    max-height: 2000px;
+}
+
+.vision-read-more {
+    display: block;
+    margin: 1rem auto 0 auto;
+    padding: 0.5rem 1rem;
+    background-color: rgba(245, 230, 211, 0.95);
+    color: #8B4513;
+    border: none;
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    text-transform: uppercase;
+    z-index: 10;
+}
+
+.vision-read-more::after {
+    content: '▼';
+    display: block;
+    font-size: 1.5rem;
+    color: #C9A961;
+    margin-top: 0.5rem;
+    transition: transform 0.3s ease;
+}
+
+.vision-read-more:hover {
+    color: #C9A961;
+    transform: scale(1.05);
+}
+
+.vision-read-more:hover::after {
+    transform: translateY(3px);
+}
+
+.vision-read-more.expanded::after {
+    transform: rotate(180deg);
+}
+
+.vision-read-more.expanded:hover::after {
+    transform: rotate(180deg) translateY(-3px);
+}
+
+.vision-link-section {
+    text-align: center;
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid #C9A961;
+}
+
+.vision-link {
+    display: inline-block;
+    padding: 1rem 2.5rem;
+    background-color: transparent;
+    color: #8B4513;
+    border: 2px solid #C9A961;
+    text-decoration: none;
+    font-size: 1rem;
+    letter-spacing: 0.05em;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.vision-link:hover {
+    background-color: #C9A961;
+    color: #F5E6D3;
+    border-color: #C9A961;
+}
+
+/* About Section */
+.about {
+    background-image: url('assets/about-bg.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    position: relative;
+}
+
+.about::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(237, 217, 192, 0.75);
+    z-index: 1;
+}
+
+.about .container {
+    position: relative;
+    z-index: 2;
+}
+
+.about h2 {
+    font-size: 2.2rem;
+}
+
+.tagline-emphasis {
+    text-align: center !important;
+    font-style: italic;
+    color: #8B4513;
+    font-size: 1.2rem;
+    margin-top: 2rem;
+    font-weight: 600;
+}
+
+/* Four Pillars Section */
+.pillars {
+    background-color: #F5E6D3;
+}
+
+.pillars-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    margin-top: 3rem;
+}
+
+.pillar-card {
+    position: relative;
+    height: 600px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.pillar-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.6), rgba(0,0,0,0.8));
+    z-index: 1;
+}
+
+.pillar-content {
+    position: relative;
+    z-index: 2;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    text-align: center;
+}
+
+.pillar-card h3 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.4rem;
+    color: #FFFFFF;
+    margin-bottom: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.9);
+    font-weight: 700;
+}
+
+.pillar-subtitle {
+    color: #FFFFFF;
+    font-size: 0.8rem;
+    line-height: 1.6;
+    text-align: center;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.9);
+    font-weight: 400;
+    max-width: 90%;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.5s ease, opacity 0.5s ease;
+}
+
+.pillars-grid.expanded .pillar-subtitle {
+    max-height: 200px;
+    opacity: 1;
+}
+
+.pillars-read-more {
+    display: block;
+    margin: 2rem auto 0;
+    padding: 0.8rem 2rem;
+    background: transparent;
+    color: #8B4513;
+    border: 2px solid #C9A961;
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.pillars-read-more:hover {
+    background-color: rgba(201, 169, 97, 0.1);
+    transform: translateY(-2px);
+}
+
+.pillars-read-more::after {
+    content: ' ▼';
+    transition: transform 0.3s ease;
+    display: inline-block;
+}
+
+.pillars-read-more.expanded::after {
+    transform: rotate(180deg);
+}
+
+/* Pillar Background Images */
+.pillar-story {
+    background-image: url('assets/pillar-story.png');
+}
+
+.pillar-token {
+    background-image: url('assets/paso-token.png');
+    background-color: #3A2820;
+}
+
+.pillar-participation {
+    background-image: url('assets/pillar-participation-new.jpg');
+}
+
+.pillar-land {
+    background-image: url('assets/land-bg.jpg');
+}
+
+/* El Paso Verse Land Section */
+.el-paso-verse {
+    background-image: url('assets/land-bg-new.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    position: relative;
+}
+
+.el-paso-verse::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(245, 230, 211, 0.75);
+    z-index: 1;
+}
+
+.el-paso-verse .container {
+    position: relative;
+    z-index: 2;
+}
+
+.el-paso-verse p {
+    text-align: justify;
+}
+
+/* Collection Section */
+/* Motion Prints Section */
+.collection {
+    background-color: #1a1a1a;
+    background: linear-gradient(to bottom, #0a0a0a, #1a1a1a, #0a0a0a);
+    padding: 4rem 0 5rem 0;
+}
+
+.collection h2 {
+    color: #E8D7C3;
+    text-align: center;
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+
+.collection .divider {
+    width: 60px;
+    height: 2px;
+    background-color: #C9A961;
+    margin: 0 auto 2.5rem auto;
+}
+
+.collection-intro {
+    text-align: center;
+    color: #C9A961;
+    font-size: 1.1rem;
+    margin-bottom: 4rem;
+    line-height: 1.8;
+}
+
+.collection-intro strong {
+    color: #E8D7C3;
+}
+
+/* Films showcase */
+.films-showcase {
+    margin: 0 0 3rem 0;
+}
+
+.film-project {
+    margin-bottom: 5rem;
+    background:
+        linear-gradient(to right, #0a0a0a 0%, #0a0a0a 20px, transparent 20px, transparent calc(100% - 20px), #0a0a0a calc(100% - 20px), #0a0a0a 100%);
+    padding: 3rem 40px;
+    position: relative;
+}
+
+/* Film perforations on sides */
+.film-project::before,
+.film-project::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 20px;
+    background:
+        repeating-linear-gradient(
+            to bottom,
+            #0a0a0a 0px,
+            #0a0a0a 10px,
+            transparent 10px,
+            transparent 15px,
+            #0a0a0a 15px,
+            #0a0a0a 25px,
+            transparent 25px,
+            transparent 45px
+        );
+}
+
+.film-project::before {
+    left: 0;
+}
+
+.film-project::after {
+    right: 0;
+}
+
+.film-title {
+    color: #E8D7C3;
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.8rem;
+    text-align: center;
+    margin-bottom: 2.5rem;
+    font-weight: 400;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.9);
+    position: relative;
+    z-index: 2;
+}
+
+.film-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.film-frame-card {
+    aspect-ratio: 1.66 / 1;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border: 8px solid #1a1a1a;
+    box-shadow:
+        0 6px 20px rgba(0, 0, 0, 0.9),
+        inset 0 0 40px rgba(0, 0, 0, 0.4),
+        inset 0 0 0 1px rgba(201, 169, 97, 0.1);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Film grain overlay */
+.film-frame-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image:
+        repeating-linear-gradient(0deg, transparent, transparent 1px, rgba(0,0,0,0.05) 1px, rgba(0,0,0,0.05) 2px),
+        repeating-linear-gradient(90deg, transparent, transparent 1px, rgba(0,0,0,0.05) 1px, rgba(0,0,0,0.05) 2px);
+    pointer-events: none;
+    opacity: 0.6;
+}
+
+/* KODAK edge code */
+.film-frame-card::after {
+    content: 'KODAK';
+    position: absolute;
+    bottom: 8px;
+    right: 10px;
+    font-size: 9px;
+    color: rgba(201, 169, 97, 0.4);
+    font-weight: 700;
+    letter-spacing: 2px;
+    font-family: 'Courier New', monospace;
+    text-shadow: 0 0 3px rgba(0, 0, 0, 0.9);
+    z-index: 2;
+}
+
+.film-frame-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow:
+        0 12px 35px rgba(0, 0, 0, 0.95),
+        0 0 30px rgba(201, 169, 97, 0.3),
+        inset 0 0 40px rgba(0, 0, 0, 0.4);
+    border-color: #2a2a2a;
+}
+
+.film-frame-card:hover::after {
+    color: rgba(201, 169, 97, 0.7);
+}
+
+/* Frame background images */
+.frame-1 {
+    background-image: url('assets/frame-1.png');
+}
+
+.frame-2 {
+    background-image: url('assets/frame-2.png');
+}
+
+.frame-3 {
+    background-image: url('assets/frame-3.jpg');
+}
+
+.frame-4 {
+    background-image: url('assets/frame-4.png');
+}
+
+.sombra-1 {
+    background-image: url('assets/sombra-1.jpg');
+}
+
+.sombra-2 {
+    background-image: url('assets/sombra-2.jpg');
+}
+
+.sombra-3 {
+    background-image: url('assets/sombra-3.jpg');
+}
+
+.sombra-4 {
+    background-image: url('assets/sombra-4.jpg');
+}
+
+/* Collection action */
+.collection-action {
+    text-align: center;
+    margin-top: 3rem;
+}
+
+.collection-cta {
+    display: inline-block;
+    padding: 1rem 2.5rem;
+    background: transparent;
+    color: #C9A961;
+    border: 2px solid #C9A961;
+    text-decoration: none;
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    transition: all 0.3s ease;
+}
+
+.collection-cta:hover {
+    background-color: rgba(201, 169, 97, 0.1);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(201, 169, 97, 0.3);
+}
+
+/* PASO Token Section */
+.paso-token {
+    background-color: #F5E6D3;
+}
+
+.paso-intro {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 3rem;
+    align-items: center;
+    margin: 3rem 0;
+}
+
+.paso-token-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.paso-token-image img {
+    max-width: 100%;
+    height: auto;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.15));
+    transition: transform 0.3s ease;
+}
+
+.paso-token-image img:hover {
+    transform: scale(1.05);
+}
+
+.paso-description p {
+    text-align: left;
+    margin-bottom: 1.5rem;
+}
+
+.paso-header {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 2rem;
+    color: #8B4513;
+    margin: 3rem 0 2rem 0;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    text-align: center;
+}
+
+/* PASO Phases */
+.paso-phases {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+    margin: 2rem 0 3rem 0;
+}
+
+.phase-card {
+    background-color: #EDD9C0;
+    border: 2px solid #8B4513;
+    padding: 2rem 1.5rem;
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    flex: 0 1 calc(33.333% - 1.5rem);
+    min-width: 280px;
+    max-width: 400px;
+}
+
+.phase-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.phase-number {
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #C9A961;
+    color: #3A2820;
+    font-family: 'Playfair Display', Georgia, serif;
+    font-weight: 700;
+    font-size: 0.9rem;
+    padding: 0.5rem 1.5rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.phase-card h4 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.5rem;
+    color: #8B4513;
+    margin: 1rem 0 1.5rem 0;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.phase-card ul {
+    list-style: none;
+    padding: 0;
+}
+
+.phase-card ul li {
+    padding: 0.5rem 0 0.5rem 1.5rem;
+    position: relative;
+    color: #3A2820;
+    line-height: 1.6;
+}
+
+.phase-card ul li:before {
+    content: '★';
+    position: absolute;
+    left: 0;
+    color: #C9A961;
+    font-size: 0.9rem;
+}
+
+/* PASO Distribution */
+.paso-distribution {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+    margin: 2rem 0 3rem 0;
+}
+
+.distribution-item {
+    background-color: #EDD9C0;
+    border-left: 4px solid #C9A961;
+    padding: 2rem 1.5rem;
+    text-align: center;
+    flex: 0 1 calc(33.333% - 1.5rem);
+    min-width: 220px;
+    max-width: 350px;
+}
+
+.distribution-stat {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 3rem;
+    font-weight: 700;
+    color: #8B4513;
+    margin-bottom: 0.5rem;
+}
+
+.distribution-item p {
+    font-size: 1rem;
+    color: #3A2820;
+    text-align: center;
+    margin: 0;
+    line-height: 1.6;
+}
+
+.distribution-item span {
+    display: block;
+    font-size: 0.9rem;
+    color: #8B4513;
+    font-style: italic;
+    margin-top: 0.5rem;
+}
+
+/* PASO Actions */
+.paso-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 3rem;
+    margin: 2rem 0;
+    background-color: #EDD9C0;
+    padding: 2.5rem;
+    border: 2px solid #8B4513;
+}
+
+.action-section {
+    flex: 0 1 calc(50% - 1.5rem);
+    min-width: 300px;
+}
+
+.action-section h4 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.6rem;
+    color: #8B4513;
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.action-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.action-section ul li {
+    padding: 0.6rem 0 0.6rem 1.8rem;
+    position: relative;
+    color: #3A2820;
+    line-height: 1.6;
+}
+
+.action-section ul li:before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: #C9A961;
+    font-weight: 700;
+}
+
+.paso-note {
+    text-align: center !important;
+    font-style: italic;
+    color: #8B4513;
+    font-size: 1rem;
+    margin-top: 3rem;
+    padding: 1.5rem;
+    background-color: rgba(201, 169, 97, 0.1);
+    border-left: 3px solid #C9A961;
+}
+
+/* PASO Reveal Functionality */
+.paso-more {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.6s ease, opacity 0.6s ease, margin-top 0.6s ease;
+}
+
+.paso-more.expanded {
+    max-height: 3000px;
+    opacity: 1;
+    margin-top: 2rem;
+}
+
+.paso-read-more {
+    display: block;
+    margin: 2rem auto 0;
+    padding: 0.8rem 2rem;
+    background: transparent;
+    color: #C9A961;
+    border: 2px solid #C9A961;
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.paso-read-more:hover {
+    background-color: rgba(201, 169, 97, 0.1);
+    transform: translateY(-2px);
+}
+
+.paso-read-more::after {
+    content: ' ▼';
+    transition: transform 0.3s ease;
+    display: inline-block;
+}
+
+.paso-read-more.expanded::after {
+    transform: rotate(180deg);
+}
+
+/* Contact Section */
+.contact {
+    background-color: #EDD9C0;
+}
+
+.links {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.links a {
+    color: #3A2820;
+    text-decoration: none;
+    font-size: 1.1rem;
+    letter-spacing: 0.05em;
+    border-bottom: 2px solid transparent;
+    transition: all 0.3s ease;
+    padding-bottom: 0.25rem;
+}
+
+.links a:hover {
+    color: #8B4513;
+    border-bottom-color: #C9A961;
+}
+
+.links a.community-link {
+    font-weight: 600;
+    color: #C9A961;
+    border-bottom: 2px solid #C9A961;
+}
+
+.links a.community-link:hover {
+    color: #8B4513;
+    background-color: rgba(201, 169, 97, 0.1);
+}
+
+/* Footer */
+.footer {
+    background-color: #3A2820;
+    color: #F5E6D3;
+    text-align: center;
+    padding: 2rem 0;
+}
+
+.footer p {
+    margin: 0;
+    font-size: 0.9rem;
+    letter-spacing: 0.05em;
+    text-align: center;
+}
+
+.footer-credits {
+    margin-top: 0.5rem !important;
+    font-size: 0.8rem !important;
+    color: #C9A961;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 3rem;
+    }
+
+    h2 {
+        font-size: 2rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1.2rem;
+    }
+
+    .hero-logo {
+        max-width: 500px;
+    }
+
+    body {
+        font-size: 16px;
+    }
+
+    .section {
+        min-height: auto;
+        padding: 3rem 0;
+    }
+
+    .container,
+    .container-wide {
+        padding: 0 1.5rem;
+    }
+
+    p {
+        text-align: left;
+    }
+
+    .paso-intro {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .paso-token-image img {
+        max-width: 300px;
+    }
+
+    .paso-actions {
+        padding: 2rem 1.5rem;
+    }
+
+    .action-section {
+        flex: 1 1 100%;
+    }
+
+    .paso-header {
+        font-size: 1.8rem;
+    }
+
+    .vision-content {
+        max-width: 100%;
+    }
+
+    .vision-content p {
+        text-align: left;
+        font-size: 1rem;
+    }
+
+    .vision-lead {
+        font-size: 1.1rem;
+    }
+
+    .vision-signature {
+        font-size: 1.1rem;
+    }
+
+    .vision-read-more {
+        padding: 0.7rem 1.5rem;
+        font-size: 0.95rem;
+    }
+
+    .pillars-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+
+    .pillar-card {
+        height: 400px;
+    }
+
+    .pillar-card h3 {
+        font-size: 1.1rem;
+    }
+
+    .pillar-subtitle {
+        font-size: 0.65rem;
+    }
+
+    .collection h2 {
+        font-size: 2rem;
+    }
+
+    .film-project {
+        padding: 2.5rem 30px;
+        margin-bottom: 4rem;
+    }
+
+    .film-project::before,
+    .film-project::after {
+        width: 15px;
+    }
+
+    .film-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+
+    .film-title {
+        font-size: 1.6rem;
+        margin-bottom: 2rem;
+    }
+
+    .film-frame-card {
+        border-width: 6px;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 2.2rem;
+    }
+
+    h2 {
+        font-size: 1.6rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1rem;
+    }
+
+    .cta-button {
+        padding: 0.8rem 2rem;
+        font-size: 0.9rem;
+    }
+
+    .paso-token-image img {
+        max-width: 250px;
+    }
+
+    .distribution-stat {
+        font-size: 2.5rem;
+    }
+
+    .paso-header {
+        font-size: 1.5rem;
+    }
+
+    .phase-card h4,
+    .action-section h4 {
+        font-size: 1.3rem;
+    }
+
+    .vision-link {
+        padding: 0.8rem 2rem;
+        font-size: 0.9rem;
+    }
+
+    .pillars-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .pillar-card {
+        height: 350px;
+    }
+
+    .pillar-card h3 {
+        font-size: 1rem;
+    }
+
+    .pillar-subtitle {
+        font-size: 0.6rem;
+    }
+
+    .film-strip {
+        width: 95%;
+        max-width: 280px;
+    }
+
+    .film-title-card h3 {
+        font-size: 1.3rem;
+        letter-spacing: 0.18em;
+    }
+
+    .film-frame {
+        height: auto;
+    }
+
+
+    .collection-info p {
+        font-size: 0.9rem;
+    }
+
+    .collection h2 {
+        font-size: 1.6rem;
+    }
+
+    .collection-intro {
+        font-size: 1rem;
+        margin-bottom: 3rem;
+    }
+
+    .film-project {
+        padding: 2rem 25px;
+        margin-bottom: 3rem;
+    }
+
+    .film-project::before,
+    .film-project::after {
+        width: 12px;
+    }
+
+    .film-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .film-title {
+        font-size: 1.4rem;
+        letter-spacing: 0.1em;
+    }
+
+    .film-frame-card {
+        border-width: 5px;
+    }
+
+    .film-frame-card::after {
+        font-size: 7px;
+        bottom: 5px;
+        right: 7px;
+    }
+
+    .collection-cta {
+        padding: 0.8rem 2rem;
+        font-size: 0.9rem;
+    }
+}

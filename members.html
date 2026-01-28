@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="El Paso Verse Community - Member Portal">
+    <title>Community Portal | El Paso Verse</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="members.css">
+</head>
+<body class="members-body">
+    <!-- Header -->
+    <header class="members-header">
+        <div class="header-container">
+            <h1 class="site-title">El Paso Verse</h1>
+            <div class="header-actions">
+                <span class="username" id="usernameDisplay">Pioneer</span>
+                <button onclick="logout()" class="logout-btn">Logout</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="members-container">
+        <!-- Welcome Section -->
+        <section class="welcome-section">
+            <h2>Welcome to the Community, Pioneer</h2>
+            <div class="ornament-divider"></div>
+            <p>Shape the frontier. Build the world's first physical destination set in the perpetual year of 1880.</p>
+        </section>
+
+        <!-- Navigation Tabs -->
+        <nav class="tabs-navigation">
+            <button class="tab-button active" data-tab="dashboard">Dashboard</button>
+            <button class="tab-button" data-tab="governance">Governance</button>
+            <button class="tab-button" data-tab="exclusive">Exclusive Content</button>
+            <button class="tab-button" data-tab="browse">Browse Ideas</button>
+            <button class="tab-button" data-tab="submit">Submit Your Idea</button>
+            <button class="tab-button" data-tab="activity">My Activity</button>
+        </nav>
+
+        <!-- Tab Content -->
+        <div class="tab-content">
+            <!-- Dashboard Tab -->
+            <div id="dashboard-tab" class="tab-pane active">
+                <h3 style="font-family: 'Playfair Display', Georgia, serif; font-size: 2rem; font-weight: 900; color: #f9f3e3; margin-bottom: 1.5rem;">Your Dashboard</h3>
+
+                <!-- PASO Token Balance -->
+                <div style="background: linear-gradient(135deg, #2c1810 0%, #4a2511 100%); border: 3px solid #c9a860; padding: 2rem; margin-bottom: 2rem; border-radius: 8px;">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 2rem;">
+                        <div style="flex: 1;">
+                            <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                                <div style="font-size: 3rem;">🪙</div>
+                                <div>
+                                    <h4 style="font-family: 'Playfair Display', Georgia, serif; font-size: 1.8rem; font-weight: 700; color: #f9f3e3; margin: 0;">PASO Balance</h4>
+                                    <p style="color: #a89178; font-size: 0.9rem; margin: 0;">The native currency of El Paso Verse</p>
+                                </div>
+                            </div>
+                            <div style="background: #1a1a1a; border: 2px solid #c9a860; padding: 1.5rem; border-radius: 4px; margin-bottom: 1rem;">
+                                <div id="pasoBalance" style="font-size: 3rem; font-weight: 900; color: #c9a860; font-family: 'Playfair Display', Georgia, serif;">0</div>
+                                <div style="color: #d4c4a8; font-size: 0.9rem; margin-top: 0.5rem;">PASO</div>
+                            </div>
+                            <p style="color: #d4c4a8; font-size: 0.85rem; line-height: 1.5;">
+                                PASO is the utility token for the El Paso Verse ecosystem. Use it to access exclusive content, participate in governance, and engage in the future land-based economy.
+                            </p>
+                        </div>
+
+                        <!-- Token Utilities Quick Info -->
+                        <div style="flex: 1; background: rgba(0,0,0,0.3); padding: 1.5rem; border-radius: 4px; border-left: 3px solid #c9a860;">
+                            <h5 style="color: #c9a860; font-weight: 700; margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.85rem;">Token Utilities by Phase</h5>
+
+                            <div style="margin-bottom: 1rem;">
+                                <div style="color: #f9f3e3; font-weight: 700; margin-bottom: 0.5rem;">Phase 1: Pre-Launch</div>
+                                <ul style="color: #d4c4a8; font-size: 0.85rem; line-height: 1.6; margin: 0; padding-left: 1.2rem;">
+                                    <li>Redeem Motion Prints & NFTs</li>
+                                    <li>Access exclusive collectibles</li>
+                                    <li>Stake for early access benefits</li>
+                                </ul>
+                            </div>
+
+                            <div style="margin-bottom: 1rem;">
+                                <div style="color: #f9f3e3; font-weight: 700; margin-bottom: 0.5rem;">Phase 2: Marketing Stage</div>
+                                <ul style="color: #d4c4a8; font-size: 0.85rem; line-height: 1.6; margin: 0; padding-left: 1.2rem;">
+                                    <li>El Paso Pass subscription</li>
+                                    <li>Stream motion pictures</li>
+                                    <li>BTS content & commentary</li>
+                                </ul>
+                            </div>
+
+                            <div>
+                                <div style="color: #f9f3e3; font-weight: 700; margin-bottom: 0.5rem;">Phase 3: Land Launch</div>
+                                <ul style="color: #d4c4a8; font-size: 0.85rem; line-height: 1.6; margin: 0; padding-left: 1.2rem;">
+                                    <li>Only currency for El Paso Verse land</li>
+                                    <li>Business operations in 1880s towns</li>
+                                    <li>Trading goods & services</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Earning Opportunities -->
+                    <div style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid rgba(201, 168, 97, 0.3);">
+                        <h5 style="color: #c9a860; font-weight: 700; margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.85rem;">Ways to Earn PASO</h5>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                            <div style="background: rgba(0,0,0,0.3); padding: 1rem; border-radius: 4px;">
+                                <div style="color: #f9f3e3; font-weight: 700; margin-bottom: 0.25rem;">Community Missions</div>
+                                <div style="color: #a89178; font-size: 0.85rem;">Complete tasks and challenges</div>
+                            </div>
+                            <div style="background: rgba(0,0,0,0.3); padding: 1rem; border-radius: 4px;">
+                                <div style="color: #f9f3e3; font-weight: 700; margin-bottom: 0.25rem;">Volunteer Work</div>
+                                <div style="color: #a89178; font-size: 0.85rem;">Production crew & on-set roles</div>
+                            </div>
+                            <div style="background: rgba(0,0,0,0.3); padding: 1rem; border-radius: 4px;">
+                                <div style="color: #f9f3e3; font-weight: 700; margin-bottom: 0.25rem;">Hold Collectibles</div>
+                                <div style="color: #a89178; font-size: 0.85rem;">Periodic rewards for NFT holders</div>
+                            </div>
+                            <div style="background: rgba(0,0,0,0.3); padding: 1rem; border-radius: 4px;">
+                                <div style="color: #f9f3e3; font-weight: 700; margin-bottom: 0.25rem;">Purchase on Exchanges</div>
+                                <div style="color: #a89178; font-size: 0.85rem;">Buy PASO from DAO or markets</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- El Paso Pass Status -->
+                <div style="background: linear-gradient(135deg, #1a1a1a 0%, #2d2416 100%); border: 2px solid #c9a860; padding: 2rem; margin-bottom: 2rem; border-radius: 8px;">
+                    <div style="display: flex; align-items: flex-start; gap: 2rem;">
+                        <div style="font-size: 3rem;">🎟️</div>
+                        <div style="flex: 1;">
+                            <h4 style="font-family: 'Playfair Display', Georgia, serif; font-size: 1.8rem; font-weight: 700; color: #f9f3e3; margin-bottom: 0.5rem;">El Paso Pass</h4>
+                            <p style="color: #a89178; font-size: 0.9rem; margin-bottom: 1.5rem;">Your gateway to exclusive privileges</p>
+
+                            <div id="elPasoPassStatus" style="margin-bottom: 1.5rem;">
+                                <!-- Status will be injected by JS -->
+                                <div style="background: rgba(0,0,0,0.4); border-left: 3px solid #8a2d2d; padding: 1rem; border-radius: 4px;">
+                                    <div style="color: #ff9090; font-weight: 700; margin-bottom: 0.5rem;">⚠ Pass Inactive</div>
+                                    <div style="color: #d4c4a8; font-size: 0.9rem;">Connect your wallet or acquire PASO to activate your El Paso Pass</div>
+                                </div>
+                            </div>
+
+                            <!-- Pass Benefits -->
+                            <div style="background: rgba(0,0,0,0.3); padding: 1.5rem; border-radius: 4px;">
+                                <h5 style="color: #c9a860; font-weight: 700; margin-bottom: 1rem; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.1em;">Pass Benefits Include:</h5>
+                                <ul style="color: #d4c4a8; font-size: 0.9rem; line-height: 1.8; margin: 0; padding-left: 1.2rem;">
+                                    <li>Early access to El Paso Verse films and content</li>
+                                    <li>Digital streaming access to motion pictures</li>
+                                    <li>Exclusive BTS content, interviews, extended directors' commentary</li>
+                                    <li>Priority invitations to in-person or livestreamed roadshow screening events</li>
+                                    <li>5% additional PASO rewards (stackable with Genesis Collection)</li>
+                                </ul>
+                            </div>
+
+                            <!-- Qualification Methods -->
+                            <div style="margin-top: 1.5rem; padding: 1rem; background: rgba(201, 168, 97, 0.1); border-radius: 4px; border: 1px solid rgba(201, 168, 97, 0.3);">
+                                <p style="color: #e8dcc8; font-size: 0.85rem; margin: 0;"><strong>How to Activate:</strong> Hold a Genesis Collection NFT OR maintain a certain PASO balance in your wallet.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Badge System -->
+                <div style="background: linear-gradient(135deg, #2c1810 0%, #4a2511 100%); border: 3px solid #c9a860; padding: 2rem; margin-bottom: 2rem; border-radius: 8px;">
+                    <h4 style="font-family: 'Playfair Display', Georgia, serif; font-size: 1.8rem; font-weight: 700; color: #f9f3e3; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 1rem;">
+                        <span style="font-size: 2rem;">🏅</span>
+                        Your Badges & Recognition
+                    </h4>
+
+                    <div id="userBadges" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
+                        <!-- Genesis Ranger Badge -->
+                        <div style="background: rgba(0,0,0,0.3); border: 2px solid #4a4a4a; padding: 1.5rem; border-radius: 8px; opacity: 0.6;">
+                            <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                                <div style="font-size: 3rem; filter: grayscale(100%);">⭐</div>
+                                <div>
+                                    <div style="font-family: 'Playfair Display', Georgia, serif; font-size: 1.3rem; font-weight: 700; color: #999;">Genesis Ranger</div>
+                                    <div style="color: #666; font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;">LOCKED</div>
+                                </div>
+                            </div>
+                            <div style="color: #999; font-size: 0.85rem; line-height: 1.5; margin-bottom: 1rem;">
+                                The highest-tier status for foundational participants in the ecosystem.
+                            </div>
+                            <div style="border-top: 1px solid #333; padding-top: 1rem;">
+                                <div style="color: #888; font-size: 0.8rem; font-weight: 700; margin-bottom: 0.5rem;">REQUIRES:</div>
+                                <div style="color: #999; font-size: 0.85rem;">Full Genesis Collection + Motion Print Collection + X PASO</div>
+                                <div style="color: #888; font-size: 0.8rem; font-weight: 700; margin-top: 1rem; margin-bottom: 0.5rem;">BENEFITS:</div>
+                                <ul style="color: #999; font-size: 0.8rem; line-height: 1.6; margin: 0; padding-left: 1.2rem;">
+                                    <li>Highest-tier land access (30% discount)</li>
+                                    <li>Right to be featured in film production</li>
+                                    <li>Governance rights</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Exclusive Screener Badge -->
+                        <div style="background: rgba(0,0,0,0.3); border: 2px solid #4a4a4a; padding: 1.5rem; border-radius: 8px; opacity: 0.6;">
+                            <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                                <div style="font-size: 3rem; filter: grayscale(100%);">🎬</div>
+                                <div>
+                                    <div style="font-family: 'Playfair Display', Georgia, serif; font-size: 1.3rem; font-weight: 700; color: #999;">Exclusive Screener</div>
+                                    <div style="color: #666; font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;">LOCKED</div>
+                                </div>
+                            </div>
+                            <div style="color: #999; font-size: 0.85rem; line-height: 1.5; margin-bottom: 1rem;">
+                                Access to exclusive cinematic experiences and early film screenings.
+                            </div>
+                            <div style="border-top: 1px solid #333; padding-top: 1rem;">
+                                <div style="color: #888; font-size: 0.8rem; font-weight: 700; margin-bottom: 0.5rem;">REQUIRES:</div>
+                                <div style="color: #999; font-size: 0.85rem;">Motion Prints + X PASO</div>
+                                <div style="color: #888; font-size: 0.8rem; font-weight: 700; margin-top: 1rem; margin-bottom: 0.5rem;">BENEFITS:</div>
+                                <ul style="color: #999; font-size: 0.8rem; line-height: 1.6; margin: 0; padding-left: 1.2rem;">
+                                    <li>Required for RWA land purchases (10% discount)</li>
+                                    <li>Exclusive access to cinematic experiences</li>
+                                    <li>Film premiere invitations</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Director's Cut Collector Badge -->
+                        <div style="background: rgba(0,0,0,0.3); border: 2px solid #4a4a4a; padding: 1.5rem; border-radius: 8px; opacity: 0.6;">
+                            <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                                <div style="font-size: 3rem; filter: grayscale(100%);">🎞️</div>
+                                <div>
+                                    <div style="font-family: 'Playfair Display', Georgia, serif; font-size: 1.3rem; font-weight: 700; color: #999;">Director's Cut Collector</div>
+                                    <div style="color: #666; font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;">LOCKED</div>
+                                </div>
+                            </div>
+                            <div style="color: #999; font-size: 0.85rem; line-height: 1.5; margin-bottom: 1rem;">
+                                Elite status for collectors of physical Director's Cut film reels.
+                            </div>
+                            <div style="border-top: 1px solid #333; padding-top: 1rem;">
+                                <div style="color: #888; font-size: 0.8rem; font-weight: 700; margin-bottom: 0.5rem;">REQUIRES:</div>
+                                <div style="color: #999; font-size: 0.85rem;">Director's Cut Physical Reel(s)</div>
+                                <div style="color: #888; font-size: 0.8rem; font-weight: 700; margin-top: 1rem; margin-bottom: 0.5rem;">BENEFITS:</div>
+                                <ul style="color: #999; font-size: 0.8rem; line-height: 1.6; margin: 0; padding-left: 1.2rem;">
+                                    <li>Access to rare cinematic content</li>
+                                    <li>Priority on future collectibles</li>
+                                    <li>Holding previous reels unlocks future rewards</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 1.5rem; padding: 1rem; background: rgba(201, 168, 97, 0.1); border-radius: 4px; border: 1px solid rgba(201, 168, 97, 0.3);">
+                        <p style="color: #e8dcc8; font-size: 0.85rem; margin: 0;"><strong>💡 Tip:</strong> Connect your wallet and hold Genesis Collection NFTs or Motion Prints to unlock badges and exclusive benefits.</p>
+                    </div>
+                </div>
+
+                <!-- Wallet Connection Section -->
+                <div style="background: linear-gradient(135deg, #1a1a1a 0%, #2d2416 100%); border: 2px solid #c9a860; padding: 2rem; border-radius: 8px;">
+                    <div style="display: flex; align-items: center; gap: 1.5rem; margin-bottom: 1.5rem;">
+                        <div style="font-size: 2.5rem;">🔗</div>
+                        <div style="flex: 1;">
+                            <h4 style="font-family: 'Playfair Display', Georgia, serif; font-size: 1.5rem; font-weight: 700; color: #f9f3e3; margin-bottom: 0.5rem;">Connect Your Wallet</h4>
+                            <p style="color: #d4c4a8; margin: 0;">Connect your wallet to verify your El Paso Verse Genesis Collection NFTs and unlock exclusive content.</p>
+                        </div>
+                    </div>
+
+                    <div id="walletInfo" style="display: none;"></div>
+                    <div id="nftStatus"></div>
+
+                    <div style="margin-top: 1.5rem;">
+                        <button id="connectWalletBtn" onclick="connectWallet()" style="background: #c9a860; color: #1a1a1a; padding: 1rem 2rem; font-weight: 700; border: none; border-radius: 4px; cursor: pointer; transition: all 0.3s ease; letter-spacing: 0.05em; font-size: 0.95rem;">
+                            Connect Wallet
+                        </button>
+                    </div>
+
+                    <div style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid rgba(201, 168, 97, 0.3);">
+                        <p style="color: #a89178; font-size: 0.85rem; margin-bottom: 0.5rem;"><strong>What are Genesis Collection NFTs?</strong></p>
+                        <p style="color: #a89178; font-size: 0.85rem; line-height: 1.5;">
+                            El Paso Verse Genesis Collection NFTs are exclusive digital collectibles from our motion picture film frames on <a href="https://book.io/series/el-paso-verse/" target="_blank" style="color: #c9a860; text-decoration: underline;">Book.io</a>. Holders get access to exclusive content, behind-the-scenes material, and early access to new releases.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Governance Tab -->
+            <div id="governance-tab" class="tab-pane">
+                <h3 style="font-family: 'Playfair Display', Georgia, serif; font-size: 2rem; font-weight: 900; color: #f9f3e3; margin-bottom: 1rem;">Governance & Voting</h3>
+                <p style="color: #d4c4a8; margin-bottom: 2rem;">Shape the future of El Paso Verse through community-driven decision making. Your PASO holdings give you voting power.</p>
+
+                <!-- Governance Overview -->
+                <div style="background: linear-gradient(135deg, #2c1810 0%, #4a2511 100%); border: 3px solid #c9a860; padding: 2rem; margin-bottom: 2rem; border-radius: 8px;">
+                    <div style="display: flex; align-items: center; gap: 1.5rem; margin-bottom: 1.5rem;">
+                        <div style="font-size: 3rem;">🗳️</div>
+                        <div>
+                            <h4 style="font-family: 'Playfair Display', Georgia, serif; font-size: 1.8rem; font-weight: 700; color: #f9f3e3; margin: 0;">Your Voting Power</h4>
+                            <p style="color: #a89178; font-size: 0.9rem; margin: 0.5rem 0 0 0;">Token-weighted governance for community decisions</p>
+                        </div>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
+                        <div style="background: rgba(0,0,0,0.3); padding: 1.25rem; border-radius: 4px; border-left: 3px solid #c9a860;">
+                            <div style="color: #c9a860; font-size: 0.75rem; letter-spacing: 0.1em; font-weight: 600; margin-bottom: 0.5rem;">YOUR VOTING POWER</div>
+                            <div id="votingPower" style="font-size: 2rem; font-weight: 900; color: #f9f3e3;">0</div>
+                        </div>
+                        <div style="background: rgba(0,0,0,0.3); padding: 1.25rem; border-radius: 4px; border-left: 3px solid #c9a860;">
+                            <div style="color: #c9a860; font-size: 0.75rem; letter-spacing: 0.1em; font-weight: 600; margin-bottom: 0.5rem;">PROPOSALS VOTED</div>
+                            <div style="font-size: 2rem; font-weight: 900; color: #f9f3e3;">0</div>
+                        </div>
+                        <div style="background: rgba(0,0,0,0.3); padding: 1.25rem; border-radius: 4px; border-left: 3px solid #c9a860;">
+                            <div style="color: #c9a860; font-size: 0.75rem; letter-spacing: 0.1em; font-weight: 600; margin-bottom: 0.5rem;">PARTICIPATION RATE</div>
+                            <div style="font-size: 2rem; font-weight: 900; color: #f9f3e3;">0%</div>
+                        </div>
+                    </div>
+
+                    <div style="background: rgba(0,0,0,0.3); padding: 1.5rem; border-radius: 4px;">
+                        <h5 style="color: #c9a860; font-weight: 700; margin-bottom: 1rem; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.1em;">What You Can Vote On:</h5>
+                        <ul style="color: #d4c4a8; font-size: 0.9rem; line-height: 1.8; margin: 0; padding-left: 1.2rem;">
+                            <li><strong>Infrastructure Priorities</strong> - Which areas to develop first</li>
+                            <li><strong>Economic Incentives</strong> - How in-world commerce is structured</li>
+                            <li><strong>Community Projects</strong> - Use of community-funded initiatives tied to PASO</li>
+                            <li><strong>Land Development</strong> - Town layouts and infrastructure projects (for Residents)</li>
+                            <li><strong>Token Supply</strong> - Majority voting on token supply inflation if needed</li>
+                            <li><strong>Ecosystem Expansion</strong> - New PASO features or policies</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Active Proposals -->
+                <div style="background: linear-gradient(135deg, #1a1a1a 0%, #2d2416 100%); border: 2px solid #c9a860; padding: 2rem; margin-bottom: 2rem; border-radius: 8px;">
+                    <h4 style="font-family: 'Playfair Display', Georgia, serif; font-size: 1.5rem; font-weight: 700; color: #f9f3e3; margin-bottom: 1.5rem;">Active Proposals</h4>
+
+                    <div id="activeProposals">
+                        <!-- Demo Proposal -->
+                        <div style="background: rgba(0,0,0,0.3); border: 2px solid #c9a860; padding: 1.5rem; border-radius: 8px; margin-bottom: 1.5rem;">
+                            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem;">
+                                <div>
+                                    <div style="display: inline-block; background: #c9a860; color: #1a1a1a; padding: 0.25rem 0.75rem; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; margin-bottom: 0.75rem; border-radius: 2px;">ACTIVE</div>
+                                    <h5 style="font-family: 'Playfair Display', Georgia, serif; font-size: 1.3rem; font-weight: 700; color: #f9f3e3; margin: 0 0 0.5rem 0;">Land Development Priority: Hub Portal Construction</h5>
+                                    <p style="color: #a89178; font-size: 0.85rem; margin: 0;">Proposal to prioritize construction of the Hub Portal as the central point for managing tourism and resident logistics.</p>
+                                </div>
+                                <div style="background: #1a1a1a; padding: 0.75rem 1rem; border-radius: 4px; text-align: center; border: 1px solid #c9a860;">
+                                    <div style="color: #c9a860; font-size: 0.7rem; letter-spacing: 0.1em; font-weight: 600;">ENDS IN</div>
+                                    <div style="font-size: 1.2rem; font-weight: 900; color: #f9f3e3;">7 DAYS</div>
+                                </div>
+                            </div>
+
+                            <!-- Vote Stats -->
+                            <div style="margin: 1.5rem 0;">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                                    <span style="color: #d4c4a8; font-size: 0.85rem;">Current Results</span>
+                                    <span style="color: #f9f3e3; font-size: 0.85rem; font-weight: 700;">67% For • 33% Against</span>
+                                </div>
+                                <div style="background: #1a1a1a; height: 20px; border-radius: 10px; overflow: hidden;">
+                                    <div style="background: linear-gradient(90deg, #2d8a2d 0%, #90ee90 100%); width: 67%; height: 100%;"></div>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; margin-top: 0.5rem;">
+                                    <span style="color: #90ee90; font-size: 0.8rem;">For: 6,700,000 PASO</span>
+                                    <span style="color: #ff9090; font-size: 0.8rem;">Against: 3,300,000 PASO</span>
+                                </div>
+                            </div>
+
+                            <!-- Vote Buttons -->
+                            <div style="display: flex; gap: 1rem; margin-top: 1.5rem;">
+                                <button onclick="alert('Demo Mode: Voting will be enabled when governance contracts are deployed.')" style="flex: 1; background: #2d8a2d; color: #fff; padding: 1rem; font-weight: 700; border: 2px solid #2d8a2d; border-radius: 4px; cursor: pointer; transition: all 0.3s ease;">
+                                    ✓ Vote For
+                                </button>
+                                <button onclick="alert('Demo Mode: Voting will be enabled when governance contracts are deployed.')" style="flex: 1; background: transparent; color: #ff9090; padding: 1rem; font-weight: 700; border: 2px solid #8a2d2d; border-radius: 4px; cursor: pointer; transition: all 0.3s ease;">
+                                    ✗ Vote Against
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Coming Soon Message -->
+                        <div style="text-align: center; padding: 2rem; background: rgba(0,0,0,0.3); border-radius: 8px; border: 1px dashed rgba(201, 168, 97, 0.5);">
+                            <p style="color: #d4c4a8; font-size: 0.95rem; margin: 0;">More proposals will appear as the community grows. Check back soon!</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Votes -->
+                <div style="background: linear-gradient(135deg, #2c1810 0%, #4a2511 100%); border: 2px solid #c9a860; padding: 2rem; border-radius: 8px;">
+                    <h4 style="font-family: 'Playfair Display', Georgia, serif; font-size: 1.5rem; font-weight: 700; color: #f9f3e3; margin-bottom: 1.5rem;">Your Vote History</h4>
+
+                    <div style="text-align: center; padding: 3rem 2rem; background: rgba(0,0,0,0.3); border-radius: 8px;">
+                        <div style="font-size: 3rem; margin-bottom: 1rem; opacity: 0.5;">📊</div>
+                        <p style="color: #a89178; font-size: 0.95rem; margin: 0;">You haven't participated in any votes yet.</p>
+                        <p style="color: #999; font-size: 0.85rem; margin-top: 0.5rem;">Your vote history will appear here once you start voting on proposals.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Exclusive Content Tab -->
+            <div id="exclusive-tab" class="tab-pane">
+                <h3>Exclusive Content</h3>
+                <p>Members-only updates, previews, and downloadable content.</p>
+
+                <!-- Featured: The El Paso Gazette -->
+                <div style="background: linear-gradient(135deg, #2c1810 0%, #4a2511 100%); border: 3px solid #c9a860; padding: 2rem; margin-bottom: 2rem; border-radius: 8px;">
+                    <div style="display: flex; align-items: flex-start; gap: 2rem;">
+                        <div style="flex: 1;">
+                            <div style="display: inline-block; background: #c9a860; color: #1a1a1a; padding: 0.25rem 0.75rem; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em; margin-bottom: 0.75rem;">EXCLUSIVE</div>
+                            <h4 style="font-family: 'Playfair Display', Georgia, serif; font-size: 2rem; font-weight: 900; color: #f9f3e3; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.05em;">The El Paso Gazette</h4>
+                            <p style="color: #d4c4a8; font-style: italic; margin-bottom: 1rem; font-size: 1.1rem;">Vol. I — No. 1 • January 30, 1880</p>
+                            <p style="color: #e8dcc8; line-height: 1.6; margin-bottom: 1.5rem;">
+                                Take your first step into 1880 and experience the birth of Breakwater as it's happening with frontier journalism. Read exclusive dispatches about H. West's land petition, railroad scouts on the eastern ridge, and the mysterious lights reported on the northern plain.
+                            </p>
+                            <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
+                                <div style="background: #1a1a1a; border: 2px solid #c9a860; padding: 0.75rem 1.25rem; border-radius: 4px;">
+                                    <div style="color: #c9a860; font-size: 0.75rem; letter-spacing: 0.1em; font-weight: 600; margin-bottom: 0.25rem;">REQUIRES</div>
+                                    <div style="color: #f9f3e3; font-size: 1.25rem; font-weight: 700;">1 PASO</div>
+                                </div>
+                                <div style="color: #d4c4a8; font-size: 0.9rem;">
+                                    <strong style="color: #f9f3e3;">24-hour access</strong> upon payment
+                                </div>
+                            </div>
+                            <a href="gazette-v2.html" style="display: inline-block; background: #c9a860; color: #1a1a1a; padding: 1rem 2rem; font-weight: 700; text-decoration: none; border-radius: 4px; transition: all 0.3s ease; letter-spacing: 0.05em; font-size: 0.95rem;">
+                                READ THE GAZETTE →
+                            </a>
+                        </div>
+                        <div style="flex: 0 0 320px; text-align: center;">
+                            <img src="assets/gazette-preview-thumb.png" alt="The El Paso Gazette Preview" style="width: 100%; height: auto; border: 3px solid #1a1a1a; transform: rotate(-1deg); box-shadow: 0 8px 20px rgba(0,0,0,0.4); cursor: pointer;" onclick="window.location.href='gazette-v2.html'">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Motion Print Streaming -->
+                <div style="background: linear-gradient(135deg, #2c1810 0%, #4a2511 100%); border: 3px solid #c9a860; padding: 2rem; margin-bottom: 2rem; border-radius: 8px;">
+                    <div style="display: flex; align-items: flex-start; gap: 2rem;">
+                        <div style="flex: 1;">
+                            <div style="display: inline-block; background: #c9a860; color: #1a1a1a; padding: 0.25rem 0.75rem; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em; margin-bottom: 0.75rem;">EXCLUSIVE</div>
+                            <h4 style="font-family: 'Playfair Display', Georgia, serif; font-size: 2rem; font-weight: 900; color: #f9f3e3; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.05em;">Motion Print Screening Room</h4>
+                            <p style="color: #d4c4a8; font-style: italic; margin-bottom: 1rem; font-size: 1.1rem;">Exclusive Film Frame Collection</p>
+                            <p style="color: #e8dcc8; line-height: 1.6; margin-bottom: 1.5rem;">
+                                Stream our exclusive Motion Print collection in the closed El Paso Verse screening room - before the films go to the public. Each frame is a one-of-one piece of cinematic art, shot on authentic Kodak motion picture film stock.
+                            </p>
+                            <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
+                                <div style="background: #1a1a1a; border: 2px solid #c9a860; padding: 0.75rem 1.25rem; border-radius: 4px;">
+                                    <div style="color: #c9a860; font-size: 0.75rem; letter-spacing: 0.1em; font-weight: 600; margin-bottom: 0.25rem;">REQUIRES</div>
+                                    <div style="color: #f9f3e3; font-size: 1.25rem; font-weight: 700;">GENESIS NFT</div>
+                                </div>
+                                <div style="color: #d4c4a8; font-size: 0.9rem;">
+                                    <strong style="color: #f9f3e3;">Unlimited streaming</strong> for NFT holders
+                                </div>
+                            </div>
+                            <button onclick="accessMotionPrint()" style="display: inline-block; background: #c9a860; color: #1a1a1a; padding: 1rem 2rem; font-weight: 700; border: none; border-radius: 4px; cursor: pointer; transition: all 0.3s ease; letter-spacing: 0.05em; font-size: 0.95rem;">
+                                STREAM MOTION PRINT →
+                            </button>
+                        </div>
+                        <div style="flex: 0 0 320px; text-align: center;">
+                            <div style="background: #000; border: 3px solid #1a1a1a; transform: rotate(-1deg); box-shadow: 0 8px 20px rgba(0,0,0,0.4); position: relative; overflow: hidden;">
+                                <img src="assets/frame-1.png" alt="Motion Print Preview" style="width: 100%; height: auto; display: block;">
+                                <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(0,0,0,0.7); padding: 1rem; border-radius: 50%; width: 60px; height: 60px; display: flex; align-items: center; justify-content: center;">
+                                    <div style="width: 0; height: 0; border-style: solid; border-width: 12px 0 12px 20px; border-color: transparent transparent transparent #f9f3e3; margin-left: 4px;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="exclusiveContent" class="exclusive-grid">
+                    <div class="loading-message">Loading exclusive content...</div>
+                </div>
+            </div>
+
+            <!-- Browse Ideas Tab -->
+            <div id="browse-tab" class="tab-pane">
+                <!-- Stats Bar -->
+                <div class="stats-bar">
+                    <div class="stat-item">
+                        <span class="stat-number" id="totalIdeas">0</span>
+                        <span class="stat-label">Total Ideas</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" id="totalSupport">0</span>
+                        <span class="stat-label">Total Support</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" id="greenlitCount">0</span>
+                        <span class="stat-label">Greenlit</span>
+                    </div>
+                </div>
+
+                <!-- Filters and Search -->
+                <div class="filters-section">
+                    <div class="search-box">
+                        <input type="text" id="searchInput" placeholder="Search film ideas..." />
+                    </div>
+                    <div class="filter-controls">
+                        <select id="sortFilter" class="filter-select">
+                            <option value="popular">Most Popular</option>
+                            <option value="recent">Newest</option>
+                            <option value="closest">Closest to Goal</option>
+                        </select>
+                        <select id="genreFilter" class="filter-select">
+                            <option value="all">All Genres</option>
+                            <option value="western">Western</option>
+                            <option value="drama">Drama</option>
+                            <option value="action">Action</option>
+                            <option value="thriller">Thriller</option>
+                            <option value="mystery">Mystery</option>
+                        </select>
+                        <select id="statusFilter" class="filter-select">
+                            <option value="all">All Status</option>
+                            <option value="gathering">Gathering Support</option>
+                            <option value="review">Under Review</option>
+                            <option value="greenlit">Greenlit</option>
+                            <option value="production">In Production</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Ideas Grid -->
+                <div id="ideasGrid" class="ideas-grid">
+                    <div class="loading-message">Loading film ideas...</div>
+                </div>
+            </div>
+
+            <!-- Submit Idea Tab -->
+            <div id="submit-tab" class="tab-pane">
+                <div class="submit-container">
+                    <h3>Submit Your Film Idea</h3>
+                    <p class="submission-intro">Have a story set in the El Paso Verse? Share your vision with the community and gather support to see it produced.</p>
+
+                    <!-- Submission Guidelines -->
+                    <div class="guidelines-box">
+                        <h4>Submission Guidelines</h4>
+                        <ul>
+                            <li>Ideas must be set in the perpetual year of 1880 in the El Paso Verse world</li>
+                            <li>Keep your title concise and compelling (max 100 characters)</li>
+                            <li>Your logline should capture the essence in one sentence (max 200 characters)</li>
+                            <li>Provide a detailed description of your story (max 2000 characters)</li>
+                            <li>Choose the genre that best fits your idea</li>
+                            <li>Optional: Upload concept art or poster idea (max 2MB, JPG/PNG)</li>
+                            <li>Reach 1000 supporters to have your idea reviewed for production</li>
+                        </ul>
+                    </div>
+
+                    <!-- Submission Form -->
+                    <form id="submitIdeaForm" class="submission-form">
+                        <div class="form-group">
+                            <label for="ideaTitle">Project Title *</label>
+                            <input type="text" id="ideaTitle" maxlength="100" required>
+                            <span class="char-count">0/100</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="ideaLogline">Logline (One-sentence pitch) *</label>
+                            <input type="text" id="ideaLogline" maxlength="200" required placeholder="Capture your story in one compelling sentence">
+                            <span class="char-count">0/200</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="ideaDescription">Full Description *</label>
+                            <textarea id="ideaDescription" rows="8" maxlength="2000" required placeholder="Describe your story, characters, setting, and what makes it special..."></textarea>
+                            <span class="char-count">0/2000</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="ideaGenre">Genre *</label>
+                            <select id="ideaGenre" required>
+                                <option value="">Select genre...</option>
+                                <option value="western">Western</option>
+                                <option value="drama">Drama</option>
+                                <option value="action">Action</option>
+                                <option value="thriller">Thriller</option>
+                                <option value="mystery">Mystery</option>
+                                <option value="romance">Romance</option>
+                                <option value="adventure">Adventure</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="submitterName">Your Name (or pseudonym) *</label>
+                            <input type="text" id="submitterName" required placeholder="How should we credit you?">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="ideaImage">Concept Art (Optional)</label>
+                            <input type="file" id="ideaImage" accept="image/jpeg,image/png">
+                            <small>Max 2MB, JPG or PNG format</small>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="submit" class="submit-btn">Publish Idea</button>
+                        </div>
+                    </form>
+
+                    <div id="submitSuccess" class="success-message" style="display: none;">
+                        <h4>Success!</h4>
+                        <p>Your idea has been published and is now live for the community to support.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- My Activity Tab -->
+            <div id="activity-tab" class="tab-pane">
+                <h3>My Activity</h3>
+
+                <div class="activity-section">
+                    <h4>My Submissions</h4>
+                    <div id="mySubmissions" class="my-submissions">
+                        <p class="empty-state">You haven't submitted any ideas yet.</p>
+                    </div>
+                </div>
+
+                <div class="activity-section">
+                    <h4>Projects I Support</h4>
+                    <div id="mySupported" class="my-supported">
+                        <p class="empty-state">You haven't supported any projects yet.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="members-footer">
+        <p>&copy; 2025 El Paso Verse Community. Shape the Frontier.</p>
+    </footer>
+
+    <!-- Firebase SDK Scripts -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-storage-compat.js"></script>
+
+    <!-- Custom Scripts -->
+    <script src="auth.js"></script>
+    <script src="firebase-config.js"></script>
+    <script src="wallet-connect.js"></script>
+    <script src="community.js"></script>
+    <script>
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Display username
+            const username = getUserDisplayName();
+            document.getElementById('usernameDisplay').textContent = username;
+
+            // Tab switching
+            const tabButtons = document.querySelectorAll('.tab-button');
+            const tabPanes = document.querySelectorAll('.tab-pane');
+
+            tabButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const tabName = this.getAttribute('data-tab');
+
+                    // Remove active class from all
+                    tabButtons.forEach(btn => btn.classList.remove('active'));
+                    tabPanes.forEach(pane => pane.classList.remove('active'));
+
+                    // Add active class to clicked
+                    this.classList.add('active');
+                    document.getElementById(tabName + '-tab').classList.add('active');
+                });
+            });
+
+            // Character counters
+            const fields = ['ideaTitle', 'ideaLogline', 'ideaDescription'];
+            fields.forEach(fieldId => {
+                const field = document.getElementById(fieldId);
+                if (field) {
+                    field.addEventListener('input', function() {
+                        const counter = this.parentElement.querySelector('.char-count');
+                        if (counter) {
+                            const maxLength = this.getAttribute('maxlength');
+                            counter.textContent = `${this.value.length}/${maxLength}`;
+                        }
+                    });
+                }
+            });
+
+            // Load initial data
+            if (typeof loadIdeas === 'function') {
+                loadIdeas();
+            }
+
+            // Initialize Dashboard data
+            updateDashboard();
+        });
+
+        // Dashboard update function
+        function updateDashboard() {
+            // Demo PASO balance (simulated)
+            const demoPasoBalance = 0;
+            document.getElementById('pasoBalance').textContent = demoPasoBalance.toLocaleString();
+
+            // Update voting power based on PASO balance
+            document.getElementById('votingPower').textContent = demoPasoBalance.toLocaleString();
+
+            // Check El Paso Pass status
+            const hasNFT = localStorage.getItem('nftVerified') === 'true';
+            const elPasoPassStatus = document.getElementById('elPasoPassStatus');
+
+            if (hasNFT) {
+                // NFT holder gets automatic El Paso Pass
+                elPasoPassStatus.innerHTML = `
+                    <div style="background: rgba(45, 138, 45, 0.2); border-left: 3px solid #2d8a2d; padding: 1rem; border-radius: 4px;">
+                        <div style="color: #90ee90; font-weight: 700; margin-bottom: 0.5rem;">✓ El Paso Pass Active</div>
+                        <div style="color: #d0f0d0; font-size: 0.9rem;">Your Genesis Collection NFT grants you automatic El Paso Pass access with all benefits!</div>
+                    </div>
+                `;
+
+                // Update badge display for Genesis holder
+                updateBadgeDisplay(hasNFT, false, false);
+            } else if (demoPasoBalance >= 1000) {
+                // Sufficient PASO balance for Pass (TBD threshold)
+                elPasoPassStatus.innerHTML = `
+                    <div style="background: rgba(45, 138, 45, 0.2); border-left: 3px solid #2d8a2d; padding: 1rem; border-radius: 4px;">
+                        <div style="color: #90ee90; font-weight: 700; margin-bottom: 0.5rem;">✓ El Paso Pass Active</div>
+                        <div style="color: #d0f0d0; font-size: 0.9rem;">Your PASO holdings qualify you for El Paso Pass access!</div>
+                    </div>
+                `;
+            } else {
+                // No pass access
+                elPasoPassStatus.innerHTML = `
+                    <div style="background: rgba(0,0,0,0.4); border-left: 3px solid #8a2d2d; padding: 1rem; border-radius: 4px;">
+                        <div style="color: #ff9090; font-weight: 700; margin-bottom: 0.5rem;">⚠ Pass Inactive</div>
+                        <div style="color: #d4c4a8; font-size: 0.9rem;">Connect your wallet or acquire PASO to activate your El Paso Pass</div>
+                    </div>
+                `;
+            }
+        }
+
+        // Update badge display function
+        function updateBadgeDisplay(hasGenesis, hasMotionPrints, hasDirectorsCut) {
+            const userBadges = document.getElementById('userBadges');
+
+            // This would be expanded with actual badge checking logic
+            // For now, keeping the locked state display
+        }
+
+        // Motion Print access function
+        function accessMotionPrint() {
+            const hasNFT = localStorage.getItem('nftVerified') === 'true';
+
+            if (hasNFT) {
+                window.location.href = 'motion-print-stream.html';
+            } else {
+                alert('Motion Print streaming requires a Genesis Collection NFT.\n\nPlease connect your wallet above to verify NFT ownership, or purchase NFTs on Book.io.');
+            }
+        }
+
+        // Update dashboard when wallet connects
+        window.addEventListener('walletConnected', updateDashboard);
+    </script>
+</body>
+</html>

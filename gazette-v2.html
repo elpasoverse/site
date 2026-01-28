@@ -1,0 +1,1300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="The El Paso Gazette - Exclusive Members Edition - Requires 1 PASO">
+    <title>The El Paso Gazette | Vol. I — No. 1</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        /* Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Authentic 1880s Newsprint with Printing Press Imperfections */
+        body {
+            font-family: 'Old Standard TT', 'Libre Baskerville', Georgia, 'Times New Roman', serif;
+            font-size: 14px;
+            line-height: 1.5;
+            color: #1a1a1a;
+            background: #f5ede0;
+            background-image:
+                repeating-linear-gradient(0deg, transparent, transparent 1px, rgba(80, 60, 40, 0.02) 1px, rgba(80, 60, 40, 0.02) 2px),
+                repeating-linear-gradient(90deg, transparent, transparent 1px, rgba(80, 60, 40, 0.02) 1px, rgba(80, 60, 40, 0.02) 2px);
+            text-rendering: geometricPrecision;
+        }
+
+        /* Imperfect ink distribution - removed blur for readability */
+        .newspaper-wrapper {
+            filter: contrast(1.05);
+        }
+
+        /* Variable ink density */
+        p, li, .caption {
+            opacity: 0.96;
+            text-shadow: 0.3px 0.3px 0.4px rgba(0,0,0,0.12);
+        }
+
+        h1, h2, h3, h4, strong {
+            text-shadow: 0.4px 0.4px 0.5px rgba(0,0,0,0.15);
+        }
+
+        .newspaper-wrapper {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+            background: #f9f3e3;
+            box-shadow: 0 0 40px rgba(0,0,0,0.2);
+            position: relative;
+        }
+
+        /* Printing press ink spots and imperfections overlay */
+        .newspaper-wrapper::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                radial-gradient(circle at 15% 25%, rgba(0,0,0,0.08) 0%, transparent 0.5%),
+                radial-gradient(circle at 85% 15%, rgba(0,0,0,0.06) 0%, transparent 0.4%),
+                radial-gradient(circle at 30% 60%, rgba(0,0,0,0.05) 0%, transparent 0.6%),
+                radial-gradient(circle at 70% 80%, rgba(0,0,0,0.07) 0%, transparent 0.5%),
+                radial-gradient(circle at 45% 35%, rgba(0,0,0,0.04) 0%, transparent 0.3%),
+                radial-gradient(circle at 90% 65%, rgba(0,0,0,0.06) 0%, transparent 0.4%),
+                radial-gradient(circle at 20% 90%, rgba(0,0,0,0.05) 0%, transparent 0.5%);
+            pointer-events: none;
+            opacity: 0.6;
+        }
+
+        /* Masthead - Authentic 1880s Style with Ink Imperfections */
+        .masthead {
+            text-align: center;
+            border: 4px double rgba(0,0,0,0.95);
+            border-bottom: 6px double rgba(0,0,0,0.92);
+            padding: 1.5rem 1rem 1rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(to bottom, #faf7f0 0%, #f9f3e3 100%);
+            box-shadow:
+                inset 0 1px 2px rgba(0,0,0,0.1),
+                0 1px 2px rgba(0,0,0,0.15);
+        }
+
+        .masthead-ornament {
+            width: 150px;
+            height: 2px;
+            background: #000;
+            margin: 0 auto 0.75rem;
+            position: relative;
+        }
+
+        .masthead-ornament::before,
+        .masthead-ornament::after {
+            content: '❖';
+            position: absolute;
+            top: -8px;
+            font-size: 12px;
+        }
+
+        .masthead-ornament::before { left: -15px; }
+        .masthead-ornament::after { right: -15px; }
+
+        .masthead-issue {
+            font-size: 10px;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .masthead-title {
+            font-family: 'Playfair Display', serif;
+            font-weight: 900;
+            line-height: 0.85;
+            margin: 0.75rem 0;
+        }
+
+        .masthead-the {
+            display: block;
+            font-size: 20px;
+            letter-spacing: 0.4em;
+            font-weight: 400;
+            margin-bottom: 0.25rem;
+        }
+
+        .masthead-name {
+            display: block;
+            font-size: 68px;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            font-weight: 900;
+        }
+
+        .masthead-gazette {
+            display: block;
+            font-size: 28px;
+            letter-spacing: 0.25em;
+            font-weight: 700;
+            margin-top: 0.25rem;
+        }
+
+        .masthead-tagline {
+            font-size: 11px;
+            font-style: italic;
+            margin: 0.75rem 2rem 0.5rem;
+            line-height: 1.4;
+        }
+
+        .masthead-info {
+            font-size: 9px;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            border-top: 2px solid #000;
+            border-bottom: 2px solid #000;
+            padding: 0.4rem 0;
+            margin-top: 0.75rem;
+            font-weight: 700;
+        }
+
+        /* Multi-Column Layout */
+        .newspaper-columns {
+            column-count: 5;
+            column-gap: 1.25rem;
+            column-rule: 1px solid #ccc;
+            text-align: justify;
+            hyphens: auto;
+        }
+
+        .newspaper-columns p {
+            orphans: 3;
+            widows: 3;
+        }
+
+        .newspaper-columns-3 {
+            column-count: 3;
+            column-gap: 1.5rem;
+            column-rule: 1px solid #ccc;
+            text-align: justify;
+        }
+
+        .newspaper-columns-2 {
+            column-count: 2;
+            column-gap: 2rem;
+            column-rule: 1px solid #ccc;
+            text-align: justify;
+        }
+
+        /* Headlines */
+        .headline-major {
+            font-family: 'Playfair Display', serif;
+            font-size: 36px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+            line-height: 0.95;
+            text-align: center;
+            margin: 0.5rem 0 0.25rem;
+            column-span: all;
+            break-after: avoid;
+        }
+
+        .headline-medium {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            line-height: 1;
+            margin: 0.75rem 0 0.25rem;
+            column-span: all;
+            break-after: avoid;
+        }
+
+        .headline-small {
+            font-family: 'Playfair Display', serif;
+            font-size: 16px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            line-height: 1.1;
+            margin: 0.5rem 0 0.25rem;
+            break-after: avoid;
+            break-inside: avoid;
+            page-break-inside: avoid;
+            text-align: left;
+            display: block;
+            column-span: all;
+        }
+
+        .subhead {
+            font-style: italic;
+            font-size: 13px;
+            text-align: center;
+            margin-bottom: 0.5rem;
+            column-span: all;
+            break-after: avoid;
+        }
+
+        /* Subheads within columns should be left-aligned and not span */
+        .newspaper-columns .subhead,
+        .newspaper-columns-2 .subhead,
+        .newspaper-columns-3 .subhead {
+            text-align: left;
+            column-span: none;
+            break-inside: avoid;
+            page-break-inside: avoid;
+        }
+
+        .byline {
+            font-size: 11px;
+            font-style: italic;
+            text-align: center;
+            margin-bottom: 0.5rem;
+            column-span: all;
+        }
+
+        /* Decorative Rules - Imperfect Printing Press */
+        .rule-heavy {
+            height: 3px;
+            background: linear-gradient(90deg,
+                #000 0%, rgba(0,0,0,0.95) 20%, #000 40%, rgba(0,0,0,0.92) 60%, #000 80%, rgba(0,0,0,0.97) 100%);
+            margin: 0.75rem 0;
+            column-span: all;
+            border-top: 1px solid rgba(0,0,0,0.9);
+            border-bottom: 1px solid rgba(0,0,0,0.85);
+            box-shadow: 0 0.5px 1px rgba(0,0,0,0.3);
+        }
+
+        .rule-medium {
+            height: 2px;
+            background: linear-gradient(90deg,
+                rgba(0,0,0,0.9) 0%, #000 25%, rgba(0,0,0,0.88) 50%, #000 75%, rgba(0,0,0,0.92) 100%);
+            margin: 0.5rem 0;
+            column-span: all;
+            box-shadow: 0 0.3px 0.8px rgba(0,0,0,0.2);
+            break-after: avoid;
+        }
+
+        .rule-light {
+            height: 1px;
+            background: linear-gradient(90deg,
+                rgba(102,102,102,0.85) 0%, #666 30%, rgba(102,102,102,0.8) 60%, #666 90%);
+            margin: 0.5rem 0;
+            opacity: 0.95;
+            break-after: avoid;
+            column-span: all;
+        }
+
+        .rule-ornate {
+            text-align: center;
+            margin: 0.75rem 0;
+            column-span: all;
+            font-size: 10px;
+            letter-spacing: 1em;
+        }
+
+        /* Drop Cap */
+        .drop-cap::first-letter {
+            float: left;
+            font-size: 52px;
+            line-height: 0.85;
+            font-weight: 700;
+            margin-right: 4px;
+            margin-top: 4px;
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Images - 1880s Aspect Ratios */
+        .illustration {
+            break-inside: avoid;
+            page-break-inside: avoid;
+            margin: 0.75rem 0;
+            overflow: hidden;
+        }
+
+        /* Reduce spacing after column-spanning headlines */
+        .headline-small + .rule-light + .illustration {
+            margin-top: 0.25rem;
+        }
+
+        .illustration-full {
+            column-span: all;
+            text-align: center;
+            margin: 1rem 0;
+        }
+
+        /* Standard photos: 5:4 aspect ratio (typical 1880s large format) */
+        .illustration img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border: 1px solid rgba(0,0,0,0.6);
+            display: block;
+            filter: grayscale(100%) sepia(40%) contrast(1.4) brightness(0.9) saturate(0.7);
+        }
+
+        /* Full-width images: slightly wider but still period-appropriate */
+        .illustration-full img {
+            max-width: 500px;
+            width: 100%;
+            height: 380px;
+            object-fit: cover;
+            border: 1px solid rgba(0,0,0,0.6);
+        }
+
+        .caption {
+            font-size: 10px;
+            font-style: italic;
+            text-align: center;
+            margin-top: 0.25rem;
+            line-height: 1.3;
+        }
+
+        /* Advertisement Boxes */
+        .advertisement {
+            border: 3px double rgba(0,0,0,0.95);
+            padding: 0.75rem;
+            margin: 0.75rem 0;
+            text-align: center;
+            break-inside: avoid;
+            background: #fff;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+        }
+
+        .ad-header {
+            font-family: 'Playfair Display', serif;
+            font-weight: 900;
+            font-size: 14px;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+        }
+
+        .ad-ornament {
+            margin: 0.5rem 0;
+            font-size: 10px;
+        }
+
+        .ad-text {
+            font-size: 11px;
+            line-height: 1.4;
+        }
+
+        /* Notice Box */
+        .notice-box {
+            border: 2px solid rgba(0,0,0,0.92);
+            padding: 0.5rem;
+            margin: 0.75rem 0;
+            background: #faf7f0;
+            break-inside: avoid;
+            box-shadow: 0 0.5px 1px rgba(0,0,0,0.15);
+        }
+
+        .notice-box h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 0.25rem;
+            text-align: center;
+        }
+
+        .notice-box p {
+            font-size: 11px;
+            line-height: 1.4;
+            text-align: left;
+        }
+
+        /* Pull Quotes */
+        .pull-quote {
+            border-top: 2px solid rgba(0,0,0,0.9);
+            border-bottom: 2px solid rgba(0,0,0,0.88);
+            padding: 0.5rem 0;
+            margin: 0.75rem 0;
+            text-align: center;
+            font-style: italic;
+            font-size: 13px;
+            break-inside: avoid;
+            box-shadow:
+                0 0.5px 1px rgba(0,0,0,0.1),
+                0 -0.5px 1px rgba(0,0,0,0.1);
+        }
+
+        /* Section Headers */
+        .section-header {
+            text-align: center;
+            border-top: 4px double rgba(0,0,0,0.94);
+            border-bottom: 4px double rgba(0,0,0,0.92);
+            padding: 0.5rem 0;
+            margin: 1rem 0 0.75rem;
+            column-span: all;
+            box-shadow:
+                0 1px 2px rgba(0,0,0,0.12),
+                0 -1px 2px rgba(0,0,0,0.12);
+        }
+
+        .section-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 22px;
+            font-weight: 900;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+        }
+
+        /* Paragraph spacing */
+        p {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Strong emphasis */
+        strong {
+            font-weight: 700;
+        }
+
+        /* Lists in columns */
+        ul {
+            margin-left: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        li {
+            margin-bottom: 0.25rem;
+            font-size: 12px;
+        }
+
+        /* Wanted Poster Style */
+        .wanted-poster {
+            border: 2px solid rgba(0,0,0,0.7);
+            padding: 1rem;
+            background: #f5f5f5;
+            text-align: center;
+            break-inside: avoid;
+            margin: 0.75rem 0;
+        }
+
+        .wanted-poster img {
+            width: 100%;
+            height: 320px;
+            object-fit: cover;
+            border: 1px solid rgba(0,0,0,0.6);
+            margin: 0.5rem 0;
+        }
+
+        .wanted-poster h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            font-weight: 900;
+            letter-spacing: 0.15em;
+            margin: 0.5rem 0;
+        }
+
+        /* 1880s Photo Effects - Gritty and Imperfect */
+        img {
+            filter: grayscale(100%) sepia(45%) contrast(1.7) brightness(0.8) saturate(0.6);
+            position: relative;
+            image-rendering: auto;
+        }
+
+        /* Add texture and imperfections */
+        .illustration {
+            position: relative;
+        }
+
+        .illustration::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 2px,
+                    rgba(0, 0, 0, 0.08) 2px,
+                    rgba(0, 0, 0, 0.08) 3px
+                ),
+                repeating-linear-gradient(
+                    90deg,
+                    transparent,
+                    transparent 2px,
+                    rgba(0, 0, 0, 0.08) 2px,
+                    rgba(0, 0, 0, 0.08) 3px
+                ),
+                radial-gradient(ellipse at 20% 30%, transparent 0%, rgba(0,0,0,0.15) 100%),
+                radial-gradient(ellipse at 80% 70%, transparent 0%, rgba(0,0,0,0.12) 100%);
+            pointer-events: none;
+            opacity: 0.3;
+            z-index: 1;
+        }
+
+        /* Light vignetting for period photos */
+        .illustration img {
+            box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .illustration-full img {
+            box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.25);
+        }
+
+        /* Scratches and damage overlay */
+        .illustration::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                linear-gradient(45deg, transparent 48%, rgba(255,255,255,0.03) 49%, rgba(255,255,255,0.03) 51%, transparent 52%),
+                linear-gradient(135deg, transparent 48%, rgba(255,255,255,0.02) 49%, rgba(255,255,255,0.02) 51%, transparent 52%),
+                radial-gradient(circle at 30% 40%, transparent 40%, rgba(0,0,0,0.05) 41%, transparent 42%),
+                radial-gradient(circle at 70% 60%, transparent 35%, rgba(0,0,0,0.04) 36%, transparent 37%);
+            pointer-events: none;
+            opacity: 0.2;
+            z-index: 2;
+            mix-blend-mode: overlay;
+        }
+
+        /* PASO Gate */
+        .paso-gate-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(26, 26, 26, 0.95);
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .paso-gate-box {
+            background: #f9f3e3;
+            border: 4px double #1a1a1a;
+            padding: 3rem 2rem;
+            max-width: 500px;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+        }
+
+        .paso-gate-box h2 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 2rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1rem;
+        }
+
+        .paso-gate-box p {
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .paso-requirement {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 1.5rem 0;
+            padding: 1rem;
+            border: 2px solid #1a1a1a;
+            background: #fff;
+        }
+
+        .paso-gate-button {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            padding: 1rem 2rem;
+            background: #1a1a1a;
+            color: #f9f3e3;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 0.5rem;
+        }
+
+        .paso-gate-button:hover {
+            background: #333;
+            transform: translateY(-2px);
+        }
+
+        .paso-gate-button.secondary {
+            background: transparent;
+            border: 2px solid #1a1a1a;
+            color: #1a1a1a;
+        }
+
+        .paso-gate-button.secondary:hover {
+            background: #1a1a1a;
+            color: #f9f3e3;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        /* Lightbox */
+        .lightbox-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 20000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .lightbox-overlay.active {
+            display: flex;
+        }
+
+        .lightbox-image {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+            box-shadow: 0 0 50px rgba(0,0,0,0.5);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 40px;
+            color: #fff;
+            font-weight: bold;
+            cursor: pointer;
+            font-family: Arial, sans-serif;
+        }
+
+        .lightbox-close:hover {
+            color: #ccc;
+        }
+
+        /* Make images clickable */
+        .illustration img,
+        .illustration-full img,
+        .wanted-poster img {
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        .illustration img:hover,
+        .illustration-full img:hover,
+        .wanted-poster img:hover {
+            opacity: 0.9;
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .newspaper-columns { column-count: 4; }
+        }
+
+        @media (max-width: 900px) {
+            .newspaper-columns { column-count: 3; }
+            .masthead-name { font-size: 48px; }
+        }
+
+        @media (max-width: 600px) {
+            .newspaper-columns { column-count: 2; }
+            .newspaper-columns-3 { column-count: 2; }
+            .masthead-name { font-size: 36px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- PASO Gate -->
+    <div id="pasoGate" class="paso-gate-overlay">
+        <div class="paso-gate-box">
+            <h2>★ Exclusive Edition ★</h2>
+            <p>This historical gazette is reserved for members of the El Paso Verse community.</p>
+            <div class="paso-requirement">Requires: 1 PASO Token<br><span style="font-size: 0.9rem; font-weight: 400;">or Genesis Collection NFT</span></div>
+            <p style="font-style: italic; font-size: 0.9rem;">
+                Step back into 1880 and witness the birth of Breakwater through authentic frontier journalism.
+            </p>
+            <div style="margin-top: 2rem;">
+                <button class="paso-gate-button" onclick="checkPasoAccess()">Verify Access</button>
+                <button class="paso-gate-button secondary" onclick="window.location.href='members.html'">Return to Portal</button>
+            </div>
+            <p style="font-size: 0.85rem; color: #8b7355; margin-top: 1.5rem; font-style: italic;">
+                Connect your wallet in the Community Portal to verify NFT ownership
+            </p>
+        </div>
+    </div>
+
+    <!-- Lightbox -->
+    <div id="lightbox" class="lightbox-overlay" onclick="closeLightbox()">
+        <span class="lightbox-close">&times;</span>
+        <img id="lightboxImage" class="lightbox-image" src="" alt="">
+    </div>
+
+    <div class="newspaper-wrapper">
+        <!-- Masthead -->
+        <header class="masthead">
+            <div class="masthead-ornament"></div>
+            <div class="masthead-issue">VOL. I — No. 1 — JANUARY 30, 1880</div>
+            <h1 class="masthead-title">
+                <span class="masthead-the">THE</span>
+                <span class="masthead-name">EL PASO GAZETTE</span>
+            </h1>
+            <p class="masthead-tagline">Printed in El Paso Verse, Circulated on Both Sides of the Rio Grande, Including Ciudad Juárez</p>
+            <div class="masthead-info">PUBLISHED CONTINUALLY SINCE 1880 — PRICE: ONE PASO</div>
+        </header>
+
+        <!-- Lead Story -->
+        <article>
+            <h2 class="headline-major">BREAKWATER: RUMORS OF A NEW TOWN NORTH OF RIO GRANDE</h2>
+            <p class="subhead">Survey Flags Appear Across Northern Plain — Merchants Predict Land Rush</p>
+            <p class="byline">From Our Correspondent in the Field</p>
+            <div class="rule-heavy"></div>
+
+            <div style="column-span: all; margin: 1rem 0;">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+                    <div class="illustration" style="margin: 0;">
+                        <img src="assets/brownsville-reference.jpg" alt="Breakwater Site" style="width: 100%; height: 280px; object-fit: cover; display: block; border: 1px solid #000;">
+                        <p class="caption">The Proposed Breakwater Site — Undeveloped Northern Territory<br>Photograph by C.S. Fly</p>
+                    </div>
+                    <div class="illustration" style="margin: 0;">
+                        <img src="assets/land-bg-new.png" alt="Brownsville" style="width: 100%; height: 280px; object-fit: cover; display: block; border: 1px solid #000;">
+                        <p class="caption">Est. Town of Brownsville — A Model for the Territory<br>Archive photograph from The Brownsville Democrat</p>
+                    </div>
+                </div>
+                <p style="text-align: center; font-style: italic; font-size: 12px; margin-top: 0.5rem; padding: 0 2rem;">Brownsville demonstrates what can be achieved in border country. Breakwater's promoters envision similar development in the northern territory.</p>
+            </div>
+
+            <div class="newspaper-columns">
+                <p class="drop-cap">Survey flags have appeared across the northern plain, prompting widespread talk of a proposed settlement known as Breakwater. Though no official claims have opened, the sight of survey tools and measuring chains has sparked considerable interest among traders, prospectors, and families currently camped along the ridge.</p>
+
+                <p>The land in question lies north of the Rio Grande, in territory long considered too remote for proper settlement. However, recent activity suggests that assessment may be changing. Wagon tracks now cross what was once virgin prairie, and more arrive daily to scout the terrain.</p>
+
+                <p>Promoters of the Breakwater development point to established border towns such as Brownsville as proof that civilization can flourish in this country. "What has been done there can be done here," one surveyor stated, though he declined to provide specifics of how Breakwater's harsher terrain and distance from existing supply routes would be overcome.</p>
+
+                <p>Merchants operating between Juárez and the northern outposts predict a land rush should the whispers become official proclamation. "Every man with coin enough for a plot will head north," said one trader who declined to give his name. "And those without coin will come anyway, hoping to stake their fortune through sweat."</p>
+
+                <p>For now, the desert holds its silence. The surveyors work without comment, the flags mark ground without explanation, and those gathered nearby wait for word—official or otherwise—that Breakwater has moved from rumor to reality.</p>
+
+                <p>The Texas General Land Office declined to comment when reached for this report. However, sources within the office confirm that multiple petitions for land development in the northern territory have been received in recent months.</p>
+
+                <p>Should Breakwater become official, it would represent the first major settlement in this section of territory since the Treaty of Guadalupe Hidalgo established the current border more than thirty years past.</p>
+            </div>
+        </article>
+
+        <div class="rule-heavy"></div>
+
+        <!-- Railroad & West Articles -->
+        <div class="newspaper-columns-3">
+            <h3 class="headline-small">RAILROAD SCOUTS SEEN PACING THE EASTERN RIDGE</h3>
+            <div class="rule-light"></div>
+
+            <p>A small team of railroad surveyors was spotted marking ground east of the proposed Breakwater townsite last Thursday. The men carried surveying equipment and were observed taking measurements along the eastern ridge for the better part of two days.</p>
+
+            <div class="illustration">
+                <img src="assets/railroad-bridge-scout.png" alt="Railroad Scout on Bridge">
+                <p class="caption">Railroad Scout on the Eastern Ridge<br>Archive photograph from The San Antonio Express</p>
+            </div>
+
+            <p>When approached by this correspondent, the team's leader—who identified himself only as Mr. Hutchins—declined to elaborate on their purpose. Railroad officials in the regional office deny any authorized expansion into the territory.</p>
+
+            <p>However, word travels that a spur line may connect Breakwater to an eastern town once the settlement becomes formally established. As one surveyor offered when pressed:</p>
+
+            <div class="pull-quote">
+                ★ "A town comes first. Then the iron." ★
+            </div>
+
+            <p>Whether this represents official policy or merely the opinion of one man remains unclear. What is certain: the presence of railroad scouts suggests forces larger than simple homesteading are at play in the northern territory.</p>
+
+            <div class="rule-medium"></div>
+
+            <h3 class="headline-small">MYSTERIOUS PETITIONER SEEKS RIGHTS TO NORTHERN TERRITORY</h3>
+            <p class="subhead">Texas General Land Office Acknowledges Unusual Filing</p>
+            <div class="rule-light"></div>
+
+            <div class="illustration">
+                <img src="assets/unidentified-man-river.png" alt="Unidentified man at Rio Grande with boat">
+                <p class="caption">Unidentified Man at the Rio Grande — Face Obscured<br>Photograph by C.S. Fly</p>
+            </div>
+
+            <p>The Texas General Land Office has confirmed that an unidentified man has made formal inquiries regarding zoning and future development rights for a tract of nearly 90,000 acres of land north of the Rio Grande.</p>
+
+            <p>The man went back the way he came, crossing the river at a little-used ford, alone in a narrow skiff and slipping back into Mexico. That moment was captured by C.S. Fly, whose photographs of the frontier have become fixtures in regional papers. The image shows the man guiding his small boat with the ease of one familiar with hidden crossings. Fly notes, however, that the traveler kept his hat low on purpose, making it difficult to capture his face.</p>
+
+            <p>It was later discovered that he had signed into the Red Feather Hotel under the name "H. West." According to documents reviewed by this publication, his stated purpose was:</p>
+
+            <p style="text-align: center; font-style: italic; margin: 1rem 0;">"A frontier community where story and land meet."</p>
+
+            <p>Such phrasing is uncommon in land petitions, which generally concern grazing, water rights, or commercial claims. When pressed for clarification, a clerk at the Land Office replied only:</p>
+
+            <p style="text-align: center; font-style: italic; margin: 1rem 0;">"No decisions have been made."</p>
+
+            <p>For now, the applicant remains a figure of speculation—a man who arrives at the Land Office, signs with a single initial, speaks of building a place that does not yet exist, and disappears back across the border without explanation.</p>
+
+            <div class="notice-box">
+                <h4>WHO IS H. WEST?</h4>
+                <p style="font-size: 10px; font-style: italic; text-align: center; margin-bottom: 0.5rem;">—A Question Raised by the Editor—</p>
+                <p>Whoever heard of a gringo hiding out in Mexico buying up land on the U.S. side? Some Mexicans claim they've seen him with maps no one recognizes—ancient paper, strange markings, the kind surveyors swear don't match any county line. Other folks near the border insist he came wandering up from the far Sonoran desert, looking half-starved and half-certain of where he was going.</p>
+                <p>Yet the region already seems to be shifting around him… as if the land knows something we don't.</p>
+            </div>
+        </div>
+
+        <div class="rule-heavy"></div>
+
+        <!-- PASO & Market News -->
+        <div class="section-header">
+            <h2>COMMERCE & CURRENCY</h2>
+        </div>
+
+        <div class="newspaper-columns">
+            <h3 class="headline-small">NEW COIN GAINS FAVOR IN CROSS-BORDER TRADE</h3>
+            <div class="rule-light"></div>
+
+            <div class="illustration" style="max-width: 200px; margin: 0.5rem auto;">
+                <img src="assets/paso-coin-new.png" alt="PASO Currency" style="height: 160px;">
+                <p class="caption">The PASO Coin — A New Currency Circulating in the Territory</p>
+            </div>
+
+            <p>Merchants operating on both sides of the Rio Grande are beginning to accept PASO coins and notes for supplies, tools, and land deposits. The currency has gained favor among traders and travelers for its convenience and portability.</p>
+
+            <p>"The coins are well-struck and hold their weight," explained one trader at the Juárez crossing. "And the paper notes are easier to carry than silver for large transactions."</p>
+
+            <p>Even certain merchants in Ciudad Juárez are beginning to accept PASO as means of exchange, though the practice remains limited to a handful of establishments willing to experiment with the private currency.</p>
+
+            <p>The National Treasury advises caution in accepting any new currencies not backed by the federal government. "Private notes carry risk," stated a Treasury circular distributed last month. "Citizens should verify the backing and legitimacy of any scrip before accepting it in trade."</p>
+
+            <div class="rule-medium"></div>
+
+            <h3 class="headline-small">HORSE PRICES RISE AS SETTLERS SCOUT THE PLAINS</h3>
+            <div class="rule-light"></div>
+
+            <p>Demand for sturdy mustangs and criollo mares has increased sharply in recent weeks. Long-ride temperament and sure footing across rough terrain command the highest bids at market.</p>
+
+            <p>A reliable gelding that sold for 40 silver dollars last month now fetches upward of 60. Mares proven for endurance trade even higher.</p>
+
+            <p>Several stables near the northern camps have begun accepting PASO notes at favorable rates, recognizing the currency's growing prevalence among would-be settlers.</p>
+
+            <div class="rule-medium"></div>
+
+            <h3 class="headline-small">NEW TRADING OUTFIT OPENS</h3>
+            <div class="rule-light"></div>
+
+            <p>A freight team operating under the name "Frontier Supply Co." has begun regular runs carrying tools, barrels of mescal, lumber, and general goods between Ciudad Juárez and the northern ridge camps.</p>
+
+            <p>The proprietors deny any connection to Breakwater speculation—though their route and timing suggest otherwise. Wagons arrive weekly, and demand has proven strong enough to justify additional teams.</p>
+        </div>
+
+        <div class="rule-heavy"></div>
+
+        <!-- Marshal's Firearm Ban -->
+        <article>
+            <h2 class="headline-medium">MARSHAL PROPOSES FIREARM BAN FOR BREAKWATER</h2>
+            <p class="subhead">Avery Briggs Seeks to Prohibit Weapons Within Town Limits</p>
+            <div class="rule-medium"></div>
+
+            <div class="newspaper-columns-2">
+                <div class="illustration">
+                    <img src="assets/marshal-street-new.png" alt="Frontier Street Scene">
+                    <p class="caption">A Lawman Walks the Streets of the Territory<br>Archive photograph El Paso Gazette</p>
+                </div>
+
+                <p class="drop-cap">Marshal Avery Briggs has made his intentions clear: should Breakwater become an official settlement, he will seek to prohibit the carrying of firearms within the town limits. The proposal has sparked considerable debate among those camped near the proposed site.</p>
+
+                <p>"Every town that wishes to prosper must choose between the gun or the gavel," Briggs stated when questioned about his plans. "I have seen too many promising settlements destroyed by men who believed disputes should be settled with lead rather than law."</p>
+
+                <p>Briggs, who served as deputy marshal in Dodge City before coming west, argues that a weapons ban would attract merchants, families, and investment capital that might otherwise avoid a frontier settlement.</p>
+
+                <div class="pull-quote">
+                    "I have seen too many promising settlements destroyed by men who believed disputes should be settled with lead rather than law."
+                </div>
+
+                <p>The proposal is not without precedent. Tombstone, Deadwood, and Dodge City have all implemented varying degrees of weapons restrictions within town boundaries. However, enforcement has proven difficult, and some argue such bans merely disarm the honest while criminals ignore the prohibition.</p>
+
+                <p>"A man has a right to defend himself," said prospector Thomas McKnight, who camps east of the survey flags. "Take away his gun and you make him prey for every outlaw who doesn't respect the marshal's rule."</p>
+
+                <p>Briggs acknowledges the concern but remains firm. "Within the town limits, the law defends the citizen. Beyond the limits, a man may carry what he wishes. This is not disarmament—it is civilization."</p>
+
+                <p>The marshal also noted that while border control is fierce, this area has historically seen outlaws from the north cross into Mexico. "Men with warrants know the Rio Grande well," Briggs stated. "A border crossing can mean the difference between a rope and a second chance."</p>
+
+                <p>When asked about rumors of a sanctuary for those with a past somewhere south of the border, a local trader who declined to give his name offered: "There are stories. Always have been. Men say there's a place down in the Chihuahua territory where a man's past doesn't follow him—if he can reach it and if he's got something to trade for silence." The trader shrugged. "But it may be only a rumor. The desert is full of them."</p>
+
+                <p>Marshal Briggs declined to comment on such speculation, noting only that his jurisdiction ends at the river.</p>
+
+                <p>The marshal has invited public comment and indicates he will hold a town meeting once Breakwater's status becomes official.</p>
+            </div>
+        </article>
+
+        <div class="rule-heavy"></div>
+
+        <!-- Public Notices -->
+        <div class="section-header">
+            <h2>PUBLIC NOTICES</h2>
+        </div>
+
+        <div class="newspaper-columns-3">
+            <div class="advertisement">
+                <div class="ad-header">★ THE EL PASO GAZETTE ★</div>
+                <div class="ad-ornament">◆ ◆ ◆</div>
+                <div class="ad-text">
+                    <p><strong>CORRESPONDENT SOUGHT</strong></p>
+                    <p style="margin-top: 0.5rem;">The Gazette seeks a reliable journalist familiar with the northern territories. Must possess strong penmanship and the ability to verify sources. Experience with frontier reporting preferred.</p>
+                    <p style="margin-top: 0.5rem; font-size: 10px; font-style: italic;">Inquire at the Gazette office, El Paso.</p>
+                </div>
+            </div>
+
+            <div class="notice-box">
+                <h4>PRINTING PRESS ASSISTANT</h4>
+                <p>Experienced pressman wanted for type-setting and print operation. Must be punctual and detail-oriented. Knowledge of press maintenance desirable. Apply in person at the Gazette.</p>
+            </div>
+
+            <div class="notice-box">
+                <h4>GEOLOGIST WANTED</h4>
+                <p>Survey company seeks qualified geologist for mineral assessment and land evaluation work. Long-term engagement possible. References required. Contact J. Morrison, El Paso.</p>
+            </div>
+
+            <div class="notice-box">
+                <h4>DENTIST AVAILABLE</h4>
+                <p>H.C. Hage offers tooth extraction and dental services at the Rio Hotel, second floor. Hours: Tuesday and Friday afternoons.</p>
+            </div>
+
+            <div class="notice-box">
+                <h4>LAND SURVEYOR</h4>
+                <p>Licensed surveyor available for private land claims and boundary disputes. Theodolite and chain work. Fair rates. Inquire at Land Office.</p>
+            </div>
+        </div>
+
+        <div class="rule-heavy"></div>
+
+        <!-- Wanted: Lobo -->
+        <div class="newspaper-columns-2">
+            <div>
+                <h3 class="headline-small">MARSHAL SEEKS INFORMATION ON DANTE CORTEZ, KNOWN AS "LOBO"</h3>
+                <div class="rule-light"></div>
+
+                <p>Territorial authorities have circulated a photograph of a man identified as Dante Cortez, known throughout the borderlands by the alias "Lobo" — Spanish for wolf — in connection with several incidents reported along the Rio Grande crossing routes.</p>
+
+                <p>Marshal Avery Briggs states that Cortez is wanted for questioning, though no formal charges have been filed. "We have reports from multiple sources describing a figure matching this likeness," Briggs explained. "Some claim he operates as a guide. Others suggest less savory pursuits."</p>
+
+                <div class="pull-quote">
+                    "Some say he's a ghost. Others say he's just a man who prefers the company of wolves to people."
+                </div>
+
+                <p>Traders report that Cortez occasionally appears at remote camps, offering services as a guide through difficult terrain. He accepts payment in silver or goods but never stays longer than necessary to conduct business.</p>
+
+                <p>"He knows every trail and every water source between here and the mountains," said one unnamed source. "If you need to cross country no one else can cross, Lobo can take you. But he doesn't talk, and he doesn't explain himself."</p>
+
+                <p>Anyone with information regarding Dante Cortez is asked to contact the Marshal's office. Discretion assured.</p>
+            </div>
+
+            <div class="wanted-poster" style="padding: 0; border: none; background: transparent;">
+                <img src="assets/lobo-wanted-poster.png" alt="Wanted Poster - Dante Cortez a.k.a. Lobo" style="width: 100%; height: auto; border: none; margin: 0;">
+                <p style="margin-top: 1rem;"><strong>Known As:</strong> <strong>Dante Cortez, alias "Lobo"</strong></p>
+                <p><strong>Description:</strong> Age 30-50 years; Height approximately 6 feet; Lean, weathered appearance; Moves silently, speaks little; Known to frequent remote crossings and canyon trails.</p>
+            </div>
+        </div>
+
+        <div class="rule-heavy"></div>
+
+        <!-- Society & Culture -->
+        <div class="section-header">
+            <h2>SOCIETY & CULTURE</h2>
+        </div>
+
+        <div class="newspaper-columns">
+            <h3 class="headline-small">THE CRESCENT PLAYERS PASS THROUGH</h3>
+            <div class="rule-light"></div>
+
+            <p>A traveling theatre troupe from New Orleans, known as The Crescent Players, gave a brief performance near the river crossing last Saturday evening.</p>
+
+            <p>The repertoire included scenes from Shakespeare and an original piece titled "The Desert Bride." Approximately forty persons attended, including several surveyors and camp followers.</p>
+
+            <p>The troupe's manager, Mr. Edmund Fairchild, indicated they may return "if a proper town rises with a hall suitable for performance."</p>
+
+            <p>"We follow civilization," Fairchild stated. "Where towns grow, so grows appetite for the stage."</p>
+
+            <div class="rule-medium"></div>
+
+            <h3 class="headline-small">HERDER REPORTS LIGHTS ON NORTHERN PLAIN</h3>
+            <div class="rule-light"></div>
+
+            <p>A local herder, Miguel Cortez, claims to have witnessed unusual lights drifting east of the canyon on three separate occasions over the past fortnight.</p>
+
+            <p>"They moved slow, like lanterns," Cortez told this correspondent. "But there was no one carrying them. They floated."</p>
+
+            <p>Territorial officials attribute the phenomenon to heat shimmer or perhaps distant campfires creating optical effects across the flat landscape. No investigation is planned.</p>
+
+            <p>Similar reports have surfaced periodically in the region, typically dismissed as products of exhaustion or desert heat.</p>
+        </div>
+
+        <div class="rule-heavy"></div>
+
+        <!-- Huck Ramirez Interview -->
+        <article>
+            <h2 class="headline-medium">INTERVIEW: HUCK RAMIREZ</h2>
+            <p class="subhead">Trader and Prospective Breakwater Resident Speaks on His Plans</p>
+            <div class="rule-medium"></div>
+
+            <div class="illustration-full">
+                <img src="assets/huck-ramirez-saloon.png" alt="Huck Ramirez">
+                <p class="caption">Huck Ramirez — Trader and Man of Enterprise on the Frontier<br>Photograph by C.S. Fly</p>
+            </div>
+
+            <div class="newspaper-columns-2">
+                <p class="drop-cap">Huck Ramirez arrived from California six months past with capital, ambition, and plans to establish himself in the territory. A trader and entrepreneur by nature, he has been studying the borderlands with the calculating eye of a man who knows opportunity when he sees it.</p>
+
+                <p>We spoke with Ramirez at a trading post near Juárez, where he has been quietly acquiring inventory and making connections on both sides of the river.</p>
+
+                <p><strong>Gazette:</strong> You came west from California. What drew you to this territory?</p>
+
+                <p><strong>Ramirez:</strong> California's getting crowded. Too many men chasing the same opportunities. Out here, a man with resources and sense can still stake a real claim. I saw the survey reports, heard the whispers about development. Figured I'd arrive before the rush instead of after.</p>
+
+                <p><strong>Gazette:</strong> Your name suggests Mexican heritage, yet you hail from California.</p>
+
+                <p><strong>Ramirez:</strong> My grandfather came up from Sonora during the gold rush. Married an American woman. I was born in San Francisco—as American as any man here. The name opens doors on both sides of the river. That's useful in border country.</p>
+
+                <p><strong>Gazette:</strong> What would you build if Breakwater becomes official?</p>
+
+                <p><strong>Ramirez:</strong> If they stake it, I'll take a corner lot. Maybe put up a hotel and an air-cooled bar. Every town needs shade and a drink, especially out in that country. Man gets thirsty just thinking about it.</p>
+
+                <p><strong>Gazette:</strong> Do you believe the settlement will succeed?</p>
+
+                <p><strong>Ramirez:</strong> I believe H. West is serious, and I believe he has backing—quiet backing, but real. When a man petitions the Land Office and surveyors show up a week later, that's not coincidence. Something's moving, and I intend to move with it.</p>
+
+                <p>Ramirez estimates that if Breakwater opens, fifty businesses will establish within the first year. His is one of the few Mexican surnames among the American settlers gathering near the proposed site.</p>
+            </div>
+        </article>
+
+        <div class="rule-heavy"></div>
+
+        <!-- Editorial -->
+        <article>
+            <div class="notice-box" style="padding: 1rem; background: #fff;">
+                <h4 style="font-size: 18px; margin-bottom: 0.75rem;">EDITORIAL</h4>
+                <h3 style="font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; text-align: center; margin-bottom: 0.5rem;">BREAKWATER — HOPE OR HAZE?</h3>
+                <p style="text-align: center; font-style: italic; font-size: 12px; margin-bottom: 0.75rem;">By the Editor</p>
+                <div class="rule-light"></div>
+
+                <div class="newspaper-columns-2">
+                    <p>Rumor runs faster than truth on the frontier. It always has. A man whispers something at a trading post, and by the time it reaches the next camp, it's become gospel.</p>
+
+                    <p>Breakwater may be real. The surveys suggest as much. H. West's petition to the Land Office carries weight. Railroad scouts do not pace ground for amusement. And yet—none of this guarantees a town will rise.</p>
+
+                    <p>But who is H. West? This question deserves asking. He appears from nowhere with maps—but does he have any capital? He speaks of "story meeting land" in language more suited to a theater than a land office. No one claims to have done business with him before. No one can name where his money comes from.</p>
+
+                    <p>Some say he arrived from the east. Others insist he came up from Mexico. A few claim to have seen him in California years back, though under what name and doing what business, they cannot say. The man leaves no trail—which in itself raises questions a prudent settler should consider.</p>
+
+                    <div class="pull-quote">
+                        Who is H. West? This question deserves asking.
+                    </div>
+
+                    <p>We have seen ambitious plans collapse under the weight of reality. Land proves too harsh. Water proves too scarce. Investors lose interest when the first winter proves brutal and the spring proves worse. We have also seen confidence men spin tales of prosperity to fleece the hopeful.</p>
+
+                    <p>Yet we have also seen towns rise from nothing more than determination and a handful of stubborn men who refused to quit when sense dictated they should. And H. West, whatever else he may be, has put official documents on file. That takes either genuine intent or remarkable audacity.</p>
+
+                    <p>Surveyors walk. Families gather. H. West whispers visions. And the PASO coin circulate as if the economy already exists.</p>
+
+                    <p>Until the first stake hits the ground, Breakwater remains a mirage with potential. But mirages sometimes become real when enough people believe in them long enough to make them so.</p>
+
+                    <p><strong>The land decides everything. We shall see what it decides here. And we shall see whether H. West proves to be the visionary he claims—or something else entirely.</strong></p>
+
+                    <p style="margin-top: 1rem;">Until then, to show we are with the times, you can now buy this paper with one Paso. Whatever its worth.</p>
+                </div>
+            </div>
+        </article>
+
+        <div class="rule-heavy"></div>
+
+        <!-- Classifieds -->
+        <div class="section-header">
+            <h2>CLASSIFIEDS</h2>
+        </div>
+
+        <div class="newspaper-columns">
+            <div style="font-size: 11px; line-height: 1.5;">
+                <p style="margin-bottom: 0.75rem;"><strong>HORSES FOR SALE</strong> — Two bay mares, one dun gelding. All sound and proven for long rides. PASO notes accepted. Inquire at northern ridge camp.</p>
+
+                <p style="margin-bottom: 0.75rem;"><strong>WANTED: GUIDES</strong> — Riders familiar with shallow crossings and safe routes between Juárez and northern territory. Steady work available.</p>
+
+                <p style="margin-bottom: 0.75rem;"><strong>HELP WANTED</strong> — Survey crews hiring strong backs for chain work and stake driving. Payment daily in silver or PASO.</p>
+
+                <p style="margin-bottom: 0.75rem;"><strong>LOST</strong> — Silver pocket watch with engraved initials "J.P.M." near ridge trail. Sentimental value. Reward offered.</p>
+
+                <p style="margin-bottom: 0.75rem;"><strong>MISS LILA'S BOARDING HOUSE</strong> — Gentlemen seeking refined companionship and evening entertainment welcome. Discreet accommodations. Piano music nightly. No questions asked. Rear entrance on Mesquite Street.</p>
+
+                <p style="margin-bottom: 0.75rem;"><strong>WAGON FOR SALE</strong> — Sturdy freight wagon with canvas cover. Needs minor repair to rear axle. Owner relocating quickly. Very fair price for immediate sale. Ask no questions.</p>
+
+                <p style="margin-bottom: 0.75rem;"><strong>MATRIMONIAL OPPORTUNITY</strong> — Widower, age 47, owns three mules and a profitable claim, seeks respectable woman for companionship and domestic arrangements. Must tolerate snoring and strong opinions about railroad routes.</p>
+
+                <p style="margin-bottom: 0.75rem;"><strong>SADDLE REPAIR</strong> — Experienced leather worker offering mending services. Also makes holsters and belts to order. No judgment on bullet holes.</p>
+
+                <p style="margin-bottom: 0.75rem;"><strong>LOST</strong> — One wife. Last seen arguing with a whiskey drummer headed west. If found, please keep her. Signed, A Grateful Man.</p>
+
+                <p style="margin-bottom: 0.75rem;"><strong>WANTED TO BUY</strong> — Surveying equipment in good condition. Will pay cash or trade goods. Leave message at Frontier Supply Co.</p>
+            </div>
+        </div>
+
+        <div class="rule-heavy"></div>
+
+        <!-- Voices from Borderlands -->
+        <article>
+            <h2 class="headline-medium">VOICES FROM THE BORDERLANDS</h2>
+            <p class="subhead">Portraits of Those Who Call the Rio Grande Home</p>
+            <div class="rule-medium"></div>
+
+            <div class="newspaper-columns-2">
+                <div class="illustration">
+                    <img src="assets/border-inhabitant-new.png" alt="Borderlands Resident">
+                    <p class="caption">A Resident of Ciudad Juárez — Keeper of Stories<br>Photograph by C.S. Fly</p>
+                </div>
+
+                <p class="drop-cap">The borderlands are home to men and women who have known this territory for generations. While surveyors arrive with fresh maps and newcomers speak of Breakwater with hopeful speculation, there are those who have lived here long before any settlement was dreamed.</p>
+
+                <p>South of the Rio Grande, in the streets and plazas of Ciudad Juárez, one finds merchants, craftsmen, and families whose roots run deep in this desert soil. They watch the northern developments with interest—some with optimism, others with the skepticism that comes from having witnessed previous promises fade under the relentless sun.</p>
+
+                <div class="pull-quote">
+                    "The desert does not change. Men come with plans, and the desert decides whether those plans will stand."
+                </div>
+
+                <p>"The desert does not change," one longtime resident observed. "Men come with plans, and the desert decides whether those plans will stand. We have seen towns rise and fall. We have seen the Rio Grande flood and dry to a trickle. The land remembers what men forget."</p>
+
+                <p>These voices carry wisdom earned through decades of living where two nations meet. They understand the rhythms of trade, the importance of water, and the reality that survival in this country requires respect for the land above all else.</p>
+
+                <p>If against all odds, Breakwater moves from rumor toward reality, these seasoned inhabitants of the borderlands offer perspective that newcomers would do well to heed.</p>
+            </div>
+        </article>
+
+        <div class="rule-heavy"></div>
+
+        <!-- Footer -->
+        <footer style="text-align: center; padding: 1.5rem 0;">
+            <div style="font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 900; letter-spacing: 0.2em; margin-bottom: 0.75rem;">
+                ★ END OF FIRST EDITION ★
+            </div>
+            <p style="font-style: italic; font-size: 12px; margin-bottom: 1rem;">
+                This gazette will publish as events warrant and news arrives.
+            </p>
+            <div class="rule-medium" style="width: 50%; margin: 1rem auto;"></div>
+            <p style="font-size: 11px; margin-bottom: 0.5rem;">
+                Return to the <a href="members.html" style="color: #1a1a1a; text-decoration: underline;">Community Portal</a>
+            </p>
+            <p style="font-size: 10px; margin-top: 1rem;">© 1880 The El Paso Gazette. Published in El Paso Verse with participation from Kamara</p>
+        </footer>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        function checkPasoAccess() {
+            if (typeof isAuthenticated === 'undefined' || !isAuthenticated()) {
+                alert('Please log in to the community portal first.');
+                window.location.href = 'login.html';
+                return;
+            }
+
+            // Check for NFT ownership first
+            const hasNFT = localStorage.getItem('nftVerified') === 'true';
+            if (hasNFT) {
+                grantAccess('NFT');
+                return;
+            }
+
+            // Check PASO balance as alternative
+            const userPasoBalance = getUserPasoBalance();
+            if (userPasoBalance >= 1) {
+                grantAccess('PASO');
+            } else {
+                alert('You need either 1 PASO token or an El Paso Verse NFT to access this exclusive gazette.\n\nConnect your wallet in the Community Portal to verify NFT ownership.');
+            }
+        }
+
+        function getUserPasoBalance() {
+            const mockBalance = localStorage.getItem('pasoBalance');
+            if (!mockBalance) {
+                localStorage.setItem('pasoBalance', '10');
+                return 10;
+            }
+            return mockBalance ? parseInt(mockBalance) : 10;
+        }
+
+        function grantAccess(method) {
+            const accessLog = {
+                timestamp: new Date().toISOString(),
+                userId: getCurrentUserId ? getCurrentUserId() : 'unknown',
+                method: method || 'PASO'
+            };
+            localStorage.setItem('gazetteAccess', JSON.stringify(accessLog));
+            document.getElementById('pasoGate').classList.add('hidden');
+        }
+
+        function checkExistingAccess() {
+            // Check for NFT ownership (permanent access)
+            const hasNFT = localStorage.getItem('nftVerified') === 'true';
+            if (hasNFT) {
+                document.getElementById('pasoGate').classList.add('hidden');
+                return;
+            }
+
+            // Check for recent PASO access (24-hour)
+            const accessLog = localStorage.getItem('gazetteAccess');
+            if (accessLog) {
+                const access = JSON.parse(accessLog);
+                const accessTime = new Date(access.timestamp);
+                const now = new Date();
+                const hoursSinceAccess = (now - accessTime) / (1000 * 60 * 60);
+                if (hoursSinceAccess < 24) {
+                    document.getElementById('pasoGate').classList.add('hidden');
+                }
+            }
+        }
+
+        // Lightbox functionality
+        function openLightbox(imageSrc) {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImage = document.getElementById('lightboxImage');
+            lightboxImage.src = imageSrc;
+            lightbox.classList.add('active');
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            lightbox.classList.remove('active');
+        }
+
+        window.addEventListener('DOMContentLoaded', function() {
+            checkExistingAccess();
+
+            // Add click handlers to all gazette images
+            const images = document.querySelectorAll('.illustration img, .illustration-full img, .wanted-poster img');
+            images.forEach(function(img) {
+                img.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    openLightbox(this.src);
+                });
+            });
+
+            // Close lightbox on Escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    closeLightbox();
+                }
+            });
+        });
+    </script>
+
+    <script src="wallet-connect.js"></script>
+    <script src="auth.js"></script>
+</body>
+</html>
