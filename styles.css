@@ -661,7 +661,7 @@ p {
 @media (max-width: 640px) {
     .film-poster-card {
         width: 100%;
-        max-width: 350px;
+        max-width: 210px;
     }
 }
 
@@ -1567,7 +1567,7 @@ p {
 
     .film-poster-card {
         width: 100% !important;
-        max-width: 350px;
+        max-width: 210px;
     }
 
     .film-title {
