@@ -43,6 +43,13 @@
             margin: 0;
             padding: 0;
             overflow: hidden;
+            background-size: cover;
+            background-position: center;
+            cursor: pointer;
+        }
+
+        .film-banner.playing {
+            cursor: default;
         }
 
         .film-banner iframe {
@@ -52,6 +59,11 @@
             width: 100%;
             height: 100%;
             object-fit: contain;
+            display: none;
+        }
+
+        .film-banner.playing iframe {
+            display: block;
         }
 
         .film-banner::before {
@@ -60,6 +72,41 @@
             inset: 0;
             background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.7));
             pointer-events: none;
+        }
+
+        .play-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80px;
+            height: 80px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            z-index: 3;
+        }
+
+        .film-banner.playing .play-button {
+            display: none;
+        }
+
+        .play-button:hover {
+            background: rgba(255, 255, 255, 1);
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+
+        .play-button::after {
+            content: '';
+            width: 0;
+            height: 0;
+            border-left: 25px solid #3A2820;
+            border-top: 15px solid transparent;
+            border-bottom: 15px solid transparent;
+            margin-left: 5px;
         }
 
         .film-detail-hero {
@@ -254,11 +301,20 @@
     <a href="index.html#collection" class="back-link">← Back to Films</a>
 
     <!-- Film Banner -->
-    <div class="film-banner" id="filmBanner">
+    <div class="film-banner" id="filmBanner" style="background-image: url('assets/frame-1.png');">
+        <div class="play-button"></div>
         <iframe id="trailerVideo" src="https://www.youtube.com/embed/z56KmGf3PuY?autoplay=1&mute=1&controls=1&showinfo=0&rel=0&modestbranding=1&playsinline=1&enablejsapi=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
     </div>
 
     <script>
+        // Click to play functionality
+        var banner = document.getElementById('filmBanner');
+        banner.addEventListener('click', function() {
+            if (!banner.classList.contains('playing')) {
+                banner.classList.add('playing');
+            }
+        });
+
         // YouTube API
         var tag = document.createElement('script');
         tag.src = "https://www.youtube.com/iframe_api";
@@ -277,12 +333,9 @@
         function onPlayerStateChange(event) {
             // YT.PlayerState.ENDED = 0
             if (event.data === 0) {
-                // Video ended, switch to static image
+                // Video ended, switch back to static image
                 var banner = document.getElementById('filmBanner');
-                banner.innerHTML = '';
-                banner.style.backgroundImage = "url('assets/frame-1.png')";
-                banner.style.backgroundSize = 'cover';
-                banner.style.backgroundPosition = 'center';
+                banner.classList.remove('playing');
             }
         }
     </script>
