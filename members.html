@@ -735,76 +735,211 @@
             <!-- Submit Idea Tab -->
             <div id="submit-tab" class="tab-pane">
                 <div class="submit-container">
-                    <h3>Submit Your Film Idea</h3>
-                    <p class="submission-intro">Have a story set in the El Paso Verse? Share your vision with the community and gather support to see it produced.</p>
+                    <h3 style="font-family: 'Playfair Display', Georgia, serif; font-size: 2rem; font-weight: 900; color: #3A2820; margin-bottom: 1rem;">Submit Your Idea</h3>
+                    <p style="color: #8B4513; margin-bottom: 2rem; line-height: 1.8;">Contribute to the El Paso Verse by proposing a new land target or pitching a screenplay for film production.</p>
 
-                    <!-- Submission Guidelines -->
-                    <div class="guidelines-box">
-                        <h4>Submission Guidelines</h4>
-                        <ul>
-                            <li>Ideas must be set in the perpetual year of 1880 in the El Paso Verse world</li>
-                            <li>Keep your title concise and compelling (max 100 characters)</li>
-                            <li>Your logline should capture the essence in one sentence (max 200 characters)</li>
-                            <li>Provide a detailed description of your story (max 2000 characters)</li>
-                            <li>Choose the genre that best fits your idea</li>
-                            <li>Optional: Upload concept art or poster idea (max 2MB, JPG/PNG)</li>
-                            <li>Reach 1000 supporters to have your idea reviewed for production</li>
-                        </ul>
+                    <!-- Submission Type Selector -->
+                    <div style="display: flex; gap: 1.5rem; margin-bottom: 2rem; flex-wrap: wrap;">
+                        <button onclick="showSubmissionType('land')" id="landSubmitBtn" class="submission-type-btn active" style="flex: 1; min-width: 250px; padding: 1.5rem; background: linear-gradient(135deg, #2c1810 0%, #4a2511 100%); border: 3px solid #C9A961; color: #F5E6D3; border-radius: 8px; cursor: pointer; transition: all 0.3s; font-family: 'Playfair Display', Georgia, serif; font-size: 1.1rem; font-weight: 700;">
+                            🗺️ Land Target Proposal
+                        </button>
+                        <button onclick="showSubmissionType('screenplay')" id="screenplaySubmitBtn" class="submission-type-btn" style="flex: 1; min-width: 250px; padding: 1.5rem; background: #FFFFFF; border: 3px solid #EDD9C0; color: #3A2820; border-radius: 8px; cursor: pointer; transition: all 0.3s; font-family: 'Playfair Display', Georgia, serif; font-size: 1.1rem; font-weight: 700;">
+                            🎬 Screenplay Pitch
+                        </button>
                     </div>
 
-                    <!-- Submission Form -->
-                    <form id="submitIdeaForm" class="submission-form">
-                        <div class="form-group">
-                            <label for="ideaTitle">Project Title *</label>
-                            <input type="text" id="ideaTitle" maxlength="100" required>
-                            <span class="char-count">0/100</span>
+                    <!-- Land Target Proposal Form -->
+                    <div id="landSubmissionForm" class="submission-form-container">
+                        <div style="background: linear-gradient(135deg, #FFF8E7 0%, #FFEFC9 100%); border: 3px solid #D4A745; padding: 1.5rem; margin-bottom: 2rem; border-radius: 8px;">
+                            <h4 style="font-family: 'Playfair Display', Georgia, serif; font-size: 1.3rem; font-weight: 700; color: #3A2820; margin: 0 0 1rem 0;">Submission Guidelines</h4>
+                            <ul style="color: #8B4513; font-size: 0.95rem; line-height: 1.8; margin: 0; padding-left: 1.5rem;">
+                                <li>Provide detailed information about the proposed land target location</li>
+                                <li>Include reference photos showing the property and surrounding area</li>
+                                <li>Specify current owner details and acquisition terms</li>
+                                <li>Indicate which development level(s) this property suits (Level 1, 2, and/or 3)</li>
+                                <li>All submissions are reviewed by the team before being shared with the community</li>
+                            </ul>
                         </div>
 
-                        <div class="form-group">
-                            <label for="ideaLogline">Logline (One-sentence pitch) *</label>
-                            <input type="text" id="ideaLogline" maxlength="200" required placeholder="Capture your story in one compelling sentence">
-                            <span class="char-count">0/200</span>
+                        <form id="landTargetForm" class="submission-form">
+                            <div class="form-group">
+                                <label for="landTitle">Property Name/Title *</label>
+                                <input type="text" id="landTitle" maxlength="100" required placeholder="e.g., Rio Bravo Ranch">
+                                <span class="char-count">0/100</span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="landLocation">Location *</label>
+                                <input type="text" id="landLocation" required placeholder="City, State/Province, Country">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="landAcreage">Estimated Square Acreage *</label>
+                                <input type="text" id="landAcreage" required placeholder="e.g., 90,000 acres or 244,084 m²">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="landOwner">Current Owner *</label>
+                                <input type="text" id="landOwner" required placeholder="e.g., Private, Texas Land Office">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="landAsking">Asking Price/Terms *</label>
+                                <input type="text" id="landAsking" required placeholder="e.g., 4 million EUR, Rental Terms">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Suitable for Development Level(s) *</label>
+                                <div style="display: flex; flex-direction: column; gap: 0.75rem; margin-top: 0.5rem;">
+                                    <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                                        <input type="checkbox" id="landLevel1" value="1">
+                                        <span>Level 1 - Small-scale filming hub & basic infrastructure</span>
+                                    </label>
+                                    <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                                        <input type="checkbox" id="landLevel2" value="2">
+                                        <span>Level 2 - Medium town with hotel/lodging facilities</span>
+                                    </label>
+                                    <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                                        <input type="checkbox" id="landLevel3" value="3">
+                                        <span>Level 3 - Full vision with multiple towns & complete immersion</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="landHighlights">Key Highlights to Consider *</label>
+                                <textarea id="landHighlights" rows="6" maxlength="1500" required placeholder="Describe the unique features, advantages, infrastructure, accessibility, natural features, existing structures, etc..."></textarea>
+                                <span class="char-count">0/1500</span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="landPhotos">Reference Photo(s) *</label>
+                                <input type="file" id="landPhotos" accept="image/jpeg,image/png" multiple required>
+                                <small>Upload 1-5 photos showing the property. Max 5MB per file, JPG or PNG format</small>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="landSubmitterName">Your Name *</label>
+                                <input type="text" id="landSubmitterName" required placeholder="How should we credit you?">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="landSubmitterContact">Contact Email *</label>
+                                <input type="email" id="landSubmitterContact" required placeholder="For follow-up questions from the team">
+                            </div>
+
+                            <div style="background: rgba(139, 69, 19, 0.1); border-left: 3px solid #C9A961; padding: 1rem; margin-bottom: 1.5rem; border-radius: 4px;">
+                                <p style="color: #8B4513; font-size: 0.9rem; margin: 0; line-height: 1.6;"><strong>Note:</strong> Your submission will be reviewed by the El Paso Verse team. If approved, it will be published to the community for voting and discussion.</p>
+                            </div>
+
+                            <div class="form-actions">
+                                <button type="submit" class="submit-btn">Submit Land Proposal</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Screenplay Pitch Form -->
+                    <div id="screenplaySubmissionForm" class="submission-form-container" style="display: none;">
+                        <div style="background: linear-gradient(135deg, #FFF8E7 0%, #FFEFC9 100%); border: 3px solid #D4A745; padding: 1.5rem; margin-bottom: 2rem; border-radius: 8px;">
+                            <h4 style="font-family: 'Playfair Display', Georgia, serif; font-size: 1.3rem; font-weight: 700; color: #3A2820; margin: 0 0 1rem 0;">Submission Guidelines</h4>
+                            <ul style="color: #8B4513; font-size: 0.95rem; line-height: 1.8; margin: 0; padding-left: 1.5rem;">
+                                <li>Screenplays must be set in the El Paso Verse (perpetual year 1880)</li>
+                                <li>Specify the Western subgenre that best describes your story</li>
+                                <li>Provide a compelling logline and detailed synopsis</li>
+                                <li>Upload poster/one-sheet artwork to visualize your project</li>
+                                <li>Include script, lookbook, and sizzle reel if available</li>
+                                <li>All submissions are reviewed by the team before being published to the community</li>
+                            </ul>
                         </div>
 
-                        <div class="form-group">
-                            <label for="ideaDescription">Full Description *</label>
-                            <textarea id="ideaDescription" rows="8" maxlength="2000" required placeholder="Describe your story, characters, setting, and what makes it special..."></textarea>
-                            <span class="char-count">0/2000</span>
-                        </div>
+                        <form id="screenplayPitchForm" class="submission-form">
+                            <div class="form-group">
+                                <label for="filmTitle">Film Title *</label>
+                                <input type="text" id="filmTitle" maxlength="100" required>
+                                <span class="char-count">0/100</span>
+                            </div>
 
-                        <div class="form-group">
-                            <label for="ideaGenre">Genre *</label>
-                            <select id="ideaGenre" required>
-                                <option value="">Select genre...</option>
-                                <option value="western">Western</option>
-                                <option value="drama">Drama</option>
-                                <option value="action">Action</option>
-                                <option value="thriller">Thriller</option>
-                                <option value="mystery">Mystery</option>
-                                <option value="romance">Romance</option>
-                                <option value="adventure">Adventure</option>
-                            </select>
-                        </div>
+                            <div class="form-group">
+                                <label for="filmSubgenre">Western Subgenre *</label>
+                                <select id="filmSubgenre" required>
+                                    <option value="">Select subgenre...</option>
+                                    <option value="classic">Classic Western</option>
+                                    <option value="spaghetti">Spaghetti Western</option>
+                                    <option value="revisionist">Revisionist Western</option>
+                                    <option value="contemporary">Contemporary Western</option>
+                                    <option value="epic">Epic Western</option>
+                                    <option value="comedy">Western Comedy</option>
+                                    <option value="horror">Western Horror</option>
+                                    <option value="sci-fi">Weird West / Sci-Fi Western</option>
+                                    <option value="noir">Western Noir</option>
+                                    <option value="romance">Western Romance</option>
+                                </select>
+                            </div>
 
-                        <div class="form-group">
-                            <label for="submitterName">Your Name (or pseudonym) *</label>
-                            <input type="text" id="submitterName" required placeholder="How should we credit you?">
-                        </div>
+                            <div class="form-group">
+                                <label for="filmRuntime">Estimated Runtime *</label>
+                                <input type="text" id="filmRuntime" required placeholder="e.g., 90 minutes, 2 hours">
+                            </div>
 
-                        <div class="form-group">
-                            <label for="ideaImage">Concept Art (Optional)</label>
-                            <input type="file" id="ideaImage" accept="image/jpeg,image/png">
-                            <small>Max 2MB, JPG or PNG format</small>
-                        </div>
+                            <div class="form-group">
+                                <label for="filmLogline">Logline (One-sentence pitch) *</label>
+                                <textarea id="filmLogline" rows="2" maxlength="200" required placeholder="Capture your story in one compelling sentence"></textarea>
+                                <span class="char-count">0/200</span>
+                            </div>
 
-                        <div class="form-actions">
-                            <button type="submit" class="submit-btn">Publish Idea</button>
-                        </div>
-                    </form>
+                            <div class="form-group">
+                                <label for="filmSynopsis">Synopsis *</label>
+                                <textarea id="filmSynopsis" rows="8" maxlength="2000" required placeholder="Provide a detailed synopsis covering the main story arc, characters, themes, and what makes this story unique..."></textarea>
+                                <span class="char-count">0/2000</span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="filmPoster">Poster / One-Sheet Artwork(s) *</label>
+                                <input type="file" id="filmPoster" accept="image/jpeg,image/png" multiple required>
+                                <small>Upload 1-3 poster designs. Max 5MB per file, JPG or PNG format</small>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="filmScript">Script (PDF) *</label>
+                                <input type="file" id="filmScript" accept="application/pdf" required>
+                                <small>Upload your screenplay in PDF format. Max 25MB</small>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="filmLookbook">Lookbook (Optional)</label>
+                                <input type="file" id="filmLookbook" accept="application/pdf">
+                                <small>Visual reference document showing cinematography, art direction, costume design, etc. Max 25MB</small>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="filmSizzleReel">Sizzle Reel URL (Optional)</label>
+                                <input type="url" id="filmSizzleReel" placeholder="https://vimeo.com/your-sizzle-reel or YouTube link">
+                                <small>Link to a short video teaser/sizzle reel if available</small>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="filmSubmitterName">Your Name / Team Name *</label>
+                                <input type="text" id="filmSubmitterName" required placeholder="How should we credit you?">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="filmSubmitterContact">Contact Email *</label>
+                                <input type="email" id="filmSubmitterContact" required placeholder="For follow-up from the production team">
+                            </div>
+
+                            <div style="background: rgba(139, 69, 19, 0.1); border-left: 3px solid #C9A961; padding: 1rem; margin-bottom: 1.5rem; border-radius: 4px;">
+                                <p style="color: #8B4513; font-size: 0.9rem; margin: 0; line-height: 1.6;"><strong>Note:</strong> Your screenplay submission will be reviewed by the production team. If approved, it will be published to the community for voting and support.</p>
+                            </div>
+
+                            <div class="form-actions">
+                                <button type="submit" class="submit-btn">Submit Screenplay Pitch</button>
+                            </div>
+                        </form>
+                    </div>
 
                     <div id="submitSuccess" class="success-message" style="display: none;">
                         <h4>Success!</h4>
-                        <p>Your idea has been published and is now live for the community to support.</p>
+                        <p id="successMessage">Your submission has been received and will be reviewed by the team.</p>
                     </div>
                 </div>
             </div>
@@ -1041,6 +1176,109 @@
                 behavior: 'smooth'
             });
         }
+
+        // Submission Type Toggle
+        function showSubmissionType(type) {
+            const landForm = document.getElementById('landSubmissionForm');
+            const screenplayForm = document.getElementById('screenplaySubmissionForm');
+            const landBtn = document.getElementById('landSubmitBtn');
+            const screenplayBtn = document.getElementById('screenplaySubmitBtn');
+
+            if (type === 'land') {
+                landForm.style.display = 'block';
+                screenplayForm.style.display = 'none';
+                landBtn.style.background = 'linear-gradient(135deg, #2c1810 0%, #4a2511 100%)';
+                landBtn.style.border = '3px solid #C9A961';
+                landBtn.style.color = '#F5E6D3';
+                screenplayBtn.style.background = '#FFFFFF';
+                screenplayBtn.style.border = '3px solid #EDD9C0';
+                screenplayBtn.style.color = '#3A2820';
+            } else {
+                landForm.style.display = 'none';
+                screenplayForm.style.display = 'block';
+                screenplayBtn.style.background = 'linear-gradient(135deg, #2c1810 0%, #4a2511 100%)';
+                screenplayBtn.style.border = '3px solid #C9A961';
+                screenplayBtn.style.color = '#F5E6D3';
+                landBtn.style.background = '#FFFFFF';
+                landBtn.style.border = '3px solid #EDD9C0';
+                landBtn.style.color = '#3A2820';
+            }
+        }
+
+        // Land Target Form Submission
+        document.addEventListener('DOMContentLoaded', function() {
+            const landForm = document.getElementById('landTargetForm');
+            if (landForm) {
+                landForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+
+                    // Validate at least one level is selected
+                    const level1 = document.getElementById('landLevel1').checked;
+                    const level2 = document.getElementById('landLevel2').checked;
+                    const level3 = document.getElementById('landLevel3').checked;
+
+                    if (!level1 && !level2 && !level3) {
+                        alert('Please select at least one development level.');
+                        return;
+                    }
+
+                    // Show success message
+                    document.getElementById('submitSuccess').style.display = 'block';
+                    document.getElementById('successMessage').textContent = 'Your land target proposal has been submitted for review. The team will evaluate your submission and contact you via email.';
+                    landForm.reset();
+
+                    // Scroll to success message
+                    document.getElementById('submitSuccess').scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+                    // Hide success message after 5 seconds
+                    setTimeout(() => {
+                        document.getElementById('submitSuccess').style.display = 'none';
+                    }, 5000);
+                });
+            }
+
+            // Screenplay Form Submission
+            const screenplayForm = document.getElementById('screenplayPitchForm');
+            if (screenplayForm) {
+                screenplayForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+
+                    // Show success message
+                    document.getElementById('submitSuccess').style.display = 'block';
+                    document.getElementById('successMessage').textContent = 'Your screenplay pitch has been submitted for review. The production team will evaluate your submission and reach out via email.';
+                    screenplayForm.reset();
+
+                    // Scroll to success message
+                    document.getElementById('submitSuccess').scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+                    // Hide success message after 5 seconds
+                    setTimeout(() => {
+                        document.getElementById('submitSuccess').style.display = 'none';
+                    }, 5000);
+                });
+            }
+
+            // Character counters for new forms
+            const textFields = [
+                { id: 'landTitle', max: 100 },
+                { id: 'landHighlights', max: 1500 },
+                { id: 'filmTitle', max: 100 },
+                { id: 'filmLogline', max: 200 },
+                { id: 'filmSynopsis', max: 2000 }
+            ];
+
+            textFields.forEach(field => {
+                const element = document.getElementById(field.id);
+                if (element) {
+                    const counter = element.parentElement.querySelector('.char-count');
+                    if (counter) {
+                        element.addEventListener('input', function() {
+                            counter.textContent = `${this.value.length}/${field.max}`;
+                        });
+                    }
+                }
+            });
+        });
     </script>
 </body>
 </html>
