@@ -385,9 +385,10 @@
         function initParallax() {
             const parallaxSections = document.querySelectorAll('.about, .el-paso-verse');
 
-            // Disable fixed background attachment (doesn't work well in Safari/mobile)
+            // Set up larger background size to prevent gaps
             parallaxSections.forEach(section => {
                 section.style.backgroundAttachment = 'scroll';
+                section.style.backgroundSize = '120%';  // Larger to allow movement
             });
 
             let ticking = false;
@@ -398,12 +399,21 @@
                     const scrolled = window.pageYOffset || document.documentElement.scrollTop;
                     const sectionTop = section.offsetTop;
                     const sectionHeight = section.offsetHeight;
+                    const windowHeight = window.innerHeight;
 
-                    // Only apply parallax when section is in viewport
-                    if (rect.top < window.innerHeight && rect.bottom > 0) {
-                        // Calculate parallax offset (slower movement = more dramatic effect)
-                        const yPos = -(scrolled - sectionTop) * 0.5;
-                        section.style.backgroundPosition = `center ${yPos}px`;
+                    // Only apply parallax when section is in or near viewport
+                    if (rect.top < windowHeight && rect.bottom > 0) {
+                        // Calculate scroll progress through the section
+                        // Range from -windowHeight to +sectionHeight
+                        const scrollRange = windowHeight + sectionHeight;
+                        const scrollProgress = (scrolled + windowHeight - sectionTop) / scrollRange;
+
+                        // Calculate parallax offset with constrained range
+                        // Move from 40% to 60% (centered at 50%) to prevent gaps
+                        const yPercent = 40 + (scrollProgress * 20);
+                        const clampedPercent = Math.max(40, Math.min(60, yPercent));
+
+                        section.style.backgroundPosition = `center ${clampedPercent}%`;
                     }
                 });
 
@@ -419,6 +429,7 @@
 
             // Listen for scroll events
             window.addEventListener('scroll', requestTick, { passive: true });
+            window.addEventListener('resize', requestTick, { passive: true });
 
             // Initial call
             updateParallax();

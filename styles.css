@@ -838,53 +838,53 @@ p {
 
 /* PASO Phases */
 .paso-phases {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 2.5rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
     margin: 3rem 0 4rem 0;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .phase-card {
     background: linear-gradient(135deg, #F5E6D3 0%, #E8D5C0 100%);
     border: 3px solid #C9A961;
-    padding: 3rem 2rem 2.5rem 2rem;
+    padding: 2.5rem 2rem 2rem 2rem;
     position: relative;
     transition: all 0.4s ease;
-    flex: 0 1 calc(33.333% - 2rem);
-    min-width: 300px;
-    max-width: 380px;
     border-radius: 8px;
     box-shadow: 0 6px 20px rgba(139, 69, 19, 0.15);
 }
 
 .phase-card:hover {
-    transform: translateY(-8px);
+    transform: translateY(-5px);
     box-shadow: 0 12px 30px rgba(139, 69, 19, 0.25);
 }
 
 .phase-number {
     position: absolute;
-    top: -18px;
+    top: -15px;
     left: 50%;
     transform: translateX(-50%);
     background: linear-gradient(135deg, #C9A961 0%, #B8985A 100%);
     color: #1a1a1a;
     font-family: 'Playfair Display', Georgia, serif;
     font-weight: 900;
-    font-size: 0.8rem;
-    padding: 0.6rem 1.8rem;
+    font-size: 0.75rem;
+    padding: 0.5rem 1.5rem;
     letter-spacing: 0.15em;
     text-transform: uppercase;
     border-radius: 4px;
     box-shadow: 0 4px 12px rgba(139, 69, 19, 0.3);
+    white-space: nowrap;
 }
 
 .phase-card h4 {
     font-family: 'Playfair Display', Georgia, serif;
-    font-size: 1.75rem;
+    font-size: 1.65rem;
     color: #3A2820;
-    margin: 0.5rem 0 1.5rem 0;
+    margin: 0.5rem 0 1.25rem 0;
     text-align: center;
     text-transform: uppercase;
     letter-spacing: 0.08em;
@@ -894,8 +894,9 @@ p {
 
 .phase-card p {
     text-align: center;
-    font-size: 1rem;
-    line-height: 1.8;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: #5a4a3a;
 }
 
 .phase-card ul {
@@ -918,23 +919,35 @@ p {
     font-size: 0.9rem;
 }
 
-/* Active Phase Card */
+/* Active Phase Card - Gold Theme */
 .phase-card.active {
-    border: 4px solid #2d8a2d;
-    background: linear-gradient(135deg, #e8f5e8 0%, #d4edda 100%);
-    box-shadow: 0 8px 25px rgba(45, 138, 45, 0.3);
-    transform: scale(1.02);
+    border: 4px solid #D4A745;
+    background: linear-gradient(135deg, #FFF8E7 0%, #FFEFC9 100%);
+    box-shadow: 0 10px 30px rgba(212, 167, 69, 0.35);
+    position: relative;
+}
+
+.phase-card.active::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #D4A745, #C9A961, #D4A745);
+    opacity: 0.3;
+    z-index: -1;
+    filter: blur(8px);
 }
 
 .phase-card.active:hover {
-    transform: scale(1.02) translateY(-8px);
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(212, 167, 69, 0.45);
 }
 
 .phase-card.active .phase-number {
-    background: linear-gradient(135deg, #2d8a2d 0%, #248824 100%);
-    color: #fff;
+    background: linear-gradient(135deg, #D4A745 0%, #B8985A 100%);
+    color: #1a1a1a;
     font-weight: 900;
-    box-shadow: 0 4px 15px rgba(45, 138, 45, 0.5);
+    box-shadow: 0 4px 15px rgba(212, 167, 69, 0.5);
 }
 
 .phase-card.active .phase-number:after {
@@ -944,7 +957,11 @@ p {
 }
 
 .phase-card.active h4 {
-    color: #1a5f1a;
+    color: #8B6914;
+}
+
+.phase-card.active p {
+    color: #5a4a3a;
 }
 
 /* Inactive Phase Card */
@@ -952,6 +969,7 @@ p {
     border: 3px solid #B8985A;
     background: linear-gradient(135deg, #E8D5C0 0%, #d9c7b0 100%);
     box-shadow: 0 4px 15px rgba(139, 69, 19, 0.1);
+    opacity: 0.85;
 }
 
 .phase-card.inactive .phase-number {
@@ -983,8 +1001,35 @@ p {
 }
 
 .phase-card.inactive:hover {
-    transform: translateY(-4px);
+    transform: translateY(-3px);
     box-shadow: 0 8px 20px rgba(139, 69, 19, 0.15);
+    opacity: 0.9;
+}
+
+/* Mobile Optimization for Phase Cards */
+@media (max-width: 768px) {
+    .paso-phases {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        padding: 0 1rem;
+    }
+
+    .phase-card {
+        padding: 2rem 1.5rem 1.75rem 1.5rem;
+    }
+
+    .phase-card h4 {
+        font-size: 1.4rem;
+    }
+
+    .phase-card p {
+        font-size: 0.9rem;
+    }
+
+    .phase-number {
+        font-size: 0.7rem;
+        padding: 0.45rem 1.2rem;
+    }
 }
 
 /* PASO Distribution */
