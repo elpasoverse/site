@@ -665,3 +665,90 @@
         width: 100%;
     }
 }
+
+/* Land Target Carousel */
+.land-carousel-wrapper {
+    position: relative;
+    margin-bottom: 2rem;
+}
+
+.land-targets-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+}
+
+.land-carousel-prev,
+.land-carousel-next {
+    display: none;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(201, 169, 97, 0.9);
+    color: #1a1a1a;
+    border: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    font-size: 2rem;
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.3s ease;
+    line-height: 1;
+    padding: 0;
+}
+
+.land-carousel-prev:hover,
+.land-carousel-next:hover {
+    background: #D4A745;
+    transform: translateY(-50%) scale(1.1);
+}
+
+.land-carousel-prev {
+    left: -25px;
+}
+
+.land-carousel-next {
+    right: -25px;
+}
+
+/* Mobile Carousel */
+@media (max-width: 768px) {
+    .land-targets-grid {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        scroll-behavior: smooth;
+        -webkit-overflow-scrolling: touch;
+        gap: 1rem;
+        padding: 0 1rem;
+        scrollbar-width: none;
+    }
+
+    .land-targets-grid::-webkit-scrollbar {
+        display: none;
+    }
+
+    .land-target-card {
+        flex: 0 0 85%;
+        scroll-snap-align: center;
+    }
+
+    .land-carousel-prev,
+    .land-carousel-next {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        font-size: 1.5rem;
+    }
+
+    .land-carousel-prev {
+        left: 10px;
+    }
+
+    .land-carousel-next {
+        right: 10px;
+    }
+}

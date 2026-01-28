@@ -384,9 +384,12 @@
                 </div>
 
                 <!-- Land Target Cards -->
-                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-bottom: 2rem;">
+                <div class="land-carousel-wrapper">
+                    <button class="land-carousel-prev" onclick="moveLandCarousel(-1)" aria-label="Previous land target">‹</button>
+                    <button class="land-carousel-next" onclick="moveLandCarousel(1)" aria-label="Next land target">›</button>
+                    <div class="land-targets-grid">
 
-                    <!-- Target 1: Verse Hotel -->
+                        <!-- Target 1: Verse Hotel -->
                     <div class="land-target-card" data-target="verse-hotel">
                         <div style="background: linear-gradient(135deg, #2c1810 0%, #4a2511 100%); border: 3px solid #C9A961; border-radius: 8px; overflow: hidden; display: flex; flex-direction: column; height: 100%;">
                             <div style="background: #1a1a1a; padding: 1.5rem; border-bottom: 2px solid #C9A961;">
@@ -554,6 +557,7 @@
                         </div>
                     </div>
 
+                    </div>
                 </div>
 
                 <!-- Additional Information -->
@@ -1023,6 +1027,19 @@
                 'rio-texaco': 'Rio Texaco'
             };
             alert(`Thank you for voting for ${targetNames[targetId]}!\n\nYour voice helps shape where the El Paso Verse frontier takes root.`);
+        }
+
+        // Land Carousel Navigation
+        function moveLandCarousel(direction) {
+            const grid = document.querySelector('.land-targets-grid');
+            const cardWidth = grid.querySelector('.land-target-card').offsetWidth;
+            const gap = 16; // 1rem gap
+            const scrollAmount = (cardWidth + gap) * direction;
+
+            grid.scrollBy({
+                left: scrollAmount,
+                behavior: 'smooth'
+            });
         }
     </script>
 </body>
