@@ -1111,6 +1111,24 @@ p {
     background-color: rgba(201, 169, 97, 0.1);
 }
 
+/* Instagram Section */
+.instagram-section {
+    min-height: auto;
+    padding: 4rem 0;
+    background: #F5E6D3;
+}
+
+.instagram-feed {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.instagram-feed iframe {
+    width: 100%;
+    border: none;
+    min-height: 600px;
+}
+
 /* Footer */
 .footer {
     background-color: #3A2820;
