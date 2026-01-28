@@ -986,7 +986,7 @@ p {
 }
 
 .phase-card.inactive .phase-number:after {
-    content: ' • COMING SOON';
+    content: ' • COMING';
     font-size: 0.65rem;
     letter-spacing: 0.08em;
 }
