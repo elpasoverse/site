@@ -39,6 +39,7 @@
             <button class="tab-button active" data-tab="dashboard">Dashboard</button>
             <button class="tab-button" data-tab="exclusive">Exclusive Content</button>
             <button class="tab-button" data-tab="governance">Governance</button>
+            <button class="tab-button" data-tab="land">Land Targets</button>
             <button class="tab-button" data-tab="browse">Browse Ideas</button>
             <button class="tab-button" data-tab="submit">Submit Your Idea</button>
             <button class="tab-button" data-tab="activity">My Activity</button>
@@ -470,6 +471,159 @@
                 </div>
             </div>
 
+            <!-- Land Targets Tab -->
+            <div id="land-tab" class="tab-pane">
+                <h3 style="font-family: 'Playfair Display', Georgia, serif; font-size: 2rem; font-weight: 900; color: #3A2820; margin-bottom: 1rem;">Land Acquisition Targets</h3>
+                <p style="color: #8B4513; margin-bottom: 2rem; line-height: 1.8;">The community is exploring three Real World Asset (RWA) acquisition targets for the El Paso Verse physical destination. Review each option and cast your vote to help shape where the frontier takes root.</p>
+
+                <!-- Voting Instructions -->
+                <div style="background: linear-gradient(135deg, #FFF8E7 0%, #FFEFC9 100%); border: 3px solid #D4A745; padding: 1.5rem; margin-bottom: 2rem; border-radius: 8px;">
+                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                        <div style="font-size: 2rem;">🗺️</div>
+                        <div>
+                            <h4 style="font-family: 'Playfair Display', Georgia, serif; font-size: 1.4rem; font-weight: 700; color: #3A2820; margin: 0;">Community-Led Land Race</h4>
+                            <p style="color: #8B4513; font-size: 0.9rem; margin: 0.5rem 0 0 0;">Your vote helps determine which land target we pursue first</p>
+                        </div>
+                    </div>
+                    <p style="color: #8B4513; font-size: 0.95rem; line-height: 1.7; margin: 0;">
+                        These targets represent potential locations for the physical El Paso Verse destination. Each offers unique advantages for our community. Vote for the target you believe best serves the vision outlined in the VisionPaper.
+                    </p>
+                </div>
+
+                <!-- Land Target Cards -->
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem; margin-bottom: 2rem;">
+
+                    <!-- Target 1: Verse Hotel Almeria -->
+                    <div class="land-target-card" data-target="verse-hotel">
+                        <div style="background: linear-gradient(135deg, #2c1810 0%, #4a2511 100%); border: 3px solid #C9A961; border-radius: 8px; overflow: hidden; height: 100%;">
+                            <div style="background: #1a1a1a; padding: 1.5rem; border-bottom: 2px solid #C9A961;">
+                                <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
+                                    <div>
+                                        <h4 style="font-family: 'Playfair Display', Georgia, serif; font-size: 1.6rem; font-weight: 700; color: #F5E6D3; margin: 0 0 0.5rem 0;">"Verse Hotel" Almeria</h4>
+                                        <p style="color: #C9A961; font-size: 0.9rem; margin: 0;">📍 Almeria, Spain</p>
+                                    </div>
+                                    <span style="background: #C9A961; color: #1a1a1a; padding: 0.25rem 0.75rem; font-size: 0.75rem; font-weight: 700; border-radius: 4px; letter-spacing: 0.05em;">HOTEL & CAMP</span>
+                                </div>
+                                <p style="color: #EDD9C0; font-size: 0.95rem; line-height: 1.6; margin: 0;">Community Hotel & Camp in Spain</p>
+                            </div>
+
+                            <div style="padding: 1.5rem;">
+                                <h5 style="color: #C9A961; font-size: 0.85rem; font-weight: 700; margin: 0 0 1rem 0; letter-spacing: 0.1em; text-transform: uppercase;">Target Details</h5>
+                                <ul style="color: #EDD9C0; font-size: 0.9rem; line-height: 1.8; margin: 0 0 1.5rem 0; padding-left: 1.2rem;">
+                                    <li>Community-owned hotel and camping facilities</li>
+                                    <li>Base camp for European pioneers</li>
+                                    <li>Gateway to Almeria's authentic Western terrain</li>
+                                    <li>Potential filming location and hub</li>
+                                </ul>
+
+                                <div style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid rgba(201, 169, 97, 0.3);">
+                                    <div style="margin-bottom: 1rem;">
+                                        <a href="https://elpasoverse.webflow.io/land-growth/verse-hotel-almeria" target="_blank" style="color: #C9A961; font-size: 0.85rem; text-decoration: underline;">View Detailed Information →</a>
+                                    </div>
+                                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                                        <span style="color: #EDD9C0; font-size: 0.85rem;">Community Support</span>
+                                        <span class="vote-count" style="color: #C9A961; font-weight: 700;">0 votes</span>
+                                    </div>
+                                    <button class="land-vote-btn" data-target="verse-hotel" style="width: 100%; padding: 0.75rem; background: linear-gradient(135deg, #C9A961 0%, #D4A745 100%); color: #1a1a1a; border: none; border-radius: 4px; font-weight: 700; font-size: 0.95rem; cursor: pointer; transition: all 0.3s;">
+                                        Vote for This Target
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Target 2: Western Leone -->
+                    <div class="land-target-card" data-target="western-leone">
+                        <div style="background: linear-gradient(135deg, #2c1810 0%, #4a2511 100%); border: 3px solid #C9A961; border-radius: 8px; overflow: hidden; height: 100%;">
+                            <div style="background: #1a1a1a; padding: 1.5rem; border-bottom: 2px solid #C9A961;">
+                                <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
+                                    <div>
+                                        <h4 style="font-family: 'Playfair Display', Georgia, serif; font-size: 1.6rem; font-weight: 700; color: #F5E6D3; margin: 0 0 0.5rem 0;">Western Leone</h4>
+                                        <p style="color: #C9A961; font-size: 0.9rem; margin: 0;">📍 Almeria, Spain</p>
+                                    </div>
+                                    <span style="background: #D4A745; color: #1a1a1a; padding: 0.25rem 0.75rem; font-size: 0.75rem; font-weight: 700; border-radius: 4px; letter-spacing: 0.05em;">LVL 1</span>
+                                </div>
+                                <p style="color: #EDD9C0; font-size: 0.95rem; line-height: 1.6; margin: 0;">A Filming Hub & Level 1 Development</p>
+                            </div>
+
+                            <div style="padding: 1.5rem;">
+                                <h5 style="color: #C9A961; font-size: 0.85rem; font-weight: 700; margin: 0 0 1rem 0; letter-spacing: 0.1em; text-transform: uppercase;">Target Details</h5>
+                                <ul style="color: #EDD9C0; font-size: 0.9rem; line-height: 1.8; margin: 0 0 1.5rem 0; padding-left: 1.2rem;">
+                                    <li>Designated as Level 1 frontier development</li>
+                                    <li>Professional filming hub for productions</li>
+                                    <li>Authentic 1880s Western town construction</li>
+                                    <li>Initial testing ground for frontier concepts</li>
+                                </ul>
+
+                                <div style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid rgba(201, 169, 97, 0.3);">
+                                    <div style="margin-bottom: 1rem;">
+                                        <a href="https://elpasoverse.webflow.io/land-growth/western-leone-almeria" target="_blank" style="color: #C9A961; font-size: 0.85rem; text-decoration: underline;">View Detailed Information →</a>
+                                    </div>
+                                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                                        <span style="color: #EDD9C0; font-size: 0.85rem;">Community Support</span>
+                                        <span class="vote-count" style="color: #C9A961; font-weight: 700;">0 votes</span>
+                                    </div>
+                                    <button class="land-vote-btn" data-target="western-leone" style="width: 100%; padding: 0.75rem; background: linear-gradient(135deg, #C9A961 0%, #D4A745 100%); color: #1a1a1a; border: none; border-radius: 4px; font-weight: 700; font-size: 0.95rem; cursor: pointer; transition: all 0.3s;">
+                                        Vote for This Target
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Target 3: Rio Texaco -->
+                    <div class="land-target-card" data-target="rio-texaco">
+                        <div style="background: linear-gradient(135deg, #2c1810 0%, #4a2511 100%); border: 3px solid #C9A961; border-radius: 8px; overflow: hidden; height: 100%;">
+                            <div style="background: #1a1a1a; padding: 1.5rem; border-bottom: 2px solid #C9A961;">
+                                <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
+                                    <div>
+                                        <h4 style="font-family: 'Playfair Display', Georgia, serif; font-size: 1.6rem; font-weight: 700; color: #F5E6D3; margin: 0 0 0.5rem 0;">Rio Texaco</h4>
+                                        <p style="color: #C9A961; font-size: 0.9rem; margin: 0;">📍 Big Bend, Texas</p>
+                                    </div>
+                                    <span style="background: linear-gradient(135deg, #D4A745 0%, #C9A961 100%); color: #1a1a1a; padding: 0.25rem 0.75rem; font-size: 0.75rem; font-weight: 700; border-radius: 4px; letter-spacing: 0.05em;">FULL VISION</span>
+                                </div>
+                                <p style="color: #EDD9C0; font-size: 0.95rem; line-height: 1.6; margin: 0;">Land for the Full Vision: Level 1 - 3</p>
+                            </div>
+
+                            <div style="padding: 1.5rem;">
+                                <h5 style="color: #C9A961; font-size: 0.85rem; font-weight: 700; margin: 0 0 1rem 0; letter-spacing: 0.1em; text-transform: uppercase;">Target Details</h5>
+                                <ul style="color: #EDD9C0; font-size: 0.9rem; line-height: 1.8; margin: 0 0 1.5rem 0; padding-left: 1.2rem;">
+                                    <li>Supports complete project vision (Levels 1-3)</li>
+                                    <li>90,000 acres of authentic Texas borderland</li>
+                                    <li>Ultimate destination for the physical frontier</li>
+                                    <li>Multiple towns, ranches, and full immersion</li>
+                                </ul>
+
+                                <div style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid rgba(201, 169, 97, 0.3);">
+                                    <div style="margin-bottom: 1rem;">
+                                        <a href="https://elpasoverse.webflow.io/land-growth/rio-texaco-texas" target="_blank" style="color: #C9A961; font-size: 0.85rem; text-decoration: underline;">View Detailed Information →</a>
+                                    </div>
+                                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                                        <span style="color: #EDD9C0; font-size: 0.85rem;">Community Support</span>
+                                        <span class="vote-count" style="color: #C9A961; font-weight: 700;">0 votes</span>
+                                    </div>
+                                    <button class="land-vote-btn" data-target="rio-texaco" style="width: 100%; padding: 0.75rem; background: linear-gradient(135deg, #C9A961 0%, #D4A745 100%); color: #1a1a1a; border: none; border-radius: 4px; font-weight: 700; font-size: 0.95rem; cursor: pointer; transition: all 0.3s;">
+                                        Vote for This Target
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Additional Information -->
+                <div style="background: linear-gradient(135deg, #EDD9C0 0%, #E8D5C0 100%); border: 2px solid #C9A961; padding: 2rem; border-radius: 8px;">
+                    <h4 style="font-family: 'Playfair Display', Georgia, serif; font-size: 1.4rem; font-weight: 700; color: #3A2820; margin: 0 0 1rem 0;">About the Land Race</h4>
+                    <p style="color: #8B4513; font-size: 0.95rem; line-height: 1.8; margin-bottom: 1rem;">
+                        The El Paso Verse land acquisition strategy is guided by community input. These three targets are currently under review and discussion. Your votes help the community prioritize which location to pursue as we build toward the physical 1880 frontier destination.
+                    </p>
+                    <p style="color: #8B4513; font-size: 0.95rem; line-height: 1.8; margin: 0;">
+                        <strong>Learn more:</strong> Review the complete vision and land strategy in the <a href="https://drive.google.com/file/d/1D_xbK8tDvH35-UsiSHx7cH91E3nz6ySO/view" target="_blank" style="color: #C9A961; text-decoration: underline;">VisionPaper</a>.
+                    </p>
+                </div>
+            </div>
+
             <!-- Browse Ideas Tab -->
             <div id="browse-tab" class="tab-pane">
                 <!-- Stats Bar -->
@@ -749,6 +903,76 @@
 
         // Update dashboard when wallet connects
         window.addEventListener('walletConnected', updateDashboard);
+
+        // Land Target Voting
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load existing votes from localStorage
+            loadLandVotes();
+
+            // Add click handlers to all vote buttons
+            const voteButtons = document.querySelectorAll('.land-vote-btn');
+            voteButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const targetId = this.getAttribute('data-target');
+                    voteLandTarget(targetId);
+                });
+            });
+        });
+
+        function loadLandVotes() {
+            const votes = JSON.parse(localStorage.getItem('landVotes') || '{"verse-hotel": 0, "western-leone": 0, "rio-texaco": 0}');
+            const userVotes = JSON.parse(localStorage.getItem('userLandVotes') || '[]');
+
+            // Update vote counts
+            Object.keys(votes).forEach(targetId => {
+                const card = document.querySelector(`.land-target-card[data-target="${targetId}"]`);
+                if (card) {
+                    const voteCount = card.querySelector('.vote-count');
+                    if (voteCount) {
+                        voteCount.textContent = `${votes[targetId]} vote${votes[targetId] !== 1 ? 's' : ''}`;
+                    }
+
+                    // Update button if user already voted for this target
+                    if (userVotes.includes(targetId)) {
+                        const button = card.querySelector('.land-vote-btn');
+                        button.textContent = 'Voted ✓';
+                        button.style.background = 'linear-gradient(135deg, #2d8a2d 0%, #3a9a3a 100%)';
+                        button.style.color = '#FFFFFF';
+                        button.disabled = true;
+                    }
+                }
+            });
+        }
+
+        function voteLandTarget(targetId) {
+            const userVotes = JSON.parse(localStorage.getItem('userLandVotes') || '[]');
+
+            // Check if user already voted for this target
+            if (userVotes.includes(targetId)) {
+                alert('You have already voted for this land target!');
+                return;
+            }
+
+            // Add vote
+            const votes = JSON.parse(localStorage.getItem('landVotes') || '{"verse-hotel": 0, "western-leone": 0, "rio-texaco": 0}');
+            votes[targetId] = (votes[targetId] || 0) + 1;
+            localStorage.setItem('landVotes', JSON.stringify(votes));
+
+            // Track user vote
+            userVotes.push(targetId);
+            localStorage.setItem('userLandVotes', JSON.stringify(userVotes));
+
+            // Update UI
+            loadLandVotes();
+
+            // Success message
+            const targetNames = {
+                'verse-hotel': '"Verse Hotel" Almeria',
+                'western-leone': 'Western Leone',
+                'rio-texaco': 'Rio Texaco'
+            };
+            alert(`Thank you for voting for ${targetNames[targetId]}!\n\nYour voice helps shape where the El Paso Verse frontier takes root.`);
+        }
     </script>
 </body>
 </html>
