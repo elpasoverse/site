@@ -470,7 +470,7 @@ p {
 }
 
 .pillar-description {
-    color: #E8DCC8;
+    color: #EDD9C0;
     font-size: 0.95rem;
     line-height: 1.7;
     margin-bottom: 1rem;
@@ -577,7 +577,7 @@ p {
 }
 
 .collection h2 {
-    color: #E8D7C3;
+    color: #EDD9C0;
     text-align: center;
     font-family: 'Playfair Display', Georgia, serif;
     font-size: 2.5rem;
@@ -600,7 +600,7 @@ p {
 }
 
 .collection-intro strong {
-    color: #E8D7C3;
+    color: #EDD9C0;
 }
 
 /* Films showcase */
@@ -638,7 +638,7 @@ p {
 }
 
 .film-caption {
-    color: #E8D7C3;
+    color: #EDD9C0;
     font-size: 0.95rem;
     font-style: italic;
     margin-top: 0.75rem;
@@ -688,7 +688,7 @@ p {
 
 .film-meta {
     font-size: 0.75rem;
-    color: #a89178;
+    color: #8B7355;
     text-transform: uppercase;
     letter-spacing: 0.05em;
 }
@@ -828,7 +828,7 @@ p {
     top: -15px;
     left: 50%;
     transform: translateX(-50%);
-    background: linear-gradient(135deg, #C9A961 0%, #B8985A 100%);
+    background: linear-gradient(135deg, #C9A961 0%, #C9A961 100%);
     color: #1a1a1a;
     font-family: 'Playfair Display', Georgia, serif;
     font-weight: 900;
@@ -857,7 +857,7 @@ p {
     text-align: center;
     font-size: 0.95rem;
     line-height: 1.7;
-    color: #5a4a3a;
+    color: #8B4513;
 }
 
 .phase-card ul {
@@ -905,7 +905,7 @@ p {
 }
 
 .phase-card.active .phase-number {
-    background: linear-gradient(135deg, #D4A745 0%, #B8985A 100%);
+    background: linear-gradient(135deg, #D4A745 0%, #C9A961 100%);
     color: #1a1a1a;
     font-weight: 900;
     box-shadow: 0 4px 15px rgba(212, 167, 69, 0.5);
@@ -918,24 +918,24 @@ p {
 }
 
 .phase-card.active h4 {
-    color: #8B6914;
+    color: #C9A961;
 }
 
 .phase-card.active p {
-    color: #5a4a3a;
+    color: #8B4513;
 }
 
 /* Inactive Phase Card */
 .phase-card.inactive {
-    border: 3px solid #B8985A;
+    border: 3px solid #C9A961;
     background: linear-gradient(135deg, #E8D5C0 0%, #d9c7b0 100%);
     box-shadow: 0 4px 15px rgba(139, 69, 19, 0.1);
     opacity: 0.85;
 }
 
 .phase-card.inactive .phase-number {
-    background: linear-gradient(135deg, #8B7355 0%, #7a6449 100%);
-    color: #d4c4a8;
+    background: linear-gradient(135deg, #8B7355 0%, #8B7355 100%);
+    color: #EDD9C0;
     box-shadow: 0 4px 12px rgba(139, 69, 19, 0.2);
 }
 
@@ -946,7 +946,7 @@ p {
 }
 
 .phase-card.inactive h4 {
-    color: #7a6449;
+    color: #8B7355;
 }
 
 .phase-card.inactive p {
@@ -958,7 +958,7 @@ p {
 }
 
 .phase-card.inactive ul li:before {
-    color: #B8985A;
+    color: #C9A961;
 }
 
 .phase-card.inactive:hover {
@@ -1169,7 +1169,7 @@ p {
 }
 
 .contact-signup-box p {
-    color: #5a4a3a;
+    color: #8B4513;
     font-size: 1rem;
     line-height: 1.7;
     margin-bottom: 2rem;
@@ -1249,7 +1249,7 @@ p {
 
 .contact-portal p {
     font-size: 1rem;
-    color: #5a4a3a;
+    color: #8B4513;
     margin-bottom: 1rem;
     text-align: center;
 }
@@ -1305,7 +1305,7 @@ p {
 }
 
 .stat-label {
-    color: #5a4a3a;
+    color: #8B4513;
     font-size: 0.95rem;
 }
 
