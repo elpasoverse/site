@@ -529,6 +529,15 @@ p {
     text-align: justify;
 }
 
+.land-race-cta {
+    text-align: center !important;
+    font-size: 1.3rem !important;
+    font-weight: 700 !important;
+    color: #8B4513 !important;
+    margin-top: 2rem !important;
+    font-style: italic;
+}
+
 /* Collection Section */
 /* Motion Prints Section */
 .collection {
