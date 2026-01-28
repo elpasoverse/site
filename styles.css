@@ -601,7 +601,7 @@ p {
     text-decoration: none;
     transition: all 0.3s ease;
     flex: 0 0 auto;
-    width: 180px;
+    width: 220px;
 }
 
 .film-poster-card:hover {
@@ -659,9 +659,12 @@ p {
 }
 
 @media (max-width: 640px) {
+    .films-gallery {
+        gap: 1rem;
+    }
+
     .film-poster-card {
-        width: 100%;
-        max-width: 210px;
+        width: 150px;
     }
 }
 
@@ -1565,9 +1568,12 @@ p {
         gap: 1.5rem;
     }
 
+    .films-gallery {
+        gap: 1rem;
+    }
+
     .film-poster-card {
-        width: 100% !important;
-        max-width: 210px;
+        width: 150px;
     }
 
     .film-title {
