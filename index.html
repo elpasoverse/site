@@ -283,12 +283,32 @@
         <div class="container">
             <h2>Join the Frontier</h2>
             <div class="divider"></div>
-            <nav class="links">
-                <a href="login.html" class="community-link">Community Portal</a>
-                <a href="https://elpasoverse.webflow.io/" target="_blank" rel="noopener noreferrer">Official Website</a>
-                <a href="https://book.io/series/el-paso-verse/" target="_blank" rel="noopener noreferrer">Book.io Series</a>
-                <a href="https://www.instagram.com/elpasoverse/" target="_blank" rel="noopener noreferrer">Instagram</a>
-            </nav>
+
+            <!-- Email Signup Box -->
+            <div class="contact-signup-box">
+                <img src="assets/paso-token.png" alt="PASO Coin" class="contact-coin">
+                <h3>Reserve Your 25 PASO</h3>
+                <p>Join the founding community and get early access to exclusive content, governance rights, and the physical frontier.</p>
+                <form id="contactEmailForm" onsubmit="submitContactEmail(event)" class="contact-email-form">
+                    <input
+                        type="email"
+                        id="contactEmailInput"
+                        placeholder="Enter your email"
+                        required
+                        class="contact-email-input"
+                    />
+                    <button type="submit" class="contact-email-submit">
+                        Claim PASO
+                    </button>
+                </form>
+                <p class="contact-signup-note">You'll receive updates on token distribution, community events, and frontier development.</p>
+            </div>
+
+            <!-- Community Portal Link -->
+            <div class="contact-portal">
+                <p>Already a member?</p>
+                <a href="login.html" class="community-portal-button">Enter Community Portal →</a>
+            </div>
         </div>
     </section>
 
@@ -456,6 +476,72 @@
 
         // Parallax is now handled by CSS background-attachment: fixed
         // This provides smooth, hardware-accelerated parallax scrolling
+
+        // Contact Form Email Submission
+        async function submitContactEmail(event) {
+            event.preventDefault();
+
+            const email = document.getElementById('contactEmailInput').value;
+            const submitButton = document.querySelector('.contact-email-submit');
+            const originalButtonText = submitButton.textContent;
+
+            // Check if already submitted
+            const emailSubmitted = localStorage.getItem('emailSubmitted');
+            if (emailSubmitted) {
+                alert('You have already signed up! Check your email for next steps.');
+                return;
+            }
+
+            // Show loading state
+            submitButton.textContent = 'Submitting...';
+            submitButton.disabled = true;
+
+            try {
+                // GOOGLE FORMS INTEGRATION
+                const formURL = 'https://docs.google.com/forms/d/e/1FAIpQLSdgBN_4kKKwNxah9h2qJInXgYlGexgp12XYFphfvwqtID8sTg/formResponse';
+
+                // Create form data
+                const formData = new FormData();
+                formData.append('entry.1894748129', email);
+
+                // Submit to Google Forms
+                await fetch(formURL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    body: formData
+                });
+
+                // Mark as submitted
+                localStorage.setItem('emailSubmitted', 'true');
+                localStorage.setItem('userEmail', email);
+
+                // Show success message
+                const signupBox = document.querySelector('.contact-signup-box');
+                signupBox.innerHTML = `
+                    <img src="assets/paso-token.png" alt="PASO Coin" class="contact-coin" style="width: 100px; height: 100px;">
+                    <h3 style="color: #2d8a2d; margin-bottom: 1rem;">Welcome, Pioneer!</h3>
+                    <p style="font-size: 1.1rem; color: #3A2820; margin-bottom: 1rem;">
+                        <strong>25 PASO reserved for ${email}</strong>
+                    </p>
+                    <p style="color: #5a4a3a;">
+                        Check your email for next steps. You'll receive updates on token distribution,
+                        community events, and frontier development.
+                    </p>
+                `;
+
+                console.log('Email successfully submitted:', email);
+
+            } catch (error) {
+                console.error('Error submitting email:', error);
+
+                // Show error message
+                alert('Oops! There was an issue submitting your email. Please try again or contact us directly.');
+
+                // Reset button
+                submitButton.textContent = originalButtonText;
+                submitButton.disabled = false;
+            }
+        }
     </script>
 </body>
 </html>

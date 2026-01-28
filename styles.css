@@ -1097,38 +1097,136 @@ p {
     background-color: #EDD9C0;
 }
 
-.links {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1.5rem;
-    margin-top: 2rem;
+.contact-signup-box {
+    max-width: 600px;
+    margin: 3rem auto;
+    padding: 3rem 2.5rem;
+    background: linear-gradient(135deg, #F5E6D3 0%, #EDD9C0 100%);
+    border: 3px solid #C9A961;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 8px 25px rgba(139, 69, 19, 0.15);
 }
 
-.links a {
+.contact-coin {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 1.5rem auto;
+    display: block;
+    filter: drop-shadow(0 4px 12px rgba(201, 169, 97, 0.4));
+}
+
+.contact-signup-box h3 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 2rem;
     color: #3A2820;
-    text-decoration: none;
-    font-size: 1.1rem;
-    letter-spacing: 0.05em;
-    border-bottom: 2px solid transparent;
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+.contact-signup-box p {
+    color: #5a4a3a;
+    font-size: 1rem;
+    line-height: 1.7;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.contact-email-form {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.contact-email-input {
+    flex: 1;
+    min-width: 250px;
+    padding: 1rem 1.25rem;
+    border: 2px solid #C9A961;
+    background-color: white;
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 1rem;
+    color: #3A2820;
+    border-radius: 6px;
     transition: all 0.3s ease;
-    padding-bottom: 0.25rem;
 }
 
-.links a:hover {
+.contact-email-input:focus {
+    outline: none;
+    border-color: #D4A745;
+    box-shadow: 0 0 0 3px rgba(212, 167, 69, 0.2);
+}
+
+.contact-email-input::placeholder {
+    color: #8B7355;
+}
+
+.contact-email-submit {
+    padding: 1rem 2.5rem;
+    background: linear-gradient(135deg, #D4A745 0%, #C9A961 100%);
+    color: #1a1a1a;
+    border: none;
+    border-radius: 6px;
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    box-shadow: 0 4px 15px rgba(212, 167, 69, 0.4);
+}
+
+.contact-email-submit:hover {
+    background: linear-gradient(135deg, #E5B856 0%, #D4A745 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(212, 167, 69, 0.6);
+}
+
+.contact-email-submit:active {
+    transform: translateY(0);
+}
+
+.contact-signup-note {
+    font-size: 0.85rem !important;
+    color: #8B7355 !important;
+    font-style: italic;
+    margin-bottom: 0 !important;
+}
+
+.contact-portal {
+    text-align: center;
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 2px solid #C9A961;
+}
+
+.contact-portal p {
+    font-size: 1rem;
+    color: #5a4a3a;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.community-portal-button {
+    display: inline-block;
+    padding: 1rem 2.5rem;
+    background-color: transparent;
     color: #8B4513;
-    border-bottom-color: #C9A961;
-}
-
-.links a.community-link {
+    border: 2px solid #C9A961;
+    text-decoration: none;
+    font-size: 1rem;
     font-weight: 600;
-    color: #C9A961;
-    border-bottom: 2px solid #C9A961;
+    letter-spacing: 0.05em;
+    transition: all 0.3s ease;
+    border-radius: 4px;
 }
 
-.links a.community-link:hover {
-    color: #8B4513;
-    background-color: rgba(201, 169, 97, 0.1);
+.community-portal-button:hover {
+    background-color: #C9A961;
+    color: #F5E6D3;
 }
 
 /* Instagram Section */
@@ -1772,5 +1870,26 @@ p {
 
     .instagram-section p {
         font-size: 0.9rem;
+    }
+
+    .contact-signup-box {
+        padding: 2rem 1.5rem;
+    }
+
+    .contact-signup-box h3 {
+        font-size: 1.6rem;
+    }
+
+    .contact-email-form {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .contact-email-input {
+        min-width: 100%;
+    }
+
+    .contact-email-submit {
+        width: 100%;
     }
 }
