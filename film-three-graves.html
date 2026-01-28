@@ -192,8 +192,9 @@
 
         .motion-prints-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            max-width: 900px;
         }
 
         .motion-print-card {
@@ -201,7 +202,6 @@
             aspect-ratio: 1.66 / 1;
             background-size: cover;
             background-position: center;
-            border: 4px solid #C9A961;
             border-radius: 6px;
             overflow: hidden;
             box-shadow: 0 6px 20px rgba(139, 69, 19, 0.25);
@@ -211,7 +211,6 @@
         .motion-print-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 10px 30px rgba(139, 69, 19, 0.35);
-            border-color: #D4A745;
         }
 
         .motion-print-card::after {
@@ -368,8 +367,8 @@
     <div class="film-detail-content">
         <!-- Motion Prints Collection -->
         <section class="film-section">
-            <h3>Available Motion Prints</h3>
-            <p style="margin-bottom: 2rem; color: #5a4a3a;">Each frame is a one-of-one collectible—a single moment captured on authentic film stock. Every painting tells its own story.</p>
+            <h3>Own 1-of-1 Motion Prints</h3>
+            <p style="margin-bottom: 2rem; color: #5a4a3a; text-align: left;">Each frame is a one-of-one collectible—a single moment captured on authentic film stock. Every painting tells its own story.</p>
 
             <div class="motion-prints-grid">
                 <div class="motion-print-card" style="background-image: url('assets/frame-1.png');"></div>
@@ -487,7 +486,12 @@
     <footer class="footer">
         <div class="container">
             <p>&copy; 2026 El Paso Verse. A community-driven frontier.</p>
-            <p class="footer-credits">Produced by Kamara Studios</p>
+            <div class="footer-credits">
+                <p style="margin-bottom: 0.5rem; font-size: 0.75rem; color: #C9A961;">Produced in association with</p>
+                <a href="https://www.kamarastudios.eu" target="_blank" rel="noopener noreferrer">
+                    <img src="assets/kamara-logo-white.png" alt="Kamara Studios" class="footer-logo">
+                </a>
+            </div>
         </div>
     </footer>
 </body>
