@@ -1190,50 +1190,24 @@ p {
     color: #C9A961;
 }
 
-/* Email Capture Modal */
-.email-modal {
+/* Email Capture Popup - Small Corner Version */
+.email-popup {
     display: none;
     position: fixed;
+    bottom: 2rem;
+    right: 2rem;
     z-index: 10000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.85);
-    backdrop-filter: blur(5px);
-    animation: fadeIn 0.3s ease;
+    max-width: 320px;
+    animation: slideInUp 0.4s ease;
 }
 
-.email-modal.show {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.email-popup.show {
+    display: block;
 }
 
-@keyframes fadeIn {
+@keyframes slideInUp {
     from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-}
-
-.email-modal-content {
-    background: linear-gradient(135deg, #F5E6D3 0%, #EDD9C0 100%);
-    border: 4px solid #C9A961;
-    border-radius: 12px;
-    padding: 3rem 2.5rem 2.5rem 2.5rem;
-    max-width: 550px;
-    width: 90%;
-    position: relative;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-    animation: slideDown 0.4s ease;
-}
-
-@keyframes slideDown {
-    from {
-        transform: translateY(-50px);
+        transform: translateY(100px);
         opacity: 0;
     }
     to {
@@ -1242,108 +1216,97 @@ p {
     }
 }
 
-.email-modal-close {
+.popup-content {
+    background: linear-gradient(135deg, #F5E6D3 0%, #EDD9C0 100%);
+    border: 3px solid #C9A961;
+    border-radius: 10px;
+    padding: 1.5rem;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    text-align: center;
+}
+
+.popup-close {
     position: absolute;
-    top: 1rem;
-    right: 1rem;
+    top: 0.5rem;
+    right: 0.5rem;
     background: transparent;
     border: none;
-    font-size: 2.5rem;
+    font-size: 1.5rem;
     color: #8B4513;
     cursor: pointer;
     line-height: 1;
-    transition: all 0.3s ease;
-    width: 40px;
-    height: 40px;
+    transition: all 0.2s ease;
+    width: 30px;
+    height: 30px;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.email-modal-close:hover {
+.popup-close:hover {
     color: #3A2820;
-    transform: rotate(90deg);
+    transform: scale(1.1);
 }
 
-.email-modal-header {
-    text-align: center;
-    margin-bottom: 1.5rem;
-}
-
-.email-modal-divider {
-    width: 150px;
-    height: 3px;
-    background: linear-gradient(to right, transparent, #C9A961, transparent);
-    margin: 1.5rem auto;
-    position: relative;
-}
-
-.email-modal-divider::after {
-    content: '★';
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    color: #C9A961;
-    background-color: #F5E6D3;
-    padding: 0 0.5rem;
-    font-size: 1.2rem;
-}
-
-.email-modal-body {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.email-input {
+.popup-email-input {
     width: 100%;
-    padding: 1rem 1.25rem;
-    border: 3px solid #8B4513;
+    padding: 0.75rem 1rem;
+    border: 2px solid #8B4513;
     background-color: #fff;
     font-family: Georgia, 'Times New Roman', serif;
-    font-size: 1rem;
+    font-size: 0.9rem;
     color: #3A2820;
-    border-radius: 6px;
-    margin-bottom: 1rem;
+    border-radius: 5px;
+    margin-bottom: 0.75rem;
     transition: all 0.3s ease;
 }
 
-.email-input:focus {
+.popup-email-input:focus {
     outline: none;
     border-color: #C9A961;
     box-shadow: 0 0 0 3px rgba(201, 169, 97, 0.2);
 }
 
-.email-input::placeholder {
+.popup-email-input::placeholder {
     color: #999;
 }
 
-.email-submit-btn {
+.popup-submit-btn {
     width: 100%;
-    padding: 1.25rem 2rem;
+    padding: 0.85rem 1.5rem;
     background: linear-gradient(135deg, #C9A961 0%, #B8985A 100%);
     color: #1a1a1a;
     border: none;
-    border-radius: 6px;
+    border-radius: 5px;
     font-family: 'Playfair Display', Georgia, serif;
-    font-size: 1.1rem;
+    font-size: 0.95rem;
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.05em;
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(139, 69, 19, 0.3);
+    box-shadow: 0 3px 10px rgba(139, 69, 19, 0.3);
 }
 
-.email-submit-btn:hover {
+.popup-submit-btn:hover {
     background: linear-gradient(135deg, #d4b56f 0%, #C9A961 100%);
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(139, 69, 19, 0.4);
+    box-shadow: 0 5px 15px rgba(139, 69, 19, 0.4);
 }
 
-.email-submit-btn:active {
+.popup-submit-btn:active {
     transform: translateY(0);
+}
+
+/* Mobile responsiveness for popup */
+@media (max-width: 768px) {
+    .email-popup {
+        bottom: 1rem;
+        right: 1rem;
+        left: 1rem;
+        max-width: none;
+    }
 }
 
 /* Responsive Design */

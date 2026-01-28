@@ -8,41 +8,26 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Email Capture Modal -->
-    <div id="emailModal" class="email-modal">
-        <div class="email-modal-content">
-            <button class="email-modal-close" onclick="closeEmailModal()">&times;</button>
+    <!-- Email Capture Popup -->
+    <div id="emailPopup" class="email-popup">
+        <button class="popup-close" onclick="closeEmailPopup()">&times;</button>
+        <div class="popup-content">
+            <img src="assets/paso-token.png" alt="PASO Coin" style="width: 50px; height: 50px; margin-bottom: 0.5rem;">
+            <h3 style="font-family: 'Playfair Display', Georgia, serif; font-size: 1.3rem; color: #3A2820; font-weight: 900; margin-bottom: 0.25rem;">Get 25 PASO</h3>
+            <p style="color: #8B4513; font-size: 0.9rem; margin-bottom: 1rem; line-height: 1.4;">Join the founding pioneers</p>
 
-            <div class="email-modal-header">
-                <img src="assets/paso-token.png" alt="PASO Coin" style="width: 100px; height: 100px; margin: 0 auto 1rem; display: block;">
-                <h2 style="font-family: 'Playfair Display', Georgia, serif; font-size: 2.2rem; color: #3A2820; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.5rem; font-weight: 900;">Claim Your PASO</h2>
-                <p style="color: #8B4513; font-size: 1.1rem; font-style: italic; margin-bottom: 0;">Join the founding pioneers</p>
-            </div>
-
-            <div class="email-modal-divider"></div>
-
-            <div class="email-modal-body">
-                <p style="color: #3A2820; font-size: 1rem; line-height: 1.8; margin-bottom: 1.5rem; text-align: center;">
-                    Be the first to know about the 1880 frontier. Get <strong style="color: #8B4513;">25 PASO coins</strong> just for joining our community.
-                </p>
-
-                <form id="emailCaptureForm" onsubmit="submitEmail(event)" style="width: 100%;">
-                    <input
-                        type="email"
-                        id="emailInput"
-                        placeholder="Enter your email address"
-                        required
-                        class="email-input"
-                    />
-                    <button type="submit" class="email-submit-btn">
-                        Claim 25 PASO Coins →
-                    </button>
-                </form>
-
-                <p style="color: #999; font-size: 0.85rem; margin-top: 1.5rem; text-align: center; line-height: 1.5;">
-                    Get exclusive updates on film releases, collectible drops, and early access to the physical frontier destination.
-                </p>
-            </div>
+            <form id="emailCaptureForm" onsubmit="submitEmail(event)">
+                <input
+                    type="email"
+                    id="emailInput"
+                    placeholder="Your email"
+                    required
+                    class="popup-email-input"
+                />
+                <button type="submit" class="popup-submit-btn">
+                    Claim →
+                </button>
+            </form>
         </div>
     </div>
 
@@ -297,19 +282,17 @@
 
     <!-- JavaScript -->
     <script>
-        // Email Capture Modal Functions
-        function showEmailModal() {
+        // Email Capture Popup Functions
+        function showEmailPopup() {
             // Check if user has already submitted email
             const emailSubmitted = localStorage.getItem('emailSubmitted');
             if (!emailSubmitted) {
-                document.getElementById('emailModal').classList.add('show');
-                document.body.style.overflow = 'hidden';
+                document.getElementById('emailPopup').classList.add('show');
             }
         }
 
-        function closeEmailModal() {
-            document.getElementById('emailModal').classList.remove('show');
-            document.body.style.overflow = 'auto';
+        function closeEmailPopup() {
+            document.getElementById('emailPopup').classList.remove('show');
         }
 
         function submitEmail(event) {
@@ -325,22 +308,22 @@
             localStorage.setItem('userEmail', email);
 
             // Show success message
-            const modalContent = document.querySelector('.email-modal-body');
-            modalContent.innerHTML = `
-                <div style="text-align: center; padding: 2rem 0;">
-                    <div style="font-size: 4rem; margin-bottom: 1rem;">✓</div>
-                    <h3 style="font-family: 'Playfair Display', Georgia, serif; font-size: 1.8rem; color: #2d8a2d; margin-bottom: 1rem; font-weight: 900;">Welcome, Pioneer!</h3>
-                    <p style="color: #3A2820; font-size: 1.1rem; line-height: 1.8; margin-bottom: 1.5rem;">
-                        <strong>25 PASO coins</strong> have been reserved for you.
+            const popupContent = document.querySelector('.popup-content');
+            popupContent.innerHTML = `
+                <div style="text-align: center; padding: 1rem 0;">
+                    <div style="font-size: 3rem; margin-bottom: 0.5rem; color: #2d8a2d;">✓</div>
+                    <h3 style="font-family: 'Playfair Display', Georgia, serif; font-size: 1.3rem; color: #2d8a2d; margin-bottom: 0.5rem; font-weight: 900;">Welcome!</h3>
+                    <p style="color: #3A2820; font-size: 0.9rem; line-height: 1.5; margin-bottom: 0.75rem;">
+                        <strong>25 PASO</strong> reserved for you.
                     </p>
-                    <p style="color: #8B4513; font-size: 0.95rem; line-height: 1.6;">
-                        Check your email for next steps to claim your coins and join the founding community.
+                    <p style="color: #8B4513; font-size: 0.8rem; line-height: 1.4;">
+                        Check your email for next steps.
                     </p>
-                    <button onclick="closeEmailModal()" style="margin-top: 2rem; padding: 1rem 2rem; background: #C9A961; color: #1a1a1a; border: none; border-radius: 6px; font-weight: 700; cursor: pointer; text-transform: uppercase; letter-spacing: 0.05em;">
-                        Continue to El Paso Verse →
-                    </button>
                 </div>
             `;
+
+            // Auto-close after 3 seconds
+            setTimeout(closeEmailPopup, 3000);
 
             // TODO: In production, integrate with your email service provider
             // Example: Mailchimp, ConvertKit, Sendinblue, etc.
@@ -351,17 +334,9 @@
             // });
         }
 
-        // Show modal 2 seconds after page load
+        // Show popup 3 seconds after page load
         window.addEventListener('load', function() {
-            setTimeout(showEmailModal, 2000);
-        });
-
-        // Close modal when clicking outside
-        document.addEventListener('click', function(event) {
-            const modal = document.getElementById('emailModal');
-            if (event.target === modal) {
-                closeEmailModal();
-            }
+            setTimeout(showEmailPopup, 3000);
         });
 
         function toggleVision() {
