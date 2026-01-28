@@ -9,21 +9,24 @@ The social media follower/subscriber counts are displayed on the website in the 
    - X (Twitter): `id="xFollowerCount"`
    - Instagram: `id="igFollowerCount"`
    - YouTube: `id="ytSubscriberCount"`
+   - TikTok: `id="tiktokFollowerCount"`
    - Discord: `id="discordMemberCount"`
 
 3. You'll find lines that look like:
    ```html
-   <span class="stat-number" id="xFollowerCount">X 1.2K</span>
-   <span class="stat-number" id="igFollowerCount">IG 850</span>
-   <span class="stat-number" id="ytSubscriberCount">YT 420</span>
-   <span class="stat-number" id="discordMemberCount">Discord 300+</span>
+   <span id="xFollowerCount" style="font-weight: 600;">685</span>
+   <span id="igFollowerCount" style="font-weight: 600;">243</span>
+   <span id="ytSubscriberCount" style="font-weight: 600;">46</span>
+   <span id="tiktokFollowerCount" style="font-weight: 600;">47</span>
+   <span id="discordMemberCount" style="font-weight: 600;">129</span>
    ```
 
-4. Change the number while keeping the platform prefix:
-   - X followers: `X 1.2K` → `X 2.5K`
-   - Instagram: `IG 850` → `IG 1.2K`
-   - YouTube: `YT 420` → `YT 650`
-   - Discord: `Discord 300+` → `Discord 500+`
+4. Change the number:
+   - X followers: `685` → `750`
+   - Instagram: `243` → `300`
+   - YouTube: `46` → `100`
+   - TikTok: `47` → `75`
+   - Discord: `129` → `200`
 
 5. Save the file
 
@@ -36,16 +39,17 @@ The social media follower/subscriber counts are displayed on the website in the 
 
 ## Formatting Tips:
 
-- **Under 1,000:** Just use the number (e.g., `IG 847`, `YT 420`)
-- **1,000 - 9,999:** Use K format (e.g., `X 1.2K`, `IG 5.8K`)
-- **10,000+:** Use K format (e.g., `X 12.5K`, `YT 45.2K`)
-- **Discord:** Can use `+` for growing communities (e.g., `Discord 300+`)
+- **Under 1,000:** Just use the number (e.g., `243`, `47`)
+- **1,000 - 9,999:** Use K format (e.g., `1.2K`, `5.8K`)
+- **10,000+:** Use K format (e.g., `12.5K`, `45.2K`)
+- All platforms display the same way: just the number with "followers", "subscribers", or "members" added by the HTML
 
 ## Current Counts:
 
 - **X (Twitter):** 685
 - **Instagram:** 243
 - **YouTube:** 46
+- **TikTok:** 47
 - **Discord:** 129
 
 *(Update these when you change them!)*
