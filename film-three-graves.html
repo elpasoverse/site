@@ -47,14 +47,11 @@
 
         .film-banner iframe {
             position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 100vw;
-            height: 56.25vw;
-            min-height: 100%;
-            min-width: 177.77vh;
-            transform: translate(-50%, -50%);
-            pointer-events: none;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
         }
 
         .film-banner::before {
@@ -258,7 +255,7 @@
 
     <!-- Film Banner -->
     <div class="film-banner" id="filmBanner">
-        <iframe id="trailerVideo" src="https://www.youtube.com/embed/z56KmGf3PuY?autoplay=1&mute=1&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&enablejsapi=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        <iframe id="trailerVideo" src="https://www.youtube.com/embed/z56KmGf3PuY?autoplay=1&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&enablejsapi=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
     </div>
 
     <script>
