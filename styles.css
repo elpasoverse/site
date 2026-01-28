@@ -1268,9 +1268,9 @@ p {
 }
 
 .footer-logo {
-    height: 30px;
+    height: 20px;
     width: auto;
-    opacity: 0.8;
+    opacity: 0.7;
     transition: opacity 0.3s ease;
 }
 
