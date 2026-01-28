@@ -572,10 +572,11 @@ p {
 /* Film Gallery - Festival Style */
 .films-gallery {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 3rem;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2.5rem;
     margin: 3rem auto;
     max-width: 1200px;
+    justify-items: center;
 }
 
 .film-poster-card {
@@ -583,31 +584,31 @@ p {
     text-decoration: none;
     transition: all 0.3s ease;
     color: inherit;
+    max-width: 400px;
+    width: 100%;
 }
 
 .film-poster-card:hover {
-    transform: translateY(-10px);
+    transform: translateY(-8px);
 }
 
 .film-poster {
     position: relative;
     width: 100%;
-    height: 0;
-    padding-bottom: 150%; /* 2:3 aspect ratio (600px height / 400px width = 1.5) */
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    border: 4px solid #C9A961;
-    border-radius: 6px;
-    overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+    background-color: #1a1a1a;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
     transition: all 0.3s ease;
-    cursor: pointer;
+    overflow: hidden;
+}
+
+.film-poster img {
+    width: 100%;
+    height: auto;
+    display: block;
 }
 
 .film-poster:hover {
-    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.8), 0 0 30px rgba(201, 169, 97, 0.4);
-    border-color: #D4A745;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.7);
 }
 
 .film-overlay {

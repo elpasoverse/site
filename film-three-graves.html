@@ -7,45 +7,15 @@
     <title>Three Graves | El Paso Verse</title>
     <link rel="stylesheet" href="styles.css">
     <style>
-        .film-detail-hero {
-            position: relative;
-            height: 70vh;
-            min-height: 500px;
-            background-image: url('assets/poster-three-graves.png');
-            background-size: cover;
-            background-position: center;
-            display: flex;
-            align-items: flex-end;
-        }
-
-        .film-detail-hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(to top, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.6) 50%, rgba(0, 0, 0, 0.3) 100%);
-        }
-
-        .film-detail-header {
-            position: relative;
-            z-index: 2;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 3rem 2rem;
-            width: 100%;
-        }
-
         .back-link {
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
             color: #C9A961;
             text-decoration: none;
-            margin-bottom: 2rem;
             font-size: 0.95rem;
             transition: all 0.3s ease;
+            margin: 2rem 0 0 2rem;
         }
 
         .back-link:hover {
@@ -53,29 +23,56 @@
             transform: translateX(-5px);
         }
 
+        .film-detail-hero {
+            display: grid;
+            grid-template-columns: 400px 1fr;
+            gap: 4rem;
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 2rem 4rem 2rem;
+            align-items: start;
+        }
+
+        .film-poster-large {
+            width: 100%;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .film-poster-large img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .film-info {
+            padding-top: 1rem;
+        }
+
         .film-detail-title {
             font-family: 'Playfair Display', Georgia, serif;
-            font-size: 3.5rem;
-            color: #F5E6D3;
-            margin-bottom: 1rem;
+            font-size: 3rem;
+            color: #3A2820;
+            margin-bottom: 0.75rem;
             font-weight: 900;
             text-transform: uppercase;
             letter-spacing: 0.08em;
+            line-height: 1.2;
         }
 
         .film-detail-tagline {
-            font-size: 1.3rem;
-            color: #C9A961;
+            font-size: 1.2rem;
+            color: #8B4513;
             font-style: italic;
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
         }
 
         .film-detail-meta {
             display: flex;
-            gap: 2rem;
-            flex-wrap: wrap;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin-bottom: 2.5rem;
             font-size: 0.9rem;
-            color: #a89178;
+            color: #5a4a3a;
             text-transform: uppercase;
             letter-spacing: 0.05em;
         }
@@ -83,7 +80,7 @@
         .film-detail-content {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 4rem 2rem;
+            padding: 0 2rem 4rem 2rem;
         }
 
         .film-section {
@@ -176,7 +173,17 @@
             flex-wrap: wrap;
         }
 
-        @media (max-width: 768px) {
+        @media (max-width: 968px) {
+            .film-detail-hero {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .film-poster-large {
+                max-width: 400px;
+                margin: 0 auto;
+            }
+
             .film-detail-title {
                 font-size: 2.5rem;
             }
@@ -192,10 +199,15 @@
     </style>
 </head>
 <body>
+    <a href="index.html#collection" class="back-link">← Back to Films</a>
+
     <!-- Film Detail Hero -->
     <section class="film-detail-hero">
-        <div class="film-detail-header">
-            <a href="index.html#collection" class="back-link">← Back to Films</a>
+        <div class="film-poster-large">
+            <img src="assets/poster-three-graves.png" alt="Three Graves">
+        </div>
+
+        <div class="film-info">
             <h1 class="film-detail-title">Three Graves</h1>
             <p class="film-detail-tagline">A tale of vengeance and redemption</p>
             <div class="film-detail-meta">
@@ -203,14 +215,7 @@
                 <span>Shot on Kodak Motion Picture Film</span>
                 <span>Limited Edition Collectibles</span>
             </div>
-        </div>
-    </section>
 
-    <!-- Film Content -->
-    <div class="film-detail-content">
-        <!-- Synopsis -->
-        <section class="film-section">
-            <h3>Synopsis</h3>
             <div class="film-synopsis">
                 <p>In the unforgiving borderlands of 1880, a lone wanderer discovers three freshly dug graves at the edge of a forgotten settlement. Each grave marks a story of betrayal, each stone a promise unkept.</p>
 
@@ -218,8 +223,11 @@
 
                 <p>Shot entirely on Kodak motion picture film stock, <strong>Three Graves</strong> captures the raw beauty and brutal reality of the Old West in its perpetual twilight year of 1880.</p>
             </div>
-        </section>
+        </div>
+    </section>
 
+    <!-- Film Content -->
+    <div class="film-detail-content">
         <!-- Motion Prints Collection -->
         <section class="film-section">
             <h3>Available Motion Prints</h3>
