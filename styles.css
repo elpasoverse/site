@@ -1366,23 +1366,27 @@ p {
 /* Responsive Design */
 @media (max-width: 768px) {
     h1 {
-        font-size: 3rem;
+        font-size: 2.5rem;
+        line-height: 1.2;
     }
 
     h2 {
-        font-size: 2rem;
+        font-size: 1.8rem;
+        line-height: 1.3;
     }
 
     .hero-subtitle {
-        font-size: 1.2rem;
+        font-size: 1.1rem;
+        line-height: 1.6;
     }
 
     .hero-logo {
-        max-width: 500px;
+        max-width: 400px;
     }
 
     body {
         font-size: 16px;
+        line-height: 1.7;
     }
 
     .section {
@@ -1390,34 +1394,96 @@ p {
         padding: 3rem 0;
     }
 
+    .hero {
+        padding: 4rem 0 3rem 0;
+    }
+
     .container,
     .container-wide {
-        padding: 0 1.5rem;
+        padding: 0 1.25rem;
     }
 
     p {
         text-align: left;
+        font-size: 0.95rem;
+    }
+
+    .divider {
+        margin: 1.5rem auto;
+    }
+
+    .paso-token {
+        padding: 3rem 0;
     }
 
     .paso-intro {
         grid-template-columns: 1fr;
         gap: 2rem;
+        text-align: center;
+    }
+
+    .paso-token-image {
+        display: flex;
+        justify-content: center;
     }
 
     .paso-token-image img {
-        max-width: 300px;
+        max-width: 280px;
+    }
+
+    .paso-description {
+        text-align: left;
+    }
+
+    .paso-description p {
+        font-size: 0.95rem;
+        line-height: 1.7;
     }
 
     .paso-actions {
-        padding: 2rem 1.5rem;
+        padding: 2rem 1.25rem;
     }
 
     .action-section {
         flex: 1 1 100%;
+        padding: 1.5rem;
     }
 
     .paso-header {
-        font-size: 1.8rem;
+        font-size: 1.6rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .phase-card {
+        padding: 1.5rem;
+    }
+
+    .phase-card h4 {
+        font-size: 1.2rem;
+    }
+
+    .phase-card p {
+        font-size: 0.9rem;
+    }
+
+    .about {
+        padding: 3rem 0;
+    }
+
+    .tagline-emphasis {
+        font-size: 1.3rem;
+        line-height: 1.5;
+        margin-top: 1.5rem;
+    }
+
+    .el-paso-verse {
+        padding: 3rem 0;
+    }
+
+    .el-paso-verse p {
+        font-size: 1rem;
+        line-height: 1.8;
+        margin-bottom: 1.25rem;
     }
 
     .vision-content {
@@ -1427,6 +1493,7 @@ p {
     .vision-content p {
         text-align: left;
         font-size: 1rem;
+        line-height: 1.8;
     }
 
     .vision-lead {
@@ -1438,8 +1505,9 @@ p {
     }
 
     .vision-read-more {
-        padding: 0.7rem 1.5rem;
+        padding: 0.8rem 1.8rem;
         font-size: 0.95rem;
+        min-height: 48px;
     }
 
     .pillars-grid {
@@ -1448,34 +1516,55 @@ p {
     }
 
     .pillar-card {
-        min-height: 500px;
-        padding: 2rem;
+        min-height: 400px;
+        padding: 2rem 1.5rem;
+        background-size: cover;
+        background-position: center;
     }
 
     .pillar-text-box {
-        padding: 1.5rem;
+        padding: 1.5rem 1.25rem;
     }
 
     .pillar-text-box h3 {
-        font-size: 1.6rem;
+        font-size: 1.8rem;
+        margin-bottom: 0.5rem;
     }
 
     .pillar-subtitle {
-        font-size: 0.8rem;
+        font-size: 0.75rem;
+        margin-bottom: 1rem;
     }
 
     .pillar-description {
-        font-size: 0.9rem;
+        font-size: 0.95rem;
+        line-height: 1.7;
     }
 
-    .pillar-subtitle {
-        font-size: 0.65rem;
+    .collection {
+        padding: 3rem 0 4rem 0;
     }
 
     .collection h2 {
-        font-size: 2rem;
+        font-size: 1.8rem;
+        margin-bottom: 1rem;
     }
 
+    .collection-intro {
+        font-size: 1rem;
+        line-height: 1.7;
+        margin-bottom: 3rem;
+        padding: 0 0.5rem;
+    }
+
+    .films-gallery {
+        gap: 1.5rem;
+    }
+
+    .film-poster-card {
+        width: 100% !important;
+        max-width: 350px;
+    }
 
     .film-title {
         font-size: 1.6rem;
@@ -1485,24 +1574,86 @@ p {
     .film-frame-card {
         border-width: 6px;
     }
+
+    .cta-button {
+        padding: 0.9rem 2rem;
+        font-size: 0.95rem;
+        min-height: 48px;
+    }
+
+    .instagram-section {
+        padding: 3rem 0;
+    }
+
+    .instagram-section h2 {
+        font-size: 1.8rem;
+    }
+
+    .instagram-section p {
+        font-size: 0.95rem;
+        padding: 0 0.5rem;
+    }
 }
 
 @media (max-width: 480px) {
     h1 {
-        font-size: 2.2rem;
+        font-size: 2rem;
+        line-height: 1.2;
     }
 
     h2 {
-        font-size: 1.6rem;
+        font-size: 1.5rem;
+        line-height: 1.3;
     }
 
     .hero-subtitle {
-        font-size: 1rem;
+        font-size: 0.95rem;
+        line-height: 1.6;
+    }
+
+    .hero-logo {
+        max-width: 300px;
+    }
+
+    .container,
+    .container-wide {
+        padding: 0 1rem;
     }
 
     .cta-button {
-        padding: 0.8rem 2rem;
+        padding: 0.85rem 1.75rem;
         font-size: 0.9rem;
+        width: 100%;
+        max-width: 300px;
+    }
+
+    .tagline-emphasis {
+        font-size: 1.1rem;
+    }
+
+    .pillar-card {
+        min-height: 350px;
+        padding: 1.5rem 1rem;
+    }
+
+    .pillar-text-box {
+        padding: 1.25rem 1rem;
+    }
+
+    .pillar-text-box h3 {
+        font-size: 1.5rem;
+    }
+
+    .pillar-description {
+        font-size: 0.9rem;
+    }
+
+    .collection h2 {
+        font-size: 1.5rem;
+    }
+
+    .collection-intro {
+        font-size: 0.95rem;
     }
 
     .paso-token-image img {
@@ -1588,6 +1739,18 @@ p {
 
     .collection-cta {
         padding: 0.8rem 2rem;
+        font-size: 0.9rem;
+    }
+
+    .paso-token-image img {
+        max-width: 200px;
+    }
+
+    .instagram-section h2 {
+        font-size: 1.4rem;
+    }
+
+    .instagram-section p {
         font-size: 0.9rem;
     }
 }
