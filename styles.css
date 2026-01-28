@@ -538,6 +538,19 @@ p {
     font-style: italic;
 }
 
+.land-race-link {
+    color: #C9A961;
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 3px;
+    transition: all 0.3s ease;
+}
+
+.land-race-link:hover {
+    color: #D4A745;
+    text-decoration-thickness: 3px;
+}
+
 /* Collection Section */
 /* Motion Prints Section */
 .collection {
