@@ -1295,6 +1295,14 @@ p {
     border-radius: 50px;
     border: 2px solid #C9A961;
     box-shadow: 0 4px 12px rgba(139, 69, 19, 0.15);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.stat-badge:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(139, 69, 19, 0.25);
+    border-color: #D4A745;
 }
 
 .stat-number {
