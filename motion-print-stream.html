@@ -312,10 +312,10 @@
     <div id="accessGate" class="access-gate">
         <div class="gate-box">
             <h2>★ Exclusive Content ★</h2>
-            <p style="color: #e8dcc8; margin-bottom: 1rem;">Motion Print streaming is reserved for Genesis Collection NFT holders.</p>
-            <div class="gate-requirement">Requires: Genesis NFT</div>
+            <p style="color: #e8dcc8; margin-bottom: 1rem;">Motion Print streaming is reserved for Genesis Collection holders.</p>
+            <div class="gate-requirement">Requires: Genesis Collection</div>
             <p style="color: #d4c4a8; font-style: italic; font-size: 0.9rem; margin-bottom: 1.5rem;">
-                Connect your wallet in the Community Portal to verify NFT ownership.
+                Connect your wallet in the Community Portal to verify collection ownership.
             </p>
             <button class="gate-button" onclick="checkNFTAccess()">Verify Access</button>
             <button class="gate-button secondary" onclick="window.location.href='members.html'">Return to Portal</button>
@@ -348,7 +348,7 @@
         <div class="film-info">
             <h2>The Closed Screening Room</h2>
             <p style="color: #e8dcc8; line-height: 1.8; margin-bottom: 1rem;">
-                Welcome to the El Paso Verse closed screening room. As a Genesis Collection NFT holder, you have exclusive access to stream Motion Prints before they're released to the public. Each Motion Print is a one-of-one digital collectible featuring authentic Kodak motion picture film frames from El Paso Verse productions - shot on film stock and carefully preserved as individual moments of cinematic storytelling.
+                Welcome to the El Paso Verse closed screening room. As a Genesis Collection holder, you have exclusive access to stream Motion Prints before they're released to the public. Each Motion Print features authentic Kodak motion picture film frames from El Paso Verse productions—shot on film stock and carefully preserved as individual moments of cinematic storytelling.
             </p>
 
             <div class="film-info-grid">
@@ -366,7 +366,7 @@
                 </div>
                 <div class="info-item">
                     <div class="info-label">Exclusivity</div>
-                    <div class="info-value">NFT Holders Only</div>
+                    <div class="info-value">Genesis Collection Only</div>
                 </div>
             </div>
         </div>
@@ -409,7 +409,7 @@
             if (hasNFT) {
                 grantStreamAccess();
             } else {
-                alert('Please connect your wallet in the Community Portal to verify NFT ownership.\n\nGenesis Collection NFT holders have unlimited streaming access.');
+                alert('Please connect your wallet in the Community Portal to verify collection ownership.\n\nGenesis Collection holders have unlimited streaming access.');
                 window.location.href = 'members.html';
             }
         }
