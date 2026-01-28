@@ -569,155 +569,90 @@ p {
     margin: 0 0 3rem 0;
 }
 
-.film-project {
-    margin-bottom: 5rem;
-    background:
-        linear-gradient(to right, #0a0a0a 0%, #0a0a0a 20px, transparent 20px, transparent calc(100% - 20px), #0a0a0a calc(100% - 20px), #0a0a0a 100%);
-    padding: 3rem 40px;
-    position: relative;
-}
-
-/* Film perforations on sides */
-.film-project::before,
-.film-project::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    width: 20px;
-    background:
-        repeating-linear-gradient(
-            to bottom,
-            #0a0a0a 0px,
-            #0a0a0a 10px,
-            transparent 10px,
-            transparent 15px,
-            #0a0a0a 15px,
-            #0a0a0a 25px,
-            transparent 25px,
-            transparent 45px
-        );
-}
-
-.film-project::before {
-    left: 0;
-}
-
-.film-project::after {
-    right: 0;
-}
-
-.film-title {
-    color: #E8D7C3;
-    font-family: 'Playfair Display', Georgia, serif;
-    font-size: 1.8rem;
-    text-align: center;
-    margin-bottom: 2.5rem;
-    font-weight: 400;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.9);
-    position: relative;
-    z-index: 2;
-}
-
-.film-grid {
+/* Film Gallery - Festival Style */
+.films-gallery {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 3rem;
+    margin: 3rem 0;
     max-width: 1200px;
-    margin: 0 auto;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-.film-frame-card {
-    aspect-ratio: 1.66 / 1;
+.film-poster-card {
+    display: block;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.film-poster-card:hover {
+    transform: translateY(-10px);
+}
+
+.film-poster {
+    position: relative;
+    aspect-ratio: 2 / 3;
     background-size: cover;
     background-position: center;
-    background-repeat: no-repeat;
-    border: 8px solid #1a1a1a;
-    box-shadow:
-        0 6px 20px rgba(0, 0, 0, 0.9),
-        inset 0 0 40px rgba(0, 0, 0, 0.4),
-        inset 0 0 0 1px rgba(201, 169, 97, 0.1);
-    transition: all 0.3s ease;
-    position: relative;
+    border: 4px solid #C9A961;
+    border-radius: 6px;
     overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+    transition: all 0.3s ease;
+    cursor: pointer;
 }
 
-/* Film grain overlay */
-.film-frame-card::before {
-    content: '';
+.film-poster:hover {
+    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.8), 0 0 30px rgba(201, 169, 97, 0.4);
+    border-color: #D4A745;
+}
+
+.film-overlay {
     position: absolute;
-    top: 0;
+    bottom: 0;
     left: 0;
     right: 0;
-    bottom: 0;
-    background-image:
-        repeating-linear-gradient(0deg, transparent, transparent 1px, rgba(0,0,0,0.05) 1px, rgba(0,0,0,0.05) 2px),
-        repeating-linear-gradient(90deg, transparent, transparent 1px, rgba(0,0,0,0.05) 1px, rgba(0,0,0,0.05) 2px);
-    pointer-events: none;
-    opacity: 0.6;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.85) 70%, transparent 100%);
+    padding: 2rem 1.5rem 1.5rem 1.5rem;
+    transform: translateY(0);
+    transition: all 0.3s ease;
 }
 
-/* KODAK edge code */
-.film-frame-card::after {
-    content: 'KODAK';
-    position: absolute;
-    bottom: 8px;
-    right: 10px;
-    font-size: 9px;
-    color: rgba(201, 169, 97, 0.4);
-    font-weight: 700;
-    letter-spacing: 2px;
-    font-family: 'Courier New', monospace;
-    text-shadow: 0 0 3px rgba(0, 0, 0, 0.9);
-    z-index: 2;
+.film-poster:hover .film-overlay {
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.98) 0%, rgba(0, 0, 0, 0.9) 70%, transparent 100%);
 }
 
-.film-frame-card:hover {
-    transform: translateY(-8px) scale(1.02);
-    box-shadow:
-        0 12px 35px rgba(0, 0, 0, 0.95),
-        0 0 30px rgba(201, 169, 97, 0.3),
-        inset 0 0 40px rgba(0, 0, 0, 0.4);
-    border-color: #2a2a2a;
+.film-poster-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.8rem;
+    color: #F5E6D3;
+    margin-bottom: 0.5rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
 }
 
-.film-frame-card:hover::after {
-    color: rgba(201, 169, 97, 0.7);
+.film-tagline {
+    color: #C9A961;
+    font-size: 1rem;
+    font-style: italic;
+    margin-bottom: 1rem;
+    line-height: 1.5;
 }
 
-/* Frame background images */
-.frame-1 {
-    background-image: url('assets/frame-1.png');
+.film-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    font-size: 0.85rem;
+    color: #a89178;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
 }
 
-.frame-2 {
-    background-image: url('assets/frame-2.png');
-}
-
-.frame-3 {
-    background-image: url('assets/frame-3.jpg');
-}
-
-.frame-4 {
-    background-image: url('assets/frame-4.png');
-}
-
-.sombra-1 {
-    background-image: url('assets/sombra-1.jpg');
-}
-
-.sombra-2 {
-    background-image: url('assets/sombra-2.jpg');
-}
-
-.sombra-3 {
-    background-image: url('assets/sombra-3.jpg');
-}
-
-.sombra-4 {
-    background-image: url('assets/sombra-4.jpg');
+.film-meta span {
+    display: block;
 }
 
 /* Collection action */
@@ -1513,19 +1448,17 @@ p {
         font-size: 2rem;
     }
 
-    .film-project {
-        padding: 2.5rem 30px;
-        margin-bottom: 4rem;
-    }
-
-    .film-project::before,
-    .film-project::after {
-        width: 15px;
-    }
-
-    .film-grid {
+    .films-gallery {
         grid-template-columns: repeat(2, 1fr);
-        gap: 1.5rem;
+        gap: 2rem;
+    }
+
+    .film-poster-title {
+        font-size: 1.5rem;
+    }
+
+    .film-tagline {
+        font-size: 0.9rem;
     }
 
     .film-title {
@@ -1622,22 +1555,12 @@ p {
         margin-bottom: 3rem;
     }
 
-    .film-project {
-        padding: 2rem 25px;
-        margin-bottom: 3rem;
-    }
-
-    .film-project::before,
-    .film-project::after {
-        width: 12px;
-    }
-
-    .film-grid {
+    .films-gallery {
         grid-template-columns: 1fr;
-        gap: 1.5rem;
+        gap: 2rem;
     }
 
-    .film-title {
+    .film-poster-title {
         font-size: 1.4rem;
         letter-spacing: 0.1em;
     }

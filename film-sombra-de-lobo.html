@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sombra de Lobo - The shadow of the wolf. El Paso Verse Motion Print.">
+    <title>Sombra de Lobo | El Paso Verse</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .film-detail-hero {
+            position: relative;
+            height: 70vh;
+            min-height: 500px;
+            background-image: url('assets/sombra-1.jpg');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: flex-end;
+        }
+
+        .film-detail-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.6) 50%, rgba(0, 0, 0, 0.3) 100%);
+        }
+
+        .film-detail-header {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+            width: 100%;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #C9A961;
+            text-decoration: none;
+            margin-bottom: 2rem;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: #D4A745;
+            transform: translateX(-5px);
+        }
+
+        .film-detail-title {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 3.5rem;
+            color: #F5E6D3;
+            margin-bottom: 1rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .film-detail-tagline {
+            font-size: 1.3rem;
+            color: #C9A961;
+            font-style: italic;
+            margin-bottom: 1.5rem;
+        }
+
+        .film-detail-meta {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            font-size: 0.9rem;
+            color: #a89178;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .film-detail-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .film-section {
+            margin-bottom: 4rem;
+        }
+
+        .film-section h3 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 2rem;
+            color: #3A2820;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .film-synopsis {
+            font-size: 1.1rem;
+            line-height: 1.9;
+            color: #3A2820;
+            max-width: 800px;
+        }
+
+        .film-synopsis p {
+            margin-bottom: 1.5rem;
+        }
+
+        .motion-prints-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .motion-print-card {
+            position: relative;
+            aspect-ratio: 1.66 / 1;
+            background-size: cover;
+            background-position: center;
+            border: 4px solid #C9A961;
+            border-radius: 6px;
+            overflow: hidden;
+            box-shadow: 0 6px 20px rgba(139, 69, 19, 0.25);
+            transition: all 0.3s ease;
+        }
+
+        .motion-print-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(139, 69, 19, 0.35);
+            border-color: #D4A745;
+        }
+
+        .motion-print-card::after {
+            content: 'KODAK';
+            position: absolute;
+            bottom: 10px;
+            right: 12px;
+            font-size: 10px;
+            color: rgba(201, 169, 97, 0.5);
+            font-weight: 700;
+            letter-spacing: 2px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .film-cta-section {
+            text-align: center;
+            padding: 3rem 2rem;
+            background: linear-gradient(135deg, #F5E6D3 0%, #EDD9C0 100%);
+            border-radius: 8px;
+            margin-top: 3rem;
+        }
+
+        .film-cta-section h4 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 1.8rem;
+            color: #3A2820;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .film-cta-section p {
+            color: #5a4a3a;
+            margin-bottom: 2rem;
+            font-size: 1.05rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        @media (max-width: 768px) {
+            .film-detail-title {
+                font-size: 2.5rem;
+            }
+
+            .film-detail-tagline {
+                font-size: 1.1rem;
+            }
+
+            .motion-prints-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Film Detail Hero -->
+    <section class="film-detail-hero">
+        <div class="film-detail-header">
+            <a href="index.html#collection" class="back-link">← Back to Films</a>
+            <h1 class="film-detail-title">Sombra de Lobo</h1>
+            <p class="film-detail-tagline">The shadow of the wolf</p>
+            <div class="film-detail-meta">
+                <span>1880 • El Paso Verse</span>
+                <span>Shot on Kodak Motion Picture Film</span>
+                <span>Limited Edition Collectibles</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Film Content -->
+    <div class="film-detail-content">
+        <!-- Synopsis -->
+        <section class="film-section">
+            <h3>Synopsis</h3>
+            <div class="film-synopsis">
+                <p>They call him <em>Sombra de Lobo</em>—the shadow of the wolf. A figure who moves through the borderlands like smoke, leaving no trace but the stories whispered in cantinas and around campfires.</p>
+
+                <p>In the harsh light of 1880, where the line between Mexico and the territories blurs in the desert heat, one man's legend becomes another's nightmare. Born from violence, shaped by the unforgiving land, he is both predator and protector—a ghost of the Old West that refuses to die.</p>
+
+                <p>Captured on authentic Kodak film stock, <strong>Sombra de Lobo</strong> is a haunting portrait of survival, identity, and the price of myth in a world that devours men whole.</p>
+            </div>
+        </section>
+
+        <!-- Motion Prints Collection -->
+        <section class="film-section">
+            <h3>Available Motion Prints</h3>
+            <p style="margin-bottom: 2rem; color: #5a4a3a;">Each frame is a one-of-one collectible—a single moment captured on authentic film stock. Every painting tells its own story.</p>
+
+            <div class="motion-prints-grid">
+                <div class="motion-print-card" style="background-image: url('assets/sombra-1.jpg');"></div>
+                <div class="motion-print-card" style="background-image: url('assets/sombra-2.jpg');"></div>
+                <div class="motion-print-card" style="background-image: url('assets/sombra-3.jpg');"></div>
+                <div class="motion-print-card" style="background-image: url('assets/sombra-4.jpg');"></div>
+            </div>
+        </section>
+
+        <!-- Call to Action -->
+        <section class="film-cta-section">
+            <h4>Own a Piece of the Frontier</h4>
+            <p>Limited 1-of-1 motion print collectibles from Sombra de Lobo are available now.</p>
+            <div class="cta-buttons">
+                <a href="https://book.io/series/el-paso-verse/" class="cta-button" target="_blank" rel="noopener noreferrer">View Collection on Book.io</a>
+                <a href="login.html" class="cta-button cta-button-secondary">Join Community Portal</a>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 El Paso Verse. A community-driven frontier.</p>
+            <p class="footer-credits">Produced by Kamara Studios</p>
+        </div>
+    </footer>
+</body>
+</html>
