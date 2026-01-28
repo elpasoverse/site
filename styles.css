@@ -571,17 +571,20 @@ p {
 
 /* Film Gallery - Clean Festival Style */
 .films-gallery {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    display: flex;
+    justify-content: center;
     gap: 2rem;
     margin: 3rem auto;
     max-width: 1200px;
+    flex-wrap: wrap;
 }
 
 .film-poster-card {
     display: block;
     text-decoration: none;
     transition: all 0.3s ease;
+    flex: 0 0 auto;
+    width: 300px;
 }
 
 .film-poster-card:hover {
@@ -638,18 +641,10 @@ p {
     margin-bottom: 0.15rem;
 }
 
-@media (max-width: 968px) {
-    .films-gallery {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1.5rem;
-    }
-}
-
 @media (max-width: 640px) {
-    .films-gallery {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-        max-width: 400px;
+    .film-poster-card {
+        width: 100%;
+        max-width: 350px;
     }
 }
 
