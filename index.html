@@ -405,6 +405,56 @@
                 button.textContent = 'Reveal More';
             }
         }
+
+        // Parallax Scrolling Effect
+        function initParallax() {
+            const parallaxSections = document.querySelectorAll('.about, .el-paso-verse');
+
+            // Disable fixed background attachment (doesn't work well in Safari/mobile)
+            parallaxSections.forEach(section => {
+                section.style.backgroundAttachment = 'scroll';
+            });
+
+            let ticking = false;
+
+            function updateParallax() {
+                parallaxSections.forEach(section => {
+                    const rect = section.getBoundingClientRect();
+                    const scrolled = window.pageYOffset || document.documentElement.scrollTop;
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.offsetHeight;
+
+                    // Only apply parallax when section is in viewport
+                    if (rect.top < window.innerHeight && rect.bottom > 0) {
+                        // Calculate parallax offset (slower movement = more dramatic effect)
+                        const yPos = -(scrolled - sectionTop) * 0.5;
+                        section.style.backgroundPosition = `center ${yPos}px`;
+                    }
+                });
+
+                ticking = false;
+            }
+
+            function requestTick() {
+                if (!ticking) {
+                    window.requestAnimationFrame(updateParallax);
+                    ticking = true;
+                }
+            }
+
+            // Listen for scroll events
+            window.addEventListener('scroll', requestTick, { passive: true });
+
+            // Initial call
+            updateParallax();
+        }
+
+        // Initialize parallax when DOM is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initParallax);
+        } else {
+            initParallax();
+        }
     </script>
 </body>
 </html>
