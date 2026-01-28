@@ -356,10 +356,10 @@ p {
 /* About Section */
 .about {
     background-image: url('assets/canyon-background.jpg');
-    background-size: 120%;
-    background-position: center 50%;
+    background-size: cover;
+    background-position: center center;
     background-repeat: no-repeat;
-    background-attachment: scroll;
+    background-attachment: fixed;
     position: relative;
 }
 
@@ -502,10 +502,10 @@ p {
 /* El Paso Verse Land Section */
 .el-paso-verse {
     background-image: url('assets/land-bg-new.png');
-    background-size: 120%;
-    background-position: center 50%;
+    background-size: cover;
+    background-position: center center;
     background-repeat: no-repeat;
-    background-attachment: scroll;
+    background-attachment: fixed;
     position: relative;
 }
 
@@ -1468,6 +1468,8 @@ p {
 
     .about {
         padding: 3rem 0;
+        background-attachment: scroll;
+        background-size: cover;
     }
 
     .tagline-emphasis {
@@ -1478,6 +1480,8 @@ p {
 
     .el-paso-verse {
         padding: 3rem 0;
+        background-attachment: scroll;
+        background-size: cover;
     }
 
     .el-paso-verse p {

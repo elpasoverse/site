@@ -451,66 +451,8 @@
             }
         }
 
-        // Parallax Scrolling Effect
-        function initParallax() {
-            const parallaxSections = document.querySelectorAll('.about, .el-paso-verse');
-
-            // Set up larger background size to prevent gaps
-            parallaxSections.forEach(section => {
-                section.style.backgroundAttachment = 'scroll';
-                section.style.backgroundSize = '120%';  // Larger to allow movement
-            });
-
-            let ticking = false;
-
-            function updateParallax() {
-                parallaxSections.forEach(section => {
-                    const rect = section.getBoundingClientRect();
-                    const scrolled = window.pageYOffset || document.documentElement.scrollTop;
-                    const sectionTop = section.offsetTop;
-                    const sectionHeight = section.offsetHeight;
-                    const windowHeight = window.innerHeight;
-
-                    // Only apply parallax when section is in or near viewport
-                    if (rect.top < windowHeight && rect.bottom > 0) {
-                        // Calculate scroll progress through the section
-                        // Range from -windowHeight to +sectionHeight
-                        const scrollRange = windowHeight + sectionHeight;
-                        const scrollProgress = (scrolled + windowHeight - sectionTop) / scrollRange;
-
-                        // Calculate parallax offset with constrained range
-                        // Move from 40% to 60% (centered at 50%) to prevent gaps
-                        const yPercent = 40 + (scrollProgress * 20);
-                        const clampedPercent = Math.max(40, Math.min(60, yPercent));
-
-                        section.style.backgroundPosition = `center ${clampedPercent}%`;
-                    }
-                });
-
-                ticking = false;
-            }
-
-            function requestTick() {
-                if (!ticking) {
-                    window.requestAnimationFrame(updateParallax);
-                    ticking = true;
-                }
-            }
-
-            // Listen for scroll events
-            window.addEventListener('scroll', requestTick, { passive: true });
-            window.addEventListener('resize', requestTick, { passive: true });
-
-            // Initial call
-            updateParallax();
-        }
-
-        // Initialize parallax when DOM is ready
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', initParallax);
-        } else {
-            initParallax();
-        }
+        // Parallax is now handled by CSS background-attachment: fixed
+        // This provides smooth, hardware-accelerated parallax scrolling
     </script>
 </body>
 </html>
