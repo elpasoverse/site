@@ -12,11 +12,14 @@
 
 html {
     scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 body {
     font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
     background: #f4ead5;
+    overflow-x: hidden;
     background-image:
         repeating-linear-gradient(0deg, transparent, transparent 1px, rgba(139, 69, 19, 0.015) 1px, rgba(139, 69, 19, 0.015) 2px),
         repeating-linear-gradient(90deg, transparent, transparent 1px, rgba(139, 69, 19, 0.015) 1px, rgba(139, 69, 19, 0.015) 2px),
@@ -337,12 +340,16 @@ p {
 
 /* About Section */
 .about {
-    background-image: url('assets/about-bg.png');
+    background-image: url('assets/canyon-background.jpg');
     background-size: cover;
-    background-position: center;
+    background-position: center center;
     background-repeat: no-repeat;
-    background-attachment: fixed;
+    background-attachment: scroll;
     position: relative;
+    will-change: transform;
+    transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
 }
 
 .about::before {
@@ -352,7 +359,7 @@ p {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(237, 217, 192, 0.75);
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.4) 0%, rgba(237, 217, 192, 0.85) 100%);
     z-index: 1;
 }
 
@@ -504,8 +511,12 @@ p {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    background-attachment: fixed;
+    background-attachment: scroll;
     position: relative;
+    will-change: transform;
+    transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
 }
 
 .el-paso-verse::before {
