@@ -8,6 +8,44 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <!-- Email Capture Modal -->
+    <div id="emailModal" class="email-modal">
+        <div class="email-modal-content">
+            <button class="email-modal-close" onclick="closeEmailModal()">&times;</button>
+
+            <div class="email-modal-header">
+                <img src="assets/paso-token.png" alt="PASO Coin" style="width: 100px; height: 100px; margin: 0 auto 1rem; display: block;">
+                <h2 style="font-family: 'Playfair Display', Georgia, serif; font-size: 2.2rem; color: #3A2820; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.5rem; font-weight: 900;">Claim Your PASO</h2>
+                <p style="color: #8B4513; font-size: 1.1rem; font-style: italic; margin-bottom: 0;">Join the founding pioneers</p>
+            </div>
+
+            <div class="email-modal-divider"></div>
+
+            <div class="email-modal-body">
+                <p style="color: #3A2820; font-size: 1rem; line-height: 1.8; margin-bottom: 1.5rem; text-align: center;">
+                    Be the first to know about the 1880 frontier. Get <strong style="color: #8B4513;">25 PASO coins</strong> just for joining our community.
+                </p>
+
+                <form id="emailCaptureForm" onsubmit="submitEmail(event)" style="width: 100%;">
+                    <input
+                        type="email"
+                        id="emailInput"
+                        placeholder="Enter your email address"
+                        required
+                        class="email-input"
+                    />
+                    <button type="submit" class="email-submit-btn">
+                        Claim 25 PASO Coins →
+                    </button>
+                </form>
+
+                <p style="color: #999; font-size: 0.85rem; margin-top: 1.5rem; text-align: center; line-height: 1.5;">
+                    Get exclusive updates on film releases, collectible drops, and early access to the physical frontier destination.
+                </p>
+            </div>
+        </div>
+    </div>
+
     <!-- Hero Section -->
     <section id="hero" class="section hero">
         <div class="container">
@@ -15,7 +53,10 @@
             <img src="assets/epv-logo-white.png" alt="El Paso Verse" class="hero-logo">
             <p class="hero-subtitle">Adventure into 1880</p>
             <div class="ornament-bottom"></div>
-            <a href="#about" class="cta-button">Explore the Frontier</a>
+            <div style="display: flex; gap: 1.5rem; justify-content: center; align-items: center; flex-wrap: wrap; margin-top: 2rem;">
+                <a href="#about" class="cta-button">Explore the Frontier</a>
+                <a href="login.html" class="cta-button cta-button-secondary">Enter Community Portal</a>
+            </div>
         </div>
     </section>
 
@@ -256,6 +297,73 @@
 
     <!-- JavaScript -->
     <script>
+        // Email Capture Modal Functions
+        function showEmailModal() {
+            // Check if user has already submitted email
+            const emailSubmitted = localStorage.getItem('emailSubmitted');
+            if (!emailSubmitted) {
+                document.getElementById('emailModal').classList.add('show');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function closeEmailModal() {
+            document.getElementById('emailModal').classList.remove('show');
+            document.body.style.overflow = 'auto';
+        }
+
+        function submitEmail(event) {
+            event.preventDefault();
+
+            const email = document.getElementById('emailInput').value;
+
+            // Store email submission (in production, send to your backend/email service)
+            console.log('Email captured:', email);
+
+            // Mark as submitted
+            localStorage.setItem('emailSubmitted', 'true');
+            localStorage.setItem('userEmail', email);
+
+            // Show success message
+            const modalContent = document.querySelector('.email-modal-body');
+            modalContent.innerHTML = `
+                <div style="text-align: center; padding: 2rem 0;">
+                    <div style="font-size: 4rem; margin-bottom: 1rem;">✓</div>
+                    <h3 style="font-family: 'Playfair Display', Georgia, serif; font-size: 1.8rem; color: #2d8a2d; margin-bottom: 1rem; font-weight: 900;">Welcome, Pioneer!</h3>
+                    <p style="color: #3A2820; font-size: 1.1rem; line-height: 1.8; margin-bottom: 1.5rem;">
+                        <strong>25 PASO coins</strong> have been reserved for you.
+                    </p>
+                    <p style="color: #8B4513; font-size: 0.95rem; line-height: 1.6;">
+                        Check your email for next steps to claim your coins and join the founding community.
+                    </p>
+                    <button onclick="closeEmailModal()" style="margin-top: 2rem; padding: 1rem 2rem; background: #C9A961; color: #1a1a1a; border: none; border-radius: 6px; font-weight: 700; cursor: pointer; text-transform: uppercase; letter-spacing: 0.05em;">
+                        Continue to El Paso Verse →
+                    </button>
+                </div>
+            `;
+
+            // TODO: In production, integrate with your email service provider
+            // Example: Mailchimp, ConvertKit, Sendinblue, etc.
+            // fetch('/api/subscribe', {
+            //     method: 'POST',
+            //     headers: { 'Content-Type': 'application/json' },
+            //     body: JSON.stringify({ email: email })
+            // });
+        }
+
+        // Show modal 2 seconds after page load
+        window.addEventListener('load', function() {
+            setTimeout(showEmailModal, 2000);
+        });
+
+        // Close modal when clicking outside
+        document.addEventListener('click', function(event) {
+            const modal = document.getElementById('emailModal');
+            if (event.target === modal) {
+                closeEmailModal();
+            }
+        });
+
         function toggleVision() {
             const moreText = document.getElementById('visionMore');
             const button = document.getElementById('visionReadMore');
