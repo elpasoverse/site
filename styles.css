@@ -1691,7 +1691,7 @@ p {
 
     .container,
     .container-wide {
-        padding: 0 1.25rem;
+        padding: 0 1.75rem;
     }
 
     p {
@@ -1715,6 +1715,7 @@ p {
     .paso-token .container {
         max-width: 100%;
         overflow-x: hidden;
+        padding: 0 1.75rem;
     }
 
     .paso-intro {
@@ -1743,12 +1744,12 @@ p {
     }
 
     .paso-actions {
-        padding: 2rem 1.25rem;
+        padding: 2rem 1.75rem;
     }
 
     .action-section {
         flex: 1 1 100%;
-        padding: 1.5rem;
+        padding: 1.75rem;
     }
 
     .paso-header {
@@ -1878,7 +1879,7 @@ p {
         font-size: 1rem;
         line-height: 1.7;
         margin-bottom: 3rem;
-        padding: 0 0.5rem;
+        padding: 0 1rem;
     }
 
     .films-gallery {
@@ -1922,7 +1923,7 @@ p {
 
     .instagram-section p {
         font-size: 0.95rem;
-        padding: 0 0.5rem;
+        padding: 0 1rem;
     }
 }
 
@@ -1939,13 +1940,14 @@ p {
 
     .hero-portal-link {
         top: 1rem;
-        right: 1rem;
+        right: 1.5rem;
         font-size: 0.85rem;
     }
 
     .hero-subtitle {
         font-size: 0.95rem;
         line-height: 1.6;
+        padding: 0 0.5rem;
     }
 
     .hero-logo {
@@ -1954,7 +1956,7 @@ p {
 
     .container,
     .container-wide {
-        padding: 0 1rem;
+        padding: 0 1.5rem;
     }
 
     .cta-button {
@@ -1970,11 +1972,11 @@ p {
 
     .pillar-card {
         min-height: 350px;
-        padding: 1.5rem 1rem;
+        padding: 1.5rem 1.25rem;
     }
 
     .pillar-text-box {
-        padding: 1.5rem 1.25rem;
+        padding: 1.5rem 1.5rem;
     }
 
     .pillar-text-box::before,
