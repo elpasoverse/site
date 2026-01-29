@@ -135,26 +135,57 @@
         }
 
         .motion-prints-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-            max-width: 900px;
+            display: flex;
+            gap: 0;
+            max-width: 100%;
+            overflow-x: auto;
+            background: #1a1a1a;
+            padding: 1.5rem 0;
+            position: relative;
+        }
+
+        .motion-prints-grid::before,
+        .motion-prints-grid::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            height: 1.5rem;
+            background: repeating-linear-gradient(
+                to right,
+                #1a1a1a 0px,
+                #1a1a1a 8px,
+                transparent 8px,
+                transparent 12px,
+                #1a1a1a 12px,
+                #1a1a1a 20px
+            );
+        }
+
+        .motion-prints-grid::before {
+            top: 0;
+        }
+
+        .motion-prints-grid::after {
+            bottom: 0;
         }
 
         .motion-print-card {
             position: relative;
+            flex: 0 0 250px;
             aspect-ratio: 1.66 / 1;
             background-size: cover;
             background-position: center;
-            border-radius: 6px;
+            border-right: 2px solid #1a1a1a;
             overflow: hidden;
-            box-shadow: 0 6px 20px rgba(139, 69, 19, 0.25);
-            transition: all 0.3s ease;
         }
 
-        .motion-print-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(139, 69, 19, 0.35);
+        .motion-print-card:first-child {
+            border-left: none;
+        }
+
+        .motion-print-card:last-child {
+            border-right: none;
         }
 
         .motion-print-card::after {
@@ -229,11 +260,39 @@
             }
 
             .motion-prints-grid {
-                grid-template-columns: 1fr;
+                padding: 1rem 0;
+            }
+
+            .motion-print-card {
+                flex: 0 0 180px;
             }
 
             .film-info {
                 padding-top: 2rem;
+            }
+
+            /* Motion Prints Section - Mobile */
+            section[style*="background: linear-gradient(180deg, #2d221a"] {
+                padding: 2.5rem 1rem !important;
+            }
+
+            section[style*="background: linear-gradient(180deg, #2d221a"] h3 {
+                font-size: 1.8rem !important;
+                margin-bottom: 0.75rem !important;
+            }
+
+            section[style*="background: linear-gradient(180deg, #2d221a"] p {
+                font-size: 0.9rem !important;
+                margin-bottom: 2rem !important;
+            }
+
+            section[style*="background: linear-gradient(180deg, #2d221a"] .motion-prints-grid {
+                margin-bottom: 1.5rem !important;
+            }
+
+            section[style*="background: linear-gradient(180deg, #2d221a"] div[style*="padding: 1.25rem"] {
+                padding: 1rem 1rem !important;
+                font-size: 0.8rem !important;
             }
         }
     </style>
