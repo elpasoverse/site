@@ -1,123 +1,236 @@
 /**
  * El Paso Verse Community Authentication System
- * Simple password-based authentication with localStorage session management
+ * Firebase Email + Password authentication with persistent sessions
  */
 
-// Community password - Change this to your desired password
-const COMMUNITY_PASSWORD = 'frontier1880';
-
-// Session storage key
+// Session storage keys (for backwards compatibility during transition)
 const SESSION_KEY = 'elPasoMember';
 const USER_ID_KEY = 'elPasoUserId';
 
+// Track current user state
+let currentUser = null;
+let authStateReady = false;
+let authStateCallbacks = [];
+
 /**
- * Attempt to log in with provided password
- * @param {string} password - The password to validate
- * @returns {boolean} - True if login successful, false otherwise
+ * Sign up a new user with email and password
+ * @param {string} email - User's email address
+ * @param {string} password - User's password
+ * @returns {Promise<{success: boolean, error?: string}>}
  */
-function attemptLogin(password) {
-    if (password === COMMUNITY_PASSWORD) {
-        // Generate a unique user ID if doesn't exist
-        let userId = localStorage.getItem(USER_ID_KEY);
-        if (!userId) {
-            userId = generateUserId();
-            localStorage.setItem(USER_ID_KEY, userId);
+async function signUp(email, password) {
+    if (!auth) {
+        return { success: false, error: 'Firebase not configured. Please contact the administrator.' };
+    }
+
+    try {
+        const userCredential = await auth.createUserWithEmailAndPassword(email, password);
+        currentUser = userCredential.user;
+
+        // Store user ID for legacy compatibility
+        localStorage.setItem(USER_ID_KEY, currentUser.uid);
+
+        return { success: true };
+    } catch (error) {
+        let errorMessage = 'An error occurred during sign up.';
+
+        switch (error.code) {
+            case 'auth/email-already-in-use':
+                errorMessage = 'This email is already registered. Please sign in instead.';
+                break;
+            case 'auth/invalid-email':
+                errorMessage = 'Please enter a valid email address.';
+                break;
+            case 'auth/weak-password':
+                errorMessage = 'Password should be at least 6 characters.';
+                break;
+            case 'auth/operation-not-allowed':
+                errorMessage = 'Email/password accounts are not enabled. Please contact the administrator.';
+                break;
         }
 
-        // Create session token
-        const sessionToken = {
-            authenticated: true,
-            loginTime: new Date().toISOString(),
-            userId: userId
-        };
-
-        // Store session
-        localStorage.setItem(SESSION_KEY, JSON.stringify(sessionToken));
-        return true;
+        return { success: false, error: errorMessage };
     }
-    return false;
 }
 
 /**
- * Check if user is currently authenticated
- * @returns {boolean} - True if authenticated, false otherwise
+ * Sign in an existing user with email and password
+ * @param {string} email - User's email address
+ * @param {string} password - User's password
+ * @returns {Promise<{success: boolean, error?: string}>}
  */
-function isAuthenticated() {
-    const session = localStorage.getItem(SESSION_KEY);
-    if (!session) {
-        return false;
+async function signIn(email, password) {
+    if (!auth) {
+        return { success: false, error: 'Firebase not configured. Please contact the administrator.' };
     }
 
     try {
-        const sessionData = JSON.parse(session);
-        return sessionData.authenticated === true;
-    } catch (e) {
-        return false;
+        const userCredential = await auth.signInWithEmailAndPassword(email, password);
+        currentUser = userCredential.user;
+
+        // Store user ID for legacy compatibility
+        localStorage.setItem(USER_ID_KEY, currentUser.uid);
+
+        return { success: true };
+    } catch (error) {
+        let errorMessage = 'An error occurred during sign in.';
+
+        switch (error.code) {
+            case 'auth/invalid-email':
+                errorMessage = 'Please enter a valid email address.';
+                break;
+            case 'auth/user-disabled':
+                errorMessage = 'This account has been disabled. Please contact the administrator.';
+                break;
+            case 'auth/user-not-found':
+                errorMessage = 'No account found with this email. Please sign up first.';
+                break;
+            case 'auth/wrong-password':
+                errorMessage = 'Incorrect password. Please try again.';
+                break;
+            case 'auth/invalid-credential':
+                errorMessage = 'Invalid email or password. Please try again.';
+                break;
+            case 'auth/too-many-requests':
+                errorMessage = 'Too many failed attempts. Please try again later.';
+                break;
+        }
+
+        return { success: false, error: errorMessage };
     }
 }
 
 /**
- * Get current user ID
- * @returns {string|null} - User ID or null if not authenticated
+ * Send a password reset email
+ * @param {string} email - User's email address
+ * @returns {Promise<{success: boolean, error?: string}>}
  */
-function getCurrentUserId() {
-    const userId = localStorage.getItem(USER_ID_KEY);
-    return userId || null;
-}
-
-/**
- * Get session data
- * @returns {object|null} - Session object or null
- */
-function getSession() {
-    const session = localStorage.getItem(SESSION_KEY);
-    if (!session) {
-        return null;
+async function sendPasswordReset(email) {
+    if (!auth) {
+        return { success: false, error: 'Firebase not configured. Please contact the administrator.' };
     }
 
     try {
-        return JSON.parse(session);
-    } catch (e) {
-        return null;
+        await auth.sendPasswordResetEmail(email);
+        return { success: true };
+    } catch (error) {
+        let errorMessage = 'An error occurred sending the reset email.';
+
+        switch (error.code) {
+            case 'auth/invalid-email':
+                errorMessage = 'Please enter a valid email address.';
+                break;
+            case 'auth/user-not-found':
+                errorMessage = 'No account found with this email address.';
+                break;
+        }
+
+        return { success: false, error: errorMessage };
     }
 }
 
 /**
  * Log out current user
  */
-function logout() {
+async function logout() {
+    if (auth) {
+        try {
+            await auth.signOut();
+        } catch (error) {
+            console.error('Error signing out:', error);
+        }
+    }
+
+    // Clear legacy session data
     localStorage.removeItem(SESSION_KEY);
-    // Keep USER_ID_KEY so user maintains same ID if they log back in
+    currentUser = null;
+
     window.location.href = 'login.html';
+}
+
+/**
+ * Check if user is currently authenticated
+ * @returns {boolean}
+ */
+function isAuthenticated() {
+    return currentUser !== null;
+}
+
+/**
+ * Wait for auth state to be ready, then check authentication
+ * @returns {Promise<boolean>}
+ */
+function waitForAuthState() {
+    return new Promise((resolve) => {
+        if (authStateReady) {
+            resolve(isAuthenticated());
+        } else {
+            authStateCallbacks.push(resolve);
+        }
+    });
+}
+
+/**
+ * Get current user ID
+ * @returns {string|null}
+ */
+function getCurrentUserId() {
+    if (currentUser) {
+        return currentUser.uid;
+    }
+    return localStorage.getItem(USER_ID_KEY);
+}
+
+/**
+ * Get current user's email
+ * @returns {string|null}
+ */
+function getCurrentUserEmail() {
+    return currentUser ? currentUser.email : null;
+}
+
+/**
+ * Get session data (for backwards compatibility)
+ * @returns {object|null}
+ */
+function getSession() {
+    if (!currentUser) {
+        return null;
+    }
+
+    return {
+        authenticated: true,
+        userId: currentUser.uid,
+        email: currentUser.email
+    };
 }
 
 /**
  * Require authentication - redirect to login if not authenticated
  * Call this function at the top of member-only pages
  */
-function requireAuth() {
-    if (!isAuthenticated()) {
+async function requireAuth() {
+    const authenticated = await waitForAuthState();
+    if (!authenticated) {
         window.location.href = 'login.html';
     }
 }
 
 /**
- * Generate a unique user ID
- * @returns {string} - Unique user identifier
- */
-function generateUserId() {
-    return 'user_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
-}
-
-/**
  * Get user display name (for submissions and comments)
- * @returns {string} - User's display name
+ * @returns {string}
  */
 function getUserDisplayName() {
     // Check if user has set a custom name
     const customName = localStorage.getItem('userDisplayName');
     if (customName) {
         return customName;
+    }
+
+    // Use email prefix if available
+    if (currentUser && currentUser.email) {
+        const emailPrefix = currentUser.email.split('@')[0];
+        return emailPrefix;
     }
 
     // Generate anonymous name based on user ID
@@ -141,10 +254,39 @@ function setUserDisplayName(name) {
 }
 
 /**
+ * Initialize Firebase Auth state observer
+ */
+function initAuthObserver() {
+    if (!auth) {
+        // Firebase not configured, mark auth as ready (not authenticated)
+        authStateReady = true;
+        authStateCallbacks.forEach(callback => callback(false));
+        authStateCallbacks = [];
+        return;
+    }
+
+    auth.onAuthStateChanged((user) => {
+        currentUser = user;
+        authStateReady = true;
+
+        if (user) {
+            // Store user ID for legacy compatibility
+            localStorage.setItem(USER_ID_KEY, user.uid);
+        }
+
+        // Resolve any waiting callbacks
+        authStateCallbacks.forEach(callback => callback(user !== null));
+        authStateCallbacks = [];
+    });
+}
+
+/**
  * Initialize authentication check for member pages
- * Automatically runs when script loads
  */
 (function initAuth() {
+    // Initialize the auth observer
+    initAuthObserver();
+
     // Only run auth check on member pages (not on login page)
     const currentPage = window.location.pathname.split('/').pop();
     const publicPages = ['index.html', 'login.html', ''];

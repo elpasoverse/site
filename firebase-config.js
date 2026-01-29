@@ -5,10 +5,11 @@
  * ===================
  * 1. Go to https://console.firebase.google.com/
  * 2. Click "Add project" and create a new project named "El Paso Verse Community"
- * 3. Once created, click the web icon (</>  ) to add Firebase to your web app
+ * 3. Once created, click the web icon (</>) to add Firebase to your web app
  * 4. Register your app with a nickname like "El Paso Community Portal"
  * 5. Copy the configuration object provided and replace the values below
  * 6. In the Firebase Console, enable these services:
+ *    - Authentication: Go to Authentication > Sign-in method > Enable "Email/Password"
  *    - Firestore Database: Click "Create database" in Firestore Database
  *      - Start in "test mode" for development (can secure later)
  *    - Storage: Click "Get started" in Storage
@@ -29,7 +30,7 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-let app, db, storage;
+let app, db, storage, auth;
 
 try {
     // Check if Firebase SDK is loaded and config is valid
@@ -38,20 +39,23 @@ try {
         app = firebase.initializeApp(firebaseConfig);
         db = firebase.firestore();
         storage = firebase.storage();
+        auth = firebase.auth();
 
         console.log('Firebase initialized successfully');
     } else {
         console.warn('Firebase not configured - running in demo mode');
         db = null;
         storage = null;
+        auth = null;
     }
 } catch (error) {
     console.error('Error initializing Firebase:', error);
     db = null;
     storage = null;
+    auth = null;
 }
 
 // Export for use in other scripts
 if (typeof module !== 'undefined' && module.exports) {
-    module.exports = { app, db, storage };
+    module.exports = { app, db, storage, auth };
 }
