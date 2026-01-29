@@ -1073,11 +1073,14 @@ p {
     .paso-phases {
         grid-template-columns: 1fr;
         gap: 2rem;
-        padding: 0 1rem;
+        padding: 0;
+        max-width: 100%;
     }
 
     .phase-card {
         padding: 2rem 1.5rem 1.75rem 1.5rem;
+        max-width: 100%;
+        box-sizing: border-box;
     }
 
     .phase-card h4 {
@@ -1091,6 +1094,19 @@ p {
     .phase-number {
         font-size: 0.7rem;
         padding: 0.45rem 1.2rem;
+    }
+
+    .paso-intro {
+        max-width: 100%;
+    }
+
+    .paso-description {
+        max-width: 100%;
+    }
+
+    .paso-description p {
+        word-wrap: break-word;
+        overflow-wrap: break-word;
     }
 }
 
@@ -1693,12 +1709,19 @@ p {
         display: flex;
         align-items: center;
         justify-content: center;
+        overflow-x: hidden;
+    }
+
+    .paso-token .container {
+        max-width: 100%;
+        overflow-x: hidden;
     }
 
     .paso-intro {
         grid-template-columns: 1fr;
         gap: 2rem;
         text-align: center;
+        max-width: 100%;
     }
 
     .paso-token-image {
