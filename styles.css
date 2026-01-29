@@ -247,7 +247,8 @@ p {
 
 .vision-content p em {
     font-style: italic;
-    color: #8B4513;
+    color: #3A2820;
+    font-weight: 700;
 }
 
 .vision-content p strong {
