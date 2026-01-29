@@ -360,7 +360,7 @@ p {
     text-decoration: none;
     font-size: 1rem;
     letter-spacing: 0.1em;
-    font-weight: 400;
+    font-weight: 700;
     text-transform: uppercase;
     transition: all 0.3s ease;
 }
@@ -1385,7 +1385,7 @@ p {
     border: 2px solid #C9A961;
     text-decoration: none;
     font-size: 1rem;
-    font-weight: 400;
+    font-weight: 700;
     letter-spacing: 0.1em;
     text-transform: uppercase;
     transition: all 0.3s ease;
