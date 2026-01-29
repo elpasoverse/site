@@ -1661,12 +1661,16 @@ p {
     }
 
     .section {
-        min-height: auto;
-        padding: 5rem 0;
+        min-height: 100vh;
+        padding: 3rem 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     .hero {
-        padding: 4rem 0 3rem 0;
+        min-height: 100vh;
+        padding: 2rem 0;
     }
 
     .container,
@@ -1684,7 +1688,11 @@ p {
     }
 
     .paso-token {
+        min-height: 100vh;
         padding: 3rem 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     .paso-intro {
@@ -1738,9 +1746,13 @@ p {
     }
 
     .about {
+        min-height: 100vh;
         padding: 3rem 0;
         background-attachment: scroll;
         background-size: cover;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     .tagline-emphasis {
@@ -1750,9 +1762,13 @@ p {
     }
 
     .el-paso-verse {
+        min-height: 100vh;
         padding: 3rem 0;
         background-attachment: scroll;
         background-size: cover;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     .el-paso-verse p {
@@ -1823,7 +1839,11 @@ p {
     }
 
     .collection {
+        min-height: 100vh;
         padding: 3rem 0 4rem 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     .collection h2 {
@@ -1866,7 +1886,11 @@ p {
     }
 
     .instagram-section {
+        min-height: 100vh;
         padding: 3rem 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     .instagram-section h2 {
