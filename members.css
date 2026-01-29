@@ -752,3 +752,250 @@
         right: 10px;
     }
 }
+
+/* ===================================
+   Account Dropdown & Settings
+   =================================== */
+
+.account-dropdown {
+    position: relative;
+}
+
+.account-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: transparent;
+    border: 1px solid #C9A961;
+    color: #F5E6D3;
+    padding: 0.5rem 1rem;
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.account-btn:hover {
+    background: rgba(201, 169, 97, 0.2);
+}
+
+.account-btn svg {
+    transition: transform 0.3s ease;
+}
+
+.account-dropdown.open .account-btn svg {
+    transform: rotate(180deg);
+}
+
+.account-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    margin-top: 0.5rem;
+    background: #3A2820;
+    border: 1px solid #C9A961;
+    min-width: 180px;
+    z-index: 100;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.account-dropdown.open .account-menu {
+    display: block;
+}
+
+.account-menu button {
+    display: block;
+    width: 100%;
+    padding: 0.75rem 1rem;
+    background: transparent;
+    border: none;
+    color: #F5E6D3;
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 0.9rem;
+    text-align: left;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.account-menu button:hover {
+    background: rgba(201, 169, 97, 0.2);
+}
+
+.account-menu button:not(:last-child) {
+    border-bottom: 1px solid rgba(201, 169, 97, 0.3);
+}
+
+/* Account Settings Modal */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-overlay.show {
+    display: flex;
+}
+
+.account-modal {
+    background: #F5E6D3;
+    border: 3px solid #8B4513;
+    max-width: 500px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.account-modal-header {
+    background: #3A2820;
+    color: #F5E6D3;
+    padding: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.account-modal-header h2 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.5rem;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.modal-close {
+    background: transparent;
+    border: none;
+    color: #F5E6D3;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0;
+    line-height: 1;
+}
+
+.modal-close:hover {
+    color: #C9A961;
+}
+
+.account-modal-body {
+    padding: 2rem;
+}
+
+.account-section {
+    margin-bottom: 2rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid rgba(139, 69, 19, 0.3);
+}
+
+.account-section:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.account-section h3 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.1rem;
+    color: #3A2820;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.account-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
+}
+
+.account-info label {
+    color: #8B4513;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.account-info span {
+    color: #3A2820;
+    font-size: 0.95rem;
+}
+
+.account-form-group {
+    margin-bottom: 1rem;
+}
+
+.account-form-group label {
+    display: block;
+    color: #3A2820;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.5rem;
+}
+
+.account-form-group input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 2px solid #8B4513;
+    background: #fff;
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 1rem;
+    color: #3A2820;
+    box-sizing: border-box;
+}
+
+.account-form-group input:focus {
+    outline: none;
+    border-color: #C9A961;
+}
+
+.account-btn-primary {
+    background: #8B4513;
+    color: #F5E6D3;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.account-btn-primary:hover {
+    background: #C9A961;
+    color: #3A2820;
+}
+
+.account-btn-primary:disabled {
+    background: #aaa;
+    cursor: not-allowed;
+}
+
+.account-message {
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+}
+
+.account-message.error {
+    background: rgba(139, 69, 19, 0.1);
+    border-left: 4px solid #8B4513;
+    color: #8B4513;
+}
+
+.account-message.success {
+    background: rgba(76, 175, 80, 0.1);
+    border-left: 4px solid #4CAF50;
+    color: #2E7D32;
+}

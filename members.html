@@ -41,8 +41,16 @@
             <a href="index.html" class="site-title" style="text-decoration: none; color: inherit; cursor: pointer;">El Paso Verse</a>
             <div class="header-actions">
                 <a href="index.html" style="color: #C9A961; text-decoration: none; margin-right: 1rem; font-size: 0.95rem; transition: color 0.3s;" onmouseover="this.style.color='#F5E6D3'" onmouseout="this.style.color='#C9A961'">← Back to Main Site</a>
-                <span class="username" id="usernameDisplay">Pioneer</span>
-                <button onclick="logout()" class="logout-btn">Logout</button>
+                <div class="account-dropdown">
+                    <button class="account-btn" id="accountBtn">
+                        <span class="username" id="usernameDisplay">Pioneer</span>
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M7 10l5 5 5-5z"/></svg>
+                    </button>
+                    <div class="account-menu" id="accountMenu">
+                        <button onclick="openAccountSettings()">Account Settings</button>
+                        <button onclick="logout()">Logout</button>
+                    </div>
+                </div>
             </div>
         </div>
     </header>
@@ -1569,6 +1577,232 @@
                 alert('Failed to copy link. Please copy manually: ' + url);
             });
         }
+
+        // Account Dropdown Toggle
+        document.getElementById('accountBtn').addEventListener('click', function(e) {
+            e.stopPropagation();
+            document.querySelector('.account-dropdown').classList.toggle('open');
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function() {
+            document.querySelector('.account-dropdown').classList.remove('open');
+        });
+
+        // Account Settings Modal
+        function openAccountSettings() {
+            document.querySelector('.account-dropdown').classList.remove('open');
+            document.getElementById('accountModal').classList.add('show');
+            document.getElementById('currentEmail').textContent = getCurrentUserEmail() || 'Not available';
+            document.getElementById('currentDisplayName').textContent = getUserDisplayName();
+        }
+
+        function closeAccountSettings() {
+            document.getElementById('accountModal').classList.remove('show');
+            // Clear forms and messages
+            document.querySelectorAll('.account-message').forEach(el => el.style.display = 'none');
+            document.getElementById('newDisplayName').value = '';
+            document.getElementById('newEmail').value = '';
+            document.getElementById('emailPassword').value = '';
+            document.getElementById('currentPassword').value = '';
+            document.getElementById('newPassword').value = '';
+            document.getElementById('confirmNewPassword').value = '';
+        }
+
+        // Close modal on overlay click
+        document.getElementById('accountModal').addEventListener('click', function(e) {
+            if (e.target === this) closeAccountSettings();
+        });
+
+        // Update Display Name
+        document.getElementById('displayNameForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const newName = document.getElementById('newDisplayName').value.trim();
+            const msgEl = document.getElementById('displayNameMessage');
+
+            if (newName) {
+                setUserDisplayName(newName);
+                document.getElementById('usernameDisplay').textContent = newName;
+                document.getElementById('currentDisplayName').textContent = newName;
+                msgEl.textContent = 'Display name updated successfully!';
+                msgEl.className = 'account-message success';
+                msgEl.style.display = 'block';
+                document.getElementById('newDisplayName').value = '';
+            }
+        });
+
+        // Update Email
+        document.getElementById('emailForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const newEmail = document.getElementById('newEmail').value.trim();
+            const password = document.getElementById('emailPassword').value;
+            const msgEl = document.getElementById('emailMessage');
+            const btn = this.querySelector('button[type="submit"]');
+
+            btn.disabled = true;
+            btn.textContent = 'Updating...';
+
+            try {
+                // Re-authenticate user first
+                const credential = firebase.auth.EmailAuthProvider.credential(
+                    auth.currentUser.email,
+                    password
+                );
+                await auth.currentUser.reauthenticateWithCredential(credential);
+
+                // Update email
+                await auth.currentUser.updateEmail(newEmail);
+                await auth.currentUser.sendEmailVerification();
+
+                msgEl.textContent = 'Email updated! Please verify your new email address.';
+                msgEl.className = 'account-message success';
+                msgEl.style.display = 'block';
+                document.getElementById('currentEmail').textContent = newEmail;
+                document.getElementById('newEmail').value = '';
+                document.getElementById('emailPassword').value = '';
+            } catch (error) {
+                let errorMsg = 'Failed to update email.';
+                if (error.code === 'auth/wrong-password') errorMsg = 'Incorrect password.';
+                if (error.code === 'auth/email-already-in-use') errorMsg = 'Email already in use.';
+                if (error.code === 'auth/invalid-email') errorMsg = 'Invalid email address.';
+                msgEl.textContent = errorMsg;
+                msgEl.className = 'account-message error';
+                msgEl.style.display = 'block';
+            }
+
+            btn.disabled = false;
+            btn.textContent = 'Update Email';
+        });
+
+        // Update Password
+        document.getElementById('passwordForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const currentPwd = document.getElementById('currentPassword').value;
+            const newPwd = document.getElementById('newPassword').value;
+            const confirmPwd = document.getElementById('confirmNewPassword').value;
+            const msgEl = document.getElementById('passwordMessage');
+            const btn = this.querySelector('button[type="submit"]');
+
+            if (newPwd !== confirmPwd) {
+                msgEl.textContent = 'New passwords do not match.';
+                msgEl.className = 'account-message error';
+                msgEl.style.display = 'block';
+                return;
+            }
+
+            if (newPwd.length < 6) {
+                msgEl.textContent = 'Password must be at least 6 characters.';
+                msgEl.className = 'account-message error';
+                msgEl.style.display = 'block';
+                return;
+            }
+
+            btn.disabled = true;
+            btn.textContent = 'Updating...';
+
+            try {
+                // Re-authenticate user first
+                const credential = firebase.auth.EmailAuthProvider.credential(
+                    auth.currentUser.email,
+                    currentPwd
+                );
+                await auth.currentUser.reauthenticateWithCredential(credential);
+
+                // Update password
+                await auth.currentUser.updatePassword(newPwd);
+
+                msgEl.textContent = 'Password updated successfully!';
+                msgEl.className = 'account-message success';
+                msgEl.style.display = 'block';
+                document.getElementById('currentPassword').value = '';
+                document.getElementById('newPassword').value = '';
+                document.getElementById('confirmNewPassword').value = '';
+            } catch (error) {
+                let errorMsg = 'Failed to update password.';
+                if (error.code === 'auth/wrong-password') errorMsg = 'Current password is incorrect.';
+                msgEl.textContent = errorMsg;
+                msgEl.className = 'account-message error';
+                msgEl.style.display = 'block';
+            }
+
+            btn.disabled = false;
+            btn.textContent = 'Update Password';
+        });
     </script>
+
+    <!-- Account Settings Modal -->
+    <div class="modal-overlay" id="accountModal">
+        <div class="account-modal">
+            <div class="account-modal-header">
+                <h2>Account Settings</h2>
+                <button class="modal-close" onclick="closeAccountSettings()">&times;</button>
+            </div>
+            <div class="account-modal-body">
+                <!-- Current Account Info -->
+                <div class="account-section">
+                    <h3>Account Information</h3>
+                    <div class="account-info">
+                        <label>Email</label>
+                        <span id="currentEmail">Loading...</span>
+                    </div>
+                    <div class="account-info">
+                        <label>Display Name</label>
+                        <span id="currentDisplayName">Loading...</span>
+                    </div>
+                </div>
+
+                <!-- Update Display Name -->
+                <div class="account-section">
+                    <h3>Change Display Name</h3>
+                    <div class="account-message" id="displayNameMessage" style="display: none;"></div>
+                    <form id="displayNameForm">
+                        <div class="account-form-group">
+                            <label for="newDisplayName">New Display Name</label>
+                            <input type="text" id="newDisplayName" placeholder="Enter new display name" required>
+                        </div>
+                        <button type="submit" class="account-btn-primary">Update Name</button>
+                    </form>
+                </div>
+
+                <!-- Update Email -->
+                <div class="account-section">
+                    <h3>Change Email</h3>
+                    <div class="account-message" id="emailMessage" style="display: none;"></div>
+                    <form id="emailForm">
+                        <div class="account-form-group">
+                            <label for="newEmail">New Email</label>
+                            <input type="email" id="newEmail" placeholder="Enter new email" required>
+                        </div>
+                        <div class="account-form-group">
+                            <label for="emailPassword">Current Password</label>
+                            <input type="password" id="emailPassword" placeholder="Confirm your password" required>
+                        </div>
+                        <button type="submit" class="account-btn-primary">Update Email</button>
+                    </form>
+                </div>
+
+                <!-- Update Password -->
+                <div class="account-section">
+                    <h3>Change Password</h3>
+                    <div class="account-message" id="passwordMessage" style="display: none;"></div>
+                    <form id="passwordForm">
+                        <div class="account-form-group">
+                            <label for="currentPassword">Current Password</label>
+                            <input type="password" id="currentPassword" placeholder="Enter current password" required>
+                        </div>
+                        <div class="account-form-group">
+                            <label for="newPassword">New Password</label>
+                            <input type="password" id="newPassword" placeholder="Enter new password (min. 6 characters)" required minlength="6">
+                        </div>
+                        <div class="account-form-group">
+                            <label for="confirmNewPassword">Confirm New Password</label>
+                            <input type="password" id="confirmNewPassword" placeholder="Confirm new password" required minlength="6">
+                        </div>
+                        <button type="submit" class="account-btn-primary">Update Password</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
