@@ -186,6 +186,24 @@
             font-style: italic;
         }
 
+        .scroll-arrow {
+            margin-top: 2rem;
+            color: #C9A961;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(8px);
+            }
+            60% {
+                transform: translateY(4px);
+            }
+        }
+
         .crew-callout {
             text-align: center;
             margin-bottom: 2.5rem;
@@ -270,13 +288,19 @@
             <div class="section-badge">Pre-Production</div>
             <h4>Join the Journey</h4>
             <p style="max-width: 700px; margin: 0 auto;">The Visionary is currently in pre-production. Be part of the frontier community to receive exclusive updates, behind-the-scenes content, and opportunities to participate in the making of this epic feature film.</p>
+            <div class="scroll-arrow">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M7 10l5 5 5-5"/>
+                </svg>
+            </div>
         </section>
 
         <!-- Cast & Crew -->
         <section id="cast-crew" class="film-section">
             <h3>Cast & Crew</h3>
             <div class="crew-callout">
-                <span class="crew-callout-label">Open Collaborations:</span> <span class="crew-callout-text">Deferred backend participation + PASO token rewards</span>
+                <span class="crew-callout-label">Open Collaborations:</span><br>
+                <span class="crew-callout-text">Deferred backend participation + PASO token rewards</span>
             </div>
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2.5rem 3rem; max-width: 1100px;">
                 <div>
@@ -288,11 +312,12 @@
                         Brechtje Meijer<br>
                         Michel Alexander de Beer<br>
                         Alex Nestor<br>
-                        Paul Umbriaco
+                        Paul Umbriaco<br>
+                        Fernando Corral
                     </div>
                 </div>
                 <div>
-                    <div style="font-weight: 700; color: #8B4513; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 0.1em; margin-bottom: 0.5rem;">Written & Directed By</div>
+                    <div style="font-weight: 700; color: #8B4513; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 0.1em; margin-bottom: 0.5rem;">Writer & Director</div>
                     <div style="font-size: 1.05rem; color: #3A2820;">Ryan Wiik</div>
                 </div>
                 <div>
