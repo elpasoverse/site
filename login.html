@@ -330,32 +330,27 @@
 
         /* Divider */
         .divider {
-            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             margin: 1.5rem 0;
-            position: relative;
+            gap: 1rem;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background-color: #8B4513;
+            opacity: 0.3;
         }
 
         .divider span {
-            display: inline-block;
-            padding: 0 1rem;
             color: #8B4513;
             font-size: 0.85rem;
             text-transform: uppercase;
             letter-spacing: 0.05em;
-            background-color: rgba(245, 230, 211, 0.95);
-            position: relative;
-            z-index: 1;
-        }
-
-        .divider::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background-color: #8B4513;
-            opacity: 0.3;
         }
 
         /* Google Button */
