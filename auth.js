@@ -27,10 +27,13 @@ async function signUp(email, password) {
         const userCredential = await auth.createUserWithEmailAndPassword(email, password);
         currentUser = userCredential.user;
 
+        // Send verification email
+        await currentUser.sendEmailVerification();
+
         // Store user ID for legacy compatibility
         localStorage.setItem(USER_ID_KEY, currentUser.uid);
 
-        return { success: true };
+        return { success: true, needsVerification: true };
     } catch (error) {
         let errorMessage = 'An error occurred during sign up.';
 
@@ -67,6 +70,11 @@ async function signIn(email, password) {
     try {
         const userCredential = await auth.signInWithEmailAndPassword(email, password);
         currentUser = userCredential.user;
+
+        // Check if email is verified
+        if (!currentUser.emailVerified) {
+            return { success: false, needsVerification: true, error: 'Please verify your email before signing in. Check your inbox for the verification link.' };
+        }
 
         // Store user ID for legacy compatibility
         localStorage.setItem(USER_ID_KEY, currentUser.uid);
@@ -243,13 +251,40 @@ function getSession() {
 }
 
 /**
- * Require authentication - redirect to login if not authenticated
+ * Require authentication - redirect to login if not authenticated or not verified
  * Call this function at the top of member-only pages
  */
 async function requireAuth() {
     const authenticated = await waitForAuthState();
     if (!authenticated) {
         window.location.href = 'login.html';
+        return;
+    }
+
+    // Check email verification (skip for Google sign-in users as they're already verified)
+    if (currentUser && !currentUser.emailVerified) {
+        // Check if user signed in with Google (provider data)
+        const isGoogleUser = currentUser.providerData.some(p => p.providerId === 'google.com');
+        if (!isGoogleUser) {
+            window.location.href = 'login.html?verify=pending';
+        }
+    }
+}
+
+/**
+ * Resend verification email
+ * @returns {Promise<{success: boolean, error?: string}>}
+ */
+async function resendVerificationEmail() {
+    if (!currentUser) {
+        return { success: false, error: 'No user signed in.' };
+    }
+
+    try {
+        await currentUser.sendEmailVerification();
+        return { success: true };
+    } catch (error) {
+        return { success: false, error: 'Could not send verification email. Please try again later.' };
     }
 }
 

@@ -454,6 +454,10 @@
             <div class="forgot-password">
                 <a id="forgotPasswordLink">Forgot Password?</a>
             </div>
+
+            <div class="forgot-password hidden" id="resendVerification">
+                <a id="resendVerificationLink">Resend verification email</a>
+            </div>
         </form>
 
         <!-- Sign Up Form -->
@@ -570,10 +574,17 @@
 
         // Check if already authenticated and redirect
         waitForAuthState().then(authenticated => {
-            if (authenticated) {
+            if (authenticated && auth.currentUser && auth.currentUser.emailVerified) {
                 window.location.href = 'members.html';
             }
         });
+
+        // Check URL params for verification pending
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('verify') === 'pending') {
+            showError('Please verify your email before accessing the community. Check your inbox for the verification link.');
+            document.getElementById('resendVerification').classList.remove('hidden');
+        }
 
         // Tab switching
         signInTab.addEventListener('click', () => {
@@ -639,6 +650,9 @@
             } else {
                 showError(result.error);
                 setButtonLoading(submitButton, false);
+                if (result.needsVerification) {
+                    document.getElementById('resendVerification').classList.remove('hidden');
+                }
             }
         });
 
@@ -663,10 +677,27 @@
             const result = await signUp(email, password);
 
             if (result.success) {
-                window.location.href = 'members.html';
+                if (result.needsVerification) {
+                    showSuccess('Account created! Please check your email and click the verification link to continue.');
+                    setButtonLoading(submitButton, false);
+                    // Show resend option
+                    document.getElementById('resendVerification').classList.remove('hidden');
+                } else {
+                    window.location.href = 'members.html';
+                }
             } else {
                 showError(result.error);
                 setButtonLoading(submitButton, false);
+            }
+        });
+
+        // Resend Verification Email
+        document.getElementById('resendVerificationLink').addEventListener('click', async () => {
+            const result = await resendVerificationEmail();
+            if (result.success) {
+                showSuccess('Verification email sent! Please check your inbox.');
+            } else {
+                showError(result.error);
             }
         });
 
