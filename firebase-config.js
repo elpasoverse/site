@@ -21,12 +21,13 @@
 // Your Firebase configuration
 // Replace these values with your own from Firebase Console
 const firebaseConfig = {
-    apiKey: "YOUR_API_KEY_HERE",
-    authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-    projectId: "YOUR_PROJECT_ID",
-    storageBucket: "YOUR_PROJECT_ID.appspot.com",
-    messagingSenderId: "YOUR_SENDER_ID",
-    appId: "YOUR_APP_ID"
+    apiKey: "AIzaSyCRUhlA2aZMiJHfYbcSCCCcbDlZEzOerJA",
+    authDomain: "el-paso-verse-community.firebaseapp.com",
+    projectId: "el-paso-verse-community",
+    storageBucket: "el-paso-verse-community.firebasestorage.app",
+    messagingSenderId: "197626438071",
+    appId: "1:197626438071:web:73b5ac01c0a5ec1da54832",
+    measurementId: "G-GHBP0K2EV7"
 };
 
 // Initialize Firebase

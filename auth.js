@@ -101,6 +101,43 @@ async function signIn(email, password) {
 }
 
 /**
+ * Sign in with Google
+ * @returns {Promise<{success: boolean, error?: string}>}
+ */
+async function signInWithGoogle() {
+    if (!auth) {
+        return { success: false, error: 'Firebase not configured. Please contact the administrator.' };
+    }
+
+    try {
+        const provider = new firebase.auth.GoogleAuthProvider();
+        const userCredential = await auth.signInWithPopup(provider);
+        currentUser = userCredential.user;
+
+        // Store user ID for legacy compatibility
+        localStorage.setItem(USER_ID_KEY, currentUser.uid);
+
+        return { success: true };
+    } catch (error) {
+        let errorMessage = 'An error occurred during Google sign in.';
+
+        switch (error.code) {
+            case 'auth/popup-closed-by-user':
+                errorMessage = 'Sign in cancelled. Please try again.';
+                break;
+            case 'auth/popup-blocked':
+                errorMessage = 'Pop-up blocked. Please allow pop-ups for this site.';
+                break;
+            case 'auth/account-exists-with-different-credential':
+                errorMessage = 'An account already exists with this email using a different sign-in method.';
+                break;
+        }
+
+        return { success: false, error: errorMessage };
+    }
+}
+
+/**
  * Send a password reset email
  * @param {string} email - User's email address
  * @returns {Promise<{success: boolean, error?: string}>}
