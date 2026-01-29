@@ -152,24 +152,55 @@
 
         .film-cta-section {
             text-align: center;
-            padding: 3rem 2rem;
-            background: linear-gradient(135deg, #F5E6D3 0%, #EDD9C0 100%);
-            border-radius: 8px;
+            padding: 3.5rem 2rem;
+            background: #1a1a1a;
+            border: 1px solid #C9A961;
             margin-top: 3rem;
+        }
+
+        .film-cta-section .section-badge {
+            display: inline-block;
+            border: 1px solid #C9A961;
+            color: #C9A961;
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 0.5rem 1.5rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
         }
 
         .film-cta-section h4 {
             font-family: 'Playfair Display', Georgia, serif;
-            font-size: 1.8rem;
-            color: #3A2820;
-            margin-bottom: 1rem;
-            font-weight: 700;
+            font-size: 2.2rem;
+            color: #F5E6D3;
+            margin-bottom: 1.25rem;
+            font-weight: 400;
         }
 
         .film-cta-section p {
+            color: #a89a8a;
+            margin-bottom: 0;
+            font-size: 1rem;
+            line-height: 1.7;
+            font-style: italic;
+        }
+
+        .crew-callout {
+            text-align: center;
+            margin-bottom: 2.5rem;
+            padding: 1.25rem 2rem;
+            border: 1px solid rgba(201, 169, 97, 0.3);
+            background: rgba(201, 169, 97, 0.05);
+        }
+
+        .crew-callout-label {
+            color: #C9A961;
+            font-weight: 700;
+        }
+
+        .crew-callout-text {
             color: #5a4a3a;
-            margin-bottom: 2rem;
-            font-size: 1.05rem;
         }
 
         @media (min-width: 969px) {
@@ -236,15 +267,30 @@
     <div class="film-detail-content">
         <!-- Call to Action -->
         <section class="film-cta-section">
+            <div class="section-badge">Pre-Production</div>
             <h4>Join the Journey</h4>
-            <p style="max-width: 800px; margin: 0 auto;">The Visionary is currently in pre-production. Be part of the frontier community to receive exclusive updates, behind-the-scenes content, and opportunities to participate in the making of this epic feature film.</p>
+            <p style="max-width: 700px; margin: 0 auto;">The Visionary is currently in pre-production. Be part of the frontier community to receive exclusive updates, behind-the-scenes content, and opportunities to participate in the making of this epic feature film.</p>
         </section>
 
         <!-- Cast & Crew -->
         <section id="cast-crew" class="film-section">
             <h3>Cast & Crew</h3>
-            <p style="margin-bottom: 2rem; color: #5a4a3a; font-style: italic;">All open collaborations include deferred backend participation + PASO token rewards.</p>
+            <div class="crew-callout">
+                <span class="crew-callout-label">Open Collaborations:</span> <span class="crew-callout-text">Deferred backend participation + PASO token rewards</span>
+            </div>
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2.5rem 3rem; max-width: 1100px;">
+                <div>
+                    <div style="font-weight: 700; color: #8B4513; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 0.1em; margin-bottom: 0.5rem;">Cast</div>
+                    <div style="font-size: 1.05rem; color: #3A2820; line-height: 1.6;">
+                        Natalia Lesz<br>
+                        Pau Serra<br>
+                        Christian Ramirez<br>
+                        Brechtje Meijer<br>
+                        Michel Alexander de Beer<br>
+                        Alex Nestor<br>
+                        Paul Umbriaco
+                    </div>
+                </div>
                 <div>
                     <div style="font-weight: 700; color: #8B4513; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 0.1em; margin-bottom: 0.5rem;">Written & Directed By</div>
                     <div style="font-size: 1.05rem; color: #3A2820;">Ryan Wiik</div>
@@ -266,43 +312,31 @@
                 </div>
                 <div>
                     <div style="font-weight: 700; color: #8B4513; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 0.1em; margin-bottom: 0.5rem;">1st Assistant Director</div>
-                    <div style="font-size: 1.05rem; color: #3A2820;"><span style="display: inline-block; background: #C9A961; color: #FFF; font-size: 0.75rem; font-weight: 700; padding: 0.2rem 0.5rem; border-radius: 3px; margin-right: 0.5rem;">OPEN</span>12,000 PASO</div>
+                    <div style="font-size: 1.05rem; color: #3A2820;"><span style="display: inline-block; background: linear-gradient(135deg, #C9A961 0%, #D4A745 100%); color: #3A2820; font-size: 0.75rem; font-weight: 700; padding: 0.25rem 0.6rem; border-radius: 3px; margin-right: 0.5rem;">OPEN</span>12,000 PASO</div>
                 </div>
                 <div>
                     <div style="font-weight: 700; color: #8B4513; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 0.1em; margin-bottom: 0.5rem;">1st AC / Focus Puller</div>
-                    <div style="font-size: 1.05rem; color: #3A2820;"><span style="display: inline-block; background: #C9A961; color: #FFF; font-size: 0.75rem; font-weight: 700; padding: 0.2rem 0.5rem; border-radius: 3px; margin-right: 0.5rem;">OPEN</span>10,000 PASO</div>
+                    <div style="font-size: 1.05rem; color: #3A2820;"><span style="display: inline-block; background: linear-gradient(135deg, #C9A961 0%, #D4A745 100%); color: #3A2820; font-size: 0.75rem; font-weight: 700; padding: 0.25rem 0.6rem; border-radius: 3px; margin-right: 0.5rem;">OPEN</span>10,000 PASO</div>
                 </div>
                 <div>
                     <div style="font-weight: 700; color: #8B4513; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 0.1em; margin-bottom: 0.5rem;">Production Sound</div>
-                    <div style="font-size: 1.05rem; color: #3A2820;"><span style="display: inline-block; background: #C9A961; color: #FFF; font-size: 0.75rem; font-weight: 700; padding: 0.2rem 0.5rem; border-radius: 3px; margin-right: 0.5rem;">OPEN</span>10,000 PASO</div>
+                    <div style="font-size: 1.05rem; color: #3A2820;"><span style="display: inline-block; background: linear-gradient(135deg, #C9A961 0%, #D4A745 100%); color: #3A2820; font-size: 0.75rem; font-weight: 700; padding: 0.25rem 0.6rem; border-radius: 3px; margin-right: 0.5rem;">OPEN</span>10,000 PASO</div>
                 </div>
                 <div>
                     <div style="font-weight: 700; color: #8B4513; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 0.1em; margin-bottom: 0.5rem;">Gaffer / Lighting</div>
-                    <div style="font-size: 1.05rem; color: #3A2820;"><span style="display: inline-block; background: #C9A961; color: #FFF; font-size: 0.75rem; font-weight: 700; padding: 0.2rem 0.5rem; border-radius: 3px; margin-right: 0.5rem;">OPEN</span>8,000 PASO</div>
+                    <div style="font-size: 1.05rem; color: #3A2820;"><span style="display: inline-block; background: linear-gradient(135deg, #C9A961 0%, #D4A745 100%); color: #3A2820; font-size: 0.75rem; font-weight: 700; padding: 0.25rem 0.6rem; border-radius: 3px; margin-right: 0.5rem;">OPEN</span>8,000 PASO</div>
                 </div>
                 <div>
                     <div style="font-weight: 700; color: #8B4513; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 0.1em; margin-bottom: 0.5rem;">BTS Videographer</div>
-                    <div style="font-size: 1.05rem; color: #3A2820;"><span style="display: inline-block; background: #C9A961; color: #FFF; font-size: 0.75rem; font-weight: 700; padding: 0.2rem 0.5rem; border-radius: 3px; margin-right: 0.5rem;">OPEN</span>8,000 PASO</div>
+                    <div style="font-size: 1.05rem; color: #3A2820;"><span style="display: inline-block; background: linear-gradient(135deg, #C9A961 0%, #D4A745 100%); color: #3A2820; font-size: 0.75rem; font-weight: 700; padding: 0.25rem 0.6rem; border-radius: 3px; margin-right: 0.5rem;">OPEN</span>8,000 PASO</div>
                 </div>
                 <div>
                     <div style="font-weight: 700; color: #8B4513; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 0.1em; margin-bottom: 0.5rem;">Set Assistants</div>
-                    <div style="font-size: 1.05rem; color: #3A2820;"><span style="display: inline-block; background: #C9A961; color: #FFF; font-size: 0.75rem; font-weight: 700; padding: 0.2rem 0.5rem; border-radius: 3px; margin-right: 0.5rem;">OPEN</span>6,000 PASO</div>
+                    <div style="font-size: 1.05rem; color: #3A2820;"><span style="display: inline-block; background: linear-gradient(135deg, #C9A961 0%, #D4A745 100%); color: #3A2820; font-size: 0.75rem; font-weight: 700; padding: 0.25rem 0.6rem; border-radius: 3px; margin-right: 0.5rem;">OPEN</span>6,000 PASO</div>
                 </div>
                 <div>
                     <div style="font-weight: 700; color: #8B4513; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 0.1em; margin-bottom: 0.5rem;">Driver / Local Fixer</div>
-                    <div style="font-size: 1.05rem; color: #3A2820;"><span style="display: inline-block; background: #C9A961; color: #FFF; font-size: 0.75rem; font-weight: 700; padding: 0.2rem 0.5rem; border-radius: 3px; margin-right: 0.5rem;">OPEN</span>6,000 PASO</div>
-                </div>
-                <div>
-                    <div style="font-weight: 700; color: #8B4513; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 0.1em; margin-bottom: 0.5rem;">Cast</div>
-                    <div style="font-size: 1.05rem; color: #3A2820; line-height: 1.6;">
-                        Natalia Lesz<br>
-                        Pau Serra<br>
-                        Christian Ramirez<br>
-                        Brechtje Meijer<br>
-                        Michel Alexander de Beer<br>
-                        Alex Nestor<br>
-                        Paul Umbriaco
-                    </div>
+                    <div style="font-size: 1.05rem; color: #3A2820;"><span style="display: inline-block; background: linear-gradient(135deg, #C9A961 0%, #D4A745 100%); color: #3A2820; font-size: 0.75rem; font-weight: 700; padding: 0.25rem 0.6rem; border-radius: 3px; margin-right: 0.5rem;">OPEN</span>6,000 PASO</div>
                 </div>
             </div>
         </section>
