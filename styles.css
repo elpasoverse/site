@@ -302,38 +302,38 @@ p {
 
 .vision-read-more {
     display: block;
-    margin: 1rem auto 0 auto;
+    margin: 1.5rem auto 0 auto;
     padding: 0.5rem 1rem;
-    background-color: rgba(245, 230, 211, 0.95);
+    background-color: transparent;
     color: #8B4513;
     border: none;
     font-family: Georgia, 'Times New Roman', serif;
-    font-size: 1.1rem;
-    font-weight: 700;
-    letter-spacing: 0.1em;
+    font-size: 0.95rem;
+    font-weight: 400;
+    letter-spacing: 0.05em;
     cursor: pointer;
     transition: all 0.3s ease;
     position: relative;
     text-transform: uppercase;
+    text-align: center;
     z-index: 10;
 }
 
 .vision-read-more::after {
-    content: '▼';
-    display: block;
-    font-size: 1.5rem;
+    content: ' ▼';
+    display: inline-block;
+    font-size: 0.7rem;
     color: #C9A961;
-    margin-top: 0.5rem;
+    margin-left: 0.3rem;
     transition: transform 0.3s ease;
 }
 
 .vision-read-more:hover {
     color: #C9A961;
-    transform: scale(1.05);
 }
 
 .vision-read-more:hover::after {
-    transform: translateY(3px);
+    color: #C9A961;
 }
 
 .vision-read-more.expanded::after {
@@ -341,7 +341,7 @@ p {
 }
 
 .vision-read-more.expanded:hover::after {
-    transform: rotate(180deg) translateY(-3px);
+    transform: rotate(180deg);
 }
 
 .vision-link-section {
@@ -355,18 +355,19 @@ p {
     display: inline-block;
     padding: 1rem 2.5rem;
     background-color: transparent;
-    color: #8B4513;
+    color: #3A2820;
     border: 2px solid #C9A961;
     text-decoration: none;
     font-size: 1rem;
-    letter-spacing: 0.05em;
-    font-weight: 600;
+    letter-spacing: 0.1em;
+    font-weight: 400;
+    text-transform: uppercase;
     transition: all 0.3s ease;
 }
 
 .vision-link:hover {
     background-color: #C9A961;
-    color: #F5E6D3;
+    color: #3A2820;
     border-color: #C9A961;
 }
 
@@ -610,15 +611,6 @@ p {
     text-align: justify;
 }
 
-.land-race-cta {
-    text-align: center !important;
-    font-size: 1.3rem !important;
-    font-weight: 700 !important;
-    color: #8B4513 !important;
-    margin-top: 2rem !important;
-    font-style: italic;
-}
-
 .land-race-link {
     color: #C9A961;
     text-decoration: underline;
@@ -803,20 +795,23 @@ p {
     display: inline-block;
     padding: 1rem 2.5rem;
     background: transparent;
-    color: #C9A961;
+    color: #F5E6D3;
     border: 2px solid #C9A961;
     text-decoration: none;
     font-family: 'Playfair Display', Georgia, serif;
     font-size: 1rem;
-    font-weight: 600;
+    font-weight: 400;
     letter-spacing: 0.1em;
+    text-transform: uppercase;
     transition: all 0.3s ease;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
 }
 
 .collection-cta:hover {
-    background-color: rgba(201, 169, 97, 0.1);
+    background-color: #C9A961;
+    color: #3A2820;
+    text-shadow: none;
     transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(201, 169, 97, 0.3);
 }
 
 .land-race-cta {
@@ -824,19 +819,20 @@ p {
     padding: 1rem 2.5rem;
     background: transparent;
     color: #3A2820;
-    border: 2px solid #3A2820;
+    border: 2px solid #C9A961;
     text-decoration: none;
     font-family: 'Playfair Display', Georgia, serif;
     font-size: 1rem;
-    font-weight: 600;
+    font-weight: 400;
     letter-spacing: 0.1em;
+    text-transform: uppercase;
     transition: all 0.3s ease;
 }
 
 .land-race-cta:hover {
-    background-color: rgba(58, 40, 32, 0.1);
+    background-color: #C9A961;
+    color: #3A2820;
     transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(58, 40, 32, 0.3);
 }
 
 /* PASO Token Section */
@@ -1227,26 +1223,36 @@ p {
 .paso-read-more {
     display: block;
     margin: 2rem auto 0;
-    padding: 0.8rem 2rem;
+    padding: 0.5rem 1rem;
     background: transparent;
-    color: #C9A961;
-    border: 2px solid #C9A961;
+    color: #8B4513;
+    border: none;
     font-family: 'Playfair Display', Georgia, serif;
-    font-size: 1rem;
+    font-size: 0.95rem;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    text-align: center;
     cursor: pointer;
     transition: all 0.3s ease;
     position: relative;
 }
 
 .paso-read-more:hover {
-    background-color: rgba(201, 169, 97, 0.1);
-    transform: translateY(-2px);
+    color: #C9A961;
 }
 
 .paso-read-more::after {
     content: ' ▼';
+    font-size: 0.7rem;
+    color: #C9A961;
     transition: transform 0.3s ease;
     display: inline-block;
+    margin-left: 0.3rem;
+}
+
+.paso-read-more:hover::after {
+    color: #C9A961;
 }
 
 .paso-read-more.expanded::after {
@@ -1375,19 +1381,19 @@ p {
     display: inline-block;
     padding: 1rem 2.5rem;
     background-color: transparent;
-    color: #8B4513;
+    color: #3A2820;
     border: 2px solid #C9A961;
     text-decoration: none;
     font-size: 1rem;
-    font-weight: 600;
-    letter-spacing: 0.05em;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
     transition: all 0.3s ease;
-    border-radius: 4px;
 }
 
 .community-portal-button:hover {
     background-color: #C9A961;
-    color: #F5E6D3;
+    color: #3A2820;
 }
 
 /* Instagram Section */
