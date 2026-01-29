@@ -784,6 +784,26 @@ p {
     box-shadow: 0 4px 15px rgba(201, 169, 97, 0.3);
 }
 
+.land-race-cta {
+    display: inline-block;
+    padding: 1rem 2.5rem;
+    background: transparent;
+    color: #3A2820;
+    border: 2px solid #3A2820;
+    text-decoration: none;
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    transition: all 0.3s ease;
+}
+
+.land-race-cta:hover {
+    background-color: rgba(58, 40, 32, 0.1);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(58, 40, 32, 0.3);
+}
+
 /* PASO Token Section */
 .paso-token {
     background-color: #F5E6D3;
@@ -1967,8 +1987,13 @@ p {
     }
 
     .collection-cta {
-        padding: 0.8rem 2rem;
-        font-size: 0.9rem;
+        padding: 0.8rem 1.5rem;
+        font-size: 0.85rem;
+    }
+
+    .land-race-cta {
+        padding: 0.8rem 1.5rem;
+        font-size: 0.85rem;
     }
 
     .paso-token-image img {
