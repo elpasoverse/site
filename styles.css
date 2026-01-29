@@ -49,7 +49,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 4rem 0;
+    padding: 7rem 0;
 }
 
 /* Typography */
@@ -470,11 +470,46 @@ p {
 .pillar-text-box {
     position: relative;
     z-index: 2;
-    background: rgba(0, 0, 0, 0.6);
-    backdrop-filter: blur(5px);
-    padding: 2rem;
-    border-radius: 6px;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0.85) 100%);
+    backdrop-filter: blur(8px);
+    padding: 2.5rem;
+    border: 2px solid rgba(201, 169, 97, 0.4);
+    box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.5),
+        inset 0 1px 0 rgba(201, 169, 97, 0.2);
     max-width: 100%;
+    transition: all 0.3s ease;
+}
+
+.pillar-card:hover .pillar-text-box {
+    border-color: rgba(201, 169, 97, 0.6);
+    box-shadow:
+        0 12px 40px rgba(0, 0, 0, 0.6),
+        inset 0 1px 0 rgba(201, 169, 97, 0.3);
+    transform: translateY(-2px);
+}
+
+.pillar-text-box::before,
+.pillar-text-box::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgba(201, 169, 97, 0.6);
+}
+
+.pillar-text-box::before {
+    top: -2px;
+    left: -2px;
+    border-right: none;
+    border-bottom: none;
+}
+
+.pillar-text-box::after {
+    bottom: -2px;
+    right: -2px;
+    border-left: none;
+    border-top: none;
 }
 
 .pillar-text-box h3 {
@@ -1627,7 +1662,7 @@ p {
 
     .section {
         min-height: auto;
-        padding: 3rem 0;
+        padding: 5rem 0;
     }
 
     .hero {
@@ -1763,7 +1798,13 @@ p {
     }
 
     .pillar-text-box {
-        padding: 1.5rem 1.25rem;
+        padding: 2rem 1.5rem;
+    }
+
+    .pillar-text-box::before,
+    .pillar-text-box::after {
+        width: 15px;
+        height: 15px;
     }
 
     .pillar-text-box h3 {
@@ -1886,7 +1927,13 @@ p {
     }
 
     .pillar-text-box {
-        padding: 1.25rem 1rem;
+        padding: 1.5rem 1.25rem;
+    }
+
+    .pillar-text-box::before,
+    .pillar-text-box::after {
+        width: 12px;
+        height: 12px;
     }
 
     .pillar-text-box h3 {
