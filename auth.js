@@ -369,9 +369,9 @@ function initAuthObserver() {
     // Initialize the auth observer
     initAuthObserver();
 
-    // Only run auth check on member pages (not on login page)
+    // Only run auth check on member pages (not on login page or gazette pages which have their own access control)
     const currentPage = window.location.pathname.split('/').pop();
-    const publicPages = ['index.html', 'login.html', ''];
+    const publicPages = ['index.html', 'login.html', '', 'gazette.html', 'gazette-v2.html'];
 
     if (!publicPages.includes(currentPage)) {
         requireAuth();
