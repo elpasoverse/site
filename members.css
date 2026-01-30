@@ -926,6 +926,62 @@
 .account-info span {
     color: #3A2820;
     font-size: 0.95rem;
+    flex: 1;
+    text-align: right;
+    margin-right: 1rem;
+}
+
+.account-info {
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid rgba(139, 69, 19, 0.15);
+}
+
+.change-link {
+    background: none;
+    border: none;
+    color: #8B4513;
+    font-size: 0.85rem;
+    cursor: pointer;
+    text-decoration: underline;
+    padding: 0;
+    font-family: Georgia, 'Times New Roman', serif;
+    transition: color 0.2s;
+}
+
+.change-link:hover {
+    color: #C9A961;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.section-header h3 {
+    margin: 0;
+}
+
+.section-close {
+    background: none;
+    border: none;
+    color: #8B4513;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0;
+    line-height: 1;
+    transition: color 0.2s;
+}
+
+.section-close:hover {
+    color: #C9A961;
+}
+
+.settings-section {
+    border-top: 2px solid rgba(139, 69, 19, 0.2);
+    padding-top: 1.5rem;
+    margin-top: 1rem;
 }
 
 .account-form-group {

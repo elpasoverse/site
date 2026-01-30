@@ -100,6 +100,26 @@
                             <p style="color: #d4c4a8; font-size: 0.85rem; line-height: 1.5;">
                                 PASO is the currency of the El Paso Verse frontier. Use it to access exclusive content, participate in community governance, and engage in the real-world land-based economy when the physical destination launches.
                             </p>
+
+                            <!-- Wallet Connection -->
+                            <div style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid rgba(201, 168, 97, 0.3);">
+                                <button id="connectWalletBtn" onclick="showWalletSelector()" style="
+                                    background: linear-gradient(135deg, #C9A961 0%, #8B6914 100%);
+                                    color: #1a1a1a;
+                                    border: none;
+                                    padding: 0.875rem 1.5rem;
+                                    font-size: 0.95rem;
+                                    font-weight: 700;
+                                    cursor: pointer;
+                                    transition: all 0.3s;
+                                    text-transform: uppercase;
+                                    letter-spacing: 0.05em;
+                                " onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 4px 15px rgba(201,169,97,0.4)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">Connect Cardano Wallet</button>
+                                <div id="walletInfo" style="display: none; margin-top: 1rem;"></div>
+                                <p style="color: #a89178; font-size: 0.8rem; margin-top: 0.75rem;">
+                                    Connect your Cardano wallet (Begin, Nami, Eternl, etc.) to view your PASO balance
+                                </p>
+                            </div>
                         </div>
 
                         <!-- Token Utilities Quick Info -->
@@ -1608,12 +1628,125 @@
             document.getElementById('confirmNewPassword').value = '';
         }
 
-        // Close modal on overlay click
+    </script>
+
+    <!-- Account Settings Modal -->
+    <div class="modal-overlay" id="accountModal">
+        <div class="account-modal">
+            <div class="account-modal-header">
+                <h2>Account Settings</h2>
+                <button class="modal-close" onclick="closeAccountSettings()">&times;</button>
+            </div>
+            <div class="account-modal-body">
+                <!-- Current Account Info -->
+                <div class="account-section">
+                    <h3>Account Information</h3>
+                    <div class="account-info">
+                        <label>Email</label>
+                        <span id="currentEmail">Loading...</span>
+                        <button class="change-link" onclick="toggleSettingsSection('emailSection')">Change</button>
+                    </div>
+                    <div class="account-info">
+                        <label>Display Name</label>
+                        <span id="currentDisplayName">Loading...</span>
+                        <button class="change-link" onclick="toggleSettingsSection('displayNameSection')">Change</button>
+                    </div>
+                    <div class="account-info" style="border-bottom: none;">
+                        <label>Password</label>
+                        <span style="color: #666;">••••••••</span>
+                        <button class="change-link" onclick="toggleSettingsSection('passwordSection')">Change</button>
+                    </div>
+                </div>
+
+                <!-- Update Display Name (hidden by default) -->
+                <div class="account-section settings-section" id="displayNameSection" style="display: none;">
+                    <div class="section-header">
+                        <h3>Change Display Name</h3>
+                        <button class="section-close" onclick="toggleSettingsSection('displayNameSection')">&times;</button>
+                    </div>
+                    <div class="account-message" id="displayNameMessage" style="display: none;"></div>
+                    <form id="displayNameForm">
+                        <div class="account-form-group">
+                            <label for="newDisplayName">New Display Name</label>
+                            <input type="text" id="newDisplayName" placeholder="Enter new display name" required>
+                        </div>
+                        <button type="submit" class="account-btn-primary">Update Name</button>
+                    </form>
+                </div>
+
+                <!-- Update Email (hidden by default) -->
+                <div class="account-section settings-section" id="emailSection" style="display: none;">
+                    <div class="section-header">
+                        <h3>Change Email</h3>
+                        <button class="section-close" onclick="toggleSettingsSection('emailSection')">&times;</button>
+                    </div>
+                    <div class="account-message" id="emailMessage" style="display: none;"></div>
+                    <form id="emailForm">
+                        <div class="account-form-group">
+                            <label for="newEmail">New Email</label>
+                            <input type="email" id="newEmail" placeholder="Enter new email" required>
+                        </div>
+                        <div class="account-form-group">
+                            <label for="emailPassword">Current Password</label>
+                            <input type="password" id="emailPassword" placeholder="Confirm your password" required>
+                        </div>
+                        <button type="submit" class="account-btn-primary">Update Email</button>
+                    </form>
+                </div>
+
+                <!-- Update Password (hidden by default) -->
+                <div class="account-section settings-section" id="passwordSection" style="display: none;">
+                    <div class="section-header">
+                        <h3>Change Password</h3>
+                        <button class="section-close" onclick="toggleSettingsSection('passwordSection')">&times;</button>
+                    </div>
+                    <div class="account-message" id="passwordMessage" style="display: none;"></div>
+                    <form id="passwordForm">
+                        <div class="account-form-group">
+                            <label for="currentPassword">Current Password</label>
+                            <input type="password" id="currentPassword" placeholder="Enter current password" required>
+                        </div>
+                        <div class="account-form-group">
+                            <label for="newPassword">New Password</label>
+                            <input type="password" id="newPassword" placeholder="Enter new password (min. 6 characters)" required minlength="6">
+                        </div>
+                        <div class="account-form-group">
+                            <label for="confirmNewPassword">Confirm New Password</label>
+                            <input type="password" id="confirmNewPassword" placeholder="Confirm new password" required minlength="6">
+                        </div>
+                        <button type="submit" class="account-btn-primary">Update Password</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Toggle settings sections
+        function toggleSettingsSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            const allSections = document.querySelectorAll('.settings-section');
+
+            // Hide all other sections first
+            allSections.forEach(s => {
+                if (s.id !== sectionId) {
+                    s.style.display = 'none';
+                }
+            });
+
+            // Toggle the clicked section
+            if (section.style.display === 'none') {
+                section.style.display = 'block';
+            } else {
+                section.style.display = 'none';
+            }
+        }
+
+        // Modal form event listeners (must be after modal HTML)
         document.getElementById('accountModal').addEventListener('click', function(e) {
             if (e.target === this) closeAccountSettings();
         });
 
-        // Update Display Name
         document.getElementById('displayNameForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             const newName = document.getElementById('newDisplayName').value.trim();
@@ -1630,7 +1763,6 @@
             }
         });
 
-        // Update Email
         document.getElementById('emailForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             const newEmail = document.getElementById('newEmail').value.trim();
@@ -1642,14 +1774,11 @@
             btn.textContent = 'Updating...';
 
             try {
-                // Re-authenticate user first
                 const credential = firebase.auth.EmailAuthProvider.credential(
                     auth.currentUser.email,
                     password
                 );
                 await auth.currentUser.reauthenticateWithCredential(credential);
-
-                // Update email
                 await auth.currentUser.updateEmail(newEmail);
                 await auth.currentUser.sendEmailVerification();
 
@@ -1673,7 +1802,6 @@
             btn.textContent = 'Update Email';
         });
 
-        // Update Password
         document.getElementById('passwordForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             const currentPwd = document.getElementById('currentPassword').value;
@@ -1700,14 +1828,11 @@
             btn.textContent = 'Updating...';
 
             try {
-                // Re-authenticate user first
                 const credential = firebase.auth.EmailAuthProvider.credential(
                     auth.currentUser.email,
                     currentPwd
                 );
                 await auth.currentUser.reauthenticateWithCredential(credential);
-
-                // Update password
                 await auth.currentUser.updatePassword(newPwd);
 
                 msgEl.textContent = 'Password updated successfully!';
@@ -1728,80 +1853,5 @@
             btn.textContent = 'Update Password';
         });
     </script>
-
-    <!-- Account Settings Modal -->
-    <div class="modal-overlay" id="accountModal">
-        <div class="account-modal">
-            <div class="account-modal-header">
-                <h2>Account Settings</h2>
-                <button class="modal-close" onclick="closeAccountSettings()">&times;</button>
-            </div>
-            <div class="account-modal-body">
-                <!-- Current Account Info -->
-                <div class="account-section">
-                    <h3>Account Information</h3>
-                    <div class="account-info">
-                        <label>Email</label>
-                        <span id="currentEmail">Loading...</span>
-                    </div>
-                    <div class="account-info">
-                        <label>Display Name</label>
-                        <span id="currentDisplayName">Loading...</span>
-                    </div>
-                </div>
-
-                <!-- Update Display Name -->
-                <div class="account-section">
-                    <h3>Change Display Name</h3>
-                    <div class="account-message" id="displayNameMessage" style="display: none;"></div>
-                    <form id="displayNameForm">
-                        <div class="account-form-group">
-                            <label for="newDisplayName">New Display Name</label>
-                            <input type="text" id="newDisplayName" placeholder="Enter new display name" required>
-                        </div>
-                        <button type="submit" class="account-btn-primary">Update Name</button>
-                    </form>
-                </div>
-
-                <!-- Update Email -->
-                <div class="account-section">
-                    <h3>Change Email</h3>
-                    <div class="account-message" id="emailMessage" style="display: none;"></div>
-                    <form id="emailForm">
-                        <div class="account-form-group">
-                            <label for="newEmail">New Email</label>
-                            <input type="email" id="newEmail" placeholder="Enter new email" required>
-                        </div>
-                        <div class="account-form-group">
-                            <label for="emailPassword">Current Password</label>
-                            <input type="password" id="emailPassword" placeholder="Confirm your password" required>
-                        </div>
-                        <button type="submit" class="account-btn-primary">Update Email</button>
-                    </form>
-                </div>
-
-                <!-- Update Password -->
-                <div class="account-section">
-                    <h3>Change Password</h3>
-                    <div class="account-message" id="passwordMessage" style="display: none;"></div>
-                    <form id="passwordForm">
-                        <div class="account-form-group">
-                            <label for="currentPassword">Current Password</label>
-                            <input type="password" id="currentPassword" placeholder="Enter current password" required>
-                        </div>
-                        <div class="account-form-group">
-                            <label for="newPassword">New Password</label>
-                            <input type="password" id="newPassword" placeholder="Enter new password (min. 6 characters)" required minlength="6">
-                        </div>
-                        <div class="account-form-group">
-                            <label for="confirmNewPassword">Confirm New Password</label>
-                            <input type="password" id="confirmNewPassword" placeholder="Confirm new password" required minlength="6">
-                        </div>
-                        <button type="submit" class="account-btn-primary">Update Password</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
 </body>
 </html>
