@@ -55,13 +55,13 @@ function getAvailableWallets() {
 /**
  * Initialize wallet on page load
  */
-function initWallet() {
+async function initWallet() {
     const savedWallet = localStorage.getItem('cardanoWallet');
     const savedAddress = localStorage.getItem('walletAddress');
 
     if (savedWallet && savedAddress) {
         // Try to reconnect to previously connected wallet
-        reconnectWallet(savedWallet);
+        await reconnectWallet(savedWallet);
     }
 
     updateWalletUI();
