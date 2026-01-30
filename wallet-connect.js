@@ -18,26 +18,34 @@ let pasoBalance = 0;
 let hasNFT = false;
 let nftCount = 0;
 
-// Supported Cardano wallets
+// Supported Cardano wallets (id must match window.cardano property)
 const SUPPORTED_WALLETS = [
-    { id: 'begin', name: 'Begin', icon: '🌅' },
-    { id: 'nami', name: 'Nami', icon: '🔮' },
-    { id: 'eternl', name: 'Eternl', icon: '♾️' },
-    { id: 'flint', name: 'Flint', icon: '🔥' },
-    { id: 'typhon', name: 'Typhon', icon: '🌀' },
-    { id: 'yoroi', name: 'Yoroi', icon: '📱' },
-    { id: 'lace', name: 'Lace', icon: '💎' }
+    { id: 'begin', name: 'Begin' },
+    { id: 'nami', name: 'Nami' },
+    { id: 'eternl', name: 'Eternl' },
+    { id: 'flint', name: 'Flint' },
+    { id: 'typhon', name: 'Typhon' },
+    { id: 'yoroi', name: 'Yoroi' },
+    { id: 'lace', name: 'Lace' },
+    { id: 'gerowallet', name: 'Gero' },
+    { id: 'nufi', name: 'NuFi' }
 ];
 
 /**
- * Get available Cardano wallets
+ * Get available Cardano wallets with their icons
  */
 function getAvailableWallets() {
     const available = [];
     if (typeof window.cardano !== 'undefined') {
         SUPPORTED_WALLETS.forEach(wallet => {
             if (window.cardano[wallet.id]) {
-                available.push(wallet);
+                // Get the actual icon from the wallet extension
+                const walletInfo = window.cardano[wallet.id];
+                available.push({
+                    id: wallet.id,
+                    name: walletInfo.name || wallet.name,
+                    icon: walletInfo.icon || null
+                });
             }
         });
     }
@@ -98,6 +106,7 @@ function showWalletSelector() {
             background: #2a2a2a;
             border: 1px solid #C9A961;
             color: #F5E6D3;
+            border-radius: 4px;
             font-size: 1rem;
             cursor: pointer;
             transition: all 0.3s;
