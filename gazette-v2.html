@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="The El Paso Gazette - Exclusive Members Edition - Requires 1 PASO">
+    <meta name="description" content="The El Paso Gazette - Exclusive Members Edition - Requires 1 PASO Credit">
     <title>The El Paso Gazette | Vol. I — No. 1</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -725,7 +725,7 @@
         <div class="paso-gate-box">
             <h2>★ Exclusive Edition ★</h2>
             <p>This historical gazette is reserved for members of the El Paso Verse community.</p>
-            <div class="paso-requirement">Requires: 1 PASO Token<br><span style="font-size: 0.9rem; font-weight: 400;">or Genesis Collection NFT</span></div>
+            <div class="paso-requirement">Requires: 1 PASO Credit<br><span style="font-size: 0.9rem; font-weight: 400;">or Genesis Collection ownership</span></div>
             <p style="font-style: italic; font-size: 0.9rem;">
                 Step back into 1880 and witness the birth of Breakwater through authentic frontier journalism.
             </p>
@@ -734,7 +734,7 @@
                 <button class="paso-gate-button secondary" onclick="window.location.href='members.html'">Return to Portal</button>
             </div>
             <p style="font-size: 0.85rem; color: #8b7355; margin-top: 1.5rem; font-style: italic;">
-                Connect your wallet in the Community Portal to verify NFT ownership
+                Sign in to the Community Portal to access with your PASO credits
             </p>
         </div>
     </div>
@@ -1195,38 +1195,39 @@
         </footer>
     </div>
 
+    <!-- Firebase SDK Scripts -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+
+    <!-- Custom Scripts -->
+    <script src="firebase-config.js"></script>
+    <script src="auth.js"></script>
+    <script src="points-system.js"></script>
+
     <!-- JavaScript -->
     <script>
-        function checkPasoAccess() {
+        async function checkPasoAccess() {
             if (typeof isAuthenticated === 'undefined' || !isAuthenticated()) {
                 alert('Please log in to the community portal first.');
                 window.location.href = 'login.html';
                 return;
             }
 
-            // Check for NFT ownership first
+            // Check for NFT ownership first (via localStorage flag from wallet verification)
             const hasNFT = localStorage.getItem('nftVerified') === 'true';
             if (hasNFT) {
                 grantAccess('NFT');
                 return;
             }
 
-            // Check PASO balance as alternative
-            const userPasoBalance = getUserPasoBalance();
+            // Check PASO credits balance from Firebase
+            const userPasoBalance = await waitForPointsSystem();
             if (userPasoBalance >= 1) {
                 grantAccess('PASO');
             } else {
-                alert('You need either 1 PASO token or an El Paso Verse NFT to access this exclusive gazette.\n\nConnect your wallet in the Community Portal to verify NFT ownership.');
+                alert('You need at least 1 PASO credit or a Genesis Collection to access this exclusive gazette.\n\nVisit the Community Portal to learn how to earn PASO credits.');
             }
-        }
-
-        function getUserPasoBalance() {
-            const mockBalance = localStorage.getItem('pasoBalance');
-            if (!mockBalance) {
-                localStorage.setItem('pasoBalance', '10');
-                return 10;
-            }
-            return mockBalance ? parseInt(mockBalance) : 10;
         }
 
         function grantAccess(method) {
@@ -1239,7 +1240,15 @@
             document.getElementById('pasoGate').classList.add('hidden');
         }
 
-        function checkExistingAccess() {
+        async function checkExistingAccess() {
+            // Wait for auth state
+            const authenticated = await waitForAuthState();
+
+            if (!authenticated) {
+                // User not logged in - show gate
+                return;
+            }
+
             // Check for NFT ownership (permanent access)
             const hasNFT = localStorage.getItem('nftVerified') === 'true';
             if (hasNFT) {
@@ -1247,7 +1256,7 @@
                 return;
             }
 
-            // Check for recent PASO access (24-hour)
+            // Check for recent access (24-hour)
             const accessLog = localStorage.getItem('gazetteAccess');
             if (accessLog) {
                 const access = JSON.parse(accessLog);
@@ -1256,7 +1265,14 @@
                 const hoursSinceAccess = (now - accessTime) / (1000 * 60 * 60);
                 if (hoursSinceAccess < 24) {
                     document.getElementById('pasoGate').classList.add('hidden');
+                    return;
                 }
+            }
+
+            // Check if user still has enough credits
+            const balance = await waitForPointsSystem();
+            if (balance >= 1) {
+                document.getElementById('pasoGate').classList.add('hidden');
             }
         }
 
@@ -1295,6 +1311,5 @@
     </script>
 
     <script src="wallet-connect.js"></script>
-    <script src="auth.js"></script>
 </body>
 </html>

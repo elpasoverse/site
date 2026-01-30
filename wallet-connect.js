@@ -1,6 +1,11 @@
 /**
- * El Paso Verse - Cardano Wallet Connection
- * Connects to Cardano wallets (Begin, Nami, Eternl, etc.) for PASO balance & NFT verification
+ * El Paso Verse - Cardano Wallet Connection (Optional Feature)
+ * Connects to Cardano wallets (Begin, Nami, Eternl, etc.) for:
+ * - NFT/Collectible verification
+ * - PASO credit withdrawal to external wallet (1:1 exchange)
+ *
+ * Note: This is an OPTIONAL feature for advanced users.
+ * Most users will use PASO credits stored in Firebase without needing a wallet.
  */
 
 // PASO Token Configuration
@@ -465,7 +470,7 @@ function isWalletConnected() {
 }
 
 /**
- * Get current PASO balance
+ * Get current PASO balance from wallet (on-chain tokens)
  */
 function getPasoTokenBalance() {
     return pasoBalance;
@@ -478,7 +483,79 @@ function getWalletAddress() {
     return walletAddress;
 }
 
+/**
+ * Withdraw PASO credits to external wallet
+ * Converts Firebase-stored credits to on-chain PASO tokens (1:1 ratio)
+ * @param {number} amount - Amount of credits to withdraw
+ * @returns {Promise<{success: boolean, txHash?: string, error?: string}>}
+ */
+async function withdrawToWallet(amount) {
+    // Check if wallet is connected
+    if (!walletConnected || !walletAddress) {
+        return { success: false, error: 'Please connect your Cardano wallet first.' };
+    }
+
+    // Check if user has enough credits
+    const currentCredits = typeof getPasoCredits === 'function' ? getPasoCredits() : 0;
+    if (amount > currentCredits) {
+        return { success: false, error: 'Insufficient PASO credits for this withdrawal.' };
+    }
+
+    if (amount <= 0) {
+        return { success: false, error: 'Invalid withdrawal amount.' };
+    }
+
+    // Note: In production, this would:
+    // 1. Call a backend API to initiate the withdrawal
+    // 2. Backend verifies user's credit balance
+    // 3. Backend deducts credits from Firestore
+    // 4. Backend initiates on-chain PASO token transfer
+    // 5. Return transaction hash
+
+    // For now, show a placeholder message
+    console.log(`Withdrawal request: ${amount} PASO to ${walletAddress}`);
+
+    return {
+        success: false,
+        error: 'Withdrawal functionality is coming soon. Your PASO credits are safely stored and ready for use within El Paso Verse.'
+    };
+}
+
+/**
+ * Process pending withdrawal after wallet connection
+ */
+async function processPendingWithdrawal() {
+    const pendingData = sessionStorage.getItem('pendingWithdrawal');
+    if (!pendingData) return;
+
+    const pending = JSON.parse(pendingData);
+    const timeSinceRequest = Date.now() - pending.timestamp;
+
+    // Only process if request is less than 5 minutes old
+    if (timeSinceRequest > 5 * 60 * 1000) {
+        sessionStorage.removeItem('pendingWithdrawal');
+        return;
+    }
+
+    // Clear pending withdrawal
+    sessionStorage.removeItem('pendingWithdrawal');
+
+    // Attempt withdrawal
+    const result = await withdrawToWallet(pending.amount);
+
+    if (result.success) {
+        alert(`Withdrawal initiated! Transaction hash: ${result.txHash}\n\nYour ${pending.amount} PASO tokens will arrive in your wallet shortly.`);
+    } else {
+        alert(result.error || 'Withdrawal failed. Please try again.');
+    }
+}
+
 // Initialize on page load
 if (typeof window !== 'undefined') {
     window.addEventListener('DOMContentLoaded', initWallet);
+
+    // Listen for wallet connection to process pending withdrawals
+    window.addEventListener('walletConnected', function() {
+        processPendingWithdrawal();
+    });
 }

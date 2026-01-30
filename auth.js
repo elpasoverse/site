@@ -33,6 +33,11 @@ async function signUp(email, password) {
         // Store user ID for legacy compatibility
         localStorage.setItem(USER_ID_KEY, currentUser.uid);
 
+        // Create user document with 25 PASO signup bonus
+        if (typeof createUserWithCredits === 'function') {
+            await createUserWithCredits(currentUser.uid, email);
+        }
+
         return { success: true, needsVerification: true };
     } catch (error) {
         let errorMessage = 'An error occurred during sign up.';
@@ -124,6 +129,11 @@ async function signInWithGoogle() {
 
         // Store user ID for legacy compatibility
         localStorage.setItem(USER_ID_KEY, currentUser.uid);
+
+        // Create user document with 25 PASO signup bonus (only for new users)
+        if (typeof createUserWithCredits === 'function') {
+            await createUserWithCredits(currentUser.uid, currentUser.email, currentUser.displayName);
+        }
 
         return { success: true };
     } catch (error) {

@@ -7,8 +7,8 @@
     <!-- Primary Meta Tags -->
     <title>Community Portal | El Paso Verse</title>
     <meta name="title" content="Community Portal | El Paso Verse">
-    <meta name="description" content="Welcome, Pioneer. Access exclusive content, earn PASO tokens, stream motion prints, and participate in building the frontier. Your gateway to the El Paso Verse community.">
-    <meta name="keywords" content="El Paso Verse, community portal, PASO token, frontier community, member access, Western community">
+    <meta name="description" content="Welcome, Pioneer. Access exclusive content, earn PASO credits, stream motion prints, and participate in building the frontier. Your gateway to the El Paso Verse community.">
+    <meta name="keywords" content="El Paso Verse, community portal, PASO credits, frontier community, member access, Western community">
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="assets/paso-token.png">
@@ -18,14 +18,14 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://elpasoverse.com/members.html">
     <meta property="og:title" content="Community Portal | El Paso Verse">
-    <meta property="og:description" content="Welcome, Pioneer. Access exclusive content, earn PASO tokens, stream motion prints, and participate in building the frontier. Your gateway to the El Paso Verse community.">
+    <meta property="og:description" content="Welcome, Pioneer. Access exclusive content, earn PASO credits, stream motion prints, and participate in building the frontier. Your gateway to the El Paso Verse community.">
     <meta property="og:image" content="https://elpasoverse.com/assets/paso-token.png">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://elpasoverse.com/members.html">
     <meta property="twitter:title" content="Community Portal | El Paso Verse">
-    <meta property="twitter:description" content="Welcome, Pioneer. Access exclusive content, earn PASO tokens, and participate in building the frontier.">
+    <meta property="twitter:description" content="Welcome, Pioneer. Access exclusive content, earn PASO credits, and participate in building the frontier.">
     <meta property="twitter:image" content="https://elpasoverse.com/assets/paso-token.png">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -82,49 +82,39 @@
             <div id="dashboard-tab" class="tab-pane active">
                 <h3 style="font-family: 'Playfair Display', Georgia, serif; font-size: 2rem; font-weight: 900; color: #f9f3e3; margin-bottom: 1.5rem;">Your Dashboard</h3>
 
-                <!-- PASO Token Balance -->
+                <!-- PASO Credits Balance -->
                 <div style="background: linear-gradient(135deg, #2c1810 0%, #4a2511 100%); border: 3px solid #c9a860; padding: 2rem; margin-bottom: 2rem; border-radius: 8px;">
                     <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 2rem;">
                         <div style="flex: 1;">
                             <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
-                                <img src="assets/paso-token.png" alt="PASO Coin" style="width: 60px; height: 60px; object-fit: contain;">
+                                <img src="assets/paso-token.png" alt="PASO Credits" style="width: 60px; height: 60px; object-fit: contain;">
                                 <div>
-                                    <h4 style="font-family: 'Playfair Display', Georgia, serif; font-size: 1.8rem; font-weight: 700; color: #f9f3e3; margin: 0;">PASO Balance</h4>
-                                    <p style="color: #a89178; font-size: 0.9rem; margin: 0;">Currency of the 1880 Frontier</p>
+                                    <h4 style="font-family: 'Playfair Display', Georgia, serif; font-size: 1.8rem; font-weight: 700; color: #f9f3e3; margin: 0;">Your PASO Balance</h4>
+                                    <p style="color: #a89178; font-size: 0.9rem; margin: 0;">Reward Credits of the 1880 Frontier</p>
                                 </div>
                             </div>
                             <div style="background: #1a1a1a; border: 2px solid #c9a860; padding: 1.5rem; border-radius: 4px; margin-bottom: 1rem;">
-                                <div id="pasoBalance" style="font-size: 3rem; font-weight: 900; color: #c9a860; font-family: 'Playfair Display', Georgia, serif;">0</div>
-                                <div style="color: #d4c4a8; font-size: 0.9rem; margin-top: 0.5rem;">PASO</div>
+                                <div id="pasoBalance" style="font-size: 3rem; font-weight: 900; color: #c9a860; font-family: 'Playfair Display', Georgia, serif;">—</div>
+                                <div style="color: #d4c4a8; font-size: 0.9rem; margin-top: 0.5rem;">PASO Credits</div>
                             </div>
                             <p style="color: #d4c4a8; font-size: 0.85rem; line-height: 1.5;">
-                                PASO is the currency of the El Paso Verse frontier. Use it to access exclusive content, participate in community governance, and engage in the real-world land-based economy when the physical destination launches.
+                                PASO credits are your rewards in the El Paso Verse frontier. Use them to access exclusive content, participate in community voting, and unlock experiences when the physical destination launches.
                             </p>
 
-                            <!-- Wallet Connection -->
+                            <!-- Balance Info -->
                             <div style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid rgba(201, 168, 97, 0.3);">
-                                <button id="connectWalletBtn" onclick="showWalletSelector()" style="
-                                    background: linear-gradient(135deg, #C9A961 0%, #8B6914 100%);
-                                    color: #1a1a1a;
-                                    border: none;
-                                    padding: 0.875rem 1.5rem;
-                                    font-size: 0.95rem;
-                                    font-weight: 700;
-                                    cursor: pointer;
-                                    transition: all 0.3s;
-                                    text-transform: uppercase;
-                                    letter-spacing: 0.05em;
-                                " onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 4px 15px rgba(201,169,97,0.4)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">Connect Cardano Wallet</button>
-                                <div id="walletInfo" style="display: none; margin-top: 1rem;"></div>
+                                <p style="color: #90ee90; font-size: 0.9rem; margin-bottom: 0.5rem;">
+                                    <span style="font-weight: 700;">Your balance loads automatically</span> when you sign in.
+                                </p>
                                 <p style="color: #a89178; font-size: 0.8rem; margin-top: 0.75rem;">
-                                    Connect your Cardano wallet (Begin, Nami, Eternl, etc.) to view your PASO balance
+                                    New members receive <strong style="color: #c9a860;">25 PASO credits</strong> as a welcome bonus.
                                 </p>
                             </div>
                         </div>
 
-                        <!-- Token Utilities Quick Info -->
+                        <!-- Credit Utilities Quick Info -->
                         <div style="flex: 1; background: rgba(0,0,0,0.3); padding: 1.5rem; border-radius: 4px; border-left: 3px solid #c9a860;">
-                            <h5 style="color: #c9a860; font-weight: 700; margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.85rem;">Coin Utilities by Phase</h5>
+                            <h5 style="color: #c9a860; font-weight: 700; margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.85rem;">Credit Benefits by Phase</h5>
 
                             <!-- Phase 1: ACTIVE -->
                             <div style="margin-bottom: 1rem; padding: 1rem; background: rgba(45, 138, 45, 0.1); border: 2px solid #2d8a2d; border-radius: 4px;">
@@ -169,7 +159,7 @@
 
                     <!-- Earning Opportunities -->
                     <div style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid rgba(201, 168, 97, 0.3);">
-                        <h5 style="color: #c9a860; font-weight: 700; margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.85rem;">Ways to Get PASO</h5>
+                        <h5 style="color: #c9a860; font-weight: 700; margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.85rem;">Ways to Earn PASO Credits</h5>
                         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
                             <div style="background: rgba(139, 69, 19, 0.2); padding: 1rem; border-radius: 4px; border: 2px solid rgba(201, 169, 97, 0.5); position: relative;">
                                 <span style="position: absolute; top: 0.5rem; right: 0.5rem; background: #2d8a2d; color: white; font-size: 0.65rem; font-weight: 700; padding: 0.2rem 0.5rem; border-radius: 3px; text-transform: uppercase; letter-spacing: 0.05em;">Active</span>
@@ -183,11 +173,11 @@
                             </a>
                             <div style="background: rgba(0,0,0,0.3); padding: 1rem; border-radius: 4px;">
                                 <div style="color: #f9f3e3; font-weight: 700; margin-bottom: 0.25rem;">Hold Film Collectibles</div>
-                                <div style="color: #a89178; font-size: 0.85rem;">Periodic rewards for collection holders</div>
+                                <div style="color: #a89178; font-size: 0.85rem;">Periodic credit rewards for collection holders</div>
                             </div>
                             <div style="background: rgba(0,0,0,0.3); padding: 1rem; border-radius: 4px;">
-                                <div style="color: #f9f3e3; font-weight: 700; margin-bottom: 0.25rem;">Purchase Direct</div>
-                                <div style="color: #a89178; font-size: 0.85rem;">Buy PASO from the community treasury</div>
+                                <div style="color: #f9f3e3; font-weight: 700; margin-bottom: 0.25rem;">Purchase Credits</div>
+                                <div style="color: #a89178; font-size: 0.85rem;">Buy PASO credits from the community</div>
                             </div>
                         </div>
                     </div>
@@ -316,10 +306,10 @@
                     </div>
                 </div>
 
-                <!-- Wallet Connection Section -->
+                <!-- Verify Collectibles & Advanced Options -->
                 <div style="background: linear-gradient(135deg, #1a1a1a 0%, #2d2416 100%); border: 2px solid #c9a860; padding: 2rem; border-radius: 8px;">
                     <div style="display: flex; align-items: center; gap: 1.5rem; margin-bottom: 1.5rem;">
-                        <div style="font-size: 2.5rem;">🔗</div>
+                        <div style="font-size: 2.5rem;">🎬</div>
                         <div style="flex: 1;">
                             <h4 style="font-family: 'Playfair Display', Georgia, serif; font-size: 1.5rem; font-weight: 700; color: #f9f3e3; margin-bottom: 0.5rem;">Verify Your Collectibles</h4>
                             <p style="color: #d4c4a8; margin: 0;">Verify ownership of your Genesis Collection film frames to unlock exclusive behind-the-scenes content and early access to future experiences.</p>
@@ -330,7 +320,7 @@
                     <div id="nftStatus"></div>
 
                     <div style="margin-top: 1.5rem;">
-                        <button id="connectWalletBtn" onclick="connectWallet()" style="background: #c9a860; color: #1a1a1a; padding: 1rem 2rem; font-weight: 700; border: none; border-radius: 4px; cursor: pointer; transition: all 0.3s ease; letter-spacing: 0.05em; font-size: 0.95rem;">
+                        <button id="verifyCollectiblesBtn" onclick="showWalletSelector()" style="background: #c9a860; color: #1a1a1a; padding: 1rem 2rem; font-weight: 700; border: none; border-radius: 4px; cursor: pointer; transition: all 0.3s ease; letter-spacing: 0.05em; font-size: 0.95rem;">
                             Verify Collectibles
                         </button>
                     </div>
@@ -340,6 +330,22 @@
                         <p style="color: #a89178; font-size: 0.85rem; line-height: 1.5;">
                             Genesis Collection holders own authentic film frames from El Paso Verse productions—shot on Kodak motion picture stock. These 1-of-1 collectibles grant access to exclusive content, streaming privileges, and priority access to real-world events and land opportunities. Available on <a href="https://book.io/series/el-paso-verse/" target="_blank" style="color: #c9a860; text-decoration: underline;">Book.io</a>.
                         </p>
+                    </div>
+
+                    <!-- Advanced: Withdraw to External Wallet -->
+                    <div style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid rgba(201, 168, 97, 0.2);">
+                        <details style="cursor: pointer;">
+                            <summary style="color: #666; font-size: 0.8rem; outline: none; user-select: none;">Advanced Options</summary>
+                            <div style="margin-top: 1rem; padding: 1rem; background: rgba(0,0,0,0.3); border-radius: 4px;">
+                                <p style="color: #a89178; font-size: 0.85rem; margin-bottom: 1rem;">
+                                    <strong>Withdraw to External Wallet</strong><br>
+                                    For users with Cardano wallets, you can withdraw your PASO credits to an external wallet at a 1:1 ratio. This converts your credits to on-chain PASO tokens.
+                                </p>
+                                <button onclick="showWithdrawModal()" style="background: transparent; border: 1px solid #666; color: #999; padding: 0.5rem 1rem; font-size: 0.85rem; cursor: pointer; border-radius: 4px; transition: all 0.3s;">
+                                    Withdraw to Wallet
+                                </button>
+                            </div>
+                        </details>
                     </div>
                 </div>
             </div>
@@ -675,8 +681,8 @@
 
             <!-- Governance Tab -->
             <div id="governance-tab" class="tab-pane">
-                <h3 style="font-family: 'Playfair Display', Georgia, serif; font-size: 2rem; font-weight: 900; color: #3A2820; margin-bottom: 1rem;">Governance & Voting</h3>
-                <p style="color: #000000; margin-bottom: 2rem;">Help shape the physical frontier destination through community-driven decisions. Your PASO holdings determine your voting power in building the 1880 world.</p>
+                <h3 style="font-family: 'Playfair Display', Georgia, serif; font-size: 2rem; font-weight: 900; color: #3A2820; margin-bottom: 1rem;">Community Voting</h3>
+                <p style="color: #000000; margin-bottom: 2rem;">Help shape the physical frontier destination through community-driven decisions. Your PASO credits determine your voting power in building the 1880 world.</p>
 
                 <!-- Governance Overview -->
                 <div style="background: linear-gradient(135deg, #2c1810 0%, #4a2511 100%); border: 3px solid #c9a860; padding: 2rem; margin-bottom: 2rem; border-radius: 8px;">
@@ -710,7 +716,7 @@
                             <li><strong>Economic Incentives</strong> - How commerce and trade operates in the 1880s world</li>
                             <li><strong>Community Projects</strong> - Use of community-funded initiatives for real-world development</li>
                             <li><strong>Land Development</strong> - Town layouts, buildings, and infrastructure projects</li>
-                            <li><strong>Currency Management</strong> - Community decisions on PASO distribution and rewards</li>
+                            <li><strong>Credits Management</strong> - Community decisions on PASO credit distribution and rewards</li>
                             <li><strong>Frontier Expansion</strong> - New experiences, locations, and opportunities to add</li>
                         </ul>
                     </div>
@@ -1254,6 +1260,7 @@
     <!-- Custom Scripts -->
     <script src="firebase-config.js"></script>
     <script src="auth.js"></script>
+    <script src="points-system.js"></script>
     <script src="wallet-connect.js"></script>
     <script src="community.js"></script>
     <script>
@@ -1626,6 +1633,132 @@
             document.getElementById('currentPassword').value = '';
             document.getElementById('newPassword').value = '';
             document.getElementById('confirmNewPassword').value = '';
+        }
+
+        // Withdraw to Wallet Modal
+        function showWithdrawModal() {
+            const currentBalance = typeof getPasoCredits === 'function' ? getPasoCredits() : 0;
+            const modal = document.createElement('div');
+            modal.id = 'withdrawModal';
+            modal.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(0,0,0,0.85);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                z-index: 10000;
+            `;
+
+            modal.innerHTML = `
+                <div style="
+                    background: linear-gradient(135deg, #1a1a1a 0%, #2d2416 100%);
+                    border: 2px solid #C9A961;
+                    border-radius: 8px;
+                    padding: 2rem;
+                    max-width: 500px;
+                    width: 90%;
+                ">
+                    <h3 style="
+                        font-family: 'Playfair Display', Georgia, serif;
+                        color: #C9A961;
+                        margin: 0 0 1.5rem 0;
+                        text-align: center;
+                    ">Withdraw PASO to External Wallet</h3>
+
+                    <div style="background: rgba(0,0,0,0.3); padding: 1rem; border-radius: 4px; margin-bottom: 1.5rem;">
+                        <p style="color: #d4c4a8; font-size: 0.9rem; margin-bottom: 1rem;">
+                            <strong>Your Balance:</strong> <span style="color: #c9a860; font-weight: 700;">${currentBalance.toLocaleString()} PASO Credits</span>
+                        </p>
+                        <p style="color: #a89178; font-size: 0.85rem; line-height: 1.6; margin: 0;">
+                            You can withdraw your PASO credits to a Cardano wallet at a <strong>1:1 ratio</strong>.
+                            This converts your in-app credits to on-chain PASO tokens.
+                        </p>
+                    </div>
+
+                    <div style="margin-bottom: 1.5rem;">
+                        <label style="color: #d4c4a8; font-size: 0.85rem; display: block; margin-bottom: 0.5rem;">Amount to Withdraw</label>
+                        <input type="number" id="withdrawAmount" placeholder="Enter amount" min="1" max="${currentBalance}" style="
+                            width: 100%;
+                            padding: 0.75rem;
+                            background: #1a1a1a;
+                            border: 1px solid #C9A961;
+                            color: #f9f3e3;
+                            border-radius: 4px;
+                            font-size: 1rem;
+                        ">
+                    </div>
+
+                    <p style="color: #ff9090; font-size: 0.8rem; margin-bottom: 1.5rem; padding: 0.75rem; background: rgba(255,144,144,0.1); border-radius: 4px;">
+                        Note: Withdrawals require a connected Cardano wallet and may take up to 24 hours to process.
+                    </p>
+
+                    <div style="display: flex; gap: 1rem;">
+                        <button onclick="initiateWithdraw()" style="
+                            flex: 1;
+                            padding: 0.875rem;
+                            background: linear-gradient(135deg, #C9A961 0%, #8B6914 100%);
+                            color: #1a1a1a;
+                            border: none;
+                            border-radius: 4px;
+                            font-weight: 700;
+                            cursor: pointer;
+                        ">Connect Wallet & Withdraw</button>
+                        <button onclick="closeWithdrawModal()" style="
+                            padding: 0.875rem 1.5rem;
+                            background: transparent;
+                            border: 1px solid #666;
+                            color: #999;
+                            cursor: pointer;
+                            border-radius: 4px;
+                        ">Cancel</button>
+                    </div>
+                </div>
+            `;
+
+            document.body.appendChild(modal);
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) closeWithdrawModal();
+            });
+        }
+
+        function closeWithdrawModal() {
+            const modal = document.getElementById('withdrawModal');
+            if (modal) modal.remove();
+        }
+
+        function initiateWithdraw() {
+            const amount = parseInt(document.getElementById('withdrawAmount').value);
+            const currentBalance = typeof getPasoCredits === 'function' ? getPasoCredits() : 0;
+
+            if (!amount || amount <= 0) {
+                alert('Please enter a valid amount to withdraw.');
+                return;
+            }
+
+            if (amount > currentBalance) {
+                alert('Insufficient PASO credits for this withdrawal.');
+                return;
+            }
+
+            // Close withdraw modal and show wallet selector
+            closeWithdrawModal();
+
+            // Store withdrawal intent
+            sessionStorage.setItem('pendingWithdrawal', JSON.stringify({
+                amount: amount,
+                timestamp: Date.now()
+            }));
+
+            // Show wallet selector (from wallet-connect.js)
+            if (typeof showWalletSelector === 'function') {
+                showWalletSelector();
+            } else {
+                alert('Wallet connection not available. Please try again later.');
+            }
         }
 
     </script>

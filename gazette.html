@@ -189,13 +189,13 @@
             <h2>★ Exclusive Edition ★</h2>
             <p>This historical gazette is reserved for members of the El Paso Verse community.</p>
             <div class="paso-requirement">
-                Requires: 1 PASO Token
+                Requires: 1 PASO Credit
             </div>
             <p style="font-style: italic; font-size: 0.9rem;">
                 Step back into 1880 and witness the birth of Breakwater through authentic frontier journalism.
             </p>
             <div style="margin-top: 2rem;">
-                <button class="paso-gate-button" onclick="checkPasoAccess()">I Have 1 PASO</button>
+                <button class="paso-gate-button" onclick="checkPasoAccess()">I Have PASO Credits</button>
                 <button class="paso-gate-button secondary" onclick="window.location.href='members.html'">Return to Portal</button>
             </div>
         </div>
@@ -725,10 +725,20 @@
         </footer>
     </main>
 
+    <!-- Firebase SDK Scripts -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+
+    <!-- Custom Scripts -->
+    <script src="firebase-config.js"></script>
+    <script src="auth.js"></script>
+    <script src="points-system.js"></script>
+
     <!-- JavaScript -->
     <script>
-        // PASO Token Gate Logic
-        function checkPasoAccess() {
+        // PASO Credits Gate Logic
+        async function checkPasoAccess() {
             // Check if user is authenticated
             if (typeof isAuthenticated === 'undefined' || !isAuthenticated()) {
                 alert('Please log in to the community portal first.');
@@ -736,35 +746,22 @@
                 return;
             }
 
-            // Check for PASO tokens (placeholder - integrate with actual token system)
-            const userPasoBalance = getUserPasoBalance();
+            // Wait for points system to be ready and get balance from Firebase
+            const userPasoBalance = await waitForPointsSystem();
 
             if (userPasoBalance >= 1) {
-                grantAccess();
+                grantAccess('PASO');
             } else {
-                alert('Insufficient PASO tokens. You need 1 PASO to access this exclusive gazette.\n\nVisit the Community Portal to learn how to acquire PASO tokens.');
+                alert('Insufficient PASO credits. You need at least 1 PASO credit to access this exclusive gazette.\n\nVisit the Community Portal to learn how to earn PASO credits.');
             }
         }
 
-        function getUserPasoBalance() {
-            // Placeholder function - integrate with actual PASO token system
-            // For now, return mock balance from localStorage
-            const mockBalance = localStorage.getItem('pasoBalance');
-
-            // TEMPORARY: Auto-grant 10 PASO for testing
-            if (!mockBalance) {
-                localStorage.setItem('pasoBalance', '10');
-                return 10;
-            }
-
-            return mockBalance ? parseInt(mockBalance) : 10;
-        }
-
-        function grantAccess() {
+        function grantAccess(method) {
             // Record access
             const accessLog = {
                 timestamp: new Date().toISOString(),
-                userId: getCurrentUserId ? getCurrentUserId() : 'unknown'
+                userId: getCurrentUserId ? getCurrentUserId() : 'unknown',
+                method: method || 'PASO'
             };
             localStorage.setItem('gazetteAccess', JSON.stringify(accessLog));
 
@@ -773,7 +770,16 @@
         }
 
         // Check if user has already accessed in this session
-        function checkExistingAccess() {
+        async function checkExistingAccess() {
+            // Wait for auth state
+            const authenticated = await waitForAuthState();
+
+            if (!authenticated) {
+                // User not logged in - show gate
+                return;
+            }
+
+            // Check for recent access (24-hour)
             const accessLog = localStorage.getItem('gazetteAccess');
             if (accessLog) {
                 const access = JSON.parse(accessLog);
@@ -784,7 +790,14 @@
                 // Grant access if accessed within last 24 hours
                 if (hoursSinceAccess < 24) {
                     document.getElementById('pasoGate').classList.add('hidden');
+                    return;
                 }
+            }
+
+            // Check if user still has enough credits
+            const balance = await waitForPointsSystem();
+            if (balance >= 1) {
+                document.getElementById('pasoGate').classList.add('hidden');
             }
         }
 
@@ -792,12 +805,6 @@
         window.addEventListener('DOMContentLoaded', function() {
             checkExistingAccess();
         });
-
-        // Temporary bypass for demo (remove in production)
-        // Allows setting PASO balance via console: localStorage.setItem('pasoBalance', '5')
     </script>
-
-    <!-- Load auth.js if available -->
-    <script src="auth.js"></script>
 </body>
 </html>
