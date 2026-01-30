@@ -111,7 +111,7 @@ function showWalletSelector() {
             cursor: pointer;
             transition: all 0.3s;
         " onmouseover="this.style.background='#3a3a3a'" onmouseout="this.style.background='#2a2a2a'">
-            <span style="font-size: 1.5rem;">${w.icon}</span>
+            <img src="${w.icon}" alt="${w.name}" style="width: 32px; height: 32px; border-radius: 6px;">
             <span>${w.name}</span>
         </button>
     `).join('');
@@ -120,6 +120,7 @@ function showWalletSelector() {
         <div style="
             background: #1a1a1a;
             border: 2px solid #C9A961;
+            border-radius: 8px;
             padding: 2rem;
             max-width: 400px;
             width: 90%;
@@ -250,7 +251,7 @@ function disconnectWallet() {
 }
 
 /**
- * Get PASO token balance from wallet UTXOs
+ * Get PASO token balance from wallet
  */
 async function getPasoBalance() {
     if (!walletApi || !PASO_CONFIG.policyId) {
@@ -259,31 +260,34 @@ async function getPasoBalance() {
     }
 
     try {
-        // Get all UTXOs from wallet
-        const utxos = await walletApi.getUtxos();
+        // Try getting balance which includes all assets
+        const balanceHex = await walletApi.getBalance();
+        console.log('Raw balance hex:', balanceHex);
 
-        if (!utxos || utxos.length === 0) {
-            pasoBalance = 0;
-            return;
-        }
+        // Search for our policy ID in the balance
+        if (balanceHex && balanceHex.includes(PASO_CONFIG.policyId)) {
+            // Policy ID found - try to extract amount
+            pasoBalance = extractPasoFromBalance(balanceHex);
+            console.log('PASO balance found:', pasoBalance);
+        } else {
+            // Try UTXOs as fallback
+            const utxos = await walletApi.getUtxos();
+            console.log('UTXOs count:', utxos ? utxos.length : 0);
 
-        // Asset ID is policyId + assetName concatenated
-        const pasoAssetId = PASO_CONFIG.policyId + PASO_CONFIG.assetName;
-        let totalPaso = 0;
-
-        // Search through UTXOs for PASO tokens
-        for (const utxo of utxos) {
-            // Check if this UTXO contains our PASO token
-            if (utxo.includes(pasoAssetId)) {
-                // Found PASO in this UTXO - extract amount
-                // CBOR parsing would be needed for exact amount
-                // For now, increment count (basic detection)
-                totalPaso += extractTokenAmount(utxo, pasoAssetId);
+            if (utxos && utxos.length > 0) {
+                let total = 0;
+                for (const utxo of utxos) {
+                    if (utxo.includes(PASO_CONFIG.policyId)) {
+                        total += extractPasoFromBalance(utxo);
+                    }
+                }
+                pasoBalance = total;
+            } else {
+                pasoBalance = 0;
             }
         }
 
-        pasoBalance = totalPaso;
-        console.log('PASO balance:', pasoBalance);
+        console.log('Final PASO balance:', pasoBalance);
 
     } catch (error) {
         console.error('Error getting PASO balance:', error);
@@ -292,48 +296,69 @@ async function getPasoBalance() {
 }
 
 /**
- * Extract token amount from UTXO hex (simplified parser)
- * Full implementation would use proper CBOR decoding
+ * Extract PASO amount from hex data
+ * Searches for policy ID and extracts the following amount
  */
-function extractTokenAmount(utxoHex, assetId) {
+function extractPasoFromBalance(hex) {
     try {
-        // Find the asset in the UTXO
-        const assetIndex = utxoHex.indexOf(assetId);
-        if (assetIndex === -1) return 0;
+        const policyIndex = hex.indexOf(PASO_CONFIG.policyId);
+        if (policyIndex === -1) return 0;
 
-        // The amount typically follows the asset name in CBOR
-        // For tokens with small amounts, it's often encoded as a single byte
-        // This is a simplified extraction - works for most common cases
-        const afterAsset = utxoHex.substring(assetIndex + assetId.length);
+        // After policy ID (56 chars) comes asset name length + asset name + amount
+        const afterPolicy = hex.substring(policyIndex + PASO_CONFIG.policyId.length);
+        console.log('After policy ID:', afterPolicy.substring(0, 40));
 
-        // Try to extract a simple integer value
-        // CBOR encodes small integers (0-23) directly
-        // Larger integers have type prefix
-        if (afterAsset.length >= 2) {
-            const firstByte = parseInt(afterAsset.substring(0, 2), 16);
-
-            // CBOR major type 0 (unsigned int) values 0-23 are encoded directly
-            if (firstByte <= 23) {
-                return firstByte;
-            }
-            // 24 = 1 byte follows, 25 = 2 bytes follow, etc.
-            if (firstByte === 24 && afterAsset.length >= 4) {
-                return parseInt(afterAsset.substring(2, 4), 16);
-            }
-            if (firstByte === 25 && afterAsset.length >= 6) {
-                return parseInt(afterAsset.substring(2, 6), 16);
-            }
-            if (firstByte === 26 && afterAsset.length >= 10) {
-                return parseInt(afterAsset.substring(2, 10), 16);
-            }
+        // Look for our asset name
+        const assetIndex = afterPolicy.indexOf(PASO_CONFIG.assetName);
+        if (assetIndex === -1) {
+            // Asset name not found with exact match, try to find amount after policy
+            return extractCborInt(afterPolicy);
         }
 
-        // If we found the asset but couldn't parse amount, assume at least 1
-        return 1;
+        // Get data after asset name
+        const afterAsset = afterPolicy.substring(assetIndex + PASO_CONFIG.assetName.length);
+        console.log('After asset name:', afterAsset.substring(0, 20));
+
+        return extractCborInt(afterAsset);
+
     } catch (e) {
-        console.error('Error parsing token amount:', e);
+        console.error('Error extracting PASO:', e);
         return 0;
     }
+}
+
+/**
+ * Extract CBOR-encoded integer from hex string
+ */
+function extractCborInt(hex) {
+    if (!hex || hex.length < 2) return 0;
+
+    const firstByte = parseInt(hex.substring(0, 2), 16);
+
+    // CBOR unsigned integers (major type 0)
+    if (firstByte <= 23) {
+        return firstByte;
+    }
+    if (firstByte === 24 && hex.length >= 4) {
+        return parseInt(hex.substring(2, 4), 16);
+    }
+    if (firstByte === 25 && hex.length >= 6) {
+        return parseInt(hex.substring(2, 6), 16);
+    }
+    if (firstByte === 26 && hex.length >= 10) {
+        return parseInt(hex.substring(2, 10), 16);
+    }
+    if (firstByte === 27 && hex.length >= 18) {
+        // 8-byte integer (for large numbers like 1 billion)
+        return parseInt(hex.substring(2, 18), 16);
+    }
+
+    // CBOR major type 1b prefix for 8-byte uint
+    if (firstByte === 0x1b && hex.length >= 18) {
+        return parseInt(hex.substring(2, 18), 16);
+    }
+
+    return 0;
 }
 
 /**
