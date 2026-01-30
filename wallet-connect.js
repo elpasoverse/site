@@ -405,11 +405,15 @@ function updateWalletUI() {
     }
 
     if (pasoBalanceEl) {
+        console.log('Updating balance display. walletConnected:', walletConnected, 'pasoBalance:', pasoBalance);
         if (walletConnected) {
             pasoBalanceEl.textContent = pasoBalance.toLocaleString();
+            console.log('Set balance to:', pasoBalanceEl.textContent);
         } else {
             pasoBalanceEl.textContent = '—';
         }
+    } else {
+        console.log('pasoBalanceEl not found!');
     }
 
     // Update NFT status if element exists
