@@ -16,6 +16,11 @@ const SIGNUP_BONUS = 25;
  * Fetches user's PASO credits balance from Firebase
  */
 async function initPointsSystem() {
+    // Prevent multiple initializations
+    if (pointsSystemInitialized) {
+        return;
+    }
+
     // Wait for auth state to be ready
     const authenticated = await waitForAuthState();
 
@@ -35,6 +40,7 @@ async function initPointsSystem() {
     try {
         userPasoCredits = await getUserBalance(userId);
         updatePointsUI();
+        console.log('Points system initialized. Balance:', userPasoCredits);
     } catch (error) {
         console.error('Error initializing points system:', error);
         userPasoCredits = 0;
@@ -68,6 +74,8 @@ function resolvePointsCallbacks() {
 
 /**
  * Get user's PASO credits balance from Firestore
+ * If user document doesn't exist (for users who signed up before points system),
+ * creates one with the signup bonus.
  * @param {string} userId - Firebase user ID
  * @returns {Promise<number>} - User's PASO credits balance
  */
@@ -84,8 +92,18 @@ async function getUserBalance(userId) {
             const data = userDoc.data();
             return data.pasoCredits || 0;
         } else {
-            // User document doesn't exist - this shouldn't happen after signup
-            // but handle gracefully
+            // User document doesn't exist - this is an existing user from before
+            // the points system was implemented. Create their document now with signup bonus.
+            console.log('Creating user document for existing user:', userId);
+
+            // Get user email from Firebase Auth
+            const userEmail = typeof getCurrentUserEmail === 'function' ? getCurrentUserEmail() : null;
+            const displayName = typeof getUserDisplayName === 'function' ? getUserDisplayName() : null;
+
+            const created = await createUserWithCredits(userId, userEmail || 'unknown', displayName);
+            if (created) {
+                return SIGNUP_BONUS;
+            }
             return 0;
         }
     } catch (error) {
@@ -96,7 +114,7 @@ async function getUserBalance(userId) {
 
 /**
  * Create a new user document with initial PASO credits
- * Called after successful signup
+ * Called after successful signup or for existing users without a document
  * @param {string} userId - Firebase user ID
  * @param {string} email - User's email
  * @param {string} displayName - Optional display name
@@ -108,24 +126,35 @@ async function createUserWithCredits(userId, email, displayName = null) {
         return false;
     }
 
+    if (!userId) {
+        console.error('Cannot create user document: userId is required');
+        return false;
+    }
+
     try {
-        // Check if user already exists (e.g., re-registration attempt)
+        // Check if user already exists (e.g., re-registration attempt or race condition)
         const existingUser = await db.collection('users').doc(userId).get();
         if (existingUser.exists) {
-            console.log('User already exists, not overwriting');
+            console.log('User document already exists, loading balance');
             userPasoCredits = existingUser.data().pasoCredits || 0;
+            updatePointsUI();
             return true;
         }
 
+        // Determine email and display name
+        const userEmail = email || 'unknown@elpasoverse.com';
+        const userName = displayName || (userEmail !== 'unknown@elpasoverse.com' ? userEmail.split('@')[0] : 'Pioneer');
+
         // Create user document with signup bonus
         const userData = {
-            email: email,
-            displayName: displayName || email.split('@')[0],
+            email: userEmail,
+            displayName: userName,
             pasoCredits: SIGNUP_BONUS,
             createdAt: firebase.firestore.FieldValue.serverTimestamp(),
             updatedAt: firebase.firestore.FieldValue.serverTimestamp()
         };
 
+        console.log('Creating user document for:', userId, userData);
         await db.collection('users').doc(userId).set(userData);
 
         // Log the signup bonus transaction
@@ -138,6 +167,7 @@ async function createUserWithCredits(userId, email, displayName = null) {
         return true;
     } catch (error) {
         console.error('Error creating user document:', error);
+        console.error('Error details:', error.code, error.message);
         return false;
     }
 }
@@ -337,18 +367,97 @@ function hasEnoughCredits(requiredAmount) {
 
 // Initialize points system when DOM is ready
 if (typeof window !== 'undefined') {
-    window.addEventListener('DOMContentLoaded', initPointsSystem);
+    window.addEventListener('DOMContentLoaded', function() {
+        // Small delay to ensure Firebase and auth.js are fully loaded
+        setTimeout(initPointsSystem, 300);
+    });
 
-    // Also listen for auth state changes to refresh balance
-    if (typeof auth !== 'undefined' && auth) {
-        auth.onAuthStateChanged((user) => {
-            if (user) {
-                // Small delay to ensure auth.js has finished processing
-                setTimeout(initPointsSystem, 100);
-            } else {
-                userPasoCredits = 0;
-                updatePointsUI();
-            }
-        });
+    // Also listen for auth state changes to handle login/logout
+    window.addEventListener('load', function() {
+        if (typeof auth !== 'undefined' && auth) {
+            auth.onAuthStateChanged((user) => {
+                if (user) {
+                    // User logged in - reinitialize if needed
+                    if (!pointsSystemInitialized) {
+                        initPointsSystem();
+                    } else {
+                        // Already initialized, just refresh balance
+                        refreshPasoCredits();
+                    }
+                } else {
+                    // User logged out - reset state
+                    userPasoCredits = 0;
+                    pointsSystemInitialized = false;
+                    updatePointsUI();
+                }
+            });
+        }
+    });
+}
+
+/**
+ * DEBUG FUNCTION - Delete user document to test signup flow
+ * Call from browser console: await debugResetUser()
+ * This will delete the user's Firestore document so they get the signup bonus again
+ */
+async function debugResetUser() {
+    if (!db) {
+        console.error('Firestore not available');
+        return;
     }
+
+    const userId = getCurrentUserId();
+    if (!userId) {
+        console.error('No user logged in');
+        return;
+    }
+
+    try {
+        // Delete user document
+        await db.collection('users').doc(userId).delete();
+        console.log('User document deleted for:', userId);
+
+        // Delete points history for this user
+        const historySnapshot = await db.collection('pointsHistory')
+            .where('userId', '==', userId)
+            .get();
+
+        const batch = db.batch();
+        historySnapshot.docs.forEach(doc => {
+            batch.delete(doc.ref);
+        });
+        await batch.commit();
+        console.log('Points history deleted');
+
+        // Reset local state
+        userPasoCredits = 0;
+        pointsSystemInitialized = false;
+        updatePointsUI();
+
+        console.log('User reset complete. Refresh the page to get signup bonus.');
+        return true;
+    } catch (error) {
+        console.error('Error resetting user:', error);
+        return false;
+    }
+}
+
+/**
+ * DEBUG FUNCTION - Force create user document with signup bonus
+ * Call from browser console: await debugForceCreateUser()
+ */
+async function debugForceCreateUser() {
+    const userId = getCurrentUserId();
+    const email = getCurrentUserEmail();
+    const displayName = getUserDisplayName();
+
+    if (!userId) {
+        console.error('No user logged in');
+        return;
+    }
+
+    console.log('Force creating user document for:', userId, email);
+    const result = await createUserWithCredits(userId, email, displayName);
+    console.log('Result:', result, 'Balance:', userPasoCredits);
+    return result;
 }
