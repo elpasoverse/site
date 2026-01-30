@@ -320,7 +320,11 @@ function updatePointsUI() {
     // Update main balance display
     const balanceElements = document.querySelectorAll('#pasoBalance, .paso-balance, [data-paso-balance]');
     balanceElements.forEach(el => {
-        el.textContent = userPasoCredits.toLocaleString();
+        if (pointsSystemInitialized) {
+            el.textContent = userPasoCredits.toLocaleString();
+        } else {
+            el.textContent = '...'; // Loading state
+        }
     });
 
     // Update voting power (if governance section exists)
@@ -333,6 +337,8 @@ function updatePointsUI() {
     window.dispatchEvent(new CustomEvent('pasoBalanceUpdated', {
         detail: { balance: userPasoCredits }
     }));
+
+    console.log('UI updated. Balance:', userPasoCredits, 'Initialized:', pointsSystemInitialized);
 }
 
 /**
