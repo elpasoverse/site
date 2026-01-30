@@ -56,6 +56,9 @@ function getAvailableWallets() {
  * Initialize wallet on page load
  */
 async function initWallet() {
+    // Wait a moment for wallet extensions to inject
+    await new Promise(resolve => setTimeout(resolve, 500));
+
     const savedWallet = localStorage.getItem('cardanoWallet');
     const savedAddress = localStorage.getItem('walletAddress');
 
@@ -65,6 +68,16 @@ async function initWallet() {
     }
 
     updateWalletUI();
+}
+
+/**
+ * Refresh PASO balance (can be called manually)
+ */
+async function refreshPasoBalance() {
+    if (walletConnected && walletApi) {
+        await getPasoBalance();
+        updateWalletUI();
+    }
 }
 
 /**
@@ -191,6 +204,13 @@ async function connectWallet(walletId) {
         // Update UI
         updateWalletUI();
 
+        // Retry balance fetch if it failed (race condition workaround)
+        if (pasoBalance === 0) {
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            await getPasoBalance();
+            updateWalletUI();
+        }
+
         // Dispatch event for other scripts
         window.dispatchEvent(new CustomEvent('walletConnected', {
             detail: { address: walletAddress, balance: pasoBalance }
@@ -221,6 +241,13 @@ async function reconnectWallet(walletId) {
                 walletAddress = localStorage.getItem('walletAddress');
                 await getPasoBalance();
                 updateWalletUI();
+
+                // Retry balance fetch if it failed (race condition workaround)
+                if (pasoBalance === 0) {
+                    await new Promise(resolve => setTimeout(resolve, 1000));
+                    await getPasoBalance();
+                    updateWalletUI();
+                }
             }
         }
     } catch (error) {
