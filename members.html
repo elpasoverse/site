@@ -2309,14 +2309,21 @@
                 }
             }
 
-            // For multiple items, open each payment link (user will need to complete separately)
-            // Or show a message
-            alert('Please purchase items one at a time. Removing other items from cart.');
-            const firstItem = cart[0];
-            cart = [firstItem];
-            saveCart();
-            if (PAYMENT_LINKS[firstItem.key]) {
-                window.location.href = PAYMENT_LINKS[firstItem.key];
+            // For multiple items, let user choose which to purchase first
+            let message = 'You have ' + cart.length + ' items. Which would you like to purchase?\n\n';
+            cart.forEach((item, index) => {
+                message += (index + 1) + '. ' + item.name + ' ($' + item.price.toFixed(2) + ')\n';
+            });
+            message += '\nEnter the number (1-' + cart.length + '):';
+
+            const choice = prompt(message);
+            const index = parseInt(choice) - 1;
+
+            if (index >= 0 && index < cart.length) {
+                const item = cart[index];
+                if (PAYMENT_LINKS[item.key]) {
+                    window.location.href = PAYMENT_LINKS[item.key];
+                }
             }
         }
 
