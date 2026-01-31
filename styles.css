@@ -17,7 +17,7 @@ html {
 }
 
 body {
-    font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
+    font-family: 'Avenir Next Condensed', 'Avenir Next', Avenir, sans-serif;
     background: #f4ead5;
     overflow-x: hidden;
     background-image:
@@ -54,7 +54,7 @@ body {
 
 /* Typography */
 h1, h2 {
-    font-family: 'Playfair Display', Georgia, serif;
+    font-family: 'Avenir Next Condensed', 'Avenir Next', Avenir, sans-serif;
     font-weight: 700;
     color: #3A2820;
     letter-spacing: 0.05em;
@@ -225,7 +225,7 @@ p {
 }
 
 .vision-lead {
-    font-family: 'Playfair Display', Georgia, serif;
+    font-family: 'Avenir Next Condensed', 'Avenir Next', Avenir, sans-serif;
     font-size: 1.3rem;
     font-style: italic;
     color: #8B4513;
@@ -263,7 +263,7 @@ p {
 
 .vision-signature {
     text-align: right !important;
-    font-family: 'Playfair Display', Georgia, serif;
+    font-family: 'Avenir Next Condensed', 'Avenir Next', Avenir, sans-serif;
     font-size: 1.2rem;
     color: #8B4513;
     margin-top: 2rem !important;
@@ -519,7 +519,7 @@ p {
 }
 
 .pillar-text-box h3 {
-    font-family: 'Playfair Display', Georgia, serif;
+    font-family: 'Avenir Next Condensed', 'Avenir Next', Avenir, sans-serif;
     font-size: 2rem;
     color: #FFFFFF;
     margin-bottom: 0.75rem;
@@ -657,7 +657,7 @@ p {
 .collection h2 {
     color: #EDD9C0;
     text-align: center;
-    font-family: 'Playfair Display', Georgia, serif;
+    font-family: 'Avenir Next Condensed', 'Avenir Next', Avenir, sans-serif;
     font-size: 2.5rem;
     font-weight: 700;
 }
@@ -748,7 +748,7 @@ p {
 }
 
 .film-poster-title {
-    font-family: 'Playfair Display', Georgia, serif;
+    font-family: 'Avenir Next Condensed', 'Avenir Next', Avenir, sans-serif;
     font-size: 1.3rem;
     color: #F5E6D3;
     margin-bottom: 0.25rem;
@@ -803,7 +803,7 @@ p {
     color: #F5E6D3;
     border: 2px solid #C9A961;
     text-decoration: none;
-    font-family: 'Playfair Display', Georgia, serif;
+    font-family: 'Avenir Next Condensed', 'Avenir Next', Avenir, sans-serif;
     font-size: 1rem;
     font-weight: 400;
     letter-spacing: 0.1em;
@@ -826,7 +826,7 @@ p {
     color: #3A2820;
     border: 2px solid #C9A961;
     text-decoration: none;
-    font-family: 'Playfair Display', Georgia, serif;
+    font-family: 'Avenir Next Condensed', 'Avenir Next', Avenir, sans-serif;
     font-size: 1rem;
     font-weight: 700;
     letter-spacing: 0.1em;
@@ -880,7 +880,7 @@ p {
 }
 
 .paso-header {
-    font-family: 'Playfair Display', Georgia, serif;
+    font-family: 'Avenir Next Condensed', 'Avenir Next', Avenir, sans-serif;
     font-size: 2.2rem;
     color: #3A2820;
     margin: 3rem 0 1rem 0;
@@ -952,7 +952,7 @@ p {
     transform: translateX(-50%);
     background: linear-gradient(135deg, #C9A961 0%, #C9A961 100%);
     color: #1a1a1a;
-    font-family: 'Playfair Display', Georgia, serif;
+    font-family: 'Avenir Next Condensed', 'Avenir Next', Avenir, sans-serif;
     font-weight: 900;
     font-size: 0.75rem;
     padding: 0.5rem 1.5rem;
@@ -964,7 +964,7 @@ p {
 }
 
 .phase-card h4 {
-    font-family: 'Playfair Display', Georgia, serif;
+    font-family: 'Avenir Next Condensed', 'Avenir Next', Avenir, sans-serif;
     font-size: 1.65rem;
     color: #3A2820;
     margin: 0.5rem 0 1.25rem 0;
@@ -1151,7 +1151,7 @@ p {
 }
 
 .distribution-stat {
-    font-family: 'Playfair Display', Georgia, serif;
+    font-family: 'Avenir Next Condensed', 'Avenir Next', Avenir, sans-serif;
     font-size: 3rem;
     font-weight: 700;
     color: #8B4513;
@@ -1192,7 +1192,7 @@ p {
 }
 
 .action-section h4 {
-    font-family: 'Playfair Display', Georgia, serif;
+    font-family: 'Avenir Next Condensed', 'Avenir Next', Avenir, sans-serif;
     font-size: 1.6rem;
     color: #8B4513;
     margin-bottom: 1.5rem;
@@ -1252,7 +1252,7 @@ p {
     background: transparent;
     color: #8B4513;
     border: none;
-    font-family: 'Playfair Display', Georgia, serif;
+    font-family: 'Avenir Next Condensed', 'Avenir Next', Avenir, sans-serif;
     font-size: 0.95rem;
     font-weight: 400;
     letter-spacing: 0.05em;
@@ -1309,7 +1309,7 @@ p {
 }
 
 .contact-signup-box h3 {
-    font-family: 'Playfair Display', Georgia, serif;
+    font-family: 'Avenir Next Condensed', 'Avenir Next', Avenir, sans-serif;
     font-size: 2rem;
     color: #3A2820;
     margin-bottom: 1rem;
@@ -1360,7 +1360,7 @@ p {
     color: #1a1a1a;
     border: none;
     border-radius: 6px;
-    font-family: 'Playfair Display', Georgia, serif;
+    font-family: 'Avenir Next Condensed', 'Avenir Next', Avenir, sans-serif;
     font-size: 1rem;
     font-weight: 700;
     text-transform: uppercase;
@@ -1540,7 +1540,7 @@ p {
 }
 
 .email-bar-text strong {
-    font-family: 'Playfair Display', Georgia, serif;
+    font-family: 'Avenir Next Condensed', 'Avenir Next', Avenir, sans-serif;
     font-size: 1.1rem;
     color: #F5E6D3;
     font-weight: 700;
@@ -1588,7 +1588,7 @@ p {
     color: #1a1a1a;
     border: none;
     border-radius: 6px;
-    font-family: 'Playfair Display', Georgia, serif;
+    font-family: 'Avenir Next Condensed', 'Avenir Next', Avenir, sans-serif;
     font-size: 0.95rem;
     font-weight: 700;
     text-transform: uppercase;

@@ -384,36 +384,47 @@
                     </div>
                 </div>
 
-                <!-- Motion Print Streaming -->
+                <!-- Community Music -->
                 <div style="background: linear-gradient(135deg, #2c1810 0%, #4a2511 100%); border: 3px solid #c9a860; padding: 2rem; margin-bottom: 2rem; border-radius: 8px;">
                     <div style="display: flex; align-items: flex-start; gap: 2rem;">
                         <div style="flex: 1;">
                             <div style="display: inline-block; background: #c9a860; color: #1a1a1a; padding: 0.25rem 0.75rem; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em; margin-bottom: 0.75rem;">EXCLUSIVE</div>
-                            <h4 style="font-family: 'Avenir Next Condensed', 'Avenir Next', Avenir, sans-serif; font-size: 2rem; font-weight: 900; color: #f9f3e3; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.05em;">Motion Print Screening Room</h4>
-                            <p style="color: #d4c4a8; font-style: italic; margin-bottom: 1rem; font-size: 1.1rem;">Exclusive Film Frame Collection</p>
+                            <h4 style="font-family: 'Avenir Next Condensed', 'Avenir Next', Avenir, sans-serif; font-size: 2rem; font-weight: 900; color: #f9f3e3; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.05em;">Frontier Soundtracks</h4>
+                            <p style="color: #d4c4a8; font-style: italic; margin-bottom: 1rem; font-size: 1.1rem;">Music Created by the Community</p>
                             <p style="color: #e8dcc8; line-height: 1.6; margin-bottom: 1.5rem;">
-                                Stream our exclusive Motion Print collection in the closed El Paso Verse screening room - before the films go to the public. Each frame is a one-of-one piece of cinematic art, shot on authentic Kodak motion picture film stock.
+                                Original compositions crafted by talented community members, capturing the spirit of the 1880 frontier. These soundtracks accompany the El Paso Verse films and immersive experiences.
                             </p>
-                            <div style="display: flex; align-items: flex-start; gap: 1rem; margin-bottom: 1.5rem; flex-wrap: wrap;">
-                                <div style="background: #1a1a1a; border: 2px solid #c9a860; padding: 0.75rem 1.25rem; border-radius: 4px;">
-                                    <div style="color: #c9a860; font-size: 0.75rem; letter-spacing: 0.1em; font-weight: 600; margin-bottom: 0.25rem;">REQUIRES</div>
-                                    <div style="color: #f9f3e3; font-size: 1.05rem; font-weight: 700; line-height: 1.4;">300 PASO Balance<br><span style="color: #c9a860;">+</span><br>Genesis Collection</div>
+
+                            <!-- Music Player -->
+                            <div id="musicPlayerPortal" style="background: rgba(0,0,0,0.4); border: 2px solid #c9a860; padding: 1.5rem; border-radius: 8px;">
+                                <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                                    <button class="music-toggle-portal" id="musicTogglePortal" title="Play Music" style="background: #c9a860; border: none; width: 50px; height: 50px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; flex-shrink: 0;">
+                                        <svg class="play-icon-portal" viewBox="0 0 24 24" fill="#1a1a1a" style="width: 24px; height: 24px;"><path d="M8 5v14l11-7z"/></svg>
+                                        <svg class="pause-icon-portal" viewBox="0 0 24 24" fill="#1a1a1a" style="width: 24px; height: 24px; display: none;"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+                                    </button>
+                                    <div style="flex: 1;">
+                                        <div id="musicTrackPortal" style="color: #f9f3e3; font-size: 1.1rem; font-weight: 700;">Frontier Music</div>
+                                        <div id="musicArtistPortal" style="color: #c9a860; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em;">Artist</div>
+                                    </div>
+                                    <div style="display: flex; gap: 0.5rem;">
+                                        <button id="musicPrevPortal" title="Previous Track" style="background: transparent; border: 2px solid #c9a860; color: #c9a860; width: 40px; height: 40px; border-radius: 4px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;">
+                                            <svg viewBox="0 0 24 24" fill="currentColor" style="width: 20px; height: 20px;"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg>
+                                        </button>
+                                        <button id="musicNextPortal" title="Next Track" style="background: transparent; border: 2px solid #c9a860; color: #c9a860; width: 40px; height: 40px; border-radius: 4px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;">
+                                            <svg viewBox="0 0 24 24" fill="currentColor" style="width: 20px; height: 20px;"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/></svg>
+                                        </button>
+                                    </div>
                                 </div>
-                                <div style="color: #d4c4a8; font-size: 0.9rem; flex: 1; min-width: 200px;">
-                                    <strong style="color: #f9f3e3;">Unlimited streaming</strong> for holders with both requirements
+
+                                <!-- Track List -->
+                                <div id="trackListPortal" style="max-height: 200px; overflow-y: auto; border-top: 1px solid rgba(201, 168, 97, 0.3); padding-top: 1rem; margin-top: 0.5rem;">
+                                    <!-- Tracks will be populated by JS -->
                                 </div>
                             </div>
-                            <button onclick="accessMotionPrint()" style="display: inline-block; background: #c9a860; color: #1a1a1a; padding: 1rem 2rem; font-weight: 700; border: none; border-radius: 4px; cursor: pointer; transition: all 0.3s ease; letter-spacing: 0.05em; font-size: 0.95rem;">
-                                STREAM MOTION PRINT →
-                            </button>
                         </div>
-                        <div style="flex: 0 0 320px; text-align: center;">
-                            <div style="background: #000; border: 3px solid #1a1a1a; transform: rotate(-1deg); box-shadow: 0 8px 20px rgba(0,0,0,0.4); position: relative; overflow: hidden;">
-                                <img src="assets/frame-1.png" alt="Motion Print Preview" style="width: 100%; height: auto; display: block;">
-                                <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(0,0,0,0.7); padding: 1rem; border-radius: 50%; width: 60px; height: 60px; display: flex; align-items: center; justify-content: center;">
-                                    <div style="width: 0; height: 0; border-style: solid; border-width: 12px 0 12px 20px; border-color: transparent transparent transparent #f9f3e3; margin-left: 4px;"></div>
-                                </div>
-                            </div>
+                        <div style="flex: 0 0 200px; text-align: center;">
+                            <div style="font-size: 6rem; opacity: 0.8;">🎵</div>
+                            <p style="color: #c9a860; font-size: 0.85rem; margin-top: 1rem;">8 Original Tracks</p>
                         </div>
                     </div>
                 </div>
@@ -1985,6 +1996,90 @@
             btn.disabled = false;
             btn.textContent = 'Update Password';
         });
+    </script>
+
+    <!-- Music Player Script -->
+    <script>
+        // Community Music Player
+        const playlistPortal = [
+            { title: 'Campo', artist: 'Kitosch', src: 'assets/music/Campo.m4a' },
+            { title: 'Forward Charge onto the Frontier', artist: 'Taizo', src: 'assets/music/Forward Charge onto the Frontier.m4a' },
+            { title: 'Bleak Horizon', artist: 'Kitosch', src: 'assets/music/Bleak Horizon.m4a' },
+            { title: 'Enemy Territory', artist: 'Kitosch', src: 'assets/music/Enemy Territory.m4a' },
+            { title: 'Far East of Yuma', artist: 'Smith', src: 'assets/music/Far East of Yuma.mp3' },
+            { title: 'Arrows', artist: 'Kitosch', src: 'assets/music/Arrows.m4a' },
+            { title: 'Law of the Jungle', artist: 'Smith', src: 'assets/music/Law of the Jungle.mp3' },
+            { title: 'Far East of Pecos', artist: 'Smith', src: 'assets/music/Far East of Pecos.mp3' }
+        ];
+
+        let currentTrackIndexPortal = 0;
+        let isPlayingPortal = false;
+        const audioPortal = new Audio();
+
+        const musicTogglePortal = document.getElementById('musicTogglePortal');
+        const musicTrackPortal = document.getElementById('musicTrackPortal');
+        const musicArtistPortal = document.getElementById('musicArtistPortal');
+        const musicPrevPortal = document.getElementById('musicPrevPortal');
+        const musicNextPortal = document.getElementById('musicNextPortal');
+        const playIconPortal = document.querySelector('.play-icon-portal');
+        const pauseIconPortal = document.querySelector('.pause-icon-portal');
+        const trackListPortal = document.getElementById('trackListPortal');
+
+        // Populate track list
+        function populateTrackList() {
+            trackListPortal.innerHTML = playlistPortal.map((track, index) => `
+                <div onclick="loadTrackPortal(${index}); togglePlayPortal();" style="display: flex; justify-content: space-between; align-items: center; padding: 0.75rem; cursor: pointer; border-radius: 4px; transition: background 0.2s; ${index === currentTrackIndexPortal ? 'background: rgba(201, 168, 97, 0.2);' : ''}" onmouseover="this.style.background='rgba(201, 168, 97, 0.15)'" onmouseout="this.style.background='${index === currentTrackIndexPortal ? 'rgba(201, 168, 97, 0.2)' : 'transparent'}'">
+                    <div>
+                        <div style="color: #f9f3e3; font-size: 0.95rem; font-weight: 600;">${track.title}</div>
+                        <div style="color: #c9a860; font-size: 0.8rem;">${track.artist}</div>
+                    </div>
+                    <div style="color: #c9a860; font-size: 1.2rem;">${index === currentTrackIndexPortal && isPlayingPortal ? '▶' : ''}</div>
+                </div>
+            `).join('');
+        }
+
+        function loadTrackPortal(index) {
+            currentTrackIndexPortal = index;
+            if (currentTrackIndexPortal < 0) currentTrackIndexPortal = playlistPortal.length - 1;
+            if (currentTrackIndexPortal >= playlistPortal.length) currentTrackIndexPortal = 0;
+
+            audioPortal.src = playlistPortal[currentTrackIndexPortal].src;
+            musicTrackPortal.textContent = playlistPortal[currentTrackIndexPortal].title;
+            musicArtistPortal.textContent = playlistPortal[currentTrackIndexPortal].artist;
+
+            populateTrackList();
+
+            if (isPlayingPortal) {
+                audioPortal.play();
+            }
+        }
+
+        function togglePlayPortal() {
+            if (isPlayingPortal) {
+                audioPortal.pause();
+                playIconPortal.style.display = 'block';
+                pauseIconPortal.style.display = 'none';
+            } else {
+                audioPortal.play();
+                playIconPortal.style.display = 'none';
+                pauseIconPortal.style.display = 'block';
+            }
+            isPlayingPortal = !isPlayingPortal;
+            populateTrackList();
+        }
+
+        if (musicTogglePortal) {
+            musicTogglePortal.addEventListener('click', togglePlayPortal);
+            musicPrevPortal.addEventListener('click', () => { loadTrackPortal(currentTrackIndexPortal - 1); if (!isPlayingPortal) togglePlayPortal(); });
+            musicNextPortal.addEventListener('click', () => { loadTrackPortal(currentTrackIndexPortal + 1); if (!isPlayingPortal) togglePlayPortal(); });
+
+            // Auto-advance to next track when current ends
+            audioPortal.addEventListener('ended', () => loadTrackPortal(currentTrackIndexPortal + 1));
+
+            // Initialize
+            loadTrackPortal(0);
+            populateTrackList();
+        }
     </script>
 </body>
 </html>
