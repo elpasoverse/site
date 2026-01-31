@@ -493,7 +493,7 @@
                                 <span style="background: rgba(201, 168, 97, 0.2); color: #c9a860; padding: 0.3rem 0.6rem; font-size: 0.75rem; border-radius: 4px;">4K Artwork Included</span>
                             </div>
                             <a href="https://book.io/book/the-el-paso-verse-visionpaper-v1-7/" target="_blank" style="display: inline-block; background: #c9a860; color: #1a1a1a; padding: 1rem 2rem; font-weight: 700; text-decoration: none; border-radius: 4px; transition: all 0.3s ease; letter-spacing: 0.05em; font-size: 0.95rem;">
-                                VIEW ON BOOK.IO — $5 →
+                                VIEW AND BUY ON BOOK.IO →
                             </a>
                         </div>
                         <div style="flex: 0 0 280px; text-align: center;">
@@ -1406,15 +1406,40 @@
 
         // Dashboard update function
         function updateDashboard() {
-            // Demo PASO balance (simulated)
-            const demoPasoBalance = 0;
-            document.getElementById('pasoBalance').textContent = demoPasoBalance.toLocaleString();
+            // Get PASO balance - check Firebase first, fallback to demo
+            let pasoBalance = 25; // Default demo balance
+
+            // Try to get from points system (Firebase)
+            if (typeof getUserPoints === 'function') {
+                getUserPoints().then(points => {
+                    if (points > 0) {
+                        updateBalanceDisplay(points);
+                    }
+                }).catch(() => {});
+            }
+
+            // Check localStorage for saved balance, default to 25 for demo
+            const savedBalance = localStorage.getItem('pasoBalance');
+            if (savedBalance) {
+                pasoBalance = parseInt(savedBalance) || 25;
+            } else {
+                pasoBalance = 25; // Demo balance
+            }
+
+            updateBalanceDisplay(pasoBalance);
+        }
+
+        function updateBalanceDisplay(balance) {
+            document.getElementById('pasoBalance').textContent = balance.toLocaleString();
+
+            // Save to localStorage for gazette access check
+            localStorage.setItem('pasoBalance', balance.toString());
 
             // Update voting power based on PASO balance
-            document.getElementById('votingPower').innerHTML = demoPasoBalance.toLocaleString() + ' <span style="font-size: 1rem; font-weight: 400;">votes</span>';
+            document.getElementById('votingPower').innerHTML = balance.toLocaleString() + ' <span style="font-size: 1rem; font-weight: 400;">votes</span>';
             const proposalVotingPower = document.getElementById('proposalVotingPower');
             if (proposalVotingPower) {
-                proposalVotingPower.textContent = demoPasoBalance.toLocaleString() + ' votes';
+                proposalVotingPower.textContent = balance.toLocaleString() + ' votes';
             }
 
             // Check El Paso Pass status
@@ -1432,7 +1457,7 @@
 
                 // Update badge display for Genesis holder
                 updateBadgeDisplay(hasNFT, false, false);
-            } else if (demoPasoBalance >= 1000) {
+            } else if (balance >= 1000) {
                 // Sufficient PASO balance for Pass (TBD threshold)
                 elPasoPassStatus.innerHTML = `
                     <div style="background: rgba(45, 138, 45, 0.2); border-left: 3px solid #2d8a2d; padding: 1rem; border-radius: 4px;">

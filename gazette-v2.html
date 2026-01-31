@@ -725,16 +725,16 @@
         <div class="paso-gate-box">
             <h2>★ Exclusive Edition ★</h2>
             <p>This historical gazette is reserved for members of the El Paso Verse community.</p>
-            <div class="paso-requirement">Requires: 1 PASO Credit<br><span style="font-size: 0.9rem; font-weight: 400;">or Genesis Collection ownership</span></div>
+            <div class="paso-requirement">Requires: 20 PASO Balance<br><span style="font-size: 0.9rem; font-weight: 400;">or Genesis Collection ownership</span></div>
             <p style="font-style: italic; font-size: 0.9rem;">
                 Step back into 1880 and witness the birth of Breakwater through authentic frontier journalism.
             </p>
             <div style="margin-top: 2rem;">
-                <button class="paso-gate-button" onclick="checkPasoAccess()">Verify Access</button>
+                <button class="paso-gate-button" onclick="purchaseGazetteAccess()">Purchase Access — $2.99</button>
                 <button class="paso-gate-button secondary" onclick="window.location.href='members.html'">Return to Portal</button>
             </div>
             <p style="font-size: 0.85rem; color: #8b7355; margin-top: 1.5rem; font-style: italic;">
-                Sign in to the Community Portal to access with your PASO credits
+                Or sign in to the Community Portal with 20+ PASO for free access
             </p>
         </div>
     </div>
@@ -1241,17 +1241,18 @@
         }
 
         async function checkExistingAccess() {
-            // Wait for auth state
-            const authenticated = await waitForAuthState();
-
-            if (!authenticated) {
-                // User not logged in - show gate
-                return;
-            }
+            const REQUIRED_PASO = 20;
 
             // Check for NFT ownership (permanent access)
             const hasNFT = localStorage.getItem('nftVerified') === 'true';
             if (hasNFT) {
+                document.getElementById('pasoGate').classList.add('hidden');
+                return;
+            }
+
+            // Check for purchased access
+            const gazettePurchased = localStorage.getItem('gazettePurchased') === 'true';
+            if (gazettePurchased) {
                 document.getElementById('pasoGate').classList.add('hidden');
                 return;
             }
@@ -1269,10 +1270,39 @@
                 }
             }
 
-            // Check if user still has enough credits
-            const balance = await waitForPointsSystem();
-            if (balance >= 1) {
+            // Check localStorage for PASO balance (from portal)
+            const storedBalance = localStorage.getItem('pasoBalance');
+            if (storedBalance && parseInt(storedBalance) >= REQUIRED_PASO) {
                 document.getElementById('pasoGate').classList.add('hidden');
+                return;
+            }
+
+            // Try Firebase balance as fallback
+            try {
+                const authenticated = await waitForAuthState();
+                if (authenticated) {
+                    const balance = await waitForPointsSystem();
+                    if (balance >= REQUIRED_PASO) {
+                        document.getElementById('pasoGate').classList.add('hidden');
+                        return;
+                    }
+                }
+            } catch (e) {
+                console.log('Firebase check failed, using localStorage only');
+            }
+        }
+
+        function purchaseGazetteAccess() {
+            // Stripe payment link for gazette
+            const stripePaymentLink = 'https://buy.stripe.com/YOUR_GAZETTE_PAYMENT_LINK';
+
+            // For demo, just grant access
+            if (stripePaymentLink.includes('YOUR_')) {
+                alert('Stripe payment link not configured yet.\n\nFor demo purposes, access will be granted.');
+                localStorage.setItem('gazettePurchased', 'true');
+                document.getElementById('pasoGate').classList.add('hidden');
+            } else {
+                window.location.href = stripePaymentLink;
             }
         }
 
