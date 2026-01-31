@@ -477,6 +477,31 @@
                     </div>
                 </div>
 
+                <!-- VisionPaper -->
+                <div style="background: linear-gradient(135deg, #2c1810 0%, #4a2511 100%); border: 3px solid #c9a860; padding: 2rem; margin-bottom: 2rem; border-radius: 8px;">
+                    <div style="display: flex; align-items: flex-start; gap: 2rem;">
+                        <div style="flex: 1;">
+                            <div style="display: inline-block; background: #c9a860; color: #1a1a1a; padding: 0.25rem 0.75rem; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em; margin-bottom: 0.75rem;">FOUNDATIONAL</div>
+                            <h4 style="font-family: 'Avenir Next Condensed', 'Avenir Next', Avenir, sans-serif; font-size: 2rem; font-weight: 900; color: #f9f3e3; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.05em;">Own The VisionPaper</h4>
+                            <p style="color: #d4c4a8; font-style: italic; margin-bottom: 1rem; font-size: 1.1rem;">By Harrison West • 3,000 Numbered Editions</p>
+                            <p style="color: #e8dcc8; line-height: 1.6; margin-bottom: 1.5rem;">
+                                The foundational blueprint for the El Paso Verse — an immersive ecosystem designed to unite a global community in bringing to life a groundbreaking physical destination permanently set in 1880. More than documentation, it's a blueprint carved in dust, mesquite, and cinematic fire.
+                            </p>
+                            <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem;">
+                                <span style="background: rgba(201, 168, 97, 0.2); color: #c9a860; padding: 0.3rem 0.6rem; font-size: 0.75rem; border-radius: 4px;">409 Unique Covers</span>
+                                <span style="background: rgba(201, 168, 97, 0.2); color: #c9a860; padding: 0.3rem 0.6rem; font-size: 0.75rem; border-radius: 4px;">241 One-of-One Editions</span>
+                                <span style="background: rgba(201, 168, 97, 0.2); color: #c9a860; padding: 0.3rem 0.6rem; font-size: 0.75rem; border-radius: 4px;">4K Artwork Included</span>
+                            </div>
+                            <a href="https://book.io/book/the-el-paso-verse-visionpaper-v1-7/" target="_blank" style="display: inline-block; background: #c9a860; color: #1a1a1a; padding: 1rem 2rem; font-weight: 700; text-decoration: none; border-radius: 4px; transition: all 0.3s ease; letter-spacing: 0.05em; font-size: 0.95rem;">
+                                VIEW ON BOOK.IO — $5 →
+                            </a>
+                        </div>
+                        <div style="flex: 0 0 280px; text-align: center;">
+                            <img src="assets/visionpaper-cover.png" alt="The VisionPaper Cover" style="width: 100%; height: auto; border: 3px solid #1a1a1a; transform: rotate(1deg); box-shadow: 0 8px 20px rgba(0,0,0,0.4); cursor: pointer;" onclick="window.open('https://book.io/book/the-el-paso-verse-visionpaper-v1-7/', '_blank')">
+                        </div>
+                    </div>
+                </div>
+
                 <div id="exclusiveContent" class="exclusive-grid">
                     <div class="loading-message">Loading exclusive content...</div>
                 </div>
@@ -756,7 +781,7 @@
                     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
                         <div style="background: rgba(0,0,0,0.3); padding: 1.25rem; border-radius: 4px; border-left: 3px solid #c9a860;">
                             <div style="color: #c9a860; font-size: 0.75rem; letter-spacing: 0.1em; font-weight: 600; margin-bottom: 0.5rem;">YOUR VOTING POWER</div>
-                            <div id="votingPower" style="font-size: 2rem; font-weight: 900; color: #f9f3e3;">0</div>
+                            <div id="votingPower" style="font-size: 2rem; font-weight: 900; color: #f9f3e3;">0 <span style="font-size: 1rem; font-weight: 400;">votes</span></div>
                         </div>
                         <div style="background: rgba(0,0,0,0.3); padding: 1.25rem; border-radius: 4px; border-left: 3px solid #c9a860;">
                             <div style="color: #c9a860; font-size: 0.75rem; letter-spacing: 0.1em; font-weight: 600; margin-bottom: 0.5rem;">PROPOSALS VOTED</div>
@@ -815,8 +840,15 @@
                                 </div>
                             </div>
 
+                            <!-- Your Votes on this Topic -->
+                            <div style="background: rgba(201, 168, 97, 0.1); border: 1px solid rgba(201, 168, 97, 0.3); padding: 0.75rem 1rem; border-radius: 4px; margin-top: 1.5rem; display: flex; align-items: center; gap: 0.5rem;">
+                                <img src="assets/paso-token.png" alt="PASO" style="width: 20px; height: 20px;">
+                                <span style="color: #c9a860; font-size: 0.85rem;">Your voting power on this topic:</span>
+                                <span id="proposalVotingPower" style="color: #f9f3e3; font-weight: 700; font-size: 0.9rem;">0 votes</span>
+                            </div>
+
                             <!-- Vote Buttons -->
-                            <div style="display: flex; gap: 1rem; margin-top: 1.5rem;">
+                            <div style="display: flex; gap: 1rem; margin-top: 1rem;">
                                 <button onclick="alert('Demo Mode: Voting will be enabled when governance contracts are deployed.')" style="flex: 1; background: #2d8a2d; color: #fff; padding: 1rem; font-weight: 700; border: 2px solid #2d8a2d; border-radius: 4px; cursor: pointer; transition: all 0.3s ease;">
                                     ✓ Vote For
                                 </button>
@@ -1379,7 +1411,11 @@
             document.getElementById('pasoBalance').textContent = demoPasoBalance.toLocaleString();
 
             // Update voting power based on PASO balance
-            document.getElementById('votingPower').textContent = demoPasoBalance.toLocaleString();
+            document.getElementById('votingPower').innerHTML = demoPasoBalance.toLocaleString() + ' <span style="font-size: 1rem; font-weight: 400;">votes</span>';
+            const proposalVotingPower = document.getElementById('proposalVotingPower');
+            if (proposalVotingPower) {
+                proposalVotingPower.textContent = demoPasoBalance.toLocaleString() + ' votes';
+            }
 
             // Check El Paso Pass status
             const hasNFT = localStorage.getItem('nftVerified') === 'true';
