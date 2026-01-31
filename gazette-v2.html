@@ -980,18 +980,22 @@
         <div class="rule-heavy"></div>
 
         <!-- Wanted: Lobo -->
-        <div class="newspaper-columns-2">
-            <div>
-                <h3 class="headline-small">MARSHAL SEEKS INFORMATION ON DANTE CORTEZ, KNOWN AS "LOBO"</h3>
-                <div class="rule-light"></div>
+        <article>
+            <h3 class="headline-small">MARSHAL SEEKS INFORMATION ON DANTE CORTEZ, KNOWN AS "LOBO"</h3>
+            <p class="subhead">Wanted for Questioning — No Formal Charges Filed</p>
+            <div class="rule-light"></div>
 
-                <p>Territorial authorities have circulated a photograph of a man identified as Dante Cortez, known throughout the borderlands by the alias "Lobo" — Spanish for wolf — in connection with several incidents reported along the Rio Grande crossing routes.</p>
+            <div class="newspaper-columns-2">
+                <div class="illustration">
+                    <img src="assets/lobo-wanted-poster.png" alt="Dante Cortez a.k.a. Lobo" style="object-fit: cover; object-position: center 22%; max-height: 450px;">
+                    <p class="caption">Dante Cortez, alias "Lobo" — Age 30-50 years<br>Sketch circulated by Marshal's Office</p>
+                </div>
+
+                <p class="drop-cap">Territorial authorities have circulated a photograph of a man identified as Dante Cortez, known throughout the borderlands by the alias "Lobo" — Spanish for wolf — in connection with several incidents reported along the Rio Grande crossing routes.</p>
 
                 <p>Marshal Avery Briggs states that Cortez is wanted for questioning, though no formal charges have been filed. "We have reports from multiple sources describing a figure matching this likeness," Briggs explained. "Some claim he operates as a guide. Others suggest less savory pursuits."</p>
 
-                <div class="pull-quote">
-                    "Some say he's a ghost. Others say he's just a man who prefers the company of wolves to people."
-                </div>
+                <p>"Some say he's a ghost. Others say he's just a man who prefers the company of wolves to people."</p>
 
                 <p>Traders report that Cortez occasionally appears at remote camps, offering services as a guide through difficult terrain. He accepts payment in silver or goods but never stays longer than necessary to conduct business.</p>
 
@@ -999,13 +1003,7 @@
 
                 <p>Anyone with information regarding Dante Cortez is asked to contact the Marshal's office. Discretion assured.</p>
             </div>
-
-            <div class="wanted-poster" style="padding: 0; border: none; background: transparent;">
-                <img src="assets/lobo-wanted-poster.png" alt="Wanted Poster - Dante Cortez a.k.a. Lobo" style="width: 100%; height: auto; border: none; margin: 0;">
-                <p style="margin-top: 1rem;"><strong>Known As:</strong> <strong>Dante Cortez, alias "Lobo"</strong></p>
-                <p><strong>Description:</strong> Age 30-50 years; Height approximately 6 feet; Lean, weathered appearance; Moves silently, speaks little; Known to frequent remote crossings and canyon trails.</p>
-            </div>
-        </div>
+        </article>
 
         <div class="rule-heavy"></div>
 
@@ -1201,6 +1199,9 @@
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
 
     <!-- Custom Scripts -->
+    <!-- Stripe.js -->
+    <script src="https://js.stripe.com/v3/"></script>
+
     <script src="firebase-config.js"></script>
     <script src="auth.js?v=2"></script>
     <script src="points-system.js?v=2"></script>
@@ -1293,17 +1294,20 @@
         }
 
         function purchaseGazetteAccess() {
-            // Stripe payment link for gazette
-            const stripePaymentLink = 'https://buy.stripe.com/YOUR_GAZETTE_PAYMENT_LINK';
+            // Initialize Stripe
+            const stripe = Stripe('pk_test_51SvmSJPz1lzmyAy84GBug0AnwlNi4OfvpUSGMBGdx79tU68eTuSEGRTcfVZMpcbmDdjmDQpsahOJmmH4HysfCtj3004JgZZeaD');
 
-            // For demo, just grant access
-            if (stripePaymentLink.includes('YOUR_')) {
-                alert('Stripe payment link not configured yet.\n\nFor demo purposes, access will be granted.');
-                localStorage.setItem('gazettePurchased', 'true');
-                document.getElementById('pasoGate').classList.add('hidden');
-            } else {
-                window.location.href = stripePaymentLink;
-            }
+            // Redirect to Stripe Checkout
+            stripe.redirectToCheckout({
+                lineItems: [{ price: 'price_1Svmc5Pz1lzmyAy8TqFSDj4d', quantity: 1 }],
+                mode: 'payment',
+                successUrl: window.location.origin + '/gazette-v2.html?payment=success',
+                cancelUrl: window.location.origin + '/gazette-v2.html?payment=cancelled'
+            }).then(function(result) {
+                if (result.error) {
+                    alert('Payment error: ' + result.error.message);
+                }
+            });
         }
 
         // Lightbox functionality
@@ -1320,7 +1324,16 @@
         }
 
         window.addEventListener('DOMContentLoaded', function() {
-            checkExistingAccess();
+            // Check for successful payment from Stripe
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('payment') === 'success') {
+                localStorage.setItem('gazettePurchased', 'true');
+                document.getElementById('pasoGate').classList.add('hidden');
+                // Clean up URL
+                window.history.replaceState({}, document.title, window.location.pathname);
+            } else {
+                checkExistingAccess();
+            }
 
             // Add click handlers to all gazette images
             const images = document.querySelectorAll('.illustration img, .illustration-full img, .wanted-poster img');

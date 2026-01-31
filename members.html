@@ -69,11 +69,11 @@
             <button class="tab-button active" data-tab="dashboard">Dashboard</button>
             <button class="tab-button" data-tab="exclusive">Exclusive Content</button>
             <button class="tab-button" data-tab="land">Land Targets</button>
-            <button class="tab-button" data-tab="governance">Governance</button>
             <button class="tab-button" data-tab="team">Development Team</button>
             <button class="tab-button" data-tab="browse">Browse Ideas</button>
             <button class="tab-button" data-tab="submit">Submit Your Idea</button>
             <button class="tab-button" data-tab="activity">My Activity</button>
+            <button class="tab-button" data-tab="governance">Governance</button>
         </nav>
 
         <!-- Tab Content -->
@@ -185,7 +185,7 @@
 
                 <!-- El Paso Pass Status -->
                 <div style="background: linear-gradient(135deg, #1a1a1a 0%, #2d2416 100%); border: 2px solid #c9a860; padding: 2rem; margin-bottom: 2rem; border-radius: 8px;">
-                    <div style="display: flex; align-items: flex-start; gap: 2rem;">
+                    <div class="exclusive-content-flex" style="display: flex; align-items: flex-start; gap: 2rem; flex-wrap: wrap;">
                         <div style="font-size: 3rem;">🎟️</div>
                         <div style="flex: 1;">
                             <h4 style="font-family: 'Avenir Next Condensed', 'Avenir Next', Avenir, sans-serif; font-size: 1.8rem; font-weight: 700; color: #f9f3e3; margin-bottom: 0.5rem;">El Paso Pass</h4>
@@ -356,33 +356,35 @@
                 <p>Members-only frontier updates, cinematic previews, and behind-the-scenes access.</p>
 
                 <!-- Featured: The El Paso Gazette -->
-                <div style="background: linear-gradient(135deg, #2c1810 0%, #4a2511 100%); border: 3px solid #c9a860; padding: 2rem; margin-bottom: 2rem; border-radius: 8px;">
-                    <div style="display: flex; align-items: flex-start; gap: 2rem;">
-                        <div style="flex: 1;">
+                <div class="exclusive-content-box" style="background: linear-gradient(135deg, #2c1810 0%, #4a2511 100%); border: 3px solid #c9a860; padding: 2rem; margin-bottom: 2rem; border-radius: 8px;">
+                    <div class="exclusive-content-flex" style="display: flex; align-items: flex-start; gap: 2rem; flex-wrap: wrap;">
+                        <div style="flex: 1; min-width: 280px;">
                             <div style="display: inline-block; background: #c9a860; color: #1a1a1a; padding: 0.25rem 0.75rem; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em; margin-bottom: 0.75rem;">EXCLUSIVE</div>
                             <h4 style="font-family: 'Avenir Next Condensed', 'Avenir Next', Avenir, sans-serif; font-size: 2rem; font-weight: 900; color: #f9f3e3; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.05em;">The El Paso Gazette</h4>
                             <p style="color: #d4c4a8; font-style: italic; margin-bottom: 1rem; font-size: 1.1rem;">Vol. I — No. 1 • January 30, 1880</p>
                             <p style="color: #e8dcc8; line-height: 1.6; margin-bottom: 1.5rem;">
                                 Take your first step into 1880 and experience the birth of Breakwater as it's happening with frontier journalism. Read exclusive dispatches about H. West's land petition, railroad scouts on the eastern ridge, and the mysterious lights reported on the northern plain.
                             </p>
-                            <div id="gazetteRequirementBox" style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; background: rgba(0,0,0,0.3); border: 1px solid rgba(201, 168, 97, 0.5); padding: 0.75rem 1rem; border-radius: 6px;">
-                                <img src="assets/paso-token.png" alt="PASO" style="width: 24px; height: 24px;">
-                                <span id="gazetteRequirementText" style="color: #c9a860; font-size: 0.9rem; flex: 1;"><strong>20 PASO</strong> required · Otherwise $2.99 USD</span>
-                                <button id="gazetteBuyBtn" onclick="purchaseGazette()" style="display: none; background: #c9a860; color: #1a1a1a; border: none; padding: 0.5rem 1rem; font-weight: 700; font-size: 0.8rem; border-radius: 4px; cursor: pointer;">ADD TO CART — $2.99</button>
+                            <div style="margin-bottom: 1rem;">
+                                <div id="gazetteRequirementBox" style="display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(0,0,0,0.3); border: 1px solid rgba(201, 168, 97, 0.5); padding: 0.75rem 1rem; border-radius: 6px;">
+                                    <img src="assets/paso-token.png" alt="PASO" style="width: 24px; height: 24px;">
+                                    <span id="gazetteRequirementText" style="color: #c9a860; font-size: 0.9rem;"><strong>20 PASO</strong> required · Otherwise $2.99 USD</span>
+                                    <button id="gazetteBuyBtn" onclick="purchaseGazette()" style="display: none; background: #c9a860; color: #1a1a1a; border: none; padding: 0.5rem 1rem; font-weight: 700; font-size: 0.8rem; border-radius: 4px; cursor: pointer; margin-left: 0.5rem;">ADD TO CART — $2.99</button>
+                                </div>
                             </div>
                             <a id="gazetteReadBtn" href="gazette-v2.html" style="display: inline-block; background: #c9a860; color: #1a1a1a; padding: 1rem 2rem; font-weight: 700; text-decoration: none; border-radius: 4px; transition: all 0.3s ease; letter-spacing: 0.05em; font-size: 0.95rem;">
                                 READ THE GAZETTE →
                             </a>
                         </div>
-                        <div style="flex: 0 0 320px; text-align: center;">
-                            <img src="assets/gazette-preview-thumb.png" alt="The El Paso Gazette Preview" style="width: 100%; height: auto; border: 3px solid #1a1a1a; transform: rotate(-1deg); box-shadow: 0 8px 20px rgba(0,0,0,0.4); cursor: pointer;" onclick="window.location.href='gazette-v2.html'">
+                        <div style="flex: 0 0 280px; text-align: center; margin: 0 auto;">
+                            <img src="assets/gazette-preview-thumb.png" alt="The El Paso Gazette Preview" style="width: 100%; max-width: 280px; height: auto; border: 3px solid #1a1a1a; transform: rotate(-1deg); box-shadow: 0 8px 20px rgba(0,0,0,0.4); cursor: pointer;" onclick="window.location.href='gazette-v2.html'">
                         </div>
                     </div>
                 </div>
 
                 <!-- Community Music -->
                 <div style="background: linear-gradient(135deg, #2c1810 0%, #4a2511 100%); border: 3px solid #c9a860; padding: 2rem; margin-bottom: 2rem; border-radius: 8px;">
-                    <div style="display: flex; align-items: flex-start; gap: 2rem;">
+                    <div class="exclusive-content-flex" style="display: flex; align-items: flex-start; gap: 2rem; flex-wrap: wrap;">
                         <div style="flex: 1;">
                             <div style="display: inline-block; background: #c9a860; color: #1a1a1a; padding: 0.25rem 0.75rem; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em; margin-bottom: 0.75rem;">EXCLUSIVE</div>
                             <h4 style="font-family: 'Avenir Next Condensed', 'Avenir Next', Avenir, sans-serif; font-size: 2rem; font-weight: 900; color: #f9f3e3; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.05em;">Collectible Frontier Albums</h4>
@@ -410,7 +412,7 @@
                                 </div>
 
                                 <!-- Music Player (Compact) -->
-                                <div id="pasoRequirementBox" style="background: rgba(0,0,0,0.3); border: 1px solid rgba(201, 168, 97, 0.5); padding: 0.6rem 1rem; border-radius: 6px; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.75rem;">
+                                <div id="pasoRequirementBox" style="background: rgba(0,0,0,0.3); border: 1px solid rgba(201, 168, 97, 0.5); padding: 0.6rem 1rem; border-radius: 6px; margin-bottom: 0.75rem; display: inline-flex; align-items: center; gap: 0.75rem;">
                                     <img src="assets/paso-token.png" alt="PASO" style="width: 20px; height: 20px;">
                                     <span id="pasoRequirementText" style="color: #c9a860; font-size: 0.8rem;"><strong>5 PASO</strong> required to sample tracks</span>
                                 </div>
@@ -449,7 +451,7 @@
 
                 <!-- Motion Print Streaming -->
                 <div style="background: linear-gradient(135deg, #2c1810 0%, #4a2511 100%); border: 3px solid #c9a860; padding: 2rem; margin-bottom: 2rem; border-radius: 8px;">
-                    <div style="display: flex; align-items: flex-start; gap: 2rem;">
+                    <div class="exclusive-content-flex" style="display: flex; align-items: flex-start; gap: 2rem; flex-wrap: wrap;">
                         <div style="flex: 1;">
                             <div style="display: inline-block; background: #c9a860; color: #1a1a1a; padding: 0.25rem 0.75rem; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em; margin-bottom: 0.75rem;">EXCLUSIVE</div>
                             <h4 style="font-family: 'Avenir Next Condensed', 'Avenir Next', Avenir, sans-serif; font-size: 2rem; font-weight: 900; color: #f9f3e3; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.05em;">Motion Print Screening Room</h4>
@@ -457,10 +459,12 @@
                             <p style="color: #e8dcc8; line-height: 1.6; margin-bottom: 1.5rem;">
                                 Stream our exclusive Motion Print collection in the closed El Paso Verse screening room - before the films go to the public. Each frame is a one-of-one piece of cinematic art, shot on authentic Kodak motion picture film stock.
                             </p>
-                            <div id="motionPrintRequirementBox" style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; background: rgba(0,0,0,0.3); border: 1px solid rgba(201, 168, 97, 0.5); padding: 0.75rem 1rem; border-radius: 6px;">
-                                <img src="assets/paso-token.png" alt="PASO" style="width: 24px; height: 24px;">
-                                <span id="motionPrintRequirementText" style="color: #c9a860; font-size: 0.9rem; flex: 1;"><strong>300 PASO</strong> + Genesis Collection required · Otherwise $49 USD</span>
-                                <button id="motionPrintBuyBtn" onclick="purchaseMotionPrint()" style="display: none; background: #c9a860; color: #1a1a1a; border: none; padding: 0.5rem 1rem; font-weight: 700; font-size: 0.8rem; border-radius: 4px; cursor: pointer;">ADD TO CART — $49</button>
+                            <div style="margin-bottom: 1rem;">
+                                <div id="motionPrintRequirementBox" style="display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(0,0,0,0.3); border: 1px solid rgba(201, 168, 97, 0.5); padding: 0.75rem 1rem; border-radius: 6px;">
+                                    <img src="assets/paso-token.png" alt="PASO" style="width: 24px; height: 24px;">
+                                    <span id="motionPrintRequirementText" style="color: #c9a860; font-size: 0.9rem;"><strong>300 PASO</strong> + Genesis Collection required · Otherwise $49 USD</span>
+                                    <button id="motionPrintBuyBtn" onclick="purchaseMotionPrint()" style="display: none; background: #c9a860; color: #1a1a1a; border: none; padding: 0.5rem 1rem; font-weight: 700; font-size: 0.8rem; border-radius: 4px; cursor: pointer; margin-left: 0.5rem;">ADD TO CART — $49</button>
+                                </div>
                             </div>
                             <button id="motionPrintStreamBtn" onclick="accessMotionPrint()" style="display: inline-block; background: #c9a860; color: #1a1a1a; padding: 1rem 2rem; font-weight: 700; border: none; border-radius: 4px; cursor: pointer; transition: all 0.3s ease; letter-spacing: 0.05em; font-size: 0.95rem;">
                                 STREAM MOTION PRINT →
@@ -479,7 +483,7 @@
 
                 <!-- VisionPaper -->
                 <div style="background: linear-gradient(135deg, #2c1810 0%, #4a2511 100%); border: 3px solid #c9a860; padding: 2rem; margin-bottom: 2rem; border-radius: 8px;">
-                    <div style="display: flex; align-items: flex-start; gap: 2rem;">
+                    <div class="exclusive-content-flex" style="display: flex; align-items: flex-start; gap: 2rem; flex-wrap: wrap;">
                         <div style="flex: 1;">
                             <div style="display: inline-block; background: #c9a860; color: #1a1a1a; padding: 0.25rem 0.75rem; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em; margin-bottom: 0.75rem;">FOUNDATIONAL</div>
                             <h4 style="font-family: 'Avenir Next Condensed', 'Avenir Next', Avenir, sans-serif; font-size: 2rem; font-weight: 900; color: #f9f3e3; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.05em;">Own The VisionPaper</h4>
@@ -2164,22 +2168,22 @@
         // Replace with your actual Stripe Price IDs from: https://dashboard.stripe.com/products
         // ===========================================
         const STRIPE_CONFIG = {
-            publishableKey: 'pk_test_YOUR_PUBLISHABLE_KEY',  // Replace with your Stripe publishable key
+            publishableKey: 'pk_test_51SvmSJPz1lzmyAy84GBug0AnwlNi4OfvpUSGMBGdx79tU68eTuSEGRTcfVZMpcbmDdjmDQpsahOJmmH4HysfCtj3004JgZZeaD',
             prices: {
                 gazette: {
-                    id: 'price_YOUR_GAZETTE_PRICE_ID',
+                    id: 'price_1Svmc5Pz1lzmyAy8TqFSDj4d',
                     name: 'The El Paso Gazette',
                     price: 2.99,
                     image: 'assets/gazette-preview-thumb.png'
                 },
                 vinyl: {
-                    id: 'price_YOUR_VINYL_PRICE_ID',
+                    id: 'price_1SvmdcPz1lzmyAy8SwmLZ7IQ',
                     name: 'Vol. I — LP Vinyl (Pre-order)',
                     price: 39.00,
                     image: 'assets/album-vol1-cover.webp'
                 },
                 motionPrint: {
-                    id: 'price_YOUR_MOTIONPRINT_PRICE_ID',
+                    id: 'price_1SvmfkPz1lzmyAy8LHa0hPe8',
                     name: 'Motion Print Screening Pass',
                     price: 49.00,
                     image: 'assets/frame-1.png'
