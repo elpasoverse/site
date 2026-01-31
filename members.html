@@ -365,16 +365,12 @@
                             <p style="color: #e8dcc8; line-height: 1.6; margin-bottom: 1.5rem;">
                                 Take your first step into 1880 and experience the birth of Breakwater as it's happening with frontier journalism. Read exclusive dispatches about H. West's land petition, railroad scouts on the eastern ridge, and the mysterious lights reported on the northern plain.
                             </p>
-                            <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
-                                <div style="background: #1a1a1a; border: 2px solid #c9a860; padding: 0.75rem 1.25rem; border-radius: 4px;">
-                                    <div style="color: #c9a860; font-size: 0.75rem; letter-spacing: 0.1em; font-weight: 600; margin-bottom: 0.25rem;">REQUIRES</div>
-                                    <div style="color: #f9f3e3; font-size: 1.15rem; font-weight: 700;">20 PASO Balance</div>
-                                </div>
-                                <div style="color: #d4c4a8; font-size: 0.9rem;">
-                                    <strong style="color: #f9f3e3;">Free with 20+ PASO</strong> · Otherwise $2.99 USD
-                                </div>
+                            <div id="gazetteRequirementBox" style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; background: rgba(0,0,0,0.3); border: 1px solid rgba(201, 168, 97, 0.5); padding: 0.75rem 1rem; border-radius: 6px;">
+                                <img src="assets/paso-token.png" alt="PASO" style="width: 24px; height: 24px;">
+                                <span id="gazetteRequirementText" style="color: #c9a860; font-size: 0.9rem; flex: 1;"><strong>20 PASO</strong> required · Otherwise $2.99 USD</span>
+                                <button id="gazetteBuyBtn" onclick="window.open('https://buy.stripe.com/gazette', '_blank')" style="display: none; background: #c9a860; color: #1a1a1a; border: none; padding: 0.5rem 1rem; font-weight: 700; font-size: 0.8rem; border-radius: 4px; cursor: pointer;">BUY $2.99</button>
                             </div>
-                            <a href="gazette-v2.html" style="display: inline-block; background: #c9a860; color: #1a1a1a; padding: 1rem 2rem; font-weight: 700; text-decoration: none; border-radius: 4px; transition: all 0.3s ease; letter-spacing: 0.05em; font-size: 0.95rem;">
+                            <a id="gazetteReadBtn" href="gazette-v2.html" style="display: inline-block; background: #c9a860; color: #1a1a1a; padding: 1rem 2rem; font-weight: 700; text-decoration: none; border-radius: 4px; transition: all 0.3s ease; letter-spacing: 0.05em; font-size: 0.95rem;">
                                 READ THE GAZETTE →
                             </a>
                         </div>
@@ -394,48 +390,50 @@
                                 Original music by the community, capturing the spirit of the 1880 frontier. <span style="color: #c9a860;">Upcoming: Official soundtrack albums from El Paso Verse films.</span>
                             </p>
 
-                            <!-- Vinyl Record Coming Soon -->
-                            <div style="background: rgba(0,0,0,0.3); border: 2px solid #c9a860; padding: 1.25rem; border-radius: 8px; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 1.5rem;">
-                                <div style="font-size: 3.5rem;">💿</div>
-                                <div style="flex: 1;">
-                                    <div style="display: inline-block; background: #8B4513; color: #f9f3e3; padding: 0.2rem 0.6rem; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; margin-bottom: 0.5rem; border-radius: 3px;">COMING SOON</div>
-                                    <h5 style="color: #f9f3e3; font-size: 1.2rem; font-weight: 700; margin: 0 0 0.5rem 0;">Vol. I — El Paso Verse Frontier</h5>
-                                    <p style="color: #d4c4a8; font-size: 0.9rem; margin: 0; line-height: 1.5;">Limited edition vinyl featuring the complete Frontier Soundtracks collection. A collector's piece for true pioneers.</p>
-                                </div>
-                            </div>
-
-                            <!-- Music Player -->
-                            <div id="musicPlayerPortal" style="background: rgba(0,0,0,0.4); border: 2px solid #c9a860; padding: 1.5rem; border-radius: 8px;">
-                                <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
-                                    <button class="music-toggle-portal" id="musicTogglePortal" title="Play Music" style="background: #c9a860; border: none; width: 50px; height: 50px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; flex-shrink: 0;">
-                                        <svg class="play-icon-portal" viewBox="0 0 24 24" fill="#1a1a1a" style="width: 24px; height: 24px;"><path d="M8 5v14l11-7z"/></svg>
-                                        <svg class="pause-icon-portal" viewBox="0 0 24 24" fill="#1a1a1a" style="width: 24px; height: 24px; display: none;"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
-                                    </button>
+                            <!-- Vol. I Album with Music Player -->
+                            <div style="background: rgba(0,0,0,0.3); border: 2px solid #c9a860; padding: 1.5rem; border-radius: 8px; margin-bottom: 1.5rem;">
+                                <div style="display: flex; align-items: flex-start; gap: 1.5rem; margin-bottom: 1.25rem;">
+                                    <img src="assets/album-vol1-cover.webp" alt="Vol. I Album Cover" style="width: 140px; height: 140px; object-fit: cover; border-radius: 4px; border: 2px solid #c9a860; flex-shrink: 0;">
                                     <div style="flex: 1;">
-                                        <div id="musicTrackPortal" style="color: #f9f3e3; font-size: 1.1rem; font-weight: 700;">Frontier Music</div>
-                                        <div id="musicArtistPortal" style="color: #c9a860; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em;">Artist</div>
-                                    </div>
-                                    <div style="display: flex; gap: 0.5rem;">
-                                        <button id="musicPrevPortal" title="Previous Track" style="background: transparent; border: 2px solid #c9a860; color: #c9a860; width: 40px; height: 40px; border-radius: 4px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;">
-                                            <svg viewBox="0 0 24 24" fill="currentColor" style="width: 20px; height: 20px;"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg>
-                                        </button>
-                                        <button id="musicNextPortal" title="Next Track" style="background: transparent; border: 2px solid #c9a860; color: #c9a860; width: 40px; height: 40px; border-radius: 4px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;">
-                                            <svg viewBox="0 0 24 24" fill="currentColor" style="width: 20px; height: 20px;"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/></svg>
-                                        </button>
+                                        <div style="display: flex; gap: 0.5rem; margin-bottom: 0.5rem;">
+                                            <span style="background: #8B4513; color: #f9f3e3; padding: 0.2rem 0.6rem; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; border-radius: 3px;">LP VINYL</span>
+                                            <span style="background: #c9a860; color: #1a1a1a; padding: 0.2rem 0.6rem; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; border-radius: 3px;">PRE-ORDER</span>
+                                        </div>
+                                        <h5 style="color: #f9f3e3; font-size: 1.3rem; font-weight: 700; margin: 0 0 0.5rem 0;">Vol. I — El Paso Verse Frontier</h5>
+                                        <p style="color: #d4c4a8; font-size: 0.85rem; margin: 0 0 1rem 0; line-height: 1.5;">Limited edition LP vinyl record featuring the complete Frontier Soundtracks. A collector's piece for true pioneers. Final artwork and track selection will differ, subject to upcoming community input.</p>
+                                        <div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;">
+                                            <div style="color: #f9f3e3; font-size: 1.5rem; font-weight: 700;">$39 <span style="font-size: 0.85rem; font-weight: 400; color: #d4c4a8;">USD</span></div>
+                                            <button style="background: #c9a860; color: #1a1a1a; border: none; padding: 0.6rem 1.25rem; font-weight: 700; font-size: 0.85rem; border-radius: 4px; cursor: pointer; transition: all 0.3s ease;">PRE-ORDER NOW</button>
+                                        </div>
                                     </div>
                                 </div>
 
-                                <!-- Track List -->
-                                <div id="trackListPortal" style="max-height: 200px; overflow-y: auto; border-top: 1px solid rgba(201, 168, 97, 0.3); padding-top: 1rem; margin-top: 0.5rem;">
-                                    <!-- Tracks will be populated by JS -->
+                                <!-- Music Player (Compact) -->
+                                <div id="pasoRequirementBox" style="background: rgba(0,0,0,0.3); border: 1px solid rgba(201, 168, 97, 0.5); padding: 0.6rem 1rem; border-radius: 6px; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.75rem;">
+                                    <img src="assets/paso-token.png" alt="PASO" style="width: 20px; height: 20px;">
+                                    <span id="pasoRequirementText" style="color: #c9a860; font-size: 0.8rem;"><strong>5 PASO</strong> required to sample tracks</span>
+                                </div>
+                                <div id="musicPlayerPortal" style="background: rgba(0,0,0,0.3); border: 1px solid rgba(201, 168, 97, 0.5); padding: 0.75rem 1rem; border-radius: 6px; display: flex; align-items: center; gap: 1rem;">
+                                    <button class="music-toggle-portal" id="musicTogglePortal" title="Play Music" style="background: #c9a860; border: none; width: 36px; height: 36px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; flex-shrink: 0;">
+                                        <svg class="play-icon-portal" viewBox="0 0 24 24" fill="#1a1a1a" style="width: 18px; height: 18px;"><path d="M8 5v14l11-7z"/></svg>
+                                        <svg class="pause-icon-portal" viewBox="0 0 24 24" fill="#1a1a1a" style="width: 18px; height: 18px; display: none;"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+                                    </button>
+                                    <div style="flex: 1; min-width: 0;">
+                                        <div id="musicTrackPortal" style="color: #f9f3e3; font-size: 0.9rem; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Frontier Music</div>
+                                        <div id="musicArtistPortal" style="color: #c9a860; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em;">Artist</div>
+                                    </div>
+                                    <div style="display: flex; gap: 0.35rem; flex-shrink: 0;">
+                                        <button id="musicPrevPortal" title="Previous" style="background: transparent; border: 1px solid #c9a860; color: #c9a860; width: 28px; height: 28px; border-radius: 4px; cursor: pointer; display: flex; align-items: center; justify-content: center;">
+                                            <svg viewBox="0 0 24 24" fill="currentColor" style="width: 14px; height: 14px;"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg>
+                                        </button>
+                                        <button id="musicNextPortal" title="Next" style="background: transparent; border: 1px solid #c9a860; color: #c9a860; width: 28px; height: 28px; border-radius: 4px; cursor: pointer; display: flex; align-items: center; justify-content: center;">
+                                            <svg viewBox="0 0 24 24" fill="currentColor" style="width: 14px; height: 14px;"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/></svg>
+                                        </button>
+                                    </div>
+                                    <div style="color: #c9a860; font-size: 0.75rem; flex-shrink: 0;">8 tracks</div>
                                 </div>
                             </div>
-                        </div>
-                        <div style="flex: 0 0 200px; text-align: center;">
-                            <div style="font-size: 5rem; opacity: 0.9;">🎵</div>
-                            <p style="color: #f9f3e3; font-size: 1rem; font-weight: 700; margin-top: 1rem;">Vol. I</p>
-                            <p style="color: #c9a860; font-size: 0.85rem; margin-top: 0.25rem;">8 Original Tracks</p>
-                            <p style="color: #d4c4a8; font-size: 0.75rem; margin-top: 0.75rem; font-style: italic;">Vinyl Coming Soon</p>
+                            <div id="trackListPortal" style="display: none;"></div>
                         </div>
                     </div>
                 </div>
@@ -2065,6 +2063,63 @@
 
     <!-- Music Player Script -->
     <script>
+        // PASO Balance Requirements
+        const REQUIRED_PASO_FOR_MUSIC = 5;
+        const REQUIRED_PASO_FOR_GAZETTE = 20;
+
+        function getUserPasoBalance() {
+            // Get balance from the dashboard display
+            const balanceEl = document.getElementById('pasoBalance');
+            if (balanceEl) {
+                const balance = parseInt(balanceEl.textContent.replace(/,/g, '')) || 0;
+                return balance;
+            }
+            return 0;
+        }
+
+        function canPlayMusic() {
+            return getUserPasoBalance() >= REQUIRED_PASO_FOR_MUSIC;
+        }
+
+        function updatePasoRequirementUI() {
+            const box = document.getElementById('pasoRequirementBox');
+            const text = document.getElementById('pasoRequirementText');
+            const balance = getUserPasoBalance();
+
+            if (balance >= REQUIRED_PASO_FOR_MUSIC) {
+                box.style.borderColor = 'rgba(45, 138, 45, 0.5)';
+                box.style.background = 'rgba(45, 138, 45, 0.1)';
+                text.innerHTML = '<strong style="color: #90ee90;">✓ Unlocked</strong> — You have ' + balance + ' PASO';
+                text.style.color = '#90ee90';
+            } else {
+                box.style.borderColor = 'rgba(201, 168, 97, 0.5)';
+                box.style.background = 'rgba(0,0,0,0.3)';
+                text.innerHTML = '<strong>5 PASO</strong> required to sample tracks (You have ' + balance + ')';
+                text.style.color = '#c9a860';
+            }
+        }
+
+        function updateGazetteRequirementUI() {
+            const box = document.getElementById('gazetteRequirementBox');
+            const text = document.getElementById('gazetteRequirementText');
+            const buyBtn = document.getElementById('gazetteBuyBtn');
+            const balance = getUserPasoBalance();
+
+            if (balance >= REQUIRED_PASO_FOR_GAZETTE) {
+                box.style.borderColor = 'rgba(45, 138, 45, 0.5)';
+                box.style.background = 'rgba(45, 138, 45, 0.1)';
+                text.innerHTML = '<strong style="color: #90ee90;">✓ Unlocked</strong> — Free access with your ' + balance + ' PASO';
+                text.style.color = '#90ee90';
+                buyBtn.style.display = 'none';
+            } else {
+                box.style.borderColor = 'rgba(201, 168, 97, 0.5)';
+                box.style.background = 'rgba(0,0,0,0.3)';
+                text.innerHTML = '<strong>20 PASO</strong> required (You have ' + balance + ')';
+                text.style.color = '#c9a860';
+                buyBtn.style.display = 'inline-block';
+            }
+        }
+
         // Community Music Player
         const playlistPortal = [
             { title: 'Campo', artist: 'Kitosch', src: 'assets/music/Campo.m4a' },
@@ -2120,6 +2175,12 @@
         }
 
         function togglePlayPortal() {
+            // Check PASO balance before playing
+            if (!isPlayingPortal && !canPlayMusic()) {
+                alert('You need at least 5 PASO to sample tracks. Your current balance: ' + getUserPasoBalance() + ' PASO');
+                return;
+            }
+
             if (isPlayingPortal) {
                 audioPortal.pause();
                 playIconPortal.style.display = 'block';
@@ -2212,10 +2273,17 @@
             loadTrackPortal(0);
             populateTrackList();
 
-            // Check if music was playing from localStorage
+            // Update PASO requirement UI
+            setTimeout(updatePasoRequirementUI, 500);
+            setTimeout(updateGazetteRequirementUI, 500);
+            // Also update when balance might change
+            setInterval(updatePasoRequirementUI, 2000);
+            setInterval(updateGazetteRequirementUI, 2000);
+
+            // Check if music was playing from localStorage (only resume if user has enough PASO)
             const wasPlaying = localStorage.getItem('musicPlaying');
             const savedTrack = localStorage.getItem('currentTrack');
-            if (wasPlaying === 'true' && savedTrack !== null) {
+            if (wasPlaying === 'true' && savedTrack !== null && canPlayMusic()) {
                 loadTrackPortal(parseInt(savedTrack));
                 showFloatingPlayer();
                 updateFloatingPlayer();
