@@ -2287,33 +2287,37 @@
             }
         }
 
+        // Payment Links
+        const PAYMENT_LINKS = {
+            gazette: 'https://buy.stripe.com/test_9B628t0m75Sn8WG2MM8N203',
+            vinyl: 'https://buy.stripe.com/test_8x27sN7Oz2Gb0qa2MM8N202',
+            motionPrint: 'https://buy.stripe.com/test_dRm3cxgl51C74Gqfzy8N200'
+        };
+
         function checkout() {
             if (cart.length === 0) {
                 alert('Your cart is empty!');
                 return;
             }
 
-            if (STRIPE_CONFIG.publishableKey.includes('YOUR_')) {
-                alert('Stripe not configured yet. Please add your Stripe publishable key and price IDs.');
-                console.log('Cart items for checkout:', cart);
-                return;
+            // If only one item, go directly to its payment link
+            if (cart.length === 1) {
+                const item = cart[0];
+                if (PAYMENT_LINKS[item.key]) {
+                    window.location.href = PAYMENT_LINKS[item.key];
+                    return;
+                }
             }
 
-            // Initialize Stripe and redirect to checkout
-            const stripe = Stripe(STRIPE_CONFIG.publishableKey);
-            stripe.redirectToCheckout({
-                lineItems: cart.map(item => ({
-                    price: item.priceId,
-                    quantity: 1
-                })),
-                mode: 'payment',
-                successUrl: window.location.origin + '/members.html?purchase=success',
-                cancelUrl: window.location.origin + '/members.html?purchase=cancelled'
-            }).then(function(result) {
-                if (result.error) {
-                    alert(result.error.message);
-                }
-            });
+            // For multiple items, open each payment link (user will need to complete separately)
+            // Or show a message
+            alert('Please purchase items one at a time. Removing other items from cart.');
+            const firstItem = cart[0];
+            cart = [firstItem];
+            saveCart();
+            if (PAYMENT_LINKS[firstItem.key]) {
+                window.location.href = PAYMENT_LINKS[firstItem.key];
+            }
         }
 
         function purchaseGazette() {

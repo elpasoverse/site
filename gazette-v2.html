@@ -1294,20 +1294,8 @@
         }
 
         function purchaseGazetteAccess() {
-            // Initialize Stripe
-            const stripe = Stripe('pk_test_51SvmSJPz1lzmyAy84GBug0AnwlNi4OfvpUSGMBGdx79tU68eTuSEGRTcfVZMpcbmDdjmDQpsahOJmmH4HysfCtj3004JgZZeaD');
-
-            // Redirect to Stripe Checkout
-            stripe.redirectToCheckout({
-                lineItems: [{ price: 'price_1Svmc5Pz1lzmyAy8TqFSDj4d', quantity: 1 }],
-                mode: 'payment',
-                successUrl: window.location.origin + '/gazette-v2.html?payment=success',
-                cancelUrl: window.location.origin + '/gazette-v2.html?payment=cancelled'
-            }).then(function(result) {
-                if (result.error) {
-                    alert('Payment error: ' + result.error.message);
-                }
-            });
+            // Redirect to Stripe Payment Link
+            window.location.href = 'https://buy.stripe.com/test_9B628t0m75Sn8WG2MM8N203';
         }
 
         // Lightbox functionality
