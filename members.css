@@ -9,7 +9,7 @@
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    font-family: 'Playfair Display', Georgia, serif;
+    font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
     background-image:
         repeating-linear-gradient(0deg, transparent, transparent 1px, rgba(139, 69, 19, 0.015) 1px, rgba(139, 69, 19, 0.015) 2px),
         repeating-linear-gradient(90deg, transparent, transparent 1px, rgba(139, 69, 19, 0.015) 1px, rgba(139, 69, 19, 0.015) 2px),
@@ -17,6 +17,35 @@
         radial-gradient(circle at 80% 80%, rgba(139, 69, 19, 0.02) 0%, transparent 50%);
     color: #1a1a1a;
     line-height: 1.8;
+    font-size: 17px;
+}
+
+/* Ensure all elements inherit Playfair Display */
+.members-body * {
+    font-family: inherit;
+}
+
+.members-body h1,
+.members-body h2,
+.members-body h3,
+.members-body h4,
+.members-body h5,
+.members-body h6 {
+    font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+}
+
+.members-body p,
+.members-body span,
+.members-body li,
+.members-body a,
+.members-body button,
+.members-body input,
+.members-body select,
+.members-body textarea,
+.members-body label {
+    font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
 }
 
 /* Header */
@@ -38,7 +67,7 @@
 }
 
 .site-title {
-    font-family: 'Playfair Display', Georgia, serif;
+    font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
     font-size: 1.8rem;
     margin: 0;
     text-transform: uppercase;
@@ -63,7 +92,7 @@
     border: 2px solid #C9A961;
     padding: 0.5rem 1.5rem;
     cursor: pointer;
-    font-family: 'Playfair Display', Georgia, serif;
+    font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
     font-size: 0.9rem;
     text-transform: uppercase;
     letter-spacing: 0.05em;
@@ -95,7 +124,7 @@
 }
 
 .welcome-section h2 {
-    font-family: 'Playfair Display', Georgia, serif;
+    font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
     font-size: 2.5rem;
     color: #3A2820;
     margin-bottom: 1rem;
@@ -148,9 +177,9 @@
     border: none;
     border-bottom: 3px solid transparent;
     padding: 1rem 1.5rem;
-    font-family: 'Playfair Display', Georgia, serif;
+    font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
     font-size: 0.95rem;
-    color: #8B4513;
+    color: #1a1a1a;
     cursor: pointer;
     transition: all 0.3s ease;
     white-space: nowrap;
@@ -160,12 +189,12 @@
 }
 
 .tab-button:hover {
-    color: #3A2820;
+    color: #1a1a1a;
     background: rgba(201, 169, 97, 0.1);
 }
 
 .tab-button.active {
-    color: #3A2820;
+    color: #1a1a1a;
     border-bottom: 3px solid #C9A961;
     font-weight: 700;
     background: rgba(201, 169, 97, 0.15);
@@ -217,8 +246,8 @@
     display: block;
     font-size: 2.5rem;
     font-weight: 700;
-    color: #8B4513;
-    font-family: 'Playfair Display', Georgia, serif;
+    color: #1a1a1a;
+    font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
 }
 
 .stat-label {
@@ -248,7 +277,7 @@
     padding: 0.75rem 1rem;
     border: 2px solid #8B4513;
     background-color: #fff;
-    font-family: 'Playfair Display', Georgia, serif;
+    font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
     font-size: 1rem;
     color: #3A2820;
 }
@@ -268,7 +297,7 @@
     padding: 0.75rem 1rem;
     border: 2px solid #8B4513;
     background-color: #fff;
-    font-family: 'Playfair Display', Georgia, serif;
+    font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
     font-size: 0.95rem;
     color: #3A2820;
     cursor: pointer;
@@ -326,7 +355,7 @@
 }
 
 .idea-card-title {
-    font-family: 'Playfair Display', Georgia, serif;
+    font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
     font-size: 1.4rem;
     color: #3A2820;
     margin-bottom: 0.5rem;
@@ -337,7 +366,7 @@
     display: flex;
     gap: 1rem;
     font-size: 0.85rem;
-    color: #8B4513;
+    color: #1a1a1a;
 }
 
 .status-badge {
@@ -350,7 +379,7 @@
     letter-spacing: 0.08em;
     font-weight: 700;
     border-radius: 3px;
-    font-family: 'Playfair Display', Georgia, serif;
+    font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
 }
 
 .status-badge.gathering {
@@ -401,7 +430,7 @@
 
 .progress-text {
     font-size: 0.9rem;
-    color: #8B4513;
+    color: #1a1a1a;
     font-weight: 600;
 }
 
@@ -417,14 +446,14 @@
 }
 
 .submit-container h3 {
-    font-family: 'Playfair Display', Georgia, serif;
+    font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
     font-size: 2rem;
     color: #3A2820;
     margin-bottom: 1rem;
 }
 
 .submission-intro {
-    color: #8B4513;
+    color: #1a1a1a;
     margin-bottom: 2rem;
     font-size: 1.05rem;
 }
@@ -440,7 +469,7 @@
 .guidelines-box h4 {
     color: #3A2820;
     margin-bottom: 1rem;
-    font-family: 'Playfair Display', Georgia, serif;
+    font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
 }
 
 .guidelines-box ul {
@@ -484,7 +513,7 @@
     padding: 0.75rem;
     border: 2px solid #8B4513;
     background-color: #fff;
-    font-family: 'Playfair Display', Georgia, serif;
+    font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
     font-size: 1rem;
     color: #3A2820;
 }
@@ -501,7 +530,7 @@
     right: 0.5rem;
     bottom: 0.5rem;
     font-size: 0.8rem;
-    color: #8B4513;
+    color: #1a1a1a;
     background-color: rgba(245, 230, 211, 0.9);
     padding: 0.25rem 0.5rem;
 }
@@ -509,7 +538,7 @@
 .form-group small {
     display: block;
     margin-top: 0.5rem;
-    color: #8B4513;
+    color: #1a1a1a;
     font-size: 0.85rem;
 }
 
@@ -528,7 +557,7 @@
     text-transform: uppercase;
     letter-spacing: 0.1em;
     cursor: pointer;
-    font-family: 'Playfair Display', Georgia, serif;
+    font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
     transition: all 0.3s ease;
 }
 
@@ -577,7 +606,7 @@
 }
 
 .content-item h4 {
-    font-family: 'Playfair Display', Georgia, serif;
+    font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
     color: #3A2820;
     margin-bottom: 0.5rem;
 }
@@ -597,7 +626,7 @@
 
 .content-link {
     display: inline-block;
-    color: #8B4513;
+    color: #1a1a1a;
     text-decoration: none;
     border-bottom: 2px solid #8B4513;
     font-weight: 600;
@@ -614,7 +643,7 @@
 }
 
 .activity-section h4 {
-    font-family: 'Playfair Display', Georgia, serif;
+    font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
     font-size: 1.5rem;
     color: #3A2820;
     margin-bottom: 1rem;
@@ -622,7 +651,7 @@
 
 .empty-state {
     text-align: center;
-    color: #8B4513;
+    color: #1a1a1a;
     padding: 4rem 2rem;
     background: linear-gradient(135deg, rgba(201, 169, 97, 0.1) 0%, rgba(139, 69, 19, 0.05) 100%);
     border: 2px dashed #C9A961;
@@ -635,7 +664,7 @@
 .loading-message {
     text-align: center;
     padding: 3rem;
-    color: #8B4513;
+    color: #1a1a1a;
     font-style: italic;
 }
 
@@ -813,7 +842,7 @@
     border: 1px solid #C9A961;
     color: #F5E6D3;
     padding: 0.5rem 1rem;
-    font-family: 'Playfair Display', Georgia, serif;
+    font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
     font-size: 0.95rem;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -855,7 +884,7 @@
     background: transparent;
     border: none;
     color: #F5E6D3;
-    font-family: 'Playfair Display', Georgia, serif;
+    font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
     font-size: 0.9rem;
     text-align: left;
     cursor: pointer;
@@ -911,7 +940,7 @@
 }
 
 .account-modal-header h2 {
-    font-family: 'Playfair Display', Georgia, serif;
+    font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
     font-size: 1.5rem;
     margin: 0;
     text-transform: uppercase;
@@ -949,7 +978,7 @@
 }
 
 .account-section h3 {
-    font-family: 'Playfair Display', Georgia, serif;
+    font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
     font-size: 1.1rem;
     color: #3A2820;
     margin-bottom: 1rem;
@@ -965,7 +994,7 @@
 }
 
 .account-info label {
-    color: #8B4513;
+    color: #1a1a1a;
     font-size: 0.85rem;
     text-transform: uppercase;
     letter-spacing: 0.05em;
@@ -987,12 +1016,12 @@
 .change-link {
     background: none;
     border: none;
-    color: #8B4513;
+    color: #1a1a1a;
     font-size: 0.85rem;
     cursor: pointer;
     text-decoration: underline;
     padding: 0;
-    font-family: 'Playfair Display', Georgia, serif;
+    font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
     transition: color 0.2s;
 }
 
@@ -1014,7 +1043,7 @@
 .section-close {
     background: none;
     border: none;
-    color: #8B4513;
+    color: #1a1a1a;
     font-size: 1.5rem;
     cursor: pointer;
     padding: 0;
@@ -1051,7 +1080,7 @@
     padding: 0.75rem;
     border: 2px solid #8B4513;
     background: #fff;
-    font-family: 'Playfair Display', Georgia, serif;
+    font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
     font-size: 1rem;
     color: #3A2820;
     box-sizing: border-box;
@@ -1067,7 +1096,7 @@
     color: #F5E6D3;
     border: none;
     padding: 0.75rem 1.5rem;
-    font-family: 'Playfair Display', Georgia, serif;
+    font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
     font-size: 0.9rem;
     font-weight: 600;
     text-transform: uppercase;
@@ -1095,7 +1124,7 @@
 .account-message.error {
     background: rgba(139, 69, 19, 0.1);
     border-left: 4px solid #8B4513;
-    color: #8B4513;
+    color: #1a1a1a;
 }
 
 .account-message.success {
