@@ -494,7 +494,7 @@ async function loadExclusiveContent() {
 
     } catch (error) {
         console.error('Error loading exclusive content:', error);
-        container.innerHTML = '<div class="loading-message">Error loading content.</div>';
+        container.innerHTML = '<div class="loading-message">More Exclusive content coming soon</div>';
     }
 }
 
