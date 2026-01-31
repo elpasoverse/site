@@ -2335,6 +2335,47 @@
             addToCart('vinyl');
         }
 
+        function showPurchaseSuccess() {
+            // Create success banner
+            const banner = document.createElement('div');
+            banner.id = 'purchaseSuccessBanner';
+            banner.style.cssText = 'position: fixed; top: 0; left: 0; right: 0; background: linear-gradient(135deg, #2d8a2d 0%, #1a5c1a 100%); color: white; padding: 1rem 2rem; text-align: center; z-index: 9999; font-weight: 600;';
+            banner.innerHTML = '✓ Purchase successful! Thank you for your order. <button onclick="this.parentElement.remove()" style="background: rgba(255,255,255,0.2); border: none; color: white; padding: 0.25rem 0.75rem; margin-left: 1rem; border-radius: 4px; cursor: pointer;">Dismiss</button>';
+            document.body.prepend(banner);
+        }
+
+        function updatePurchasedItemsUI() {
+            // Check if gazette was purchased
+            if (localStorage.getItem('gazettePurchased') === 'true') {
+                const gazetteBox = document.getElementById('gazetteRequirementBox');
+                if (gazetteBox) {
+                    gazetteBox.style.borderColor = 'rgba(45, 138, 45, 0.5)';
+                    gazetteBox.style.background = 'rgba(45, 138, 45, 0.1)';
+                    gazetteBox.innerHTML = '<span style="color: #90ee90; font-size: 0.9rem;"><strong>✓ Purchased</strong> — You have full access</span>';
+                }
+            }
+
+            // Check if motion print was purchased
+            if (localStorage.getItem('motionPrintPurchased') === 'true') {
+                const mpBox = document.getElementById('motionPrintRequirementBox');
+                if (mpBox) {
+                    mpBox.style.borderColor = 'rgba(45, 138, 45, 0.5)';
+                    mpBox.style.background = 'rgba(45, 138, 45, 0.1)';
+                    mpBox.innerHTML = '<span style="color: #90ee90; font-size: 0.9rem;"><strong>✓ Purchased</strong> — You have full access</span>';
+                }
+            }
+
+            // Check if vinyl was purchased
+            if (localStorage.getItem('vinylPurchased') === 'true') {
+                const vinylBtn = document.querySelector('button[onclick="preorderVinyl()"]');
+                if (vinylBtn) {
+                    vinylBtn.textContent = '✓ PRE-ORDER CONFIRMED';
+                    vinylBtn.style.background = '#2d8a2d';
+                    vinylBtn.disabled = true;
+                }
+            }
+        }
+
         // Initialize cart on page load
         document.addEventListener('DOMContentLoaded', function() {
             updateCartUI();
@@ -2342,11 +2383,18 @@
             // Check for successful purchase
             const urlParams = new URLSearchParams(window.location.search);
             if (urlParams.get('purchase') === 'success') {
+                // Store purchased items before clearing cart
+                cart.forEach(item => {
+                    localStorage.setItem(item.key + 'Purchased', 'true');
+                });
                 cart = [];
                 saveCart();
-                alert('Thank you for your purchase! Check your email for confirmation.');
+                showPurchaseSuccess();
                 window.history.replaceState({}, document.title, window.location.pathname);
             }
+
+            // Update UI for purchased items
+            updatePurchasedItemsUI();
         });
     </script>
 
