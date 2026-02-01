@@ -33,16 +33,14 @@ async function signUp(email, password) {
         // Store user ID for legacy compatibility
         localStorage.setItem(USER_ID_KEY, currentUser.uid);
 
-        // Create user document WITHOUT bonus - bonus will be granted on first verified login
+        // Create user document with 25 PASO signup bonus
         if (typeof createUserWithCredits === 'function') {
-            await createUserWithCredits(currentUser.uid, email, null, {
-                awaitingVerification: true  // Flag to grant bonus on verification
-            });
+            await createUserWithCredits(currentUser.uid, email);
         }
 
-        // Log signup to Google Sheet (bonus pending verification)
+        // Log signup to Google Sheet
         if (window.SheetLogger) {
-            window.SheetLogger.logUserSignup(currentUser.uid, email, email.split('@')[0], 'email', 0, 'pending_verification');
+            window.SheetLogger.logUserSignup(currentUser.uid, email, email.split('@')[0], 'email', 25);
         }
 
         return { success: true, needsVerification: true };
@@ -91,11 +89,6 @@ async function signIn(email, password) {
         // Store user ID for legacy compatibility
         localStorage.setItem(USER_ID_KEY, currentUser.uid);
 
-        // Check if user needs to receive signup bonus (first verified login)
-        if (typeof grantVerificationBonus === 'function') {
-            await grantVerificationBonus(currentUser.uid, currentUser.email);
-        }
-
         return { success: true };
     } catch (error) {
         let errorMessage = 'An error occurred during sign in.';
@@ -142,18 +135,11 @@ async function signInWithGoogle() {
         // Store user ID for legacy compatibility
         localStorage.setItem(USER_ID_KEY, currentUser.uid);
 
-        // Create user document (bonus handled inside based on email duplicate check)
+        // Create user document with 25 PASO signup bonus (only for new users)
         if (typeof createUserWithCredits === 'function') {
-            const isNewUser = await createUserWithCredits(
-                currentUser.uid,
-                currentUser.email,
-                currentUser.displayName,
-                {
-                    awaitingVerification: false  // Google users are already verified
-                }
-            );
+            const isNewUser = await createUserWithCredits(currentUser.uid, currentUser.email, currentUser.displayName);
 
-            // Log signup to Google Sheet (only for new users who got bonus)
+            // Log signup to Google Sheet (only for new users)
             if (isNewUser && window.SheetLogger) {
                 window.SheetLogger.logUserSignup(currentUser.uid, currentUser.email, currentUser.displayName, 'google', 25);
             }

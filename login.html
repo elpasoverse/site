@@ -11,8 +11,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="styles.css">
-    <!-- Google reCAPTCHA -->
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
@@ -341,7 +339,7 @@
             align-items: center;
             justify-content: center;
             margin: 1.5rem 0;
-            width: 100%;
+            gap: 1rem;
         }
 
         .divider::before,
@@ -358,8 +356,6 @@
             font-size: 0.85rem;
             text-transform: uppercase;
             letter-spacing: 0.05em;
-            padding: 0 1rem;
-            flex-shrink: 0;
         }
 
         /* Google Button */
@@ -405,12 +401,6 @@
 
             .modal-buttons {
                 flex-direction: column;
-            }
-
-            /* Scale reCAPTCHA to fit mobile screens */
-            #recaptchaWidget {
-                transform: scale(0.85);
-                transform-origin: center;
             }
         }
     </style>
@@ -515,11 +505,6 @@
                 >
             </div>
 
-            <!-- reCAPTCHA widget -->
-            <div class="form-group" style="display: flex; justify-content: center; align-items: center; width: 100%; overflow: hidden;">
-                <div id="recaptchaWidget" style="transform: scale(0.9); transform-origin: center;"></div>
-            </div>
-
             <button type="submit" class="login-button" id="signUpButton">
                 Join the Frontier
             </button>
@@ -576,14 +561,9 @@
     </div>
 
     <script src="firebase-config.js"></script>
-    <script src="auth.js?v=3"></script>
+    <script src="auth.js?v=2"></script>
     <script src="sheet-logger.js"></script>
-    <script src="points-system.js?v=3"></script>
-    <script src="signup-protection.js?v=1"></script>
-    <script>
-        // reCAPTCHA Site Key - Replace with your actual key from https://www.google.com/recaptcha/admin
-        const RECAPTCHA_SITE_KEY = '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI'; // This is Google's test key - replace with your own
-    </script>
+    <script src="points-system.js?v=2"></script>
     <script>
         // DOM Elements
         const signInTab = document.getElementById('signInTab');
@@ -599,32 +579,10 @@
         const resetErrorMessage = document.getElementById('resetErrorMessage');
         const resetSuccessMessage = document.getElementById('resetSuccessMessage');
 
-        // Check if user needs onboarding
-        async function checkUserNeedsOnboarding() {
-            try {
-                const userId = getCurrentUserId();
-                if (!userId || !db) return true; // Default to needing onboarding
-
-                const userDoc = await db.collection('users').doc(userId).get();
-                if (!userDoc.exists) return true;
-
-                const userData = userDoc.data();
-                return !userData.onboardingCompleted;
-            } catch (error) {
-                console.error('Error checking onboarding status:', error);
-                return true; // Default to needing onboarding on error
-            }
-        }
-
         // Check if already authenticated and redirect
-        waitForAuthState().then(async (authenticated) => {
+        waitForAuthState().then(authenticated => {
             if (authenticated && auth.currentUser && auth.currentUser.emailVerified) {
-                const needsOnboarding = await checkUserNeedsOnboarding();
-                if (needsOnboarding) {
-                    window.location.href = 'onboarding.html';
-                } else {
-                    window.location.href = 'members.html';
-                }
+                window.location.href = 'members.html';
             }
         });
 
@@ -695,13 +653,7 @@
             const result = await signIn(email, password);
 
             if (result.success) {
-                // Check if user needs onboarding
-                const needsOnboarding = await checkUserNeedsOnboarding();
-                if (needsOnboarding) {
-                    window.location.href = 'onboarding.html';
-                } else {
-                    window.location.href = 'members.html';
-                }
+                window.location.href = 'members.html';
             } else {
                 showError(result.error);
                 setButtonLoading(submitButton, false);
@@ -729,28 +681,11 @@
 
             setButtonLoading(submitButton, true);
 
-            // Run signup protection checks
-            if (window.SignupProtection) {
-                // Check disposable email
-                if (window.SignupProtection.isDisposableEmail(email)) {
-                    showError('Please use a permanent email address. Temporary or disposable emails are not allowed.');
-                    setButtonLoading(submitButton, false);
-                    return;
-                }
-
-                // Check reCAPTCHA (if configured)
-                if (!window.SignupProtection.isRecaptchaVerified()) {
-                    showError('Please complete the reCAPTCHA verification.');
-                    setButtonLoading(submitButton, false);
-                    return;
-                }
-            }
-
             const result = await signUp(email, password);
 
             if (result.success) {
                 if (result.needsVerification) {
-                    showSuccess('Account created! Please check your email and click the verification link to receive your 25 PASO welcome bonus.');
+                    showSuccess('Account created! Please check your email and click the verification link to continue.');
                     setButtonLoading(submitButton, false);
                     // Show resend option
                     document.getElementById('resendVerification').classList.remove('hidden');
@@ -802,13 +737,7 @@
             const result = await signInWithGoogle();
 
             if (result.success) {
-                // Check if user needs onboarding
-                const needsOnboarding = await checkUserNeedsOnboarding();
-                if (needsOnboarding) {
-                    window.location.href = 'onboarding.html';
-                } else {
-                    window.location.href = 'members.html';
-                }
+                window.location.href = 'members.html';
             } else {
                 showError(result.error);
                 button.disabled = false;
@@ -849,16 +778,6 @@
                 resetErrorMessage.textContent = result.error;
                 resetErrorMessage.classList.add('show');
             }
-        });
-
-        // Initialize reCAPTCHA when SignupProtection is loaded
-        document.addEventListener('DOMContentLoaded', function() {
-            // Small delay to ensure all scripts are loaded
-            setTimeout(() => {
-                if (window.SignupProtection && typeof RECAPTCHA_SITE_KEY !== 'undefined') {
-                    window.SignupProtection.initRecaptcha('recaptchaWidget', RECAPTCHA_SITE_KEY);
-                }
-            }, 500);
         });
     </script>
 </body>
