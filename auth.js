@@ -33,14 +33,22 @@ async function signUp(email, password) {
         // Store user ID for legacy compatibility
         localStorage.setItem(USER_ID_KEY, currentUser.uid);
 
-        // Create user document with 25 PASO signup bonus
+        // Get signup validation data (fingerprint, IP, bonus eligibility)
+        const validationData = window.signupValidation || {};
+
+        // Create user document WITHOUT bonus - bonus will be granted on first verified login
         if (typeof createUserWithCredits === 'function') {
-            await createUserWithCredits(currentUser.uid, email);
+            await createUserWithCredits(currentUser.uid, email, null, {
+                fingerprint: validationData.fingerprint,
+                ip: validationData.ip,
+                bonusEligible: validationData.bonusEligible !== false,
+                awaitingVerification: true  // Flag to grant bonus on verification
+            });
         }
 
-        // Log signup to Google Sheet
+        // Log signup to Google Sheet (bonus pending verification)
         if (window.SheetLogger) {
-            window.SheetLogger.logUserSignup(currentUser.uid, email, email.split('@')[0], 'email', 25);
+            window.SheetLogger.logUserSignup(currentUser.uid, email, email.split('@')[0], 'email', 0, 'pending_verification');
         }
 
         return { success: true, needsVerification: true };
@@ -89,6 +97,11 @@ async function signIn(email, password) {
         // Store user ID for legacy compatibility
         localStorage.setItem(USER_ID_KEY, currentUser.uid);
 
+        // Check if user needs to receive signup bonus (first verified login)
+        if (typeof grantVerificationBonus === 'function') {
+            await grantVerificationBonus(currentUser.uid, currentUser.email);
+        }
+
         return { success: true };
     } catch (error) {
         let errorMessage = 'An error occurred during sign in.';
@@ -135,13 +148,38 @@ async function signInWithGoogle() {
         // Store user ID for legacy compatibility
         localStorage.setItem(USER_ID_KEY, currentUser.uid);
 
-        // Create user document with 25 PASO signup bonus (only for new users)
-        if (typeof createUserWithCredits === 'function') {
-            const isNewUser = await createUserWithCredits(currentUser.uid, currentUser.email, currentUser.displayName);
+        // Get device fingerprint and check eligibility
+        let fingerprint = null;
+        let bonusEligible = true;
 
-            // Log signup to Google Sheet (only for new users)
+        if (window.SignupProtection) {
+            fingerprint = await window.SignupProtection.getDeviceFingerprint();
+            const fingerprintCheck = await window.SignupProtection.checkDeviceFingerprint(fingerprint);
+            bonusEligible = fingerprintCheck.isNew;
+
+            // Get IP for logging
+            const ip = await window.SignupProtection.getUserIP();
+            if (ip) {
+                window.SignupProtection.recordSignupAttempt(ip, currentUser.email, fingerprint);
+            }
+        }
+
+        // Create user document (bonus handled inside based on eligibility checks)
+        if (typeof createUserWithCredits === 'function') {
+            const isNewUser = await createUserWithCredits(
+                currentUser.uid,
+                currentUser.email,
+                currentUser.displayName,
+                {
+                    fingerprint: fingerprint,
+                    bonusEligible: bonusEligible,
+                    awaitingVerification: false  // Google users are already verified
+                }
+            );
+
+            // Log signup to Google Sheet (only for new users who got bonus)
             if (isNewUser && window.SheetLogger) {
-                window.SheetLogger.logUserSignup(currentUser.uid, currentUser.email, currentUser.displayName, 'google', 25);
+                window.SheetLogger.logUserSignup(currentUser.uid, currentUser.email, currentUser.displayName, 'google', bonusEligible ? 25 : 0);
             }
         }
 

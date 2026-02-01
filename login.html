@@ -11,6 +11,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="styles.css">
+    <!-- Google reCAPTCHA -->
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
@@ -505,6 +507,11 @@
                 >
             </div>
 
+            <!-- reCAPTCHA widget -->
+            <div class="form-group" style="display: flex; justify-content: center;">
+                <div id="recaptchaWidget"></div>
+            </div>
+
             <button type="submit" class="login-button" id="signUpButton">
                 Join the Frontier
             </button>
@@ -561,9 +568,14 @@
     </div>
 
     <script src="firebase-config.js"></script>
-    <script src="auth.js?v=2"></script>
+    <script src="auth.js?v=3"></script>
     <script src="sheet-logger.js"></script>
-    <script src="points-system.js?v=2"></script>
+    <script src="points-system.js?v=3"></script>
+    <script src="signup-protection.js?v=1"></script>
+    <script>
+        // reCAPTCHA Site Key - Replace with your actual key from https://www.google.com/recaptcha/admin
+        const RECAPTCHA_SITE_KEY = '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI'; // This is Google's test key - replace with your own
+    </script>
     <script>
         // DOM Elements
         const signInTab = document.getElementById('signInTab');
@@ -681,11 +693,37 @@
 
             setButtonLoading(submitButton, true);
 
+            // Run signup protection checks
+            if (window.SignupProtection) {
+                const validation = await window.SignupProtection.validateSignupAttempt(email);
+
+                if (!validation.valid) {
+                    showError(validation.error);
+                    setButtonLoading(submitButton, false);
+                    if (window.SignupProtection.resetRecaptcha) {
+                        window.SignupProtection.resetRecaptcha();
+                    }
+                    return;
+                }
+
+                // Store validation data for use in signup
+                window.signupValidation = validation;
+            }
+
             const result = await signUp(email, password);
 
             if (result.success) {
+                // Record the signup attempt for rate limiting
+                if (window.SignupProtection && window.signupValidation) {
+                    window.SignupProtection.recordSignupAttempt(
+                        window.signupValidation.ip,
+                        email,
+                        window.signupValidation.fingerprint
+                    );
+                }
+
                 if (result.needsVerification) {
-                    showSuccess('Account created! Please check your email and click the verification link to continue.');
+                    showSuccess('Account created! Please check your email and click the verification link to receive your 25 PASO welcome bonus.');
                     setButtonLoading(submitButton, false);
                     // Show resend option
                     document.getElementById('resendVerification').classList.remove('hidden');
@@ -695,6 +733,9 @@
             } else {
                 showError(result.error);
                 setButtonLoading(submitButton, false);
+                if (window.SignupProtection && window.SignupProtection.resetRecaptcha) {
+                    window.SignupProtection.resetRecaptcha();
+                }
             }
         });
 
@@ -778,6 +819,16 @@
                 resetErrorMessage.textContent = result.error;
                 resetErrorMessage.classList.add('show');
             }
+        });
+
+        // Initialize reCAPTCHA when SignupProtection is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // Small delay to ensure all scripts are loaded
+            setTimeout(() => {
+                if (window.SignupProtection && typeof RECAPTCHA_SITE_KEY !== 'undefined') {
+                    window.SignupProtection.initRecaptcha('recaptchaWidget', RECAPTCHA_SITE_KEY);
+                }
+            }, 500);
         });
     </script>
 </body>

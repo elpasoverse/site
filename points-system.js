@@ -118,9 +118,10 @@ async function getUserBalance(userId) {
  * @param {string} userId - Firebase user ID
  * @param {string} email - User's email
  * @param {string} displayName - Optional display name
+ * @param {object} options - Additional options (fingerprint, ip, bonusEligible, awaitingVerification)
  * @returns {Promise<boolean>} - Success status (true = new user with bonus granted)
  */
-async function createUserWithCredits(userId, email, displayName = null) {
+async function createUserWithCredits(userId, email, displayName = null, options = {}) {
     if (!db) {
         console.warn('Firestore not available - cannot create user document');
         return false;
@@ -130,6 +131,13 @@ async function createUserWithCredits(userId, email, displayName = null) {
         console.error('Cannot create user document: userId is required');
         return false;
     }
+
+    const {
+        fingerprint = null,
+        ip = null,
+        bonusEligible = true,
+        awaitingVerification = false
+    } = options;
 
     try {
         // Check if user document already exists for this userId
@@ -145,29 +153,52 @@ async function createUserWithCredits(userId, email, displayName = null) {
         const userEmail = email || 'unknown@elpasoverse.com';
         const userName = displayName || (userEmail !== 'unknown@elpasoverse.com' ? userEmail.split('@')[0] : 'Pioneer');
 
-        // Check if this email has already received a signup bonus (prevents duplicate bonuses)
-        let signupBonusGranted = false;
+        // Check if this email has already received a signup bonus
+        let emailAlreadyUsed = false;
         if (userEmail !== 'unknown@elpasoverse.com') {
             const existingEmailQuery = await db.collection('users')
                 .where('email', '==', userEmail)
+                .where('signupBonusGranted', '==', true)
                 .limit(1)
                 .get();
 
             if (!existingEmailQuery.empty) {
                 console.log('Email already received signup bonus:', userEmail);
-                signupBonusGranted = true;
+                emailAlreadyUsed = true;
             }
         }
 
-        // Determine initial credits (0 if email already got bonus, otherwise SIGNUP_BONUS)
-        const initialCredits = signupBonusGranted ? 0 : SIGNUP_BONUS;
+        // Check if this device fingerprint has already received a signup bonus
+        let fingerprintAlreadyUsed = false;
+        if (fingerprint) {
+            const existingFingerprintQuery = await db.collection('users')
+                .where('deviceFingerprint', '==', fingerprint)
+                .where('signupBonusGranted', '==', true)
+                .limit(1)
+                .get();
+
+            if (!existingFingerprintQuery.empty) {
+                console.log('Device fingerprint already received signup bonus');
+                fingerprintAlreadyUsed = true;
+            }
+        }
+
+        // Determine if user can receive bonus
+        const canReceiveBonus = bonusEligible && !emailAlreadyUsed && !fingerprintAlreadyUsed;
+
+        // If awaiting verification, don't grant bonus yet - it will be granted on first verified login
+        const grantBonusNow = canReceiveBonus && !awaitingVerification;
+        const initialCredits = grantBonusNow ? SIGNUP_BONUS : 0;
 
         // Create user document
         const userData = {
             email: userEmail,
             displayName: userName,
             pasoCredits: initialCredits,
-            signupBonusGranted: !signupBonusGranted, // Track if THIS user got the bonus
+            signupBonusGranted: grantBonusNow,
+            bonusPending: canReceiveBonus && awaitingVerification, // Bonus will be granted on verification
+            deviceFingerprint: fingerprint,
+            signupIP: ip,
             createdAt: firebase.firestore.FieldValue.serverTimestamp(),
             updatedAt: firebase.firestore.FieldValue.serverTimestamp()
         };
@@ -175,28 +206,117 @@ async function createUserWithCredits(userId, email, displayName = null) {
         console.log('Creating user document for:', userId, userData);
         await db.collection('users').doc(userId).set(userData);
 
-        // Only log transaction and grant bonus if this email hasn't received one before
-        if (!signupBonusGranted) {
-            // Log the signup bonus transaction
+        // Only log transaction if bonus was granted now (not pending verification)
+        if (grantBonusNow) {
             await logPointsTransaction(userId, SIGNUP_BONUS, 'signup_bonus', 'Welcome bonus for joining El Paso Verse');
 
-            // Log to Google Sheet
             if (window.SheetLogger) {
                 window.SheetLogger.logTransaction(userId, userEmail, 'signup_bonus', SIGNUP_BONUS, SIGNUP_BONUS, 'signup_bonus', 'Welcome bonus for joining El Paso Verse');
             }
 
             console.log('User created with', SIGNUP_BONUS, 'PASO credits');
+        } else if (canReceiveBonus && awaitingVerification) {
+            console.log('User created with 0 PASO credits (bonus pending email verification)');
         } else {
-            console.log('User created with 0 PASO credits (email already received bonus)');
+            console.log('User created with 0 PASO credits (not eligible for bonus)');
         }
 
         userPasoCredits = initialCredits;
         updatePointsUI();
 
-        return !signupBonusGranted; // Return true only if bonus was granted
+        return grantBonusNow; // Return true only if bonus was granted now
     } catch (error) {
         console.error('Error creating user document:', error);
         console.error('Error details:', error.code, error.message);
+        return false;
+    }
+}
+
+/**
+ * Grant signup bonus to user after email verification
+ * Called on first login after email is verified
+ * @param {string} userId - Firebase user ID
+ * @param {string} email - User's email
+ * @returns {Promise<boolean>} - True if bonus was granted
+ */
+async function grantVerificationBonus(userId, email) {
+    if (!db || !userId) return false;
+
+    try {
+        const userDoc = await db.collection('users').doc(userId).get();
+
+        if (!userDoc.exists) {
+            console.log('User document not found for verification bonus');
+            return false;
+        }
+
+        const userData = userDoc.data();
+
+        // Check if bonus is pending and not yet granted
+        if (!userData.bonusPending || userData.signupBonusGranted) {
+            console.log('No pending bonus or already granted');
+            return false;
+        }
+
+        // Double-check email hasn't received bonus (in case of race conditions)
+        const existingEmailQuery = await db.collection('users')
+            .where('email', '==', email)
+            .where('signupBonusGranted', '==', true)
+            .limit(1)
+            .get();
+
+        if (!existingEmailQuery.empty && existingEmailQuery.docs[0].id !== userId) {
+            console.log('Email already received bonus from another account');
+            // Mark this user as not eligible
+            await db.collection('users').doc(userId).update({
+                bonusPending: false,
+                bonusDeniedReason: 'email_already_used'
+            });
+            return false;
+        }
+
+        // Double-check fingerprint hasn't received bonus
+        if (userData.deviceFingerprint) {
+            const existingFingerprintQuery = await db.collection('users')
+                .where('deviceFingerprint', '==', userData.deviceFingerprint)
+                .where('signupBonusGranted', '==', true)
+                .limit(1)
+                .get();
+
+            if (!existingFingerprintQuery.empty && existingFingerprintQuery.docs[0].id !== userId) {
+                console.log('Device already received bonus from another account');
+                await db.collection('users').doc(userId).update({
+                    bonusPending: false,
+                    bonusDeniedReason: 'device_already_used'
+                });
+                return false;
+            }
+        }
+
+        // Grant the bonus
+        await db.collection('users').doc(userId).update({
+            pasoCredits: firebase.firestore.FieldValue.increment(SIGNUP_BONUS),
+            signupBonusGranted: true,
+            bonusPending: false,
+            emailVerifiedAt: firebase.firestore.FieldValue.serverTimestamp(),
+            updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+        });
+
+        // Log the transaction
+        await logPointsTransaction(userId, SIGNUP_BONUS, 'signup_bonus', 'Welcome bonus for joining El Paso Verse (verified)');
+
+        if (window.SheetLogger) {
+            window.SheetLogger.logTransaction(userId, email, 'signup_bonus', SIGNUP_BONUS, SIGNUP_BONUS, 'signup_bonus', 'Welcome bonus for joining El Paso Verse (verified)');
+        }
+
+        // Update local state
+        userPasoCredits += SIGNUP_BONUS;
+        updatePointsUI();
+
+        console.log('Verification bonus granted:', SIGNUP_BONUS, 'PASO credits');
+        return true;
+    } catch (error) {
+        console.error('Error granting verification bonus:', error);
         return false;
     }
 }
