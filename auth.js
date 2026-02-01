@@ -33,15 +33,9 @@ async function signUp(email, password) {
         // Store user ID for legacy compatibility
         localStorage.setItem(USER_ID_KEY, currentUser.uid);
 
-        // Get signup validation data (fingerprint, IP, bonus eligibility)
-        const validationData = window.signupValidation || {};
-
         // Create user document WITHOUT bonus - bonus will be granted on first verified login
         if (typeof createUserWithCredits === 'function') {
             await createUserWithCredits(currentUser.uid, email, null, {
-                fingerprint: validationData.fingerprint,
-                ip: validationData.ip,
-                bonusEligible: validationData.bonusEligible !== false,
                 awaitingVerification: true  // Flag to grant bonus on verification
             });
         }
@@ -148,38 +142,20 @@ async function signInWithGoogle() {
         // Store user ID for legacy compatibility
         localStorage.setItem(USER_ID_KEY, currentUser.uid);
 
-        // Get device fingerprint and check eligibility
-        let fingerprint = null;
-        let bonusEligible = true;
-
-        if (window.SignupProtection) {
-            fingerprint = await window.SignupProtection.getDeviceFingerprint();
-            const fingerprintCheck = await window.SignupProtection.checkDeviceFingerprint(fingerprint);
-            bonusEligible = fingerprintCheck.isNew;
-
-            // Get IP for logging
-            const ip = await window.SignupProtection.getUserIP();
-            if (ip) {
-                window.SignupProtection.recordSignupAttempt(ip, currentUser.email, fingerprint);
-            }
-        }
-
-        // Create user document (bonus handled inside based on eligibility checks)
+        // Create user document (bonus handled inside based on email duplicate check)
         if (typeof createUserWithCredits === 'function') {
             const isNewUser = await createUserWithCredits(
                 currentUser.uid,
                 currentUser.email,
                 currentUser.displayName,
                 {
-                    fingerprint: fingerprint,
-                    bonusEligible: bonusEligible,
                     awaitingVerification: false  // Google users are already verified
                 }
             );
 
             // Log signup to Google Sheet (only for new users who got bonus)
             if (isNewUser && window.SheetLogger) {
-                window.SheetLogger.logUserSignup(currentUser.uid, currentUser.email, currentUser.displayName, 'google', bonusEligible ? 25 : 0);
+                window.SheetLogger.logUserSignup(currentUser.uid, currentUser.email, currentUser.displayName, 'google', 25);
             }
         }
 

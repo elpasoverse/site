@@ -118,7 +118,7 @@ async function getUserBalance(userId) {
  * @param {string} userId - Firebase user ID
  * @param {string} email - User's email
  * @param {string} displayName - Optional display name
- * @param {object} options - Additional options (fingerprint, ip, bonusEligible, awaitingVerification)
+ * @param {object} options - Additional options (awaitingVerification)
  * @returns {Promise<boolean>} - Success status (true = new user with bonus granted)
  */
 async function createUserWithCredits(userId, email, displayName = null, options = {}) {
@@ -132,12 +132,7 @@ async function createUserWithCredits(userId, email, displayName = null, options 
         return false;
     }
 
-    const {
-        fingerprint = null,
-        ip = null,
-        bonusEligible = true,
-        awaitingVerification = false
-    } = options;
+    const { awaitingVerification = false } = options;
 
     try {
         // Check if user document already exists for this userId
@@ -168,23 +163,8 @@ async function createUserWithCredits(userId, email, displayName = null, options 
             }
         }
 
-        // Check if this device fingerprint has already received a signup bonus
-        let fingerprintAlreadyUsed = false;
-        if (fingerprint) {
-            const existingFingerprintQuery = await db.collection('users')
-                .where('deviceFingerprint', '==', fingerprint)
-                .where('signupBonusGranted', '==', true)
-                .limit(1)
-                .get();
-
-            if (!existingFingerprintQuery.empty) {
-                console.log('Device fingerprint already received signup bonus');
-                fingerprintAlreadyUsed = true;
-            }
-        }
-
         // Determine if user can receive bonus
-        const canReceiveBonus = bonusEligible && !emailAlreadyUsed && !fingerprintAlreadyUsed;
+        const canReceiveBonus = !emailAlreadyUsed;
 
         // If awaiting verification, don't grant bonus yet - it will be granted on first verified login
         const grantBonusNow = canReceiveBonus && !awaitingVerification;
@@ -197,8 +177,6 @@ async function createUserWithCredits(userId, email, displayName = null, options 
             pasoCredits: initialCredits,
             signupBonusGranted: grantBonusNow,
             bonusPending: canReceiveBonus && awaitingVerification, // Bonus will be granted on verification
-            deviceFingerprint: fingerprint,
-            signupIP: ip,
             createdAt: firebase.firestore.FieldValue.serverTimestamp(),
             updatedAt: firebase.firestore.FieldValue.serverTimestamp()
         };
@@ -218,7 +196,7 @@ async function createUserWithCredits(userId, email, displayName = null, options 
         } else if (canReceiveBonus && awaitingVerification) {
             console.log('User created with 0 PASO credits (bonus pending email verification)');
         } else {
-            console.log('User created with 0 PASO credits (not eligible for bonus)');
+            console.log('User created with 0 PASO credits (email already received bonus)');
         }
 
         userPasoCredits = initialCredits;
@@ -273,24 +251,6 @@ async function grantVerificationBonus(userId, email) {
                 bonusDeniedReason: 'email_already_used'
             });
             return false;
-        }
-
-        // Double-check fingerprint hasn't received bonus
-        if (userData.deviceFingerprint) {
-            const existingFingerprintQuery = await db.collection('users')
-                .where('deviceFingerprint', '==', userData.deviceFingerprint)
-                .where('signupBonusGranted', '==', true)
-                .limit(1)
-                .get();
-
-            if (!existingFingerprintQuery.empty && existingFingerprintQuery.docs[0].id !== userId) {
-                console.log('Device already received bonus from another account');
-                await db.collection('users').doc(userId).update({
-                    bonusPending: false,
-                    bonusDeniedReason: 'device_already_used'
-                });
-                return false;
-            }
         }
 
         // Grant the bonus

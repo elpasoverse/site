@@ -591,10 +591,32 @@
         const resetErrorMessage = document.getElementById('resetErrorMessage');
         const resetSuccessMessage = document.getElementById('resetSuccessMessage');
 
+        // Check if user needs onboarding
+        async function checkUserNeedsOnboarding() {
+            try {
+                const userId = getCurrentUserId();
+                if (!userId || !db) return true; // Default to needing onboarding
+
+                const userDoc = await db.collection('users').doc(userId).get();
+                if (!userDoc.exists) return true;
+
+                const userData = userDoc.data();
+                return !userData.onboardingCompleted;
+            } catch (error) {
+                console.error('Error checking onboarding status:', error);
+                return true; // Default to needing onboarding on error
+            }
+        }
+
         // Check if already authenticated and redirect
-        waitForAuthState().then(authenticated => {
+        waitForAuthState().then(async (authenticated) => {
             if (authenticated && auth.currentUser && auth.currentUser.emailVerified) {
-                window.location.href = 'members.html';
+                const needsOnboarding = await checkUserNeedsOnboarding();
+                if (needsOnboarding) {
+                    window.location.href = 'onboarding.html';
+                } else {
+                    window.location.href = 'members.html';
+                }
             }
         });
 
@@ -665,7 +687,13 @@
             const result = await signIn(email, password);
 
             if (result.success) {
-                window.location.href = 'members.html';
+                // Check if user needs onboarding
+                const needsOnboarding = await checkUserNeedsOnboarding();
+                if (needsOnboarding) {
+                    window.location.href = 'onboarding.html';
+                } else {
+                    window.location.href = 'members.html';
+                }
             } else {
                 showError(result.error);
                 setButtonLoading(submitButton, false);
@@ -695,33 +723,24 @@
 
             // Run signup protection checks
             if (window.SignupProtection) {
-                const validation = await window.SignupProtection.validateSignupAttempt(email);
-
-                if (!validation.valid) {
-                    showError(validation.error);
+                // Check disposable email
+                if (window.SignupProtection.isDisposableEmail(email)) {
+                    showError('Please use a permanent email address. Temporary or disposable emails are not allowed.');
                     setButtonLoading(submitButton, false);
-                    if (window.SignupProtection.resetRecaptcha) {
-                        window.SignupProtection.resetRecaptcha();
-                    }
                     return;
                 }
 
-                // Store validation data for use in signup
-                window.signupValidation = validation;
+                // Check reCAPTCHA (if configured)
+                if (!window.SignupProtection.isRecaptchaVerified()) {
+                    showError('Please complete the reCAPTCHA verification.');
+                    setButtonLoading(submitButton, false);
+                    return;
+                }
             }
 
             const result = await signUp(email, password);
 
             if (result.success) {
-                // Record the signup attempt for rate limiting
-                if (window.SignupProtection && window.signupValidation) {
-                    window.SignupProtection.recordSignupAttempt(
-                        window.signupValidation.ip,
-                        email,
-                        window.signupValidation.fingerprint
-                    );
-                }
-
                 if (result.needsVerification) {
                     showSuccess('Account created! Please check your email and click the verification link to receive your 25 PASO welcome bonus.');
                     setButtonLoading(submitButton, false);
@@ -733,9 +752,6 @@
             } else {
                 showError(result.error);
                 setButtonLoading(submitButton, false);
-                if (window.SignupProtection && window.SignupProtection.resetRecaptcha) {
-                    window.SignupProtection.resetRecaptcha();
-                }
             }
         });
 
@@ -778,7 +794,13 @@
             const result = await signInWithGoogle();
 
             if (result.success) {
-                window.location.href = 'members.html';
+                // Check if user needs onboarding
+                const needsOnboarding = await checkUserNeedsOnboarding();
+                if (needsOnboarding) {
+                    window.location.href = 'onboarding.html';
+                } else {
+                    window.location.href = 'members.html';
+                }
             } else {
                 showError(result.error);
                 button.disabled = false;

@@ -1369,16 +1369,44 @@
 
     <!-- Custom Scripts -->
     <script src="firebase-config.js"></script>
-    <script src="auth.js?v=2"></script>
+    <script src="auth.js?v=3"></script>
     <script src="sheet-logger.js"></script>
-    <script src="points-system.js?v=2"></script>
+    <script src="points-system.js?v=3"></script>
     <script src="wallet-connect.js"></script>
     <script src="community.js"></script>
     <script>
+        // Check if user has completed onboarding
+        async function checkOnboardingRequired() {
+            try {
+                const userId = getCurrentUserId();
+                if (!userId || !db) return;
+
+                const userDoc = await db.collection('users').doc(userId).get();
+                if (!userDoc.exists) {
+                    // No user document, redirect to onboarding
+                    window.location.href = 'onboarding.html';
+                    return;
+                }
+
+                const userData = userDoc.data();
+                if (!userData.onboardingCompleted) {
+                    // Onboarding not completed, redirect
+                    window.location.href = 'onboarding.html';
+                    return;
+                }
+            } catch (error) {
+                console.error('Error checking onboarding:', error);
+            }
+        }
+
         // Initialize the page
         document.addEventListener('DOMContentLoaded', async function() {
             // Wait for auth state and display username
             await waitForAuthState();
+
+            // Check if onboarding is required
+            await checkOnboardingRequired();
+
             const username = getUserDisplayName();
             document.getElementById('usernameDisplay').textContent = username;
 

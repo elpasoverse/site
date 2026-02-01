@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="El Paso Verse Community - Welcome Onboarding">
+    <title>Welcome to El Paso Verse</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-image: url('assets/hero-bg.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: relative;
+            font-family: Georgia, 'Times New Roman', serif;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 1;
+        }
+
+        .onboarding-container {
+            position: relative;
+            z-index: 2;
+            max-width: 700px;
+            width: 95%;
+            background-color: rgba(245, 230, 211, 0.98);
+            padding: 2.5rem;
+            border: 3px solid #8B4513;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+            max-height: 90vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .step-indicator {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .step-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: #ccc;
+            transition: all 0.3s ease;
+        }
+
+        .step-dot.active {
+            background-color: #8B4513;
+            transform: scale(1.2);
+        }
+
+        .step-dot.completed {
+            background-color: #4CAF50;
+        }
+
+        .onboarding-header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .onboarding-header h1 {
+            font-family: 'Cinzel', Georgia, serif;
+            font-size: 1.8rem;
+            color: #3A2820;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 0.5rem;
+        }
+
+        .onboarding-header h2 {
+            font-family: 'Cinzel', Georgia, serif;
+            font-size: 1rem;
+            color: #8B4513;
+            font-weight: 400;
+            letter-spacing: 0.05em;
+        }
+
+        .ornament {
+            width: 80px;
+            height: 2px;
+            background: linear-gradient(to right, transparent, #C9A961, transparent);
+            margin: 1rem auto;
+            position: relative;
+        }
+
+        .ornament::after {
+            content: '\2605';
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            color: #C9A961;
+            font-size: 1rem;
+            background-color: #F5E6D3;
+            padding: 0 0.5rem;
+        }
+
+        /* Step 1: Waiver */
+        .waiver-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .waiver-scroll-box {
+            flex: 1;
+            overflow-y: auto;
+            border: 2px solid #8B4513;
+            padding: 1.5rem;
+            background-color: #fff;
+            font-size: 0.9rem;
+            line-height: 1.7;
+            color: #3A2820;
+            max-height: 400px;
+            margin-bottom: 1rem;
+        }
+
+        .waiver-scroll-box h3 {
+            font-family: 'Cinzel', Georgia, serif;
+            font-size: 1.1rem;
+            color: #3A2820;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .waiver-scroll-box h4 {
+            font-size: 0.95rem;
+            color: #8B4513;
+            margin-bottom: 1rem;
+            font-style: italic;
+        }
+
+        .waiver-scroll-box p {
+            margin-bottom: 1rem;
+            text-align: justify;
+        }
+
+        .waiver-scroll-box strong {
+            color: #8B4513;
+        }
+
+        .scroll-indicator {
+            text-align: center;
+            font-size: 0.85rem;
+            color: #8B4513;
+            font-style: italic;
+            margin-bottom: 1rem;
+            transition: opacity 0.3s ease;
+        }
+
+        .scroll-indicator.hidden {
+            opacity: 0;
+        }
+
+        /* Step 2: Grant */
+        .grant-container {
+            display: none;
+            text-align: center;
+        }
+
+        .grant-container.active {
+            display: block;
+        }
+
+        .grant-seal {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+        }
+
+        .grant-seal img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .grant-box {
+            border: 3px double #8B4513;
+            padding: 2rem;
+            background-color: #fff;
+            margin-bottom: 1.5rem;
+        }
+
+        .grant-title {
+            font-family: 'Cinzel', Georgia, serif;
+            font-size: 1.4rem;
+            color: #3A2820;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1.5rem;
+        }
+
+        .grant-recipient {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .grant-recipient-name {
+            font-family: 'Cinzel', Georgia, serif;
+            font-size: 1.5rem;
+            color: #8B4513;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+        .grant-amount-label {
+            font-size: 0.9rem;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.25rem;
+        }
+
+        .grant-amount {
+            font-family: 'Cinzel', Georgia, serif;
+            font-size: 3rem;
+            color: #C9A961;
+            font-weight: 900;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+
+        .grant-amount span {
+            font-size: 1.2rem;
+            color: #8B4513;
+        }
+
+        .grant-details {
+            text-align: left;
+            font-size: 0.85rem;
+            line-height: 1.6;
+            color: #3A2820;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #ddd;
+        }
+
+        .grant-details p {
+            margin-bottom: 0.75rem;
+        }
+
+        .grant-signature {
+            margin-top: 1.5rem;
+            text-align: right;
+            font-style: italic;
+            color: #8B4513;
+        }
+
+        /* Buttons */
+        .btn-primary {
+            width: 100%;
+            padding: 1rem 2rem;
+            background-color: #8B4513;
+            color: #F5E6D3;
+            border: none;
+            font-size: 1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: Georgia, 'Times New Roman', serif;
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            background-color: #C9A961;
+            color: #3A2820;
+        }
+
+        .btn-primary:disabled {
+            background-color: #aaa;
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: #8B4513;
+            border: 2px solid #8B4513;
+            padding: 0.75rem 1.5rem;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: Georgia, 'Times New Roman', serif;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .btn-secondary:hover {
+            background-color: rgba(139, 69, 19, 0.1);
+        }
+
+        .checkbox-container {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+        .checkbox-container input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            margin-top: 2px;
+            cursor: pointer;
+            accent-color: #8B4513;
+        }
+
+        .checkbox-container label {
+            font-size: 0.9rem;
+            color: #3A2820;
+            cursor: pointer;
+            line-height: 1.4;
+        }
+
+        /* Loading overlay */
+        .loading-overlay {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(245, 230, 211, 0.95);
+            z-index: 10;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .loading-overlay.active {
+            display: flex;
+        }
+
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid #ddd;
+            border-top-color: #8B4513;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            margin-top: 1rem;
+            color: #8B4513;
+            font-style: italic;
+        }
+
+        /* Success animation */
+        .success-checkmark {
+            display: none;
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1rem;
+        }
+
+        .success-checkmark.show {
+            display: block;
+            animation: popIn 0.5s ease;
+        }
+
+        @keyframes popIn {
+            0% { transform: scale(0); opacity: 0; }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        /* Already onboarded message */
+        .already-onboarded {
+            display: none;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .already-onboarded.active {
+            display: block;
+        }
+
+        .already-onboarded h2 {
+            font-family: 'Cinzel', Georgia, serif;
+            color: #3A2820;
+            margin-bottom: 1rem;
+        }
+
+        .already-onboarded p {
+            color: #8B4513;
+            margin-bottom: 1.5rem;
+        }
+
+        @media (max-width: 600px) {
+            .onboarding-container {
+                padding: 1.5rem;
+                max-height: 95vh;
+            }
+
+            .onboarding-header h1 {
+                font-size: 1.4rem;
+            }
+
+            .waiver-scroll-box {
+                max-height: 300px;
+                padding: 1rem;
+                font-size: 0.85rem;
+            }
+
+            .grant-amount {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="onboarding-container">
+        <!-- Loading Overlay -->
+        <div class="loading-overlay" id="loadingOverlay">
+            <div class="loading-spinner"></div>
+            <p class="loading-text">Processing...</p>
+        </div>
+
+        <!-- Step Indicator -->
+        <div class="step-indicator">
+            <div class="step-dot active" id="step1Dot"></div>
+            <div class="step-dot" id="step2Dot"></div>
+        </div>
+
+        <!-- Already Onboarded Message -->
+        <div class="already-onboarded" id="alreadyOnboarded">
+            <h2>Welcome Back, Pioneer</h2>
+            <p>You have already completed the onboarding process.</p>
+            <button class="btn-primary" onclick="window.location.href='members.html'">
+                Enter Community Portal
+            </button>
+        </div>
+
+        <!-- Step 1: Waiver -->
+        <div class="waiver-container" id="step1Container">
+            <div class="onboarding-header">
+                <h1>Standard Participation Intake Waiver</h1>
+                <h2>Kamara / El Paso Verse – an Ind. Vision-Driven Creative Project</h2>
+                <div class="ornament"></div>
+            </div>
+
+            <p class="scroll-indicator" id="scrollIndicator">↓ Please scroll to read the entire document ↓</p>
+
+            <div class="waiver-scroll-box" id="waiverScrollBox">
+                <p><strong>READ CAREFULLY BEFORE PARTICIPATING</strong></p>
+                <p>The undersigned ("Participant") acknowledges and agrees as follows:</p>
+
+                <p><strong>1. Nature and Spirit of the Project</strong><br>
+                This project forms part of the Kamara / El Paso Verse creative universe, an independent, long-term creative vision initiated and developed by Harry West, and sustained through the personal vision, goodwill, trust, and continued effort of its creator(s). The Participant acknowledges that this project would not exist but for the commitment and perseverance of its creator(s), that it is pioneering in spirit, carving its own path outside conventional production models, and that it is pursued against significant practical, financial, and structural obstacles, particularly in today's entertainment industry landscape. The project is developed on a best-efforts basis, with limited resources, progressive financing, and open-ended timelines, and may include films, short works, experimental productions, and related creative activities.</p>
+
+                <p><strong>2. Risk, Uncertainty, and No Guarantees</strong><br>
+                The Participant understands that development, financing, production, post-production, exploitation, and/or monetization may be delayed, paused, extended, or may not ultimately occur. No promises or guarantees have been made regarding funding, payment timing, completion, commercial success, distribution, or monetization. Participation is voluntary and undertaken with full awareness of these realities.</p>
+
+                <p><strong>3. Rewards, Goodwill, and Voluntary Contributions</strong><br>
+                Participation in the project may, but does not necessarily, give rise to recognition, opportunities, or future rewards. Any compensation, profit participation, ownership interest, credit, PASO allocation, or other benefit shall arise only if expressly set forth in a separate written agreement. No expectation of reward is implied by participation alone. Any assistance, contribution, service, resource, or support provided to the project is given voluntarily and in good faith, and shall be deemed gratuitous unless expressly agreed otherwise in a separate written contract.</p>
+
+                <p><strong>4. Entity-Only Responsibility and Waiver of Claims</strong><br>
+                Any contractual, financial, or labor obligations, if applicable, exist solely at the level of the producing entity, if any. The Participant agrees that no personal liability or recourse exists against any individual involved in the project, including the creator(s), director(s), producer(s), administrator(s), shareholder(s), or representatives, in their personal capacity. The Participant irrevocably waives any right to bring claims or proceedings—judicial or extrajudicial—against any such individual arising out of or related to participation in the project.</p>
+
+                <p><strong>5. No Blocking Actions; Personal Circumstances</strong><br>
+                Changes in the Participant's personal, financial, or emotional circumstances do not create any obligation on the project or its participants. The Participant agrees not to seek injunctive relief or any action intended to delay, block, or interfere with the project.</p>
+
+                <p><strong>6. Legal Limits</strong><br>
+                This waiver does not apply in cases of willful misconduct or fraud, solely to the extent finally determined by a competent court under applicable law.</p>
+
+                <p><strong>7. Informed Consent and Welcome</strong><br>
+                The Participant confirms that they have read and understood this document and consciously accept participation in a vision-driven, pioneering project operating within a challenging and uncertain industry environment.</p>
+            </div>
+
+            <div class="checkbox-container">
+                <input type="checkbox" id="agreeCheckbox" disabled>
+                <label for="agreeCheckbox">I have read and understood this document in its entirety, and I agree to its terms.</label>
+            </div>
+
+            <button class="btn-primary" id="agreeButton" disabled onclick="acceptWaiver()">
+                I Agree & Continue
+            </button>
+        </div>
+
+        <!-- Step 2: Grant Confirmation -->
+        <div class="grant-container" id="step2Container">
+            <div class="onboarding-header">
+                <h1>PASO Participation Grant</h1>
+                <div class="ornament"></div>
+            </div>
+
+            <div class="grant-seal">
+                <img src="assets/paso-token.png" alt="PASO">
+            </div>
+
+            <div class="grant-box">
+                <div class="grant-title">Certificate of Grant</div>
+
+                <p class="grant-recipient">This PASO Participation Grant is issued to:</p>
+                <p class="grant-recipient-name" id="grantRecipientName">Pioneer</p>
+
+                <p class="grant-amount-label">One-Time PASO Allocation</p>
+                <p class="grant-amount"><span id="grantAmount">25</span> <span>PASO</span></p>
+
+                <div class="grant-details">
+                    <p><strong>Purpose:</strong> PASO is granted as recognition of participation, belief, and alignment with the El Paso Verse journey. It reflects presence in the world-building process and contribution to the shared vision over time.</p>
+
+                    <p><strong>Usage:</strong> Within the El Paso Verse ecosystem, PASO may be used for participation in the El Paso Verse world; access to experiences, initiatives, or future layers of the project; and community and governance functions as they emerge.</p>
+
+                    <p><strong>Important:</strong> PASO is not equity, ownership, or a claim on profits. Its value is rooted in participation and belonging, not guarantees. Grant amounts are determined using high-level participation logic as described in the Vision Paper.</p>
+
+                    <p><strong>Liquidity & Evolution:</strong> PASO may evolve over time and may become transferable or tradable in the future, subject to the project's direction and applicable frameworks. No guarantee is made regarding liquidity, markets, or future value.</p>
+
+                    <p class="grant-signature">Granted by: <strong>Harry West</strong>, on behalf of El Paso Verse</p>
+                </div>
+            </div>
+
+            <p style="font-size: 0.85rem; color: #666; margin-bottom: 1.5rem; font-style: italic;">
+                By claiming this grant, you acknowledge its purpose within the El Paso Verse vision and affirm your intention to engage with the ecosystem in good faith.
+            </p>
+
+            <button class="btn-primary" id="claimButton" onclick="claimGrantAndEnter()">
+                Claim Grant & Enter Portal
+            </button>
+        </div>
+    </div>
+
+    <script src="firebase-config.js"></script>
+    <script src="auth.js?v=3"></script>
+    <script src="points-system.js?v=3"></script>
+    <script>
+        // State
+        let userEmail = null;
+        let userId = null;
+        let userName = null;
+        let pasoAmount = 25; // Default signup bonus
+        let hasScrolledToBottom = false;
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', async function() {
+            // Wait for auth state
+            const authenticated = await waitForAuthState();
+
+            if (!authenticated) {
+                window.location.href = 'login.html';
+                return;
+            }
+
+            userId = getCurrentUserId();
+            userEmail = getCurrentUserEmail();
+            userName = getUserDisplayName();
+
+            // Check if user has already completed onboarding
+            await checkOnboardingStatus();
+        });
+
+        // Check if user already completed onboarding
+        async function checkOnboardingStatus() {
+            if (!db || !userId) return;
+
+            try {
+                const userDoc = await db.collection('users').doc(userId).get();
+
+                if (userDoc.exists) {
+                    const userData = userDoc.data();
+
+                    // If user has completed onboarding, redirect to portal
+                    if (userData.onboardingCompleted) {
+                        document.getElementById('step1Container').style.display = 'none';
+                        document.getElementById('alreadyOnboarded').classList.add('active');
+                        return;
+                    }
+
+                    // If user accepted waiver but hasn't claimed grant, go to step 2
+                    if (userData.waiverAccepted) {
+                        goToStep2();
+                        return;
+                    }
+
+                    // Set the PASO amount from user data if available
+                    if (userData.pasoCredits) {
+                        pasoAmount = userData.pasoCredits;
+                    }
+                }
+
+                // Update grant display with user info
+                updateGrantDisplay();
+
+            } catch (error) {
+                console.error('Error checking onboarding status:', error);
+            }
+        }
+
+        // Update the grant display with user's name and amount
+        function updateGrantDisplay() {
+            document.getElementById('grantRecipientName').textContent = userName || userEmail || 'Pioneer';
+            document.getElementById('grantAmount').textContent = pasoAmount;
+        }
+
+        // Waiver scroll handling
+        const waiverScrollBox = document.getElementById('waiverScrollBox');
+        const scrollIndicator = document.getElementById('scrollIndicator');
+        const agreeCheckbox = document.getElementById('agreeCheckbox');
+        const agreeButton = document.getElementById('agreeButton');
+
+        waiverScrollBox.addEventListener('scroll', function() {
+            const scrollTop = this.scrollTop;
+            const scrollHeight = this.scrollHeight;
+            const clientHeight = this.clientHeight;
+
+            // Check if scrolled to bottom (with 20px tolerance)
+            if (scrollTop + clientHeight >= scrollHeight - 20) {
+                hasScrolledToBottom = true;
+                scrollIndicator.classList.add('hidden');
+                agreeCheckbox.disabled = false;
+            }
+        });
+
+        // Checkbox handling
+        agreeCheckbox.addEventListener('change', function() {
+            agreeButton.disabled = !this.checked;
+        });
+
+        // Get user's IP address
+        async function getUserIP() {
+            try {
+                const response = await fetch('https://api.ipify.org?format=json');
+                const data = await response.json();
+                return data.ip;
+            } catch (error) {
+                console.warn('Could not fetch IP:', error);
+                return 'unknown';
+            }
+        }
+
+        // Accept waiver (Step 1)
+        async function acceptWaiver() {
+            if (!hasScrolledToBottom || !agreeCheckbox.checked) return;
+
+            showLoading('Recording your acceptance...');
+
+            try {
+                const ip = await getUserIP();
+                const timestamp = new Date().toISOString();
+
+                // Record waiver acceptance in Firestore
+                await db.collection('waiverAcceptances').add({
+                    userId: userId,
+                    email: userEmail,
+                    displayName: userName,
+                    ipAddress: ip,
+                    timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                    clientTimestamp: timestamp,
+                    userAgent: navigator.userAgent,
+                    documentVersion: '1.0',
+                    documentType: 'participation_intake_waiver'
+                });
+
+                // Update user document
+                await db.collection('users').doc(userId).update({
+                    waiverAccepted: true,
+                    waiverAcceptedAt: firebase.firestore.FieldValue.serverTimestamp(),
+                    waiverIP: ip
+                });
+
+                hideLoading();
+                goToStep2();
+
+            } catch (error) {
+                console.error('Error recording waiver acceptance:', error);
+                hideLoading();
+                alert('There was an error processing your acceptance. Please try again.');
+            }
+        }
+
+        // Go to Step 2
+        function goToStep2() {
+            document.getElementById('step1Container').style.display = 'none';
+            document.getElementById('step2Container').classList.add('active');
+            document.getElementById('step1Dot').classList.remove('active');
+            document.getElementById('step1Dot').classList.add('completed');
+            document.getElementById('step2Dot').classList.add('active');
+            updateGrantDisplay();
+        }
+
+        // Claim grant and enter portal (Step 2)
+        async function claimGrantAndEnter() {
+            showLoading('Finalizing your grant...');
+
+            try {
+                const timestamp = new Date().toISOString();
+
+                // Record grant acceptance
+                await db.collection('grantAcceptances').add({
+                    userId: userId,
+                    email: userEmail,
+                    displayName: userName,
+                    pasoAmount: pasoAmount,
+                    timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                    clientTimestamp: timestamp,
+                    documentVersion: '1.0',
+                    documentType: 'paso_participation_grant'
+                });
+
+                // Update user document to mark onboarding complete
+                await db.collection('users').doc(userId).update({
+                    onboardingCompleted: true,
+                    onboardingCompletedAt: firebase.firestore.FieldValue.serverTimestamp(),
+                    grantAccepted: true,
+                    grantAcceptedAt: firebase.firestore.FieldValue.serverTimestamp()
+                });
+
+                // Grant the verification bonus if pending
+                if (typeof grantVerificationBonus === 'function') {
+                    await grantVerificationBonus(userId, userEmail);
+                }
+
+                // Trigger welcome email (via Firestore trigger or external service)
+                await triggerWelcomeEmail();
+
+                hideLoading();
+
+                // Show success briefly then redirect
+                document.getElementById('step2Dot').classList.remove('active');
+                document.getElementById('step2Dot').classList.add('completed');
+
+                setTimeout(() => {
+                    window.location.href = 'members.html';
+                }, 500);
+
+            } catch (error) {
+                console.error('Error completing onboarding:', error);
+                hideLoading();
+                alert('There was an error finalizing your grant. Please try again.');
+            }
+        }
+
+        // Trigger welcome email
+        async function triggerWelcomeEmail() {
+            try {
+                // Create email request in Firestore (to be processed by Cloud Function or external service)
+                await db.collection('emailQueue').add({
+                    type: 'welcome_onboarding',
+                    to: userEmail,
+                    userId: userId,
+                    displayName: userName,
+                    pasoAmount: pasoAmount,
+                    createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+                    status: 'pending',
+                    attachments: ['waiver', 'grant_certificate']
+                });
+                console.log('Welcome email queued');
+            } catch (error) {
+                console.error('Error queuing welcome email:', error);
+                // Don't block onboarding if email fails
+            }
+        }
+
+        // Loading helpers
+        function showLoading(message) {
+            const overlay = document.getElementById('loadingOverlay');
+            overlay.querySelector('.loading-text').textContent = message || 'Processing...';
+            overlay.classList.add('active');
+        }
+
+        function hideLoading() {
+            document.getElementById('loadingOverlay').classList.remove('active');
+        }
+    </script>
+</body>
+</html>
