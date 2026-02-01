@@ -35,6 +35,16 @@
     <link rel="stylesheet" href="members.css">
 </head>
 <body class="members-body">
+    <!-- Auto-reset purchase states if ?reset in URL -->
+    <script>
+        if (window.location.search.includes('reset')) {
+            localStorage.removeItem('motionPrintPurchased');
+            localStorage.removeItem('vinylPurchased');
+            localStorage.removeItem('gazettePurchased');
+            localStorage.removeItem('cartItems');
+            window.location.href = 'members.html';
+        }
+    </script>
     <!-- Header -->
     <header class="members-header">
         <div class="header-container">
