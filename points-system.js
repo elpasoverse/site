@@ -118,7 +118,7 @@ async function getUserBalance(userId) {
  * @param {string} userId - Firebase user ID
  * @param {string} email - User's email
  * @param {string} displayName - Optional display name
- * @returns {Promise<boolean>} - Success status
+ * @returns {Promise<boolean>} - Success status (true = new user with bonus granted)
  */
 async function createUserWithCredits(userId, email, displayName = null) {
     if (!db) {
@@ -132,7 +132,7 @@ async function createUserWithCredits(userId, email, displayName = null) {
     }
 
     try {
-        // Check if user already exists (e.g., re-registration attempt or race condition)
+        // Check if user document already exists for this userId
         const existingUser = await db.collection('users').doc(userId).get();
         if (existingUser.exists) {
             console.log('User document already exists, loading balance');
@@ -145,11 +145,29 @@ async function createUserWithCredits(userId, email, displayName = null) {
         const userEmail = email || 'unknown@elpasoverse.com';
         const userName = displayName || (userEmail !== 'unknown@elpasoverse.com' ? userEmail.split('@')[0] : 'Pioneer');
 
-        // Create user document with signup bonus
+        // Check if this email has already received a signup bonus (prevents duplicate bonuses)
+        let signupBonusGranted = false;
+        if (userEmail !== 'unknown@elpasoverse.com') {
+            const existingEmailQuery = await db.collection('users')
+                .where('email', '==', userEmail)
+                .limit(1)
+                .get();
+
+            if (!existingEmailQuery.empty) {
+                console.log('Email already received signup bonus:', userEmail);
+                signupBonusGranted = true;
+            }
+        }
+
+        // Determine initial credits (0 if email already got bonus, otherwise SIGNUP_BONUS)
+        const initialCredits = signupBonusGranted ? 0 : SIGNUP_BONUS;
+
+        // Create user document
         const userData = {
             email: userEmail,
             displayName: userName,
-            pasoCredits: SIGNUP_BONUS,
+            pasoCredits: initialCredits,
+            signupBonusGranted: !signupBonusGranted, // Track if THIS user got the bonus
             createdAt: firebase.firestore.FieldValue.serverTimestamp(),
             updatedAt: firebase.firestore.FieldValue.serverTimestamp()
         };
@@ -157,19 +175,25 @@ async function createUserWithCredits(userId, email, displayName = null) {
         console.log('Creating user document for:', userId, userData);
         await db.collection('users').doc(userId).set(userData);
 
-        // Log the signup bonus transaction
-        await logPointsTransaction(userId, SIGNUP_BONUS, 'signup_bonus', 'Welcome bonus for joining El Paso Verse');
+        // Only log transaction and grant bonus if this email hasn't received one before
+        if (!signupBonusGranted) {
+            // Log the signup bonus transaction
+            await logPointsTransaction(userId, SIGNUP_BONUS, 'signup_bonus', 'Welcome bonus for joining El Paso Verse');
 
-        // Log to Google Sheet
-        if (window.SheetLogger) {
-            window.SheetLogger.logTransaction(userId, userEmail, 'signup_bonus', SIGNUP_BONUS, SIGNUP_BONUS, 'signup_bonus', 'Welcome bonus for joining El Paso Verse');
+            // Log to Google Sheet
+            if (window.SheetLogger) {
+                window.SheetLogger.logTransaction(userId, userEmail, 'signup_bonus', SIGNUP_BONUS, SIGNUP_BONUS, 'signup_bonus', 'Welcome bonus for joining El Paso Verse');
+            }
+
+            console.log('User created with', SIGNUP_BONUS, 'PASO credits');
+        } else {
+            console.log('User created with 0 PASO credits (email already received bonus)');
         }
 
-        userPasoCredits = SIGNUP_BONUS;
+        userPasoCredits = initialCredits;
         updatePointsUI();
 
-        console.log('User created with', SIGNUP_BONUS, 'PASO credits');
-        return true; // Is a new user
+        return !signupBonusGranted; // Return true only if bonus was granted
     } catch (error) {
         console.error('Error creating user document:', error);
         console.error('Error details:', error.code, error.message);
