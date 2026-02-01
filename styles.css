@@ -17,7 +17,7 @@ html {
 }
 
 body {
-    font-family: 'Avenir Next Condensed', 'Avenir Next', Avenir, sans-serif;
+    font-family: 'Avenir Next', Avenir, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     background: #f4ead5;
     overflow-x: hidden;
     background-image:
@@ -27,7 +27,7 @@ body {
         radial-gradient(circle at 80% 80%, rgba(139, 69, 19, 0.02) 0%, transparent 50%);
     color: #1a1a1a;
     line-height: 1.8;
-    font-size: 17px;
+    font-size: 18px;
 }
 
 /* Container */
@@ -1703,8 +1703,8 @@ p {
     }
 
     body {
-        font-size: 16px;
-        line-height: 1.7;
+        font-size: 17px;
+        line-height: 1.75;
     }
 
     .section {
