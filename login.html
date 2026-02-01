@@ -341,7 +341,7 @@
             align-items: center;
             justify-content: center;
             margin: 1.5rem 0;
-            gap: 1rem;
+            width: 100%;
         }
 
         .divider::before,
@@ -358,6 +358,8 @@
             font-size: 0.85rem;
             text-transform: uppercase;
             letter-spacing: 0.05em;
+            padding: 0 1rem;
+            flex-shrink: 0;
         }
 
         /* Google Button */
@@ -403,6 +405,12 @@
 
             .modal-buttons {
                 flex-direction: column;
+            }
+
+            /* Scale reCAPTCHA to fit mobile screens */
+            #recaptchaWidget {
+                transform: scale(0.85);
+                transform-origin: center;
             }
         }
     </style>
@@ -508,8 +516,8 @@
             </div>
 
             <!-- reCAPTCHA widget -->
-            <div class="form-group" style="display: flex; justify-content: center;">
-                <div id="recaptchaWidget"></div>
+            <div class="form-group" style="display: flex; justify-content: center; align-items: center; width: 100%; overflow: hidden;">
+                <div id="recaptchaWidget" style="transform: scale(0.9); transform-origin: center;"></div>
             </div>
 
             <button type="submit" class="login-button" id="signUpButton">
