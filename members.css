@@ -20,7 +20,7 @@
     font-size: 18px;
 }
 
-/* Ensure all elements inherit Playfair Display */
+/* Ensure all elements inherit font */
 .members-body * {
     font-family: inherit;
 }
@@ -31,9 +31,9 @@
 .members-body h4,
 .members-body h5,
 .members-body h6 {
-    font-family: 'Playfair Display', Georgia, serif;
+    font-family: 'Cinzel', Georgia, serif;
     font-weight: 700;
-    letter-spacing: 0.02em;
+    letter-spacing: 0.03em;
 }
 
 .members-body p,
@@ -67,7 +67,7 @@
 }
 
 .site-title {
-    font-family: 'Playfair Display', Georgia, serif;
+    font-family: 'Cinzel', Georgia, serif;
     font-size: 1.8rem;
     margin: 0;
     text-transform: uppercase;
@@ -124,7 +124,7 @@
 }
 
 .welcome-section h2 {
-    font-family: 'Playfair Display', Georgia, serif;
+    font-family: 'Cinzel', Georgia, serif;
     font-size: 2.5rem;
     color: #3A2820;
     margin-bottom: 1rem;
@@ -247,7 +247,7 @@
     font-size: 2.5rem;
     font-weight: 700;
     color: #1a1a1a;
-    font-family: 'Playfair Display', Georgia, serif;
+    font-family: 'Cinzel', Georgia, serif;
 }
 
 .stat-label {
@@ -355,7 +355,7 @@
 }
 
 .idea-card-title {
-    font-family: 'Playfair Display', Georgia, serif;
+    font-family: 'Cinzel', Georgia, serif;
     font-size: 1.4rem;
     color: #3A2820;
     margin-bottom: 0.5rem;
@@ -446,7 +446,7 @@
 }
 
 .submit-container h3 {
-    font-family: 'Playfair Display', Georgia, serif;
+    font-family: 'Cinzel', Georgia, serif;
     font-size: 2rem;
     color: #3A2820;
     margin-bottom: 1rem;
@@ -469,7 +469,7 @@
 .guidelines-box h4 {
     color: #3A2820;
     margin-bottom: 1rem;
-    font-family: 'Playfair Display', Georgia, serif;
+    font-family: 'Cinzel', Georgia, serif;
 }
 
 .guidelines-box ul {
@@ -606,7 +606,7 @@
 }
 
 .content-item h4 {
-    font-family: 'Playfair Display', Georgia, serif;
+    font-family: 'Cinzel', Georgia, serif;
     color: #3A2820;
     margin-bottom: 0.5rem;
 }
@@ -643,7 +643,7 @@
 }
 
 .activity-section h4 {
-    font-family: 'Playfair Display', Georgia, serif;
+    font-family: 'Cinzel', Georgia, serif;
     font-size: 1.5rem;
     color: #3A2820;
     margin-bottom: 1rem;
@@ -954,7 +954,7 @@
 }
 
 .account-modal-header h2 {
-    font-family: 'Playfair Display', Georgia, serif;
+    font-family: 'Cinzel', Georgia, serif;
     font-size: 1.5rem;
     margin: 0;
     text-transform: uppercase;
@@ -992,7 +992,7 @@
 }
 
 .account-section h3 {
-    font-family: 'Playfair Display', Georgia, serif;
+    font-family: 'Cinzel', Georgia, serif;
     font-size: 1.1rem;
     color: #3A2820;
     margin-bottom: 1rem;
