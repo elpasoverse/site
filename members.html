@@ -38,10 +38,15 @@
     <!-- Auto-reset purchase states if ?reset in URL -->
     <script>
         if (window.location.search.includes('reset')) {
+            // Clear purchases
             localStorage.removeItem('motionPrintPurchased');
             localStorage.removeItem('vinylPurchased');
             localStorage.removeItem('gazettePurchased');
             localStorage.removeItem('cartItems');
+            // Disconnect wallet
+            localStorage.removeItem('cardanoWallet');
+            localStorage.removeItem('walletAddress');
+            localStorage.removeItem('nftVerified');
             window.location.href = 'members.html';
         }
     </script>
