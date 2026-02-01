@@ -221,6 +221,14 @@ async function connectWallet(walletId) {
             detail: { address: walletAddress, balance: pasoBalance }
         }));
 
+        // Log wallet connection to Google Sheet
+        if (window.SheetLogger) {
+            const userId = typeof getCurrentUserId === 'function' ? getCurrentUserId() : 'unknown';
+            const email = typeof getCurrentUserEmail === 'function' ? getCurrentUserEmail() : 'unknown';
+            const walletName = SUPPORTED_WALLETS.find(w => w.id === walletId)?.name || walletId;
+            window.SheetLogger.logWalletConnection(userId, email, walletAddress, walletName, pasoBalance);
+        }
+
         console.log('Wallet connected:', walletId, walletAddress);
 
     } catch (error) {

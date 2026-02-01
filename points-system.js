@@ -138,7 +138,7 @@ async function createUserWithCredits(userId, email, displayName = null) {
             console.log('User document already exists, loading balance');
             userPasoCredits = existingUser.data().pasoCredits || 0;
             updatePointsUI();
-            return true;
+            return false; // Not a new user
         }
 
         // Determine email and display name
@@ -160,11 +160,16 @@ async function createUserWithCredits(userId, email, displayName = null) {
         // Log the signup bonus transaction
         await logPointsTransaction(userId, SIGNUP_BONUS, 'signup_bonus', 'Welcome bonus for joining El Paso Verse');
 
+        // Log to Google Sheet
+        if (window.SheetLogger) {
+            window.SheetLogger.logTransaction(userId, userEmail, 'signup_bonus', SIGNUP_BONUS, SIGNUP_BONUS, 'signup_bonus', 'Welcome bonus for joining El Paso Verse');
+        }
+
         userPasoCredits = SIGNUP_BONUS;
         updatePointsUI();
 
         console.log('User created with', SIGNUP_BONUS, 'PASO credits');
-        return true;
+        return true; // Is a new user
     } catch (error) {
         console.error('Error creating user document:', error);
         console.error('Error details:', error.code, error.message);
@@ -205,6 +210,12 @@ async function grantPoints(userId, amount, reason, description = '') {
         // Update local state
         userPasoCredits += amount;
         updatePointsUI();
+
+        // Log to Google Sheet
+        if (window.SheetLogger) {
+            const email = typeof getCurrentUserEmail === 'function' ? getCurrentUserEmail() : 'unknown';
+            window.SheetLogger.logTransaction(userId, email, 'grant', amount, userPasoCredits, reason, description);
+        }
 
         return true;
     } catch (error) {
@@ -253,6 +264,12 @@ async function deductPoints(userId, amount, reason, description = '') {
         // Update local state
         userPasoCredits -= amount;
         updatePointsUI();
+
+        // Log to Google Sheet
+        if (window.SheetLogger) {
+            const email = typeof getCurrentUserEmail === 'function' ? getCurrentUserEmail() : 'unknown';
+            window.SheetLogger.logTransaction(userId, email, 'deduct', -amount, userPasoCredits, reason, description);
+        }
 
         return true;
     } catch (error) {

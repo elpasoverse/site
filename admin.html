@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - El Paso Verse</title>
+    <link rel="icon" type="image/png" href="assets/token-icon.png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: #1a1a1a;
+            color: #F5E6D3;
+            min-height: 100vh;
+        }
+
+        /* Password Gate */
+        #passwordGate {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: #1a1a1a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+        }
+
+        .password-form {
+            background: #2a2a2a;
+            border: 2px solid #C9A961;
+            border-radius: 8px;
+            padding: 2rem;
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+        }
+
+        .password-form h2 {
+            color: #C9A961;
+            margin-bottom: 1.5rem;
+            font-family: 'Playfair Display', Georgia, serif;
+        }
+
+        .password-form input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            background: #1a1a1a;
+            border: 1px solid #C9A961;
+            color: #F5E6D3;
+            border-radius: 4px;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .password-form button {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            background: linear-gradient(135deg, #C9A961 0%, #8B7355 100%);
+            border: none;
+            color: #1a1a1a;
+            font-weight: bold;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .password-form button:hover {
+            opacity: 0.9;
+        }
+
+        .password-error {
+            color: #ff6b6b;
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            display: none;
+        }
+
+        /* Admin Dashboard */
+        #adminDashboard {
+            display: none;
+            padding: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #C9A961;
+        }
+
+        header h1 {
+            color: #C9A961;
+            font-family: 'Playfair Display', Georgia, serif;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.5rem 1rem;
+            background: transparent;
+            border: 1px solid #C9A961;
+            color: #C9A961;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .btn:hover {
+            background: #C9A961;
+            color: #1a1a1a;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #C9A961 0%, #8B7355 100%);
+            color: #1a1a1a;
+            border: none;
+            font-weight: bold;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: #2a2a2a;
+            border: 1px solid #3a3a3a;
+            border-radius: 8px;
+            padding: 1.5rem;
+        }
+
+        .stat-card h3 {
+            color: #999;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #C9A961;
+        }
+
+        .stat-subtext {
+            font-size: 0.85rem;
+            color: #666;
+            margin-top: 0.25rem;
+        }
+
+        /* Tables */
+        .section {
+            background: #2a2a2a;
+            border: 1px solid #3a3a3a;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .section h2 {
+            color: #C9A961;
+            margin-bottom: 1rem;
+            font-size: 1.25rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid #3a3a3a;
+        }
+
+        th {
+            color: #C9A961;
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        td {
+            color: #F5E6D3;
+            font-size: 0.9rem;
+        }
+
+        tr:hover {
+            background: #333;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: bold;
+        }
+
+        .badge-grant {
+            background: #2d5a2d;
+            color: #90EE90;
+        }
+
+        .badge-deduct {
+            background: #5a2d2d;
+            color: #ff9999;
+        }
+
+        .badge-signup {
+            background: #2d4a5a;
+            color: #87CEEB;
+        }
+
+        /* Setup Instructions */
+        .setup-box {
+            background: #2d2d1a;
+            border: 1px solid #C9A961;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .setup-box h3 {
+            color: #C9A961;
+            margin-bottom: 1rem;
+        }
+
+        .setup-box ol {
+            margin-left: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .setup-box code {
+            background: #1a1a1a;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 0.85rem;
+        }
+
+        .setup-box pre {
+            background: #1a1a1a;
+            padding: 1rem;
+            border-radius: 4px;
+            overflow-x: auto;
+            margin: 1rem 0;
+            font-size: 0.8rem;
+        }
+
+        /* Loading state */
+        .loading {
+            text-align: center;
+            padding: 2rem;
+            color: #999;
+        }
+
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            table {
+                font-size: 0.8rem;
+            }
+
+            th, td {
+                padding: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Password Gate -->
+    <div id="passwordGate">
+        <div class="password-form">
+            <h2>Admin Access</h2>
+            <input type="password" id="adminPassword" placeholder="Enter password" onkeypress="if(event.key==='Enter')checkPassword()">
+            <button onclick="checkPassword()">Enter</button>
+            <p class="password-error" id="passwordError">Incorrect password</p>
+        </div>
+    </div>
+
+    <!-- Admin Dashboard -->
+    <div id="adminDashboard">
+        <header>
+            <h1>PASO Admin Panel</h1>
+            <div class="header-actions">
+                <button class="btn" onclick="refreshData()">Refresh</button>
+                <a href="#" id="sheetLink" class="btn btn-primary" target="_blank">Open Google Sheet</a>
+                <button class="btn" onclick="logout()">Logout</button>
+            </div>
+        </header>
+
+        <!-- Setup Instructions (shown when not configured) -->
+        <div class="setup-box" id="setupInstructions">
+            <h3>Setup Required: Connect Google Sheets</h3>
+            <ol>
+                <li>Go to <a href="https://sheets.google.com" target="_blank" style="color: #C9A961;">Google Sheets</a> and create a new spreadsheet</li>
+                <li>Name it "El Paso Verse PASO Tracker"</li>
+                <li>Create three tabs (sheets): <code>Users</code>, <code>Transactions</code>, <code>Wallets</code></li>
+                <li>Go to <strong>Extensions → Apps Script</strong></li>
+                <li>Delete any code and paste the following:</li>
+            </ol>
+            <pre id="appsScriptCode">
+function doPost(e) {
+  try {
+    const data = JSON.parse(e.postData.contents);
+
+    // Verify secret key
+    if (data.secret !== 'elpaso-paso-logger-2024') {
+      return ContentService.createTextOutput('Unauthorized');
+    }
+
+    const ss = SpreadsheetApp.getActiveSpreadsheet();
+    const sheet = ss.getSheetByName(data.sheet);
+
+    if (!sheet) {
+      return ContentService.createTextOutput('Sheet not found: ' + data.sheet);
+    }
+
+    // Add headers if sheet is empty
+    if (sheet.getLastRow() === 0) {
+      const headers = Object.keys(data.data);
+      sheet.appendRow(headers);
+    }
+
+    // Add data row
+    const values = Object.values(data.data);
+    sheet.appendRow(values);
+
+    return ContentService.createTextOutput('Success');
+  } catch (error) {
+    return ContentService.createTextOutput('Error: ' + error.message);
+  }
+}
+
+function doGet(e) {
+  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  const action = e.parameter.action;
+
+  if (action === 'getSummary') {
+    const usersSheet = ss.getSheetByName('Users');
+    const transactionsSheet = ss.getSheetByName('Transactions');
+
+    const totalUsers = usersSheet ? Math.max(0, usersSheet.getLastRow() - 1) : 0;
+
+    let totalGranted = 0;
+    let totalDeducted = 0;
+
+    if (transactionsSheet && transactionsSheet.getLastRow() > 1) {
+      const data = transactionsSheet.getDataRange().getValues();
+      for (let i = 1; i < data.length; i++) {
+        const amount = parseFloat(data[i][4]) || 0; // amount column
+        if (amount > 0) totalGranted += amount;
+        else totalDeducted += Math.abs(amount);
+      }
+    }
+
+    const result = {
+      totalUsers: totalUsers,
+      totalGranted: totalGranted,
+      totalDeducted: totalDeducted,
+      circulating: totalGranted - totalDeducted
+    };
+
+    return ContentService.createTextOutput(JSON.stringify(result))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
+
+  if (action === 'getRecentTransactions') {
+    const sheet = ss.getSheetByName('Transactions');
+    if (!sheet || sheet.getLastRow() <= 1) {
+      return ContentService.createTextOutput('[]')
+        .setMimeType(ContentService.MimeType.JSON);
+    }
+
+    const lastRow = sheet.getLastRow();
+    const startRow = Math.max(2, lastRow - 19);
+    const data = sheet.getRange(startRow, 1, lastRow - startRow + 1, sheet.getLastColumn()).getValues();
+    const headers = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
+
+    const result = data.reverse().map(row => {
+      const obj = {};
+      headers.forEach((h, i) => obj[h] = row[i]);
+      return obj;
+    });
+
+    return ContentService.createTextOutput(JSON.stringify(result))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
+
+  return ContentService.createTextOutput('El Paso Verse PASO Logger');
+}</pre>
+            <ol start="6">
+                <li>Click <strong>Deploy → New deployment</strong></li>
+                <li>Select type: <strong>Web app</strong></li>
+                <li>Set "Execute as" to <strong>Me</strong> and "Who has access" to <strong>Anyone</strong></li>
+                <li>Click <strong>Deploy</strong> and authorize when prompted</li>
+                <li>Copy the Web app URL and update it in <code>sheet-logger.js</code></li>
+                <li>Also paste the URL below:</li>
+            </ol>
+            <input type="text" id="webhookUrlInput" placeholder="Paste your Apps Script Web App URL here" style="width: 100%; padding: 0.5rem; margin-top: 1rem; background: #1a1a1a; border: 1px solid #C9A961; color: #F5E6D3; border-radius: 4px;">
+            <button onclick="saveWebhookUrl()" style="margin-top: 0.5rem; padding: 0.5rem 1rem; background: #C9A961; border: none; color: #1a1a1a; border-radius: 4px; cursor: pointer;">Save URL & Refresh</button>
+        </div>
+
+        <!-- Stats Grid -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <h3>Total Supply</h3>
+                <div class="stat-value">1,000,000,000</div>
+                <div class="stat-subtext">PASO tokens</div>
+            </div>
+            <div class="stat-card">
+                <h3>Registered Users</h3>
+                <div class="stat-value" id="totalUsers">--</div>
+                <div class="stat-subtext">community members</div>
+            </div>
+            <div class="stat-card">
+                <h3>Total Distributed</h3>
+                <div class="stat-value" id="totalDistributed">--</div>
+                <div class="stat-subtext">PASO granted</div>
+            </div>
+            <div class="stat-card">
+                <h3>Total Spent</h3>
+                <div class="stat-value" id="totalSpent">--</div>
+                <div class="stat-subtext">PASO used on content</div>
+            </div>
+            <div class="stat-card">
+                <h3>Circulating</h3>
+                <div class="stat-value" id="circulating">--</div>
+                <div class="stat-subtext">PASO in user accounts</div>
+            </div>
+            <div class="stat-card">
+                <h3>Remaining Supply</h3>
+                <div class="stat-value" id="remainingSupply">--</div>
+                <div class="stat-subtext">PASO to distribute</div>
+            </div>
+        </div>
+
+        <!-- Recent Transactions -->
+        <div class="section">
+            <h2>Recent Transactions</h2>
+            <div id="transactionsTable">
+                <p class="loading">Loading transactions...</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const ADMIN_PASSWORD = '2240';
+        const TOTAL_SUPPLY = 1000000000;
+
+        // Check if already authenticated
+        if (localStorage.getItem('adminAuthenticated') === 'true') {
+            showDashboard();
+        }
+
+        function checkPassword() {
+            const input = document.getElementById('adminPassword').value;
+            if (input === ADMIN_PASSWORD) {
+                localStorage.setItem('adminAuthenticated', 'true');
+                showDashboard();
+            } else {
+                document.getElementById('passwordError').style.display = 'block';
+            }
+        }
+
+        function showDashboard() {
+            document.getElementById('passwordGate').style.display = 'none';
+            document.getElementById('adminDashboard').style.display = 'block';
+
+            // Load saved webhook URL
+            const savedUrl = localStorage.getItem('pasoWebhookUrl');
+            if (savedUrl) {
+                document.getElementById('webhookUrlInput').value = savedUrl;
+                document.getElementById('sheetLink').href = savedUrl.replace('/exec', '').replace('script.google.com/macros/s/', 'docs.google.com/spreadsheets/d/');
+            }
+
+            loadData();
+        }
+
+        function logout() {
+            localStorage.removeItem('adminAuthenticated');
+            location.reload();
+        }
+
+        function saveWebhookUrl() {
+            const url = document.getElementById('webhookUrlInput').value.trim();
+            if (url) {
+                localStorage.setItem('pasoWebhookUrl', url);
+                alert('URL saved! Now update the same URL in sheet-logger.js file.');
+                loadData();
+            }
+        }
+
+        async function loadData() {
+            const webhookUrl = localStorage.getItem('pasoWebhookUrl');
+
+            if (!webhookUrl) {
+                document.getElementById('setupInstructions').style.display = 'block';
+                return;
+            }
+
+            // Try to fetch summary data
+            try {
+                const summaryResponse = await fetch(webhookUrl + '?action=getSummary');
+                const summary = await summaryResponse.json();
+
+                document.getElementById('totalUsers').textContent = summary.totalUsers.toLocaleString();
+                document.getElementById('totalDistributed').textContent = summary.totalGranted.toLocaleString();
+                document.getElementById('totalSpent').textContent = summary.totalDeducted.toLocaleString();
+                document.getElementById('circulating').textContent = summary.circulating.toLocaleString();
+                document.getElementById('remainingSupply').textContent = (TOTAL_SUPPLY - summary.totalGranted).toLocaleString();
+
+                // Hide setup if data loaded successfully
+                document.getElementById('setupInstructions').style.display = 'none';
+
+                // Load recent transactions
+                const txResponse = await fetch(webhookUrl + '?action=getRecentTransactions');
+                const transactions = await txResponse.json();
+
+                renderTransactions(transactions);
+
+            } catch (error) {
+                console.error('Error loading data:', error);
+                document.getElementById('setupInstructions').style.display = 'block';
+                document.getElementById('transactionsTable').innerHTML = '<p class="loading">Could not load data. Make sure the Google Apps Script is deployed correctly.</p>';
+            }
+        }
+
+        function renderTransactions(transactions) {
+            if (!transactions || transactions.length === 0) {
+                document.getElementById('transactionsTable').innerHTML = '<p class="loading">No transactions yet.</p>';
+                return;
+            }
+
+            let html = `
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>User</th>
+                            <th>Type</th>
+                            <th>Amount</th>
+                            <th>Balance</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            `;
+
+            transactions.forEach(tx => {
+                const date = tx.transactionDate ? new Date(tx.transactionDate).toLocaleString() : '--';
+                const amount = parseFloat(tx.amount) || 0;
+                const badgeClass = amount > 0 ? 'badge-grant' : (amount < 0 ? 'badge-deduct' : 'badge-signup');
+                const typeLabel = tx.type || 'unknown';
+
+                html += `
+                    <tr>
+                        <td>${date}</td>
+                        <td>${tx.email || 'unknown'}</td>
+                        <td><span class="badge ${badgeClass}">${typeLabel}</span></td>
+                        <td style="color: ${amount >= 0 ? '#90EE90' : '#ff9999'}">${amount >= 0 ? '+' : ''}${amount}</td>
+                        <td>${tx.balanceAfter || '--'}</td>
+                        <td>${tx.description || tx.reason || '--'}</td>
+                    </tr>
+                `;
+            });
+
+            html += '</tbody></table>';
+            document.getElementById('transactionsTable').innerHTML = html;
+        }
+
+        function refreshData() {
+            loadData();
+        }
+    </script>
+</body>
+</html>

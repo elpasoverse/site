@@ -38,6 +38,11 @@ async function signUp(email, password) {
             await createUserWithCredits(currentUser.uid, email);
         }
 
+        // Log signup to Google Sheet
+        if (window.SheetLogger) {
+            window.SheetLogger.logUserSignup(currentUser.uid, email, email.split('@')[0], 'email', 25);
+        }
+
         return { success: true, needsVerification: true };
     } catch (error) {
         let errorMessage = 'An error occurred during sign up.';
@@ -132,7 +137,12 @@ async function signInWithGoogle() {
 
         // Create user document with 25 PASO signup bonus (only for new users)
         if (typeof createUserWithCredits === 'function') {
-            await createUserWithCredits(currentUser.uid, currentUser.email, currentUser.displayName);
+            const isNewUser = await createUserWithCredits(currentUser.uid, currentUser.email, currentUser.displayName);
+
+            // Log signup to Google Sheet (only for new users)
+            if (isNewUser && window.SheetLogger) {
+                window.SheetLogger.logUserSignup(currentUser.uid, currentUser.email, currentUser.displayName, 'google', 25);
+            }
         }
 
         return { success: true };
