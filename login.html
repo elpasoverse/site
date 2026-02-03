@@ -550,26 +550,40 @@
             <div style="width: 60px; height: 2px; background: linear-gradient(to right, transparent, #C9A961, transparent); margin: 1rem auto;"></div>
 
             <div style="border: 3px double #8B4513; padding: 1.5rem; background: #fff; margin-bottom: 1.5rem;">
-                <p style="font-size: 0.9rem; color: #666; margin-bottom: 0.5rem;">This grant is issued to:</p>
+                <p style="font-size: 0.9rem; color: #5a4a3a; margin-bottom: 0.5rem;">This grant is issued to:</p>
                 <p id="grantUserName" style="font-family: 'Cinzel', Georgia, serif; font-size: 1.3rem; color: #8B4513; font-weight: 700; margin-bottom: 1.25rem;">Pioneer</p>
 
-                <p style="font-size: 0.8rem; color: #888; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.25rem;">One-Time PASO Allocation</p>
-                <p style="font-family: 'Cinzel', Georgia, serif; font-size: 2.5rem; color: #C9A961; font-weight: 900;">25 <span style="font-size: 1rem; color: #8B4513;">PASO</span></p>
+                <p style="font-size: 0.8rem; color: #6b5a4a; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.25rem;">One-Time PASO Allocation</p>
+                <p style="font-family: 'Cinzel', Georgia, serif; font-size: 2.5rem; color: #8B4513; font-weight: 900;">25 <span style="font-size: 1rem; color: #8B4513;">PASO</span></p>
             </div>
 
-            <p style="font-size: 0.85rem; color: #666; line-height: 1.6; margin-bottom: 1rem;">
+            <p style="font-size: 0.85rem; color: #4a3a2a; line-height: 1.6; margin-bottom: 1rem;">
                 PASO is granted as recognition of your participation and belief in the El Paso Verse journey. It reflects your presence in the world-building process.
             </p>
 
-            <p style="font-size: 0.8rem; color: #999; font-style: italic; margin-bottom: 1.5rem;">
+            <p style="font-size: 0.8rem; color: #5a4a3a; font-style: italic; margin-bottom: 1.5rem;">
                 PASO is not equity or ownership. Its value is rooted in participation and belonging.
             </p>
 
-            <p style="font-size: 0.8rem; color: #8B4513; text-align: right; margin-bottom: 1.5rem;">
+            <p style="font-size: 0.8rem; color: #5a4a3a; text-align: right; margin-bottom: 1.5rem;">
                 — <strong>Harry West</strong>, on behalf of El Paso Verse
             </p>
 
-            <button type="button" class="btn-primary" id="claimGrantButton" style="width: 100%;">
+            <button type="button" id="claimGrantButton" style="
+                width: 100%;
+                padding: 1rem 1.5rem;
+                background: linear-gradient(to bottom, #8B4513, #6d3610);
+                color: #F5E6D3;
+                border: 2px solid #C9A961;
+                font-family: 'Cinzel', Georgia, serif;
+                font-size: 1rem;
+                font-weight: 600;
+                text-transform: uppercase;
+                letter-spacing: 0.1em;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            " onmouseover="this.style.background='linear-gradient(to bottom, #C9A961, #a8893e)'; this.style.color='#3A2820';" onmouseout="this.style.background='linear-gradient(to bottom, #8B4513, #6d3610)'; this.style.color='#F5E6D3';">
                 Claim Grant & Enter Portal
             </button>
         </div>
@@ -607,7 +621,21 @@
                 The Participant confirms that they have read and understood this document and consciously accept participation in a vision-driven, pioneering project operating within a challenging and uncertain industry environment.</p>
             </div>
 
-            <button type="button" class="btn-primary" id="closeWaiverModal" style="width: 100%;">Close</button>
+            <button type="button" id="closeWaiverModal" style="
+                width: 100%;
+                padding: 0.875rem 1.5rem;
+                background: linear-gradient(to bottom, #8B4513, #6d3610);
+                color: #F5E6D3;
+                border: 2px solid #C9A961;
+                font-family: Georgia, 'Times New Roman', serif;
+                font-size: 0.95rem;
+                font-weight: 600;
+                text-transform: uppercase;
+                letter-spacing: 0.08em;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+            " onmouseover="this.style.background='linear-gradient(to bottom, #C9A961, #a8893e)'; this.style.color='#3A2820';" onmouseout="this.style.background='linear-gradient(to bottom, #8B4513, #6d3610)'; this.style.color='#F5E6D3';">I Understand</button>
         </div>
     </div>
 
