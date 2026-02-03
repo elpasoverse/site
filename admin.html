@@ -315,14 +315,28 @@
             <div class="header-actions">
                 <button class="btn" onclick="refreshData()">Refresh</button>
                 <a href="#" id="sheetLink" class="btn btn-primary" target="_blank">Open Google Sheet</a>
+                <button class="btn" onclick="toggleSettings()">Settings</button>
                 <button class="btn" onclick="logout()">Logout</button>
             </div>
         </header>
 
         <!-- Setup Instructions (shown when not configured) -->
         <div class="setup-box" id="setupInstructions">
-            <h3>Setup Required: Connect Google Sheets</h3>
-            <ol>
+            <h3>Google Sheets Settings</h3>
+
+            <div style="background: #1a1a1a; padding: 1rem; border-radius: 4px; margin-bottom: 1.5rem;">
+                <label style="display: block; margin-bottom: 0.5rem; color: #C9A961; font-size: 0.9rem;">Google Sheet URL (for "Open Google Sheet" button):</label>
+                <input type="text" id="sheetUrlInput" placeholder="https://docs.google.com/spreadsheets/d/YOUR_SHEET_ID/edit" style="width: 100%; padding: 0.5rem; background: #2a2a2a; border: 1px solid #C9A961; color: #F5E6D3; border-radius: 4px;">
+
+                <label style="display: block; margin-top: 1rem; margin-bottom: 0.5rem; color: #C9A961; font-size: 0.9rem;">Apps Script Webhook URL (for data sync):</label>
+                <input type="text" id="webhookUrlInput" placeholder="https://script.google.com/macros/s/.../exec" style="width: 100%; padding: 0.5rem; background: #2a2a2a; border: 1px solid #C9A961; color: #F5E6D3; border-radius: 4px;">
+
+                <button onclick="saveWebhookUrl()" style="margin-top: 1rem; padding: 0.5rem 1.5rem; background: #C9A961; border: none; color: #1a1a1a; border-radius: 4px; cursor: pointer; font-weight: 600;">Save Settings</button>
+            </div>
+
+            <details style="margin-top: 1rem;">
+                <summary style="cursor: pointer; color: #C9A961;">Setup Instructions (if not yet configured)</summary>
+                <ol style="margin-top: 1rem;">
                 <li>Go to <a href="https://sheets.google.com" target="_blank" style="color: #C9A961;">Google Sheets</a> and create a new spreadsheet</li>
                 <li>Name it "El Paso Verse PASO Tracker"</li>
                 <li>Create three tabs (sheets): <code>Users</code>, <code>Transactions</code>, <code>Wallets</code></li>
@@ -424,11 +438,9 @@ function doGet(e) {
                 <li>Select type: <strong>Web app</strong></li>
                 <li>Set "Execute as" to <strong>Me</strong> and "Who has access" to <strong>Anyone</strong></li>
                 <li>Click <strong>Deploy</strong> and authorize when prompted</li>
-                <li>Copy the Web app URL and update it in <code>sheet-logger.js</code></li>
-                <li>Also paste the URL below:</li>
+                <li>Copy the Web app URL and paste it in the Webhook URL field above</li>
             </ol>
-            <input type="text" id="webhookUrlInput" placeholder="Paste your Apps Script Web App URL here" style="width: 100%; padding: 0.5rem; margin-top: 1rem; background: #1a1a1a; border: 1px solid #C9A961; color: #F5E6D3; border-radius: 4px;">
-            <button onclick="saveWebhookUrl()" style="margin-top: 0.5rem; padding: 0.5rem 1rem; background: #C9A961; border: none; color: #1a1a1a; border-radius: 4px; cursor: pointer;">Save URL & Refresh</button>
+            </details>
         </div>
 
         <!-- Stats Grid -->
@@ -497,11 +509,15 @@ function doGet(e) {
             document.getElementById('passwordGate').style.display = 'none';
             document.getElementById('adminDashboard').style.display = 'block';
 
-            // Load saved webhook URL
+            // Load saved URLs
             const savedUrl = localStorage.getItem('pasoWebhookUrl');
+            const savedSheetUrl = localStorage.getItem('pasoSheetUrl');
             if (savedUrl) {
                 document.getElementById('webhookUrlInput').value = savedUrl;
-                document.getElementById('sheetLink').href = savedUrl.replace('/exec', '').replace('script.google.com/macros/s/', 'docs.google.com/spreadsheets/d/');
+            }
+            if (savedSheetUrl) {
+                document.getElementById('sheetUrlInput').value = savedSheetUrl;
+                document.getElementById('sheetLink').href = savedSheetUrl;
             }
 
             loadData();
@@ -512,13 +528,27 @@ function doGet(e) {
             location.reload();
         }
 
+        function toggleSettings() {
+            const setupBox = document.getElementById('setupInstructions');
+            if (setupBox.style.display === 'none' || setupBox.style.display === '') {
+                setupBox.style.display = 'block';
+            } else {
+                setupBox.style.display = 'none';
+            }
+        }
+
         function saveWebhookUrl() {
             const url = document.getElementById('webhookUrlInput').value.trim();
+            const sheetUrl = document.getElementById('sheetUrlInput').value.trim();
             if (url) {
                 localStorage.setItem('pasoWebhookUrl', url);
-                alert('URL saved! Now update the same URL in sheet-logger.js file.');
-                loadData();
             }
+            if (sheetUrl) {
+                localStorage.setItem('pasoSheetUrl', sheetUrl);
+                document.getElementById('sheetLink').href = sheetUrl;
+            }
+            alert('URLs saved!');
+            loadData();
         }
 
         async function loadData() {

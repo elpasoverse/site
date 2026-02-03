@@ -477,7 +477,7 @@
                 <div class="ornament"></div>
             </div>
 
-            <p class="scroll-indicator" id="scrollIndicator">↓ Please scroll to read the entire document ↓</p>
+            <p class="scroll-indicator" id="scrollIndicator" style="color: #666; font-size: 0.85rem;">Scroll to read the full document</p>
 
             <div class="waiver-scroll-box" id="waiverScrollBox">
                 <p><strong>READ CAREFULLY BEFORE PARTICIPATING</strong></p>
@@ -506,7 +506,7 @@
             </div>
 
             <div class="checkbox-container">
-                <input type="checkbox" id="agreeCheckbox" disabled>
+                <input type="checkbox" id="agreeCheckbox">
                 <label for="agreeCheckbox">I have read and understood this document in its entirety, and I agree to its terms.</label>
             </div>
 
@@ -567,7 +567,6 @@
         let userId = null;
         let userName = null;
         let pasoAmount = 25; // Default signup bonus
-        let hasScrolledToBottom = false;
 
         // Initialize
         document.addEventListener('DOMContentLoaded', async function() {
@@ -630,26 +629,11 @@
             document.getElementById('grantAmount').textContent = pasoAmount;
         }
 
-        // Waiver scroll handling
-        const waiverScrollBox = document.getElementById('waiverScrollBox');
-        const scrollIndicator = document.getElementById('scrollIndicator');
+        // Waiver elements
         const agreeCheckbox = document.getElementById('agreeCheckbox');
         const agreeButton = document.getElementById('agreeButton');
 
-        waiverScrollBox.addEventListener('scroll', function() {
-            const scrollTop = this.scrollTop;
-            const scrollHeight = this.scrollHeight;
-            const clientHeight = this.clientHeight;
-
-            // Check if scrolled to bottom (with 20px tolerance)
-            if (scrollTop + clientHeight >= scrollHeight - 20) {
-                hasScrolledToBottom = true;
-                scrollIndicator.classList.add('hidden');
-                agreeCheckbox.disabled = false;
-            }
-        });
-
-        // Checkbox handling
+        // Checkbox handling - no scroll requirement
         agreeCheckbox.addEventListener('change', function() {
             agreeButton.disabled = !this.checked;
         });
@@ -668,7 +652,7 @@
 
         // Accept waiver (Step 1)
         async function acceptWaiver() {
-            if (!hasScrolledToBottom || !agreeCheckbox.checked) return;
+            if (!agreeCheckbox.checked) return;
 
             showLoading('Recording your acceptance...');
 

@@ -339,7 +339,7 @@
             align-items: center;
             justify-content: center;
             margin: 1.5rem 0;
-            gap: 1rem;
+            width: 100%;
         }
 
         .divider::before,
@@ -356,6 +356,7 @@
             font-size: 0.85rem;
             text-transform: uppercase;
             letter-spacing: 0.05em;
+            padding: 0 1rem;
         }
 
         /* Google Button */
@@ -505,6 +506,13 @@
                 >
             </div>
 
+            <div class="form-group" style="margin-top: 1rem;">
+                <label style="display: flex; align-items: flex-start; gap: 0.75rem; cursor: pointer; font-size: 0.85rem; line-height: 1.4;">
+                    <input type="checkbox" id="agreeTermsCheckbox" required style="width: 18px; height: 18px; margin-top: 2px; accent-color: #8B4513; cursor: pointer;">
+                    <span>I have read and agree to the <a href="#" id="openWaiverLink" style="color: #8B4513; text-decoration: underline;">Participation Intake Waiver</a></span>
+                </label>
+            </div>
+
             <button type="submit" class="login-button" id="signUpButton">
                 Join the Frontier
             </button>
@@ -527,6 +535,79 @@
 
         <div class="back-link">
             <a href="index.html">&larr; Back to Main Site</a>
+        </div>
+    </div>
+
+    <!-- PASO Grant Modal -->
+    <div class="modal-overlay" id="grantModal">
+        <div class="modal" style="max-width: 550px; text-align: center;">
+            <div style="margin-bottom: 1.5rem;">
+                <img src="assets/paso-token.png" alt="PASO" style="width: 70px; height: 70px;">
+            </div>
+
+            <h2 style="font-family: 'Cinzel', Georgia, serif; font-size: 1.5rem; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.5rem; color: #3A2820;">PASO Participation Grant</h2>
+
+            <div style="width: 60px; height: 2px; background: linear-gradient(to right, transparent, #C9A961, transparent); margin: 1rem auto;"></div>
+
+            <div style="border: 3px double #8B4513; padding: 1.5rem; background: #fff; margin-bottom: 1.5rem;">
+                <p style="font-size: 0.9rem; color: #666; margin-bottom: 0.5rem;">This grant is issued to:</p>
+                <p id="grantUserName" style="font-family: 'Cinzel', Georgia, serif; font-size: 1.3rem; color: #8B4513; font-weight: 700; margin-bottom: 1.25rem;">Pioneer</p>
+
+                <p style="font-size: 0.8rem; color: #888; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.25rem;">One-Time PASO Allocation</p>
+                <p style="font-family: 'Cinzel', Georgia, serif; font-size: 2.5rem; color: #C9A961; font-weight: 900;">25 <span style="font-size: 1rem; color: #8B4513;">PASO</span></p>
+            </div>
+
+            <p style="font-size: 0.85rem; color: #666; line-height: 1.6; margin-bottom: 1rem;">
+                PASO is granted as recognition of your participation and belief in the El Paso Verse journey. It reflects your presence in the world-building process.
+            </p>
+
+            <p style="font-size: 0.8rem; color: #999; font-style: italic; margin-bottom: 1.5rem;">
+                PASO is not equity or ownership. Its value is rooted in participation and belonging.
+            </p>
+
+            <p style="font-size: 0.8rem; color: #8B4513; text-align: right; margin-bottom: 1.5rem;">
+                — <strong>Harry West</strong>, on behalf of El Paso Verse
+            </p>
+
+            <button type="button" class="btn-primary" id="claimGrantButton" style="width: 100%;">
+                Claim Grant & Enter Portal
+            </button>
+        </div>
+    </div>
+
+    <!-- Waiver Modal -->
+    <div class="modal-overlay" id="waiverModal">
+        <div class="modal" style="max-width: 700px; max-height: 90vh; display: flex; flex-direction: column;">
+            <h2 style="font-family: 'Cinzel', Georgia, serif; font-size: 1.3rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.25rem;">Standard Participation Intake Waiver</h2>
+            <p style="color: #8B4513; font-style: italic; margin-bottom: 1rem; font-size: 0.9rem;">Kamara / El Paso Verse – an Ind. Vision-Driven Creative Project</p>
+
+            <div style="flex: 1; overflow-y: auto; border: 1px solid #ddd; padding: 1.25rem; background: #fff; font-size: 0.85rem; line-height: 1.7; margin-bottom: 1rem; max-height: 400px;">
+                <p><strong>READ CAREFULLY BEFORE PARTICIPATING</strong></p>
+                <p>The undersigned ("Participant") acknowledges and agrees as follows:</p>
+
+                <p><strong>1. Nature and Spirit of the Project</strong><br>
+                This project forms part of the Kamara / El Paso Verse creative universe, an independent, long-term creative vision initiated and developed by Harry West, and sustained through the personal vision, goodwill, trust, and continued effort of its creator(s). The Participant acknowledges that this project would not exist but for the commitment and perseverance of its creator(s), that it is pioneering in spirit, carving its own path outside conventional production models, and that it is pursued against significant practical, financial, and structural obstacles, particularly in today's entertainment industry landscape. The project is developed on a best-efforts basis, with limited resources, progressive financing, and open-ended timelines, and may include films, short works, experimental productions, and related creative activities.</p>
+
+                <p><strong>2. Risk, Uncertainty, and No Guarantees</strong><br>
+                The Participant understands that development, financing, production, post-production, exploitation, and/or monetization may be delayed, paused, extended, or may not ultimately occur. No promises or guarantees have been made regarding funding, payment timing, completion, commercial success, distribution, or monetization. Participation is voluntary and undertaken with full awareness of these realities.</p>
+
+                <p><strong>3. Rewards, Goodwill, and Voluntary Contributions</strong><br>
+                Participation in the project may, but does not necessarily, give rise to recognition, opportunities, or future rewards. Any compensation, profit participation, ownership interest, credit, PASO allocation, or other benefit shall arise only if expressly set forth in a separate written agreement. No expectation of reward is implied by participation alone. Any assistance, contribution, service, resource, or support provided to the project is given voluntarily and in good faith, and shall be deemed gratuitous unless expressly agreed otherwise in a separate written contract.</p>
+
+                <p><strong>4. Entity-Only Responsibility and Waiver of Claims</strong><br>
+                Any contractual, financial, or labor obligations, if applicable, exist solely at the level of the producing entity, if any. The Participant agrees that no personal liability or recourse exists against any individual involved in the project, including the creator(s), director(s), producer(s), administrator(s), shareholder(s), or representatives, in their personal capacity. The Participant irrevocably waives any right to bring claims or proceedings—judicial or extrajudicial—against any such individual arising out of or related to participation in the project.</p>
+
+                <p><strong>5. No Blocking Actions; Personal Circumstances</strong><br>
+                Changes in the Participant's personal, financial, or emotional circumstances do not create any obligation on the project or its participants. The Participant agrees not to seek injunctive relief or any action intended to delay, block, or interfere with the project.</p>
+
+                <p><strong>6. Legal Limits</strong><br>
+                This waiver does not apply in cases of willful misconduct or fraud, solely to the extent finally determined by a competent court under applicable law.</p>
+
+                <p><strong>7. Informed Consent and Welcome</strong><br>
+                The Participant confirms that they have read and understood this document and consciously accept participation in a vision-driven, pioneering project operating within a challenging and uncertain industry environment.</p>
+            </div>
+
+            <button type="button" class="btn-primary" id="closeWaiverModal" style="width: 100%;">Close</button>
         </div>
     </div>
 
@@ -578,6 +659,26 @@
         const resetPasswordForm = document.getElementById('resetPasswordForm');
         const resetErrorMessage = document.getElementById('resetErrorMessage');
         const resetSuccessMessage = document.getElementById('resetSuccessMessage');
+
+        // Waiver Modal
+        const openWaiverLink = document.getElementById('openWaiverLink');
+        const waiverModal = document.getElementById('waiverModal');
+        const closeWaiverModal = document.getElementById('closeWaiverModal');
+
+        openWaiverLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            waiverModal.classList.add('show');
+        });
+
+        closeWaiverModal.addEventListener('click', () => {
+            waiverModal.classList.remove('show');
+        });
+
+        waiverModal.addEventListener('click', (e) => {
+            if (e.target === waiverModal) {
+                waiverModal.classList.remove('show');
+            }
+        });
 
         // Check if already authenticated and redirect
         waitForAuthState().then(authenticated => {
@@ -639,6 +740,37 @@
             }
         }
 
+        // PASO Grant Modal
+        const grantModal = document.getElementById('grantModal');
+        const claimGrantButton = document.getElementById('claimGrantButton');
+
+        function showGrantModal(email) {
+            const displayName = email ? email.split('@')[0] : 'Pioneer';
+            document.getElementById('grantUserName').textContent = displayName;
+            grantModal.classList.add('show');
+        }
+
+        claimGrantButton.addEventListener('click', async () => {
+            claimGrantButton.disabled = true;
+            claimGrantButton.textContent = 'Processing...';
+
+            // Record grant acceptance if user is authenticated
+            try {
+                if (auth.currentUser && db) {
+                    await db.collection('users').doc(auth.currentUser.uid).update({
+                        grantAccepted: true,
+                        grantAcceptedAt: firebase.firestore.FieldValue.serverTimestamp(),
+                        onboardingCompleted: true
+                    });
+                }
+            } catch (e) {
+                console.log('Could not record grant acceptance:', e);
+            }
+
+            // Redirect to members portal
+            window.location.href = 'members.html';
+        });
+
         // Sign In Form Handler
         signInForm.addEventListener('submit', async function(e) {
             e.preventDefault();
@@ -653,7 +785,24 @@
             const result = await signIn(email, password);
 
             if (result.success) {
-                window.location.href = 'members.html';
+                // Check if user has already claimed their grant
+                try {
+                    if (db && auth.currentUser) {
+                        const userDoc = await db.collection('users').doc(auth.currentUser.uid).get();
+                        if (userDoc.exists && userDoc.data().grantAccepted) {
+                            // Already claimed, go to members
+                            window.location.href = 'members.html';
+                        } else {
+                            // First time, show grant modal
+                            showGrantModal(email);
+                        }
+                    } else {
+                        window.location.href = 'members.html';
+                    }
+                } catch (e) {
+                    console.log('Error checking grant status:', e);
+                    window.location.href = 'members.html';
+                }
             } else {
                 showError(result.error);
                 setButtonLoading(submitButton, false);
@@ -690,7 +839,8 @@
                     // Show resend option
                     document.getElementById('resendVerification').classList.remove('hidden');
                 } else {
-                    window.location.href = 'members.html';
+                    // Show PASO grant modal for new signups
+                    showGrantModal(email);
                 }
             } else {
                 showError(result.error);
