@@ -569,86 +569,6 @@
             mix-blend-mode: overlay;
         }
 
-        /* PASO Gate */
-        .paso-gate-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(26, 26, 26, 0.95);
-            z-index: 10000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            backdrop-filter: blur(10px);
-        }
-
-        .paso-gate-box {
-            background: #f9f3e3;
-            border: 4px double #1a1a1a;
-            padding: 3rem 2rem;
-            max-width: 500px;
-            text-align: center;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
-        }
-
-        .paso-gate-box h2 {
-            font-family: 'Cinzel', Georgia, serif;
-            font-size: 2rem;
-            font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin-bottom: 1rem;
-        }
-
-        .paso-gate-box p {
-            font-size: 1rem;
-            line-height: 1.6;
-            margin-bottom: 1.5rem;
-        }
-
-        .paso-requirement {
-            font-family: 'Cinzel', Georgia, serif;
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin: 1.5rem 0;
-            padding: 1rem;
-            border: 2px solid #1a1a1a;
-            background: #fff;
-        }
-
-        .paso-gate-button {
-            font-family: 'Cinzel', Georgia, serif;
-            font-size: 1rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            padding: 1rem 2rem;
-            background: #1a1a1a;
-            color: #f9f3e3;
-            border: none;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            margin: 0.5rem;
-        }
-
-        .paso-gate-button:hover {
-            background: #333;
-            transform: translateY(-2px);
-        }
-
-        .paso-gate-button.secondary {
-            background: transparent;
-            border: 2px solid #1a1a1a;
-            color: #1a1a1a;
-        }
-
-        .paso-gate-button.secondary:hover {
-            background: #1a1a1a;
-            color: #f9f3e3;
-        }
-
         .hidden {
             display: none;
         }
@@ -726,24 +646,6 @@
     </style>
 </head>
 <body>
-    <!-- PASO Gate (hidden by default, shown only if access denied) -->
-    <div id="pasoGate" class="paso-gate-overlay hidden">
-        <div class="paso-gate-box">
-            <h2>★ Exclusive Edition ★</h2>
-            <p>This historical gazette is reserved for members of the El Paso Verse community.</p>
-            <div class="paso-requirement">Requires: 20 PASO Balance<br><span style="font-size: 0.9rem; font-weight: 400;">or Genesis Collection ownership</span></div>
-            <p style="font-style: italic; font-size: 0.9rem;">
-                Step back into 1880 and witness the birth of Breakwater through authentic frontier journalism.
-            </p>
-            <div style="margin-top: 2rem;">
-                <button class="paso-gate-button" onclick="purchaseGazetteAccess()">Purchase Access — $2.99</button>
-                <button class="paso-gate-button secondary" onclick="window.location.href='members.html'">Return to Portal</button>
-            </div>
-            <p style="font-size: 0.85rem; color: #8b7355; margin-top: 1.5rem; font-style: italic;">
-                Or sign in to the Community Portal with 20+ PASO for free access
-            </p>
-        </div>
-    </div>
 
     <!-- Lightbox -->
     <div id="lightbox" class="lightbox-overlay" onclick="closeLightbox()">
@@ -1213,85 +1115,6 @@
 
     <!-- JavaScript -->
     <script>
-        async function checkPasoAccess() {
-            if (typeof isAuthenticated === 'undefined' || !isAuthenticated()) {
-                alert('Please log in to the community portal first.');
-                window.location.href = 'login.html';
-                return;
-            }
-
-            // Check for NFT ownership first (via localStorage flag from wallet verification)
-            const hasNFT = localStorage.getItem('nftVerified') === 'true';
-            if (hasNFT) {
-                grantAccess('NFT');
-                return;
-            }
-
-            // Check PASO credits balance from Firebase
-            const userPasoBalance = await waitForPointsSystem();
-            if (userPasoBalance >= 1) {
-                grantAccess('PASO');
-            } else {
-                alert('You need at least 1 PASO credit or a Genesis Collection to access this exclusive gazette.\n\nVisit the Community Portal to learn how to earn PASO credits.');
-            }
-        }
-
-        function grantAccess(method) {
-            const accessLog = {
-                timestamp: new Date().toISOString(),
-                userId: getCurrentUserId ? getCurrentUserId() : 'unknown',
-                method: method || 'PASO'
-            };
-            localStorage.setItem('gazetteAccess', JSON.stringify(accessLog));
-            document.getElementById('pasoGate').classList.add('hidden');
-        }
-
-        async function checkExistingAccess() {
-            const REQUIRED_PASO = 20;
-            const gate = document.getElementById('pasoGate');
-
-            // Check for NFT ownership (permanent access)
-            const hasNFT = localStorage.getItem('nftVerified') === 'true';
-            if (hasNFT) return; // Gate stays hidden
-
-            // Check for purchased access
-            const gazettePurchased = localStorage.getItem('gazettePurchased') === 'true';
-            if (gazettePurchased) return; // Gate stays hidden
-
-            // Check for recent access (24-hour)
-            const accessLog = localStorage.getItem('gazetteAccess');
-            if (accessLog) {
-                const access = JSON.parse(accessLog);
-                const accessTime = new Date(access.timestamp);
-                const now = new Date();
-                const hoursSinceAccess = (now - accessTime) / (1000 * 60 * 60);
-                if (hoursSinceAccess < 24) return; // Gate stays hidden
-            }
-
-            // Check localStorage for PASO balance (from portal)
-            const storedBalance = localStorage.getItem('pasoBalance');
-            if (storedBalance && parseInt(storedBalance) >= REQUIRED_PASO) return; // Gate stays hidden
-
-            // Try Firebase balance as fallback
-            try {
-                const authenticated = await waitForAuthState();
-                if (authenticated) {
-                    const balance = await waitForPointsSystem();
-                    if (balance >= REQUIRED_PASO) return; // Gate stays hidden
-                }
-            } catch (e) {
-                console.log('Firebase check failed, using localStorage only');
-            }
-
-            // No valid access found - show the gate
-            gate.classList.remove('hidden');
-        }
-
-        function purchaseGazetteAccess() {
-            // Redirect to Stripe Payment Link
-            window.location.href = 'https://buy.stripe.com/test_9B628t0m75Sn8WG2MM8N203';
-        }
-
         // Lightbox functionality
         function openLightbox(imageSrc) {
             const lightbox = document.getElementById('lightbox');
@@ -1306,16 +1129,6 @@
         }
 
         window.addEventListener('DOMContentLoaded', function() {
-            // Check for successful payment from Stripe
-            const urlParams = new URLSearchParams(window.location.search);
-            if (urlParams.get('payment') === 'success') {
-                localStorage.setItem('gazettePurchased', 'true');
-                document.getElementById('pasoGate').classList.add('hidden');
-                // Clean up URL
-                window.history.replaceState({}, document.title, window.location.pathname);
-            } else {
-                checkExistingAccess();
-            }
 
             // Add click handlers to all gazette images
             const images = document.querySelectorAll('.illustration img, .illustration-full img, .wanted-poster img');
