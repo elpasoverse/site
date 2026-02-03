@@ -726,8 +726,8 @@
     </style>
 </head>
 <body>
-    <!-- PASO Gate -->
-    <div id="pasoGate" class="paso-gate-overlay">
+    <!-- PASO Gate (hidden by default, shown only if access denied) -->
+    <div id="pasoGate" class="paso-gate-overlay hidden">
         <div class="paso-gate-box">
             <h2>★ Exclusive Edition ★</h2>
             <p>This historical gazette is reserved for members of the El Paso Verse community.</p>
@@ -1248,20 +1248,15 @@
 
         async function checkExistingAccess() {
             const REQUIRED_PASO = 20;
+            const gate = document.getElementById('pasoGate');
 
             // Check for NFT ownership (permanent access)
             const hasNFT = localStorage.getItem('nftVerified') === 'true';
-            if (hasNFT) {
-                document.getElementById('pasoGate').classList.add('hidden');
-                return;
-            }
+            if (hasNFT) return; // Gate stays hidden
 
             // Check for purchased access
             const gazettePurchased = localStorage.getItem('gazettePurchased') === 'true';
-            if (gazettePurchased) {
-                document.getElementById('pasoGate').classList.add('hidden');
-                return;
-            }
+            if (gazettePurchased) return; // Gate stays hidden
 
             // Check for recent access (24-hour)
             const accessLog = localStorage.getItem('gazetteAccess');
@@ -1270,32 +1265,26 @@
                 const accessTime = new Date(access.timestamp);
                 const now = new Date();
                 const hoursSinceAccess = (now - accessTime) / (1000 * 60 * 60);
-                if (hoursSinceAccess < 24) {
-                    document.getElementById('pasoGate').classList.add('hidden');
-                    return;
-                }
+                if (hoursSinceAccess < 24) return; // Gate stays hidden
             }
 
             // Check localStorage for PASO balance (from portal)
             const storedBalance = localStorage.getItem('pasoBalance');
-            if (storedBalance && parseInt(storedBalance) >= REQUIRED_PASO) {
-                document.getElementById('pasoGate').classList.add('hidden');
-                return;
-            }
+            if (storedBalance && parseInt(storedBalance) >= REQUIRED_PASO) return; // Gate stays hidden
 
             // Try Firebase balance as fallback
             try {
                 const authenticated = await waitForAuthState();
                 if (authenticated) {
                     const balance = await waitForPointsSystem();
-                    if (balance >= REQUIRED_PASO) {
-                        document.getElementById('pasoGate').classList.add('hidden');
-                        return;
-                    }
+                    if (balance >= REQUIRED_PASO) return; // Gate stays hidden
                 }
             } catch (e) {
                 console.log('Firebase check failed, using localStorage only');
             }
+
+            // No valid access found - show the gate
+            gate.classList.remove('hidden');
         }
 
         function purchaseGazetteAccess() {
