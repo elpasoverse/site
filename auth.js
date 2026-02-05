@@ -380,8 +380,12 @@ function initAuthObserver() {
     initAuthObserver();
 
     // Only run auth check on member pages (not on login page or gazette pages which have their own access control)
-    const currentPage = window.location.pathname.split('/').pop();
-    const publicPages = ['index.html', 'login.html', '', 'gazette.html', 'gazette-v2.html'];
+    let currentPage = window.location.pathname.split('/').pop();
+    // Handle clean URLs (without .html extension) from static servers
+    currentPage = currentPage.replace(/\.html$/, '');
+    const publicPages = ['index', 'login', '', 'gazette', 'gazette-v2',
+                         'film-three-graves', 'film-sombra-de-lobo', 'film-the-visionary',
+                         'index-newspaper', 'motion-print-stream'];
 
     if (!publicPages.includes(currentPage)) {
         requireAuth();

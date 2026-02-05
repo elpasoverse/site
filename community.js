@@ -47,7 +47,7 @@ async function loadIdeas() {
                     description: 'Marshal Kate Brennan has spent five years building her reputation as the most feared lawwoman in West Texas. When a series of gruesome murders along the border points to the Ghost Hawk gang, she takes the case without hesitation. But as the trail leads deeper into the lawless territories, Kate uncovers a terrible truth: the gang\'s leader is Samuel, the brother she thought died in the war. Now she must choose between the badge she\'s worn with honor and the blood tie that still binds her to a man who\'s become a monster. A neo-noir Western that explores justice, family, and the thin line between law and vengeance. Runtime: 112 minutes.',
                     genre: 'Neo-Noir Western',
                     submitter: 'Marcus Rodriguez',
-                    imageUrl: 'assets/sombra-concept.png',
+                    imageUrl: 'assets/sombra-concept.jpg',
                     supportCount: 412,
                     supportGoal: 1000,
                     status: 'gathering',
