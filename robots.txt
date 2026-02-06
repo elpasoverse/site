@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /admin.html
+Disallow: /onboarding.html
+Disallow: /motion-print-stream.html
+
+Sitemap: https://elpasoverse.com/sitemap.xml

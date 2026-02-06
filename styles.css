@@ -3,6 +3,19 @@
    Western/Vintage Theme
    =================================== */
 
+/* Screen reader only - visually hidden but accessible */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
 /* CSS Reset & Base */
 * {
     margin: 0;
@@ -265,7 +278,7 @@ p {
     text-align: right !important;
     font-family: 'Cinzel', Georgia, serif;
     font-size: 1.2rem;
-    color: #8B4513;
+    color: inherit;
     margin-top: 2rem !important;
     font-style: normal;
 }
@@ -574,7 +587,7 @@ p {
 }
 
 .pillar-token {
-    background-image: url('assets/paso-coin-sepia.png');
+    background-image: url('assets/paso-coin-sepia.jpg');
     background-color: #3A2820;
 }
 

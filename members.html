@@ -5,9 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Primary Meta Tags -->
-    <title>Community Portal | El Paso Verse</title>
-    <meta name="title" content="Community Portal | El Paso Verse">
-    <meta name="description" content="Welcome, Pioneer. Access exclusive content, earn PASO credits, stream motion prints, and participate in building the frontier. Your gateway to the El Paso Verse community.">
+    <title>Community Portal | El Paso Verse — Dashboard, Content & Voting</title>
+    <meta name="title" content="Community Portal | El Paso Verse — Dashboard, Content & Voting">
+    <meta name="description" content="Access exclusive content, earn PASO, stream motion prints, and vote on frontier development. Your gateway to the El Paso Verse community.">
+    <link rel="canonical" href="https://elpasoverse.com/members.html">
     <meta name="keywords" content="El Paso Verse, community portal, PASO credits, frontier community, member access, Western community">
 
     <!-- Favicon -->
@@ -17,16 +18,20 @@
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://elpasoverse.com/members.html">
-    <meta property="og:title" content="Community Portal | El Paso Verse">
-    <meta property="og:description" content="Welcome, Pioneer. Access exclusive content, earn PASO credits, stream motion prints, and participate in building the frontier. Your gateway to the El Paso Verse community.">
+    <meta property="og:site_name" content="El Paso Verse">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:title" content="Community Portal | El Paso Verse — Dashboard, Content & Voting">
+    <meta property="og:description" content="Access exclusive content, earn PASO, stream motion prints, and vote on frontier development. Your gateway to the El Paso Verse community.">
     <meta property="og:image" content="https://elpasoverse.com/assets/paso-token.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
 
     <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://elpasoverse.com/members.html">
-    <meta property="twitter:title" content="Community Portal | El Paso Verse">
-    <meta property="twitter:description" content="Welcome, Pioneer. Access exclusive content, earn PASO credits, and participate in building the frontier.">
-    <meta property="twitter:image" content="https://elpasoverse.com/assets/paso-token.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://elpasoverse.com/members.html">
+    <meta name="twitter:title" content="Community Portal | El Paso Verse">
+    <meta name="twitter:description" content="Access exclusive content, earn PASO, and vote on frontier development.">
+    <meta name="twitter:image" content="https://elpasoverse.com/assets/paso-token.png">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -74,7 +79,7 @@
     <div class="members-container">
         <!-- Welcome Section -->
         <section class="welcome-section">
-            <h2>Welcome to the Community, Pioneer</h2>
+            <h1>Welcome to the Community, Pioneer</h1>
             <div class="ornament-divider"></div>
             <p style="color: #1a1a1a;">You're now part of something that's never been built before—a real-world destination where lore, film universe and land meet to create one of the most extraordinary experiences on the planet.</p>
         </section>
@@ -111,54 +116,63 @@
                                 <div style="color: #d4c4a8; font-size: 0.8rem;">PASO Credits</div>
                                 <div style="color: #888; font-size: 0.7rem; margin-top: 0.5rem;">Balance not showing? Try refreshing.</div>
                             </div>
-                            <a href="film-the-visionary.html#cast-crew" style="text-decoration: none; display: flex; flex-direction: column; align-items: center; gap: 0.25rem; background: #c9a860; padding: 0.75rem 1.25rem; border-radius: 4px; transition: all 0.3s;" onmouseover="this.style.background='#d4b870'" onmouseout="this.style.background='#c9a860'">
-                                <span style="color: #1a1a1a; font-weight: 700; font-size: 0.85rem; font-family: 'Cinzel', Georgia, serif;">Earn PASO</span>
-                                <span style="color: #3A2820; font-size: 0.7rem;">Missions & Work</span>
-                            </a>
+                            <div style="display: flex; flex-direction: column; gap: 0.4rem;">
+                                <div style="color: #c9a860; font-family: 'Cinzel', Georgia, serif; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em; text-align: center;">EARN PASO</div>
+                                <a href="film-the-visionary.html#cast-crew" style="text-decoration: none; display: block; text-align: center; background: #c9a860; padding: 0.6rem 1.25rem; border-radius: 4px; transition: all 0.3s;" onmouseover="this.style.background='#d4b870'" onmouseout="this.style.background='#c9a860'">
+                                    <span style="color: #1a1a1a; font-weight: 700; font-size: 0.8rem; font-family: 'Cinzel', Georgia, serif;">Cast & Crew</span>
+                                </a>
+                                <div style="display: block; text-align: center; background: transparent; border: 2px solid #666; padding: 0.5rem 1.25rem; border-radius: 4px; opacity: 0.5; cursor: default;">
+                                    <span style="color: #888; font-weight: 700; font-size: 0.8rem; font-family: 'Cinzel', Georgia, serif;">Missions</span>
+                                    <span style="color: #666; font-size: 0.6rem; display: block;">Coming Soon</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- PASO Utility Roadmap -->
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-bottom: 2rem;">
-                    <!-- Phase 1: Pre-Launch -->
-                    <div style="background: linear-gradient(135deg, #2c1810 0%, #3a2511 100%); border: 2px solid #c9a860; padding: 1.5rem; border-radius: 8px; position: relative; overflow: hidden;">
-                        <div style="position: absolute; top: 0; left: 0; right: 0; height: 3px; background: #c9a860;"></div>
-                        <div style="margin-bottom: 0.75rem;">
-                            <span style="font-family: 'Cinzel', Georgia, serif; color: #c9a860; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em;">PHASE 1 — PRE-LAUNCH</span>
+                <!-- Use PASO To -->
+                <div style="text-align: center; margin-bottom: 2rem;">
+                    <h3 style="font-family: 'Cinzel', Georgia, serif; font-size: 1.8rem; font-weight: 900; color: #3A2820; margin-bottom: 0.5rem; letter-spacing: 0.05em;">Use PASO To</h3>
+                    <div style="width: 40px; height: 3px; background: #c9a860; margin: 0 auto 1.5rem;"></div>
+
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem;">
+                        <!-- Phase 1 -->
+                        <div style="background: linear-gradient(135deg, #FFF8E7 0%, #FFEFC9 100%); border: 2px solid #D4A745; padding: 2rem 1.5rem; border-radius: 8px; text-align: center;">
+                            <div style="margin-bottom: 1rem;">
+                                <span style="display: inline-block; background: #8B6914; color: #fff; font-family: 'Cinzel', Georgia, serif; font-size: 0.65rem; font-weight: 700; padding: 0.3rem 0.75rem; border-radius: 3px; letter-spacing: 0.1em;">PHASE 1 &bull; ACTIVE NOW</span>
+                            </div>
+                            <h4 style="font-family: 'Cinzel', Georgia, serif; font-size: 1.3rem; font-weight: 900; color: #3A2820; margin: 0 0 0.75rem 0;">Collect and Shape the Story</h4>
+                            <ul style="list-style: none; padding: 0; margin: 0; text-align: left;">
+                                <li style="color: #5a4a3a; font-size: 0.9rem; line-height: 1.6; padding: 0.25rem 0 0.25rem 1rem; position: relative;"><span style="position: absolute; left: 0; color: #c9a860;">&#8226;</span>Own exclusive 1-of-1 film frames</li>
+                                <li style="color: #5a4a3a; font-size: 0.9rem; line-height: 1.6; padding: 0.25rem 0 0.25rem 1rem; position: relative;"><span style="position: absolute; left: 0; color: #c9a860;">&#8226;</span>Limited edition collectibles</li>
+                                <li style="color: #5a4a3a; font-size: 0.9rem; line-height: 1.6; padding: 0.25rem 0 0.25rem 1rem; position: relative;"><span style="position: absolute; left: 0; color: #c9a860;">&#8226;</span>Get early access as a founding pioneer</li>
+                            </ul>
                         </div>
-                        <h5 style="font-family: 'Cinzel', Georgia, serif; color: #f9f3e3; font-size: 1.05rem; font-weight: 700; margin: 0 0 0.75rem 0;">Collectibles & Staking</h5>
-                        <ul style="list-style: none; padding: 0; margin: 0;">
-                            <li style="color: #d4c4a8; font-size: 0.85rem; line-height: 1.5; padding: 0.3rem 0; border-bottom: 1px solid rgba(201, 168, 97, 0.1);">Redeem 1-of-1 Motion Prints and NFTs from developers who accept PASO</li>
-                            <li style="color: #d4c4a8; font-size: 0.85rem; line-height: 1.5; padding: 0.3rem 0; border-bottom: 1px solid rgba(201, 168, 97, 0.1);">Exclusive props, concept art, and signed merchandise</li>
-                            <li style="color: #d4c4a8; font-size: 0.85rem; line-height: 1.5; padding: 0.3rem 0;">Stake PASO for early access benefits and tiered rewards</li>
-                        </ul>
-                    </div>
-                    <!-- Phase 2: Movie Marketing -->
-                    <div style="background: linear-gradient(135deg, #2c1810 0%, #3a2511 100%); border: 2px solid rgba(201, 168, 97, 0.4); padding: 1.5rem; border-radius: 8px; position: relative; overflow: hidden;">
-                        <div style="position: absolute; top: 0; left: 0; right: 0; height: 3px; background: rgba(201, 168, 97, 0.4);"></div>
-                        <div style="margin-bottom: 0.75rem;">
-                            <span style="font-family: 'Cinzel', Georgia, serif; color: #a89178; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em;">PHASE 2 — MOVIE MARKETING</span>
+                        <!-- Phase 2 -->
+                        <div style="background: linear-gradient(135deg, #F5EDE0 0%, #EDE4D4 100%); border: 2px solid #c9a860; padding: 2rem 1.5rem; border-radius: 8px; text-align: center;">
+                            <div style="margin-bottom: 1rem;">
+                                <span style="display: inline-block; background: #a89178; color: #fff; font-family: 'Cinzel', Georgia, serif; font-size: 0.65rem; font-weight: 700; padding: 0.3rem 0.75rem; border-radius: 3px; letter-spacing: 0.1em;">PHASE 2 &bull; COMING</span>
+                            </div>
+                            <h4 style="font-family: 'Cinzel', Georgia, serif; font-size: 1.3rem; font-weight: 900; color: #3A2820; margin: 0 0 0.75rem 0;">Experience the Story</h4>
+                            <ul style="list-style: none; padding: 0; margin: 0; text-align: left;">
+                                <li style="color: #5a4a3a; font-size: 0.9rem; line-height: 1.6; padding: 0.25rem 0 0.25rem 1rem; position: relative;"><span style="position: absolute; left: 0; color: #c9a860;">&#8226;</span>Stream El Paso Verse films</li>
+                                <li style="color: #5a4a3a; font-size: 0.9rem; line-height: 1.6; padding: 0.25rem 0 0.25rem 1rem; position: relative;"><span style="position: absolute; left: 0; color: #c9a860;">&#8226;</span>Attend roadshow premieres worldwide</li>
+                                <li style="color: #5a4a3a; font-size: 0.9rem; line-height: 1.6; padding: 0.25rem 0 0.25rem 1rem; position: relative;"><span style="position: absolute; left: 0; color: #c9a860;">&#8226;</span>Exclusive behind-the-scenes access</li>
+                                <li style="color: #5a4a3a; font-size: 0.9rem; line-height: 1.6; padding: 0.25rem 0 0.25rem 1rem; position: relative;"><span style="position: absolute; left: 0; color: #c9a860;">&#8226;</span>Help masterplan the towns</li>
+                            </ul>
                         </div>
-                        <h5 style="font-family: 'Cinzel', Georgia, serif; color: #f9f3e3; font-size: 1.05rem; font-weight: 700; margin: 0 0 0.75rem 0;">El Paso Pass</h5>
-                        <ul style="list-style: none; padding: 0; margin: 0;">
-                            <li style="color: #a89178; font-size: 0.85rem; line-height: 1.5; padding: 0.3rem 0; border-bottom: 1px solid rgba(201, 168, 97, 0.1);">Digital streaming access to El Paso Verse motion pictures</li>
-                            <li style="color: #a89178; font-size: 0.85rem; line-height: 1.5; padding: 0.3rem 0; border-bottom: 1px solid rgba(201, 168, 97, 0.1);">Exclusive BTS content, interviews, and director's commentary</li>
-                            <li style="color: #a89178; font-size: 0.85rem; line-height: 1.5; padding: 0.3rem 0;">Priority invitations to roadshow screening events</li>
-                        </ul>
-                    </div>
-                    <!-- Phase 3: Land Launch -->
-                    <div style="background: linear-gradient(135deg, #2c1810 0%, #3a2511 100%); border: 2px solid rgba(201, 168, 97, 0.2); padding: 1.5rem; border-radius: 8px; position: relative; overflow: hidden;">
-                        <div style="position: absolute; top: 0; left: 0; right: 0; height: 3px; background: rgba(201, 168, 97, 0.2);"></div>
-                        <div style="margin-bottom: 0.75rem;">
-                            <span style="font-family: 'Cinzel', Georgia, serif; color: #6b5d4a; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em;">PHASE 3 — LAND LAUNCH</span>
+                        <!-- Phase 3 -->
+                        <div style="background: linear-gradient(135deg, #EDE4D4 0%, #E5DBC8 100%); border: 2px solid #b8a070; padding: 2rem 1.5rem; border-radius: 8px; text-align: center;">
+                            <div style="margin-bottom: 1rem;">
+                                <span style="display: inline-block; background: #8a7a62; color: #fff; font-family: 'Cinzel', Georgia, serif; font-size: 0.65rem; font-weight: 700; padding: 0.3rem 0.75rem; border-radius: 3px; letter-spacing: 0.1em;">PHASE 3 &bull; COMING</span>
+                            </div>
+                            <h4 style="font-family: 'Cinzel', Georgia, serif; font-size: 1.3rem; font-weight: 900; color: #3A2820; margin: 0 0 0.75rem 0;">Live the Story</h4>
+                            <ul style="list-style: none; padding: 0; margin: 0; text-align: left;">
+                                <li style="color: #5a4a3a; font-size: 0.9rem; line-height: 1.6; padding: 0.25rem 0 0.25rem 1rem; position: relative;"><span style="position: absolute; left: 0; color: #c9a860;">&#8226;</span>Enjoy the saloons, order goods, hire a guide, get your own horse</li>
+                                <li style="color: #5a4a3a; font-size: 0.9rem; line-height: 1.6; padding: 0.25rem 0 0.25rem 1rem; position: relative;"><span style="position: absolute; left: 0; color: #c9a860;">&#8226;</span>Run your business in the 1880s towns</li>
+                                <li style="color: #5a4a3a; font-size: 0.9rem; line-height: 1.6; padding: 0.25rem 0 0.25rem 1rem; position: relative;"><span style="position: absolute; left: 0; color: #c9a860;">&#8226;</span>Trade, build, and live in the 1880s West</li>
+                            </ul>
                         </div>
-                        <h5 style="font-family: 'Cinzel', Georgia, serif; color: #d4c4a8; font-size: 1.05rem; font-weight: 700; margin: 0 0 0.75rem 0;">The Frontier Economy</h5>
-                        <ul style="list-style: none; padding: 0; margin: 0;">
-                            <li style="color: #7a6d5a; font-size: 0.85rem; line-height: 1.5; padding: 0.3rem 0; border-bottom: 1px solid rgba(201, 168, 97, 0.1);">PASO as sole medium of exchange on the land</li>
-                            <li style="color: #7a6d5a; font-size: 0.85rem; line-height: 1.5; padding: 0.3rem 0; border-bottom: 1px solid rgba(201, 168, 97, 0.1);">Entry to the Hub portal and Old West Towns</li>
-                            <li style="color: #7a6d5a; font-size: 0.85rem; line-height: 1.5; padding: 0.3rem 0;">Living, trading, and building your life in the 1880s</li>
-                        </ul>
                     </div>
                 </div>
 
@@ -246,7 +260,7 @@
                                 <summary style="color: #c9b896; font-size: 0.9rem; outline: none; user-select: none;">Advanced: Withdraw PASO to external wallet</summary>
                                 <div style="margin-top: 1rem; padding: 1rem; background: rgba(0,0,0,0.3); border-radius: 4px;">
                                     <p style="color: #f0e6d3; font-size: 0.9rem; margin-bottom: 1rem; line-height: 1.5;">
-                                        For Cardano wallet users: convert your PASO credits to on-chain tokens at a 1:1 ratio. <span style="color: #c9a860;">Requires admin review.</span>
+                                        For Cardano wallet users: transfer your PASO to an on-chain wallet for use within the El Paso Verse ecosystem. <span style="color: #c9a860;">Requires admin review.</span>
                                     </p>
                                     <button onclick="showWithdrawModal()" style="background: transparent; border: 1px solid #c9a860; color: #c9a860; padding: 0.5rem 1rem; font-size: 0.85rem; cursor: pointer; border-radius: 4px; transition: all 0.3s;">
                                         Withdraw to Wallet
