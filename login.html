@@ -767,6 +767,21 @@
             document.getElementById('resendVerification').classList.remove('hidden');
         }
 
+        // Check if redirected from email capture — auto-switch to Sign Up with email pre-filled
+        if (urlParams.get('signup') === 'true') {
+            signUpTab.classList.add('active');
+            signInTab.classList.remove('active');
+            signUpForm.classList.remove('hidden');
+            signInForm.classList.add('hidden');
+
+            const prefillEmail = urlParams.get('email');
+            if (prefillEmail) {
+                document.getElementById('signUpEmail').value = decodeURIComponent(prefillEmail);
+            }
+
+            showSuccess('Almost there! Set a password to claim your 25 PASO credits.');
+        }
+
         // Tab switching
         signInTab.addEventListener('click', () => {
             signInTab.classList.add('active');
