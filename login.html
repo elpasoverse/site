@@ -340,14 +340,13 @@
             justify-content: center;
             margin: 1.5rem 0;
             width: 100%;
+            height: auto;
+            background-color: transparent;
         }
 
         .divider::before,
         .divider::after {
-            content: '';
-            flex: 1;
-            height: 0;
-            background-color: transparent;
+            content: none;
         }
 
         .divider span {
@@ -929,6 +928,9 @@
         });
 
         // Google Sign In Handler
+        // Store pending Google result for after waiver acceptance
+        let pendingGoogleResult = null;
+
         document.getElementById('googleSignInButton').addEventListener('click', async function() {
             hideMessages();
             const button = this;
@@ -939,7 +941,36 @@
             const result = await signInWithGoogle();
 
             if (result.success) {
-                window.location.href = 'members.html';
+                if (result.isNewUser) {
+                    // New Google user — must accept waiver & PASO grant terms first
+                    pendingGoogleResult = result;
+                    waiverModal.classList.add('show');
+                    // Change the waiver button to require acceptance
+                    closeWaiverModal.textContent = 'I Accept';
+                    closeWaiverModal.onclick = function() {
+                        waiverModal.classList.remove('show');
+                        closeWaiverModal.textContent = 'I Understand';
+                        closeWaiverModal.onclick = function() { waiverModal.classList.remove('show'); };
+                        // Now show the PASO grant modal
+                        showGrantModal(auth.currentUser.email);
+                    };
+                } else {
+                    // Returning Google user — check grant status
+                    try {
+                        if (db && auth.currentUser) {
+                            const userDoc = await db.collection('users').doc(auth.currentUser.uid).get();
+                            if (userDoc.exists && userDoc.data().grantAccepted) {
+                                window.location.href = 'members.html';
+                            } else {
+                                showGrantModal(auth.currentUser.email);
+                            }
+                        } else {
+                            window.location.href = 'members.html';
+                        }
+                    } catch (e) {
+                        window.location.href = 'members.html';
+                    }
+                }
             } else {
                 showError(result.error);
                 button.disabled = false;

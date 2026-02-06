@@ -11,6 +11,9 @@ let pointsSystemCallbacks = [];
 // Default signup bonus
 const SIGNUP_BONUS = 25;
 
+// Lock to prevent concurrent user creation (race condition during signup)
+let _creatingUser = false;
+
 /**
  * Initialize the points system on page load
  * Fetches user's PASO credits balance from Firebase
@@ -131,6 +134,13 @@ async function createUserWithCredits(userId, email, displayName = null) {
         return false;
     }
 
+    // Prevent concurrent creation (race condition: auth.js and onAuthStateChanged both call this)
+    if (_creatingUser) {
+        console.log('User creation already in progress, skipping duplicate call');
+        return false;
+    }
+    _creatingUser = true;
+
     try {
         // Check if user already exists (e.g., re-registration attempt or race condition)
         const existingUser = await db.collection('users').doc(userId).get();
@@ -174,6 +184,8 @@ async function createUserWithCredits(userId, email, displayName = null) {
         console.error('Error creating user document:', error);
         console.error('Error details:', error.code, error.message);
         return false;
+    } finally {
+        _creatingUser = false;
     }
 }
 

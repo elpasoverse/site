@@ -136,8 +136,9 @@ async function signInWithGoogle() {
         localStorage.setItem(USER_ID_KEY, currentUser.uid);
 
         // Create user document with 25 PASO signup bonus (only for new users)
+        let isNewUser = false;
         if (typeof createUserWithCredits === 'function') {
-            const isNewUser = await createUserWithCredits(currentUser.uid, currentUser.email, currentUser.displayName);
+            isNewUser = await createUserWithCredits(currentUser.uid, currentUser.email, currentUser.displayName);
 
             // Log signup to Google Sheet (only for new users)
             if (isNewUser && window.SheetLogger) {
@@ -145,7 +146,7 @@ async function signInWithGoogle() {
             }
         }
 
-        return { success: true };
+        return { success: true, isNewUser: isNewUser };
     } catch (error) {
         let errorMessage = 'An error occurred during Google sign in.';
 
@@ -277,6 +278,8 @@ function getSession() {
 async function requireAuth() {
     const authenticated = await waitForAuthState();
     if (!authenticated) {
+        // If account is being deleted, don't redirect (delete handler will redirect to index)
+        if (window._accountDeleting) return;
         window.location.href = 'login.html';
         return;
     }
