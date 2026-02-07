@@ -457,44 +457,7 @@
     <a href="index.html#collection" class="back-link">← Back to Films</a>
 
     <!-- Film Banner -->
-    <div class="film-banner" id="filmBanner" style="background-image: url('assets/three-graves-banner-still.jpg');">
-        <div class="play-button"></div>
-        <iframe id="trailerVideo" src="https://www.youtube.com/embed/z56KmGf3PuY?autoplay=1&mute=1&controls=1&showinfo=0&rel=0&modestbranding=1&playsinline=1&enablejsapi=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-    </div>
-
-    <script>
-        // Click to play functionality
-        var banner = document.getElementById('filmBanner');
-        banner.addEventListener('click', function() {
-            if (!banner.classList.contains('playing')) {
-                banner.classList.add('playing');
-            }
-        });
-
-        // YouTube API
-        var tag = document.createElement('script');
-        tag.src = "https://www.youtube.com/iframe_api";
-        var firstScriptTag = document.getElementsByTagName('script')[0];
-        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-        var player;
-        function onYouTubeIframeAPIReady() {
-            player = new YT.Player('trailerVideo', {
-                events: {
-                    'onStateChange': onPlayerStateChange
-                }
-            });
-        }
-
-        function onPlayerStateChange(event) {
-            // YT.PlayerState.ENDED = 0
-            if (event.data === 0) {
-                // Video ended, switch back to static image
-                var banner = document.getElementById('filmBanner');
-                banner.classList.remove('playing');
-            }
-        }
-    </script>
+    <div class="film-banner" style="background-image: url('assets/three-graves-banner-still.jpg');"></div>
 
     <!-- Film Detail Hero -->
     <section class="film-detail-hero">
