@@ -533,6 +533,11 @@
                 </label>
             </div>
 
+            <!-- reCAPTCHA -->
+            <div class="form-group" style="margin-top: 1rem; display: flex; justify-content: center;">
+                <div class="g-recaptcha" data-sitekey="6LcXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"></div>
+            </div>
+
             <button type="submit" class="login-button" id="signUpButton">
                 Join the Frontier
             </button>
@@ -714,10 +719,14 @@
         </div>
     </div>
 
+    <!-- reCAPTCHA v2 -->
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
     <script src="firebase-config.js"></script>
     <script src="auth.js?v=2"></script>
     <script src="sheet-logger.js"></script>
-    <script src="points-system.js?v=2"></script>
+    <script src="points-system.js?v=3"></script>
+    <script src="signup-protection.js"></script>
     <script>
         // DOM Elements
         const signInTab = document.getElementById('signInTab');
@@ -873,6 +882,11 @@
             const result = await signIn(email, password);
 
             if (result.success) {
+                // Grant signup bonus if not yet granted (only runs after email verification)
+                if (typeof grantSignupBonusIfEligible === 'function') {
+                    await grantSignupBonusIfEligible(auth.currentUser.uid);
+                }
+
                 // Check if user has already claimed their grant
                 try {
                     if (db && auth.currentUser) {
@@ -914,6 +928,17 @@
             if (password !== confirmPassword) {
                 showError('Passwords do not match. Please try again.');
                 return;
+            }
+
+            // Run signup protection checks (disposable email, reCAPTCHA, IP rate limit, fingerprint)
+            if (typeof validateSignupAttempt === 'function') {
+                setButtonLoading(submitButton, true);
+                const protection = await validateSignupAttempt(email);
+                if (!protection.valid) {
+                    showError(protection.error);
+                    setButtonLoading(submitButton, false);
+                    return;
+                }
             }
 
             setButtonLoading(submitButton, true);
@@ -992,7 +1017,11 @@
                         showGrantModal(auth.currentUser.email);
                     };
                 } else {
-                    // Returning Google user — check grant status
+                    // Returning Google user — grant bonus if not yet granted
+                    if (typeof grantSignupBonusIfEligible === 'function') {
+                        await grantSignupBonusIfEligible(auth.currentUser.uid);
+                    }
+                    // Check grant status
                     try {
                         if (db && auth.currentUser) {
                             const userDoc = await db.collection('users').doc(auth.currentUser.uid).get();

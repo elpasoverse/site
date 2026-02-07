@@ -102,6 +102,32 @@ const DISPOSABLE_EMAIL_DOMAINS = [
 ];
 
 /**
+ * Normalize email to prevent alias tricks
+ * Strips Gmail dots and +aliases, normalizes googlemail.com
+ * @param {string} email - Email address to normalize
+ * @returns {string} - Normalized email
+ */
+function normalizeEmail(email) {
+    if (!email || typeof email !== 'string') return email;
+
+    const parts = email.toLowerCase().split('@');
+    if (parts.length !== 2) return email;
+
+    let [local, domain] = parts;
+
+    // Normalize googlemail.com to gmail.com
+    if (domain === 'googlemail.com') domain = 'gmail.com';
+
+    // For Gmail: remove dots and strip +alias
+    if (domain === 'gmail.com') {
+        local = local.replace(/\./g, ''); // Remove dots
+        local = local.split('+')[0];       // Remove +alias
+    }
+
+    return local + '@' + domain;
+}
+
+/**
  * Check if an email domain is disposable/temporary
  * @param {string} email - Email address to check
  * @returns {boolean} - True if disposable, false if legitimate
@@ -453,6 +479,24 @@ async function validateSignupAttempt(email) {
         return result;
     }
 
+    // 1b. Check if normalized email already exists (catches Gmail +alias and dot tricks)
+    if (db) {
+        try {
+            const normalized = normalizeEmail(email);
+            const existingUsers = await db.collection('users')
+                .where('normalizedEmail', '==', normalized)
+                .limit(1)
+                .get();
+            if (!existingUsers.empty) {
+                result.valid = false;
+                result.error = 'An account with this email already exists. Please sign in instead.';
+                return result;
+            }
+        } catch (e) {
+            console.warn('Could not check normalized email:', e);
+        }
+    }
+
     // 2. Check reCAPTCHA (if configured)
     if (!isRecaptchaVerified()) {
         result.valid = false;
@@ -486,6 +530,7 @@ async function validateSignupAttempt(email) {
 // Export functions for use in other scripts
 window.SignupProtection = {
     isDisposableEmail,
+    normalizeEmail,
     validateSignupAttempt,
     recordSignupAttempt,
     getDeviceFingerprint,

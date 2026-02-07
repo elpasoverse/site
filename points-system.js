@@ -155,11 +155,16 @@ async function createUserWithCredits(userId, email, displayName = null) {
         const userEmail = email || 'unknown@elpasoverse.com';
         const userName = displayName || (userEmail !== 'unknown@elpasoverse.com' ? userEmail.split('@')[0] : 'Pioneer');
 
-        // Create user document with signup bonus
+        // Compute normalized email for duplicate detection
+        const normalizedEmail = (typeof normalizeEmail === 'function') ? normalizeEmail(userEmail) : userEmail.toLowerCase();
+
+        // Create user document WITHOUT bonus — bonus granted after email verification
         const userData = {
             email: userEmail,
+            normalizedEmail: normalizedEmail,
             displayName: userName,
-            pasoCredits: SIGNUP_BONUS,
+            pasoCredits: 0,
+            signupBonusGranted: false,
             createdAt: firebase.firestore.FieldValue.serverTimestamp(),
             updatedAt: firebase.firestore.FieldValue.serverTimestamp()
         };
@@ -167,18 +172,10 @@ async function createUserWithCredits(userId, email, displayName = null) {
         console.log('Creating user document for:', userId, userData);
         await db.collection('users').doc(userId).set(userData);
 
-        // Log the signup bonus transaction
-        await logPointsTransaction(userId, SIGNUP_BONUS, 'signup_bonus', 'Welcome bonus for joining El Paso Verse');
-
-        // Log to Google Sheet
-        if (window.SheetLogger) {
-            window.SheetLogger.logTransaction(userId, userEmail, 'signup_bonus', SIGNUP_BONUS, SIGNUP_BONUS, 'signup_bonus', 'Welcome bonus for joining El Paso Verse');
-        }
-
-        userPasoCredits = SIGNUP_BONUS;
+        userPasoCredits = 0;
         updatePointsUI();
 
-        console.log('User created with', SIGNUP_BONUS, 'PASO');
+        console.log('User created — bonus will be granted after email verification');
         return true; // Is a new user
     } catch (error) {
         console.error('Error creating user document:', error);
@@ -186,6 +183,49 @@ async function createUserWithCredits(userId, email, displayName = null) {
         return false;
     } finally {
         _creatingUser = false;
+    }
+}
+
+/**
+ * Grant signup bonus ONLY after email verification
+ * Called on first successful sign-in (which requires verified email)
+ * @param {string} userId - Firebase user ID
+ * @returns {Promise<boolean>} - Whether bonus was granted
+ */
+async function grantSignupBonusIfEligible(userId) {
+    if (!db || !userId) return false;
+
+    try {
+        const userDoc = await db.collection('users').doc(userId).get();
+        if (!userDoc.exists) return false;
+
+        const data = userDoc.data();
+        if (data.signupBonusGranted) return false; // Already granted
+
+        // Grant the bonus
+        await db.collection('users').doc(userId).update({
+            pasoCredits: firebase.firestore.FieldValue.increment(SIGNUP_BONUS),
+            signupBonusGranted: true,
+            bonusGrantedAt: firebase.firestore.FieldValue.serverTimestamp(),
+            updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+        });
+
+        // Log the signup bonus transaction
+        await logPointsTransaction(userId, SIGNUP_BONUS, 'signup_bonus', 'Welcome bonus for joining El Paso Verse');
+
+        // Log to Google Sheet
+        if (window.SheetLogger) {
+            window.SheetLogger.logTransaction(userId, data.email, 'signup_bonus', SIGNUP_BONUS, (data.pasoCredits || 0) + SIGNUP_BONUS, 'signup_bonus', 'Welcome bonus for joining El Paso Verse');
+        }
+
+        userPasoCredits = (data.pasoCredits || 0) + SIGNUP_BONUS;
+        updatePointsUI();
+
+        console.log('Signup bonus granted:', SIGNUP_BONUS, 'PASO');
+        return true;
+    } catch (error) {
+        console.error('Error granting signup bonus:', error);
+        return false;
     }
 }
 
