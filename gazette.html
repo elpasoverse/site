@@ -196,7 +196,7 @@
                 Step back into 1880 and witness the birth of Breakwater through authentic frontier journalism.
             </p>
             <div style="margin-top: 2rem;">
-                <button class="paso-gate-button" onclick="checkPasoAccess()">I Have PASO Credits</button>
+                <button class="paso-gate-button" onclick="checkPasoAccess()">I Have PASO</button>
                 <button class="paso-gate-button secondary" onclick="window.location.href='members.html'">Return to Portal</button>
             </div>
         </div>
@@ -739,7 +739,7 @@
 
     <!-- JavaScript -->
     <script>
-        // PASO Credits Gate Logic
+        // PASO Gate Logic
         async function checkPasoAccess() {
             // Check if user is authenticated
             if (typeof isAuthenticated === 'undefined' || !isAuthenticated()) {
@@ -754,7 +754,7 @@
             if (userPasoBalance >= 1) {
                 grantAccess('PASO');
             } else {
-                alert('Insufficient PASO credits. You need at least 1 PASO credit to access this exclusive gazette.\n\nVisit the Community Portal to learn how to earn PASO credits.');
+                alert('Insufficient PASO. You need at least 1 PASO credit to access this exclusive gazette.\n\nVisit the Community Portal to learn how to earn PASO.');
             }
         }
 

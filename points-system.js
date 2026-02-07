@@ -1,5 +1,5 @@
 /**
- * El Paso Verse - PASO Credits System
+ * El Paso Verse - PASO System
  * Firebase-based rewards points system for community members
  */
 
@@ -16,7 +16,7 @@ let _creatingUser = false;
 
 /**
  * Initialize the points system on page load
- * Fetches user's PASO credits balance from Firebase
+ * Fetches user's PASO balance from Firebase
  */
 async function initPointsSystem() {
     // Prevent multiple initializations
@@ -55,7 +55,7 @@ async function initPointsSystem() {
 
 /**
  * Wait for points system to be ready
- * @returns {Promise<number>} - User's PASO credits balance
+ * @returns {Promise<number>} - User's PASO balance
  */
 function waitForPointsSystem() {
     return new Promise((resolve) => {
@@ -76,11 +76,11 @@ function resolvePointsCallbacks() {
 }
 
 /**
- * Get user's PASO credits balance from Firestore
+ * Get user's PASO balance from Firestore
  * If user document doesn't exist (for users who signed up before points system),
  * creates one with the signup bonus.
  * @param {string} userId - Firebase user ID
- * @returns {Promise<number>} - User's PASO credits balance
+ * @returns {Promise<number>} - User's PASO balance
  */
 async function getUserBalance(userId) {
     if (!db) {
@@ -116,7 +116,7 @@ async function getUserBalance(userId) {
 }
 
 /**
- * Create a new user document with initial PASO credits
+ * Create a new user document with initial PASO
  * Called after successful signup or for existing users without a document
  * @param {string} userId - Firebase user ID
  * @param {string} email - User's email
@@ -178,7 +178,7 @@ async function createUserWithCredits(userId, email, displayName = null) {
         userPasoCredits = SIGNUP_BONUS;
         updatePointsUI();
 
-        console.log('User created with', SIGNUP_BONUS, 'PASO credits');
+        console.log('User created with', SIGNUP_BONUS, 'PASO');
         return true; // Is a new user
     } catch (error) {
         console.error('Error creating user document:', error);
@@ -190,7 +190,7 @@ async function createUserWithCredits(userId, email, displayName = null) {
 }
 
 /**
- * Grant PASO credits to a user
+ * Grant PASO to a user
  * @param {string} userId - Firebase user ID
  * @param {number} amount - Amount of credits to grant (positive number)
  * @param {string} reason - Reason code for the transaction
@@ -237,7 +237,7 @@ async function grantPoints(userId, amount, reason, description = '') {
 }
 
 /**
- * Deduct PASO credits from a user
+ * Deduct PASO from a user
  * @param {string} userId - Firebase user ID
  * @param {number} amount - Amount of credits to deduct (positive number)
  * @param {string} reason - Reason code for the transaction
@@ -258,7 +258,7 @@ async function deductPoints(userId, amount, reason, description = '') {
     // Check if user has enough balance
     const currentBalance = await getUserBalance(userId);
     if (currentBalance < amount) {
-        console.error('Insufficient PASO credits');
+        console.error('Insufficient PASO');
         return false;
     }
 
@@ -371,8 +371,8 @@ function updatePointsUI() {
 }
 
 /**
- * Get current cached PASO credits balance
- * @returns {number} - User's PASO credits
+ * Get current cached PASO balance
+ * @returns {number} - User's PASO
  */
 function getPasoCredits() {
     return userPasoCredits;

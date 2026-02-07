@@ -5,7 +5,7 @@
  * - PASO credit withdrawal to external wallet (1:1 exchange)
  *
  * Note: This is an OPTIONAL feature for advanced users.
- * Most users will use PASO credits stored in Firebase without needing a wallet.
+ * Most users will use PASO stored in Firebase without needing a wallet.
  */
 
 // PASO Token Configuration
@@ -492,7 +492,7 @@ function getWalletAddress() {
 }
 
 /**
- * Withdraw PASO credits to external wallet
+ * Withdraw PASO to external wallet
  * Converts Firebase-stored credits to on-chain PASO tokens (1:1 ratio)
  * @param {number} amount - Amount of credits to withdraw
  * @returns {Promise<{success: boolean, txHash?: string, error?: string}>}
@@ -506,7 +506,7 @@ async function withdrawToWallet(amount) {
     // Check if user has enough credits
     const currentCredits = typeof getPasoCredits === 'function' ? getPasoCredits() : 0;
     if (amount > currentCredits) {
-        return { success: false, error: 'Insufficient PASO credits for this withdrawal.' };
+        return { success: false, error: 'Insufficient PASO for this withdrawal.' };
     }
 
     if (amount <= 0) {
@@ -525,7 +525,7 @@ async function withdrawToWallet(amount) {
 
     return {
         success: false,
-        error: 'Withdrawal functionality is coming soon. Your PASO credits are safely stored and ready for use within El Paso Verse.'
+        error: 'Withdrawal functionality is coming soon. Your PASO are safely stored and ready for use within El Paso Verse.'
     };
 }
 

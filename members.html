@@ -9,7 +9,7 @@
     <meta name="title" content="Community Portal | El Paso Verse — Dashboard, Content & Voting">
     <meta name="description" content="Access exclusive content, earn PASO, stream motion prints, and vote on frontier development. Your gateway to the El Paso Verse community.">
     <link rel="canonical" href="https://elpasoverse.com/members.html">
-    <meta name="keywords" content="El Paso Verse, community portal, PASO credits, frontier community, member access, Western community">
+    <meta name="keywords" content="El Paso Verse, community portal, PASO, frontier community, member access, Western community">
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="assets/paso-token.png">
@@ -102,10 +102,10 @@
             <div id="dashboard-tab" class="tab-pane active">
                 <h3 style="font-family: 'Cinzel', Georgia, serif; font-size: 2rem; font-weight: 900; color: #1a1a1a; margin-bottom: 1.5rem;">Your Dashboard</h3>
 
-                <!-- PASO Credits Balance -->
+                <!-- PASO Balance -->
                 <div style="background: linear-gradient(135deg, #2c1810 0%, #4a2511 100%); border: 3px solid #c9a860; padding: 2rem; margin-bottom: 2rem; border-radius: 8px;">
                     <div style="display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap;">
-                        <img src="assets/paso-token.png" alt="PASO Credits" style="width: 50px; height: 50px; object-fit: contain;">
+                        <img src="assets/paso-token.png" alt="PASO" style="width: 50px; height: 50px; object-fit: contain;">
                         <div style="flex: 1; min-width: 200px;">
                             <h4 style="font-family: 'Cinzel', Georgia, serif; font-size: 1.5rem; font-weight: 700; color: #f9f3e3; margin: 0;">Your PASO Balance</h4>
                             <p style="color: #a89178; font-size: 0.85rem; margin: 0.25rem 0 0 0;">Unlock content, merchandise, and future frontier experiences</p>
@@ -113,7 +113,7 @@
                         <div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;">
                             <div style="background: #1a1a1a; border: 2px solid #c9a860; padding: 1rem 1.5rem; border-radius: 4px; text-align: center;">
                                 <div id="pasoBalance" style="font-size: 2.5rem; font-weight: 900; color: #c9a860; font-family: 'Cinzel', Georgia, serif;">—</div>
-                                <div style="color: #d4c4a8; font-size: 0.8rem;">PASO Credits</div>
+                                <div style="color: #d4c4a8; font-size: 0.8rem;">PASO</div>
                                 <div style="color: #888; font-size: 0.7rem; margin-top: 0.5rem;">Balance not showing? Try refreshing.</div>
                             </div>
                             <div style="display: flex; flex-direction: column; gap: 0.4rem;">
@@ -592,7 +592,7 @@
             <!-- Governance Tab -->
             <div id="governance-tab" class="tab-pane">
                 <h3 style="font-family: 'Cinzel', Georgia, serif; font-size: 2rem; font-weight: 900; color: #3A2820; margin-bottom: 1rem;">Community Voting</h3>
-                <p style="color: #000000; margin-bottom: 2rem;">Help shape the physical frontier destination through community-driven decisions. Your PASO credits determine your voting power in building the 1880 world.</p>
+                <p style="color: #000000; margin-bottom: 2rem;">Help shape the physical frontier destination through community-driven decisions. Your PASO determine your voting power in building the 1880 world.</p>
 
                 <!-- Governance Overview -->
                 <div style="background: linear-gradient(135deg, #2c1810 0%, #4a2511 100%); border: 3px solid #c9a860; padding: 2rem; margin-bottom: 2rem; border-radius: 8px;">
@@ -1657,10 +1657,10 @@
 
                     <div style="background: rgba(0,0,0,0.3); padding: 1rem; border-radius: 4px; margin-bottom: 1.5rem;">
                         <p style="color: #d4c4a8; font-size: 0.9rem; margin-bottom: 1rem;">
-                            <strong>Your Balance:</strong> <span style="color: #c9a860; font-weight: 700;">${currentBalance.toLocaleString()} PASO Credits</span>
+                            <strong>Your Balance:</strong> <span style="color: #c9a860; font-weight: 700;">${currentBalance.toLocaleString()} PASO</span>
                         </p>
                         <p style="color: #a89178; font-size: 0.85rem; line-height: 1.6; margin: 0;">
-                            You can withdraw your PASO credits to a Cardano wallet at a <strong>1:1 ratio</strong>.
+                            You can withdraw your PASO to a Cardano wallet at a <strong>1:1 ratio</strong>.
                             This converts your in-app credits to on-chain PASO tokens.
                         </p>
                     </div>
@@ -1726,7 +1726,7 @@
             }
 
             if (amount > currentBalance) {
-                alert('Insufficient PASO credits for this withdrawal.');
+                alert('Insufficient PASO for this withdrawal.');
                 return;
             }
 
