@@ -208,6 +208,8 @@
 
 .tab-pane {
     display: none;
+    overflow-x: hidden;
+    max-width: 100%;
 }
 
 .tab-pane.active {
