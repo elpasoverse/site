@@ -196,19 +196,32 @@ async function grantSignupBonusIfEligible(userId) {
     if (!db || !userId) return false;
 
     try {
-        const userDoc = await db.collection('users').doc(userId).get();
-        if (!userDoc.exists) return false;
+        const userRef = db.collection('users').doc(userId);
 
-        const data = userDoc.data();
-        if (data.signupBonusGranted) return false; // Already granted
+        // Use a Firestore transaction to atomically check and grant the bonus
+        // This prevents race conditions where two concurrent calls both read
+        // signupBonusGranted as false and both grant the bonus
+        const result = await db.runTransaction(async (transaction) => {
+            const userDoc = await transaction.get(userRef);
+            if (!userDoc.exists) return { granted: false, data: null };
 
-        // Grant the bonus
-        await db.collection('users').doc(userId).update({
-            pasoCredits: firebase.firestore.FieldValue.increment(SIGNUP_BONUS),
-            signupBonusGranted: true,
-            bonusGrantedAt: firebase.firestore.FieldValue.serverTimestamp(),
-            updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+            const data = userDoc.data();
+            if (data.signupBonusGranted) return { granted: false, data: data };
+
+            // Grant the bonus atomically
+            transaction.update(userRef, {
+                pasoCredits: firebase.firestore.FieldValue.increment(SIGNUP_BONUS),
+                signupBonusGranted: true,
+                bonusGrantedAt: firebase.firestore.FieldValue.serverTimestamp(),
+                updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+            });
+
+            return { granted: true, data: data };
         });
+
+        if (!result.granted) return false;
+
+        const data = result.data;
 
         // Log the signup bonus transaction
         await logPointsTransaction(userId, SIGNUP_BONUS, 'signup_bonus', 'Welcome bonus for joining El Paso Verse');
