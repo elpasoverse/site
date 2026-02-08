@@ -1339,10 +1339,10 @@
         // Land Target Voting
         document.addEventListener('DOMContentLoaded', function() {
             // Add click handlers to all vote buttons
-            const voteButtons = document.querySelectorAll('.land-vote-btn');
-            voteButtons.forEach(button => {
+            var voteButtons = document.querySelectorAll('.land-vote-btn');
+            voteButtons.forEach(function(button) {
                 button.addEventListener('click', function() {
-                    const targetId = this.getAttribute('data-target');
+                    var targetId = this.getAttribute('data-target');
                     voteLandTarget(targetId);
                 });
             });
@@ -1358,22 +1358,26 @@
         });
 
         function updateVoteUI(votes, userVotes) {
-            ['verse-hotel', 'western-leone', 'rio-texaco'].forEach(targetId => {
-                const card = document.querySelector(`.land-target-card[data-target="${targetId}"]`);
+            ['verse-hotel', 'western-leone', 'rio-texaco'].forEach(function(targetId) {
+                var card = document.querySelector('.land-target-card[data-target="' + targetId + '"]');
                 if (card) {
-                    const voteCount = card.querySelector('.vote-count');
-                    const count = votes[targetId] || 0;
+                    var voteCount = card.querySelector('.vote-count');
+                    var count = votes[targetId] || 0;
                     if (voteCount) {
-                        voteCount.textContent = `${count} vote${count !== 1 ? 's' : ''}`;
+                        voteCount.textContent = count + ' vote' + (count !== 1 ? 's' : '');
                     }
 
-                    // Update button if user already voted for this target
-                    if (userVotes.includes(targetId)) {
-                        const button = card.querySelector('.land-vote-btn');
+                    var button = card.querySelector('.land-vote-btn');
+                    if (userVotes.indexOf(targetId) !== -1) {
                         button.textContent = 'Voted ✓';
                         button.style.background = 'linear-gradient(135deg, #2d8a2d 0%, #3a9a3a 100%)';
                         button.style.color = '#FFFFFF';
                         button.disabled = true;
+                    } else {
+                        button.textContent = 'Vote for This Target';
+                        button.style.background = 'linear-gradient(135deg, #C9A961 0%, #D4A745 100%)';
+                        button.style.color = '#1a1a1a';
+                        button.disabled = false;
                     }
                 }
             });
@@ -1385,22 +1389,26 @@
             var user = auth ? auth.currentUser : null;
             var userVotes = [];
 
-            // Load total vote counts
-            db.collection('landVotes').doc('totals').get().then(function(doc) {
-                var votes = doc.exists ? doc.data() : { 'verse-hotel': 0, 'western-leone': 0, 'rio-texaco': 0 };
+            // Load total vote counts from users collection (shared doc)
+            db.collection('users').doc('__landVoteTotals__').get().then(function(doc) {
+                var votes = doc.exists ? doc.data() : {};
 
-                // Load current user's votes
+                // Load current user's land votes from their user doc
                 if (user) {
-                    db.collection('landVotes').doc(user.uid).get().then(function(userDoc) {
-                        userVotes = userDoc.exists && userDoc.data().votes ? userDoc.data().votes : [];
+                    db.collection('users').doc(user.uid).get().then(function(userDoc) {
+                        if (userDoc.exists && userDoc.data().landVotes) {
+                            userVotes = userDoc.data().landVotes;
+                        }
+                        updateVoteUI(votes, userVotes);
+                    }).catch(function() {
                         updateVoteUI(votes, userVotes);
                     });
                 } else {
                     updateVoteUI(votes, userVotes);
                 }
-            }).catch(function() {
-                // Fallback to zeros if Firestore fails
-                updateVoteUI({ 'verse-hotel': 0, 'western-leone': 0, 'rio-texaco': 0 }, []);
+            }).catch(function(err) {
+                console.error('Failed to load land votes:', err);
+                updateVoteUI({}, []);
             });
         }
 
@@ -1411,36 +1419,38 @@
             }
 
             var user = auth.currentUser;
-            var userRef = db.collection('landVotes').doc(user.uid);
-            var totalsRef = db.collection('landVotes').doc('totals');
+            var userRef = db.collection('users').doc(user.uid);
+            var totalsRef = db.collection('users').doc('__landVoteTotals__');
 
             // Check if user already voted
             userRef.get().then(function(userDoc) {
-                var userVotes = userDoc.exists && userDoc.data().votes ? userDoc.data().votes : [];
+                var userVotes = userDoc.exists && userDoc.data().landVotes ? userDoc.data().landVotes : [];
 
-                if (userVotes.includes(targetId)) {
+                if (userVotes.indexOf(targetId) !== -1) {
                     alert('You have already voted for this land target!');
                     return;
                 }
 
-                // Add vote to totals using increment
+                // Add vote to shared totals using increment
                 var updateData = {};
                 updateData[targetId] = firebase.firestore.FieldValue.increment(1);
-                totalsRef.set(updateData, { merge: true });
+                totalsRef.set(updateData, { merge: true }).then(function() {
+                    // Track user's vote on their own user doc
+                    userVotes.push(targetId);
+                    return userRef.set({ landVotes: userVotes }, { merge: true });
+                }).then(function() {
+                    loadLandVotes();
 
-                // Track user's vote
-                userVotes.push(targetId);
-                userRef.set({ votes: userVotes }, { merge: true });
-
-                // Update UI
-                loadLandVotes();
-
-                var targetNames = {
-                    'verse-hotel': '"Verse Hotel" Almeria',
-                    'western-leone': 'Western Leone',
-                    'rio-texaco': 'Rio Texaco'
-                };
-                alert('Thank you for voting for ' + targetNames[targetId] + '!\n\nYour voice helps shape where the El Paso Verse frontier takes root.');
+                    var targetNames = {
+                        'verse-hotel': '"Verse Hotel" Almeria',
+                        'western-leone': 'Western Leone',
+                        'rio-texaco': 'Rio Texaco'
+                    };
+                    alert('Thank you for voting for ' + targetNames[targetId] + '!\n\nYour voice helps shape where the El Paso Verse frontier takes root.');
+                }).catch(function(err) {
+                    console.error('Vote failed:', err);
+                    alert('Something went wrong. Please try again.');
+                });
             });
         }
 
