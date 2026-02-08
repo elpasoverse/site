@@ -1338,9 +1338,6 @@
 
         // Land Target Voting
         document.addEventListener('DOMContentLoaded', function() {
-            // Load existing votes from Firestore
-            loadLandVotes();
-
             // Add click handlers to all vote buttons
             const voteButtons = document.querySelectorAll('.land-vote-btn');
             voteButtons.forEach(button => {
@@ -1349,6 +1346,15 @@
                     voteLandTarget(targetId);
                 });
             });
+
+            // Load votes once auth state is ready
+            if (auth) {
+                auth.onAuthStateChanged(function() {
+                    loadLandVotes();
+                });
+            } else {
+                loadLandVotes();
+            }
         });
 
         function updateVoteUI(votes, userVotes) {
