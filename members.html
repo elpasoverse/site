@@ -475,7 +475,7 @@
                                         <iframe src="https://www.youtube.com/embed/g2VizZo027k?rel=0&modestbranding=1" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
                                     </div>
                                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
-                                        <span class="vote-count" style="color: #C9A961; font-size: 0.85rem; font-weight: 700;">0 votes</span>
+                                        <span class="vote-count" style="color: #C9A961; font-size: 0.85rem; font-weight: 700;"></span>
                                         <div style="display: flex; gap: 0.4rem;">
                                             <button onclick="shareOnX('verse-hotel')" style="background: none; border: 1px solid #C9A961; color: #C9A961; padding: 0.25rem 0.5rem; border-radius: 3px; cursor: pointer; font-size: 0.7rem;">X</button>
                                             <button onclick="copyShareLink('verse-hotel')" style="background: none; border: 1px solid #C9A961; color: #C9A961; padding: 0.25rem 0.5rem; border-radius: 3px; cursor: pointer; font-size: 0.7rem;">Link</button>
@@ -527,7 +527,7 @@
                                         <iframe src="https://www.youtube.com/embed/-B1ULbjoJ_U?rel=0&modestbranding=1" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
                                     </div>
                                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
-                                        <span class="vote-count" style="color: #C9A961; font-size: 0.85rem; font-weight: 700;">0 votes</span>
+                                        <span class="vote-count" style="color: #C9A961; font-size: 0.85rem; font-weight: 700;"></span>
                                         <div style="display: flex; gap: 0.4rem;">
                                             <button onclick="shareOnX('western-leone')" style="background: none; border: 1px solid #C9A961; color: #C9A961; padding: 0.25rem 0.5rem; border-radius: 3px; cursor: pointer; font-size: 0.7rem;">X</button>
                                             <button onclick="copyShareLink('western-leone')" style="background: none; border: 1px solid #C9A961; color: #C9A961; padding: 0.25rem 0.5rem; border-radius: 3px; cursor: pointer; font-size: 0.7rem;">Link</button>
@@ -579,7 +579,7 @@
                                         <iframe src="https://www.youtube.com/embed/sijM35O3pz4?rel=0&modestbranding=1" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
                                     </div>
                                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
-                                        <span class="vote-count" style="color: #C9A961; font-size: 0.85rem; font-weight: 700;">0 votes</span>
+                                        <span class="vote-count" style="color: #C9A961; font-size: 0.85rem; font-weight: 700;"></span>
                                         <div style="display: flex; gap: 0.4rem;">
                                             <button onclick="shareOnX('rio-texaco')" style="background: none; border: 1px solid #C9A961; color: #C9A961; padding: 0.25rem 0.5rem; border-radius: 3px; cursor: pointer; font-size: 0.7rem;">X</button>
                                             <button onclick="copyShareLink('rio-texaco')" style="background: none; border: 1px solid #C9A961; color: #C9A961; padding: 0.25rem 0.5rem; border-radius: 3px; cursor: pointer; font-size: 0.7rem;">Link</button>
@@ -1384,32 +1384,21 @@
         }
 
         function loadLandVotes() {
-            if (!db) return;
-
-            var user = auth ? auth.currentUser : null;
+            var user = (auth && auth.currentUser) ? auth.currentUser : null;
             var userVotes = [];
 
-            // Load total vote counts from users collection (shared doc)
-            db.collection('users').doc('__landVoteTotals__').get().then(function(doc) {
-                var votes = doc.exists ? doc.data() : {};
-
-                // Load current user's land votes from their user doc
-                if (user) {
-                    db.collection('users').doc(user.uid).get().then(function(userDoc) {
-                        if (userDoc.exists && userDoc.data().landVotes) {
-                            userVotes = userDoc.data().landVotes;
-                        }
-                        updateVoteUI(votes, userVotes);
-                    }).catch(function() {
-                        updateVoteUI(votes, userVotes);
-                    });
-                } else {
-                    updateVoteUI(votes, userVotes);
-                }
-            }).catch(function(err) {
-                console.error('Failed to load land votes:', err);
-                updateVoteUI({}, []);
-            });
+            if (db && user) {
+                db.collection('users').doc(user.uid).get().then(function(userDoc) {
+                    if (userDoc.exists && userDoc.data().landVotes) {
+                        userVotes = userDoc.data().landVotes;
+                    }
+                    updateVoteUI({}, userVotes);
+                }).catch(function() {
+                    updateVoteUI({}, userVotes);
+                });
+            } else {
+                updateVoteUI({}, userVotes);
+            }
         }
 
         function voteLandTarget(targetId) {
@@ -1420,37 +1409,44 @@
 
             var user = auth.currentUser;
             var userRef = db.collection('users').doc(user.uid);
-            var totalsRef = db.collection('users').doc('__landVoteTotals__');
+            var button = document.querySelector('.land-target-card[data-target="' + targetId + '"] .land-vote-btn');
 
-            // Check if user already voted
+            if (button) {
+                button.disabled = true;
+                button.textContent = 'Voting...';
+            }
+
             userRef.get().then(function(userDoc) {
-                var userVotes = userDoc.exists && userDoc.data().landVotes ? userDoc.data().landVotes : [];
+                var userVotes = (userDoc.exists && userDoc.data().landVotes) ? userDoc.data().landVotes : [];
 
                 if (userVotes.indexOf(targetId) !== -1) {
                     alert('You have already voted for this land target!');
+                    loadLandVotes();
                     return;
                 }
 
-                // Add vote to shared totals using increment
-                var updateData = {};
-                updateData[targetId] = firebase.firestore.FieldValue.increment(1);
-                totalsRef.set(updateData, { merge: true }).then(function() {
-                    // Track user's vote on their own user doc
-                    userVotes.push(targetId);
-                    return userRef.set({ landVotes: userVotes }, { merge: true });
-                }).then(function() {
-                    loadLandVotes();
+                userVotes.push(targetId);
+                return userRef.set({ landVotes: userVotes }, { merge: true }).then(function() {
+                    // Also log to Google Sheets for admin tracking
+                    logToSheet('LandVotes', {
+                        userId: user.uid,
+                        email: user.email || 'unknown',
+                        targetId: targetId,
+                        voteDate: new Date().toISOString()
+                    });
 
+                    loadLandVotes();
                     var targetNames = {
                         'verse-hotel': '"Verse Hotel" Almeria',
                         'western-leone': 'Western Leone',
                         'rio-texaco': 'Rio Texaco'
                     };
                     alert('Thank you for voting for ' + targetNames[targetId] + '!\n\nYour voice helps shape where the El Paso Verse frontier takes root.');
-                }).catch(function(err) {
-                    console.error('Vote failed:', err);
-                    alert('Something went wrong. Please try again.');
                 });
+            }).catch(function(err) {
+                console.error('Vote failed:', err);
+                alert('Something went wrong. Please try again.');
+                loadLandVotes();
             });
         }
 
