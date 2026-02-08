@@ -1338,7 +1338,7 @@
 
         // Land Target Voting
         document.addEventListener('DOMContentLoaded', function() {
-            // Load existing votes from localStorage
+            // Load existing votes from Firestore
             loadLandVotes();
 
             // Add click handlers to all vote buttons
@@ -1351,17 +1351,14 @@
             });
         });
 
-        function loadLandVotes() {
-            const votes = JSON.parse(localStorage.getItem('landVotes') || '{"verse-hotel": 0, "western-leone": 0, "rio-texaco": 0}');
-            const userVotes = JSON.parse(localStorage.getItem('userLandVotes') || '[]');
-
-            // Update vote counts
-            Object.keys(votes).forEach(targetId => {
+        function updateVoteUI(votes, userVotes) {
+            ['verse-hotel', 'western-leone', 'rio-texaco'].forEach(targetId => {
                 const card = document.querySelector(`.land-target-card[data-target="${targetId}"]`);
                 if (card) {
                     const voteCount = card.querySelector('.vote-count');
+                    const count = votes[targetId] || 0;
                     if (voteCount) {
-                        voteCount.textContent = `${votes[targetId]} vote${votes[targetId] !== 1 ? 's' : ''}`;
+                        voteCount.textContent = `${count} vote${count !== 1 ? 's' : ''}`;
                     }
 
                     // Update button if user already voted for this target
@@ -1376,34 +1373,69 @@
             });
         }
 
-        function voteLandTarget(targetId) {
-            const userVotes = JSON.parse(localStorage.getItem('userLandVotes') || '[]');
+        function loadLandVotes() {
+            if (!db) return;
 
-            // Check if user already voted for this target
-            if (userVotes.includes(targetId)) {
-                alert('You have already voted for this land target!');
+            var user = auth ? auth.currentUser : null;
+            var userVotes = [];
+
+            // Load total vote counts
+            db.collection('landVotes').doc('totals').get().then(function(doc) {
+                var votes = doc.exists ? doc.data() : { 'verse-hotel': 0, 'western-leone': 0, 'rio-texaco': 0 };
+
+                // Load current user's votes
+                if (user) {
+                    db.collection('landVotes').doc(user.uid).get().then(function(userDoc) {
+                        userVotes = userDoc.exists && userDoc.data().votes ? userDoc.data().votes : [];
+                        updateVoteUI(votes, userVotes);
+                    });
+                } else {
+                    updateVoteUI(votes, userVotes);
+                }
+            }).catch(function() {
+                // Fallback to zeros if Firestore fails
+                updateVoteUI({ 'verse-hotel': 0, 'western-leone': 0, 'rio-texaco': 0 }, []);
+            });
+        }
+
+        function voteLandTarget(targetId) {
+            if (!db || !auth || !auth.currentUser) {
+                alert('Please log in to vote.');
                 return;
             }
 
-            // Add vote
-            const votes = JSON.parse(localStorage.getItem('landVotes') || '{"verse-hotel": 0, "western-leone": 0, "rio-texaco": 0}');
-            votes[targetId] = (votes[targetId] || 0) + 1;
-            localStorage.setItem('landVotes', JSON.stringify(votes));
+            var user = auth.currentUser;
+            var userRef = db.collection('landVotes').doc(user.uid);
+            var totalsRef = db.collection('landVotes').doc('totals');
 
-            // Track user vote
-            userVotes.push(targetId);
-            localStorage.setItem('userLandVotes', JSON.stringify(userVotes));
+            // Check if user already voted
+            userRef.get().then(function(userDoc) {
+                var userVotes = userDoc.exists && userDoc.data().votes ? userDoc.data().votes : [];
 
-            // Update UI
-            loadLandVotes();
+                if (userVotes.includes(targetId)) {
+                    alert('You have already voted for this land target!');
+                    return;
+                }
 
-            // Success message
-            const targetNames = {
-                'verse-hotel': '"Verse Hotel" Almeria',
-                'western-leone': 'Western Leone',
-                'rio-texaco': 'Rio Texaco'
-            };
-            alert(`Thank you for voting for ${targetNames[targetId]}!\n\nYour voice helps shape where the El Paso Verse frontier takes root.`);
+                // Add vote to totals using increment
+                var updateData = {};
+                updateData[targetId] = firebase.firestore.FieldValue.increment(1);
+                totalsRef.set(updateData, { merge: true });
+
+                // Track user's vote
+                userVotes.push(targetId);
+                userRef.set({ votes: userVotes }, { merge: true });
+
+                // Update UI
+                loadLandVotes();
+
+                var targetNames = {
+                    'verse-hotel': '"Verse Hotel" Almeria',
+                    'western-leone': 'Western Leone',
+                    'rio-texaco': 'Rio Texaco'
+                };
+                alert('Thank you for voting for ' + targetNames[targetId] + '!\n\nYour voice helps shape where the El Paso Verse frontier takes root.');
+            });
         }
 
         // Land Carousel Navigation
