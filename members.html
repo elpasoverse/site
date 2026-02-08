@@ -1384,21 +1384,32 @@
         }
 
         function loadLandVotes() {
+            if (!db) return;
+
             var user = (auth && auth.currentUser) ? auth.currentUser : null;
             var userVotes = [];
 
-            if (db && user) {
-                db.collection('users').doc(user.uid).get().then(function(userDoc) {
-                    if (userDoc.exists && userDoc.data().landVotes) {
-                        userVotes = userDoc.data().landVotes;
-                    }
-                    updateVoteUI({}, userVotes);
-                }).catch(function() {
-                    updateVoteUI({}, userVotes);
-                });
-            } else {
+            // Load global vote totals from landVotes collection
+            db.collection('landVotes').doc('totals').get().then(function(doc) {
+                var votes = doc.exists ? doc.data() : {};
+
+                // Load current user's votes to show which they already voted for
+                if (user) {
+                    db.collection('landVotes').doc(user.uid).get().then(function(userDoc) {
+                        if (userDoc.exists && userDoc.data().votes) {
+                            userVotes = userDoc.data().votes;
+                        }
+                        updateVoteUI(votes, userVotes);
+                    }).catch(function() {
+                        updateVoteUI(votes, userVotes);
+                    });
+                } else {
+                    updateVoteUI(votes, userVotes);
+                }
+            }).catch(function(err) {
+                console.error('Failed to load land votes:', err);
                 updateVoteUI({}, userVotes);
-            }
+            });
         }
 
         function voteLandTarget(targetId) {
@@ -1408,7 +1419,6 @@
             }
 
             var user = auth.currentUser;
-            var userRef = db.collection('users').doc(user.uid);
             var button = document.querySelector('.land-target-card[data-target="' + targetId + '"] .land-vote-btn');
 
             if (button) {
@@ -1416,8 +1426,9 @@
                 button.textContent = 'Voting...';
             }
 
-            userRef.get().then(function(userDoc) {
-                var userVotes = (userDoc.exists && userDoc.data().landVotes) ? userDoc.data().landVotes : [];
+            // Check if user already voted
+            db.collection('landVotes').doc(user.uid).get().then(function(userDoc) {
+                var userVotes = (userDoc.exists && userDoc.data().votes) ? userDoc.data().votes : [];
 
                 if (userVotes.indexOf(targetId) !== -1) {
                     alert('You have already voted for this land target!');
@@ -1425,8 +1436,15 @@
                     return;
                 }
 
-                userVotes.push(targetId);
-                return userRef.set({ landVotes: userVotes }, { merge: true }).then(function() {
+                // Increment global total
+                var updateData = {};
+                updateData[targetId] = firebase.firestore.FieldValue.increment(1);
+
+                return db.collection('landVotes').doc('totals').set(updateData, { merge: true }).then(function() {
+                    // Track user's vote
+                    userVotes.push(targetId);
+                    return db.collection('landVotes').doc(user.uid).set({ votes: userVotes }, { merge: true });
+                }).then(function() {
                     // Also log to Google Sheets for admin tracking
                     logToSheet('LandVotes', {
                         userId: user.uid,
