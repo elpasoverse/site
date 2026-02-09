@@ -840,7 +840,7 @@ figcaption {
 }
 
 .film-frame::after {
-    content: 'KODAK';
+    content: '';
     position: absolute;
     bottom: 4px;
     right: 6px;
