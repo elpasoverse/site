@@ -38,6 +38,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="members.css">
+    <style>
+        .roadmap-dropdown .roadmap-arrow { display: inline-block; transform: rotate(-90deg); }
+        .roadmap-dropdown.open .roadmap-arrow { transform: rotate(0deg); }
+        .roadmap-dropdown.open .roadmap-details { display: flex !important; }
+    </style>
 </head>
 <body class="members-body">
     <!-- Auto-reset purchase states if ?reset in URL -->
@@ -89,6 +94,7 @@
             <button class="tab-button active" data-tab="dashboard">Dashboard</button>
             <button class="tab-button" data-tab="exclusive">Exclusive Content</button>
             <button class="tab-button" data-tab="land">Land Targets</button>
+            <button class="tab-button" data-tab="roadmap">Roadmap</button>
             <button class="tab-button" data-tab="team">Development Team</button>
             <button class="tab-button" data-tab="submit">Submit Your Idea</button>
             <button class="tab-button" data-tab="browse">Browse Ideas</button>
@@ -158,7 +164,7 @@
                                 <li style="color: #5a4a3a; font-size: 0.9rem; line-height: 1.6; padding: 0.25rem 0 0.25rem 1rem; position: relative;"><span style="position: absolute; left: 0; color: #c9a860;">&#8226;</span>Stream El Paso Verse films</li>
                                 <li style="color: #5a4a3a; font-size: 0.9rem; line-height: 1.6; padding: 0.25rem 0 0.25rem 1rem; position: relative;"><span style="position: absolute; left: 0; color: #c9a860;">&#8226;</span>Attend roadshow premieres worldwide</li>
                                 <li style="color: #5a4a3a; font-size: 0.9rem; line-height: 1.6; padding: 0.25rem 0 0.25rem 1rem; position: relative;"><span style="position: absolute; left: 0; color: #c9a860;">&#8226;</span>Exclusive behind-the-scenes access</li>
-                                <li style="color: #5a4a3a; font-size: 0.9rem; line-height: 1.6; padding: 0.25rem 0 0.25rem 1rem; position: relative;"><span style="position: absolute; left: 0; color: #c9a860;">&#8226;</span>Help masterplan the towns</li>
+                                <li style="color: #5a4a3a; font-size: 0.9rem; line-height: 1.6; padding: 0.25rem 0 0.25rem 1rem; position: relative;"><span style="position: absolute; left: 0; color: #c9a860;">&#8226;</span>Masterplan the towns</li>
                             </ul>
                         </div>
                         <!-- Phase 3 -->
@@ -596,6 +602,210 @@
                     </div>
                 </div>
 
+            </div>
+
+            <!-- Roadmap Tab -->
+            <div id="roadmap-tab" class="tab-pane">
+                <h3 style="font-family: 'Cinzel', Georgia, serif; font-size: 2rem; font-weight: 900; color: #3A2820; margin-bottom: 0.5rem;">Track the Journey to 1880</h3>
+                <p style="color: #1a1a1a; margin-bottom: 2.5rem; line-height: 1.6;">Follow the path from cinema to physical frontier. Each phase builds on the last—bringing the El Paso Verse from screen to reality.</p>
+
+                <!-- Progress Bar -->
+                <div style="position: relative; max-width: 700px; margin: 0 auto 3rem;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; position: relative;">
+                        <!-- Track -->
+                        <div style="position: absolute; top: 50%; left: 0; right: 0; height: 4px; background: #d4c4a8; border-radius: 2px; transform: translateY(-50%); z-index: 0;"></div>
+                        <div style="position: absolute; top: 50%; left: 0; width: 45%; height: 4px; background: linear-gradient(90deg, #8B6914, #D4A745); border-radius: 2px; transform: translateY(-50%); z-index: 1;"></div>
+                        <!-- Dots -->
+                        <div style="width: 28px; height: 28px; border-radius: 50%; background: #8B6914; border: 3px solid #D4A745; z-index: 2; display: flex; align-items: center; justify-content: center;">
+                            <div style="width: 10px; height: 10px; border-radius: 50%; background: #D4A745;"></div>
+                        </div>
+                        <div style="width: 28px; height: 28px; border-radius: 50%; background: #d4c4a8; border: 3px solid #c9a860; z-index: 2;"></div>
+                        <div style="width: 28px; height: 28px; border-radius: 50%; background: #d4c4a8; border: 3px solid #b8a070; z-index: 2;"></div>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-top: 0.75rem;">
+                        <span style="font-family: 'Cinzel', Georgia, serif; font-size: 0.75rem; font-weight: 700; color: #8B6914;">Phase 1</span>
+                        <span style="font-family: 'Cinzel', Georgia, serif; font-size: 0.75rem; font-weight: 700; color: #a89178;">Phase 2</span>
+                        <span style="font-family: 'Cinzel', Georgia, serif; font-size: 0.75rem; font-weight: 700; color: #a89178;">Phase 3</span>
+                    </div>
+                </div>
+
+                <!-- Phase Cards -->
+                <div style="display: flex; flex-direction: column; gap: 2rem;">
+
+                    <!-- Phase 1 — Active -->
+                    <div style="background: linear-gradient(135deg, #FFF8E7 0%, #FFEFC9 100%); border: 2px solid #D4A745; border-radius: 8px; padding: 2rem; position: relative; overflow: hidden;">
+                        <div style="position: absolute; top: 0; left: 0; width: 5px; height: 100%; background: linear-gradient(180deg, #8B6914, #D4A745);"></div>
+                        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.25rem; flex-wrap: wrap;">
+                            <span style="display: inline-block; background: #8B6914; color: #fff; font-family: 'Cinzel', Georgia, serif; font-size: 0.65rem; font-weight: 700; padding: 0.3rem 0.75rem; border-radius: 3px; letter-spacing: 0.1em;">PHASE 1 &bull; ACTIVE NOW</span>
+                        </div>
+                        <h4 style="font-family: 'Cinzel', Georgia, serif; font-size: 1.5rem; font-weight: 900; color: #3A2820; margin: 0 0 0.75rem 0;">Build the Story</h4>
+                        <p style="color: #5a4a3a; line-height: 1.8; margin: 0 0 1.25rem 0;">Own exclusive film frames, collectibles, and get early access to the world through cinema as you become a pioneer with the community.</p>
+                        <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                            <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                <span style="color: #8B6914; font-size: 1.1rem;">&#10003;</span>
+                                <span style="color: #5a4a3a; font-size: 0.9rem;">Extensive project &amp; story development</span>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                <span style="color: #8B6914; font-size: 1.1rem;">&#10003;</span>
+                                <span style="color: #5a4a3a; font-size: 0.9rem;">Global location and land scout</span>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                <span style="color: #8B6914; font-size: 1.1rem;">&#10003;</span>
+                                <span style="color: #5a4a3a; font-size: 0.9rem;">Genesis collection of books launched with Book.io</span>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                <span style="color: #8B6914; font-size: 1.1rem;">&#10003;</span>
+                                <span style="color: #5a4a3a; font-size: 0.9rem;">VisionPaper published</span>
+                            </div>
+                            <div class="roadmap-dropdown" onclick="this.classList.toggle('open')" style="cursor: pointer;">
+                                <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                    <span style="color: #8B6914; font-size: 1.1rem;">&#10003;</span>
+                                    <span style="color: #5a4a3a; font-size: 0.9rem; font-weight: 700;">Screenplays developed and greenlit</span>
+                                    <span class="roadmap-arrow" style="color: #c9a860; font-size: 0.7rem; transition: transform 0.3s;">&#9660;</span>
+                                </div>
+                                <div class="roadmap-details" style="padding-left: 2rem; display: none; flex-direction: column; gap: 0.3rem; margin-top: 0.4rem;">
+                                    <span style="color: #5a4a3a; font-size: 0.82rem;">— Full length feature screenplays <em>Part I: The Visionary</em> &amp; <em>Part II: Shadows of Sombrajo</em></span>
+                                    <span style="color: #5a4a3a; font-size: 0.82rem;">— Four short form screenplays for <em>Quartet of Death</em></span>
+                                </div>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                <span style="color: #8B6914; font-size: 1.1rem;">&#10003;</span>
+                                <span style="color: #5a4a3a; font-size: 0.9rem;">Built live streaming facilities in Desert and Spain</span>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                <span style="color: #8B6914; font-size: 1.1rem;">&#10003;</span>
+                                <span style="color: #5a4a3a; font-size: 0.9rem;">Community platform launched</span>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                <span style="color: #8B6914; font-size: 1.1rem;">&#10003;</span>
+                                <span style="color: #5a4a3a; font-size: 0.9rem;">PASO token live — begins circulation among founding pioneers</span>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                <span style="color: #8B6914; font-size: 1.1rem;">&#10003;</span>
+                                <span style="color: #5a4a3a; font-size: 0.9rem;">Land targets identified — voting opened</span>
+                            </div>
+                            <div class="roadmap-dropdown" onclick="this.classList.toggle('open')" style="cursor: pointer;">
+                                <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                    <span style="color: #D4A745; font-size: 1rem;">&#9679;</span>
+                                    <span style="color: #5a4a3a; font-size: 0.9rem; font-weight: 700;">16mm Short Form films — <em>Sombra del Lobo</em> &amp; <em>Three Graves</em> (Filming)</span>
+                                    <span class="roadmap-arrow" style="color: #c9a860; font-size: 0.7rem; transition: transform 0.3s;">&#9660;</span>
+                                </div>
+                                <div class="roadmap-details" style="padding-left: 2rem; display: none; flex-direction: column; gap: 0.3rem; margin-top: 0.4rem;">
+                                    <span style="color: #8B6914; font-size: 0.82rem;">&#10003; Development</span>
+                                    <span style="color: #8B6914; font-size: 0.82rem;">&#10003; Pre-Production</span>
+                                    <span style="color: #8B6914; font-size: 0.82rem;">&#10003; Filming (ongoing)</span>
+                                    <span style="color: #5a4a3a; font-size: 0.82rem;">&#9675; Post-Production</span>
+                                </div>
+                            </div>
+                            <div class="roadmap-dropdown" onclick="this.classList.toggle('open')" style="cursor: pointer;">
+                                <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                    <span style="color: #D4A745; font-size: 1rem;">&#9679;</span>
+                                    <span style="color: #5a4a3a; font-size: 0.9rem; font-weight: 700;">Full Length Motion Picture <em>The Visionary</em> (In Pre-Production)</span>
+                                    <span class="roadmap-arrow" style="color: #c9a860; font-size: 0.7rem; transition: transform 0.3s;">&#9660;</span>
+                                </div>
+                                <div class="roadmap-details" style="padding-left: 2rem; display: none; flex-direction: column; gap: 0.3rem; margin-top: 0.4rem;">
+                                    <span style="color: #8B6914; font-size: 0.82rem;">&#10003; Development — screenplay and scouts</span>
+                                    <span style="color: #8B6914; font-size: 0.82rem;">&#10003; Pre-Production — sets built, cast attached</span>
+                                    <span style="color: #5a4a3a; font-size: 0.82rem;">&#9675; Filming (80 days)</span>
+                                    <span style="color: #5a4a3a; font-size: 0.82rem;">&#9675; Post-Production</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Phase 2 — Coming -->
+                    <div style="background: linear-gradient(135deg, #F5EDE0 0%, #EDE4D4 100%); border: 2px solid #c9a860; border-radius: 8px; padding: 2rem; position: relative; overflow: hidden; opacity: 0.85;">
+                        <div style="position: absolute; top: 0; left: 0; width: 5px; height: 100%; background: #c9a860;"></div>
+                        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.25rem; flex-wrap: wrap;">
+                            <span style="display: inline-block; background: #a89178; color: #fff; font-family: 'Cinzel', Georgia, serif; font-size: 0.65rem; font-weight: 700; padding: 0.3rem 0.75rem; border-radius: 3px; letter-spacing: 0.1em;">PHASE 2 &bull; COMING</span>
+                        </div>
+                        <h4 style="font-family: 'Cinzel', Georgia, serif; font-size: 1.5rem; font-weight: 900; color: #3A2820; margin: 0 0 0.75rem 0;">Experience the Story</h4>
+                        <p style="color: #5a4a3a; line-height: 1.8; margin: 0 0 1.25rem 0;">Access screenings, attend roadshow premieres, be part of the story that reaches a global audience, and masterplan the towns.</p>
+                        <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                            <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                <span style="color: #a89178; font-size: 1rem;">&#9675;</span>
+                                <span style="color: #7a6a5a; font-size: 0.9rem;">Premiere festival releases of completed films</span>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                <span style="color: #a89178; font-size: 1rem;">&#9675;</span>
+                                <span style="color: #7a6a5a; font-size: 0.9rem;">Launch Motion Prints — exclusive 1-of-1 film frame collectibles</span>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                <span style="color: #a89178; font-size: 1rem;">&#9675;</span>
+                                <span style="color: #7a6a5a; font-size: 0.9rem;">Exclusive film premieres for holders in cities worldwide</span>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                <span style="color: #a89178; font-size: 1rem;">&#9675;</span>
+                                <span style="color: #7a6a5a; font-size: 0.9rem;">Offer exclusive streaming screening with El Paso Pass</span>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                <span style="color: #a89178; font-size: 1rem;">&#9675;</span>
+                                <span style="color: #7a6a5a; font-size: 0.9rem;">Grow community to 10–20K members</span>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                <span style="color: #a89178; font-size: 1rem;">&#9675;</span>
+                                <span style="color: #7a6a5a; font-size: 0.9rem;">Expand film slate with dual production teams</span>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                <span style="color: #a89178; font-size: 1rem;">&#9675;</span>
+                                <span style="color: #7a6a5a; font-size: 0.9rem;">Masterplan the towns</span>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                <span style="color: #a89178; font-size: 1rem;">&#9675;</span>
+                                <span style="color: #7a6a5a; font-size: 0.9rem;">Negotiate acquisition terms for leading land</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Phase 3 — Coming -->
+                    <div style="background: linear-gradient(135deg, #EDE4D4 0%, #E5DBC8 100%); border: 2px solid #b8a070; border-radius: 8px; padding: 2rem; position: relative; overflow: hidden; opacity: 0.75;">
+                        <div style="position: absolute; top: 0; left: 0; width: 5px; height: 100%; background: #b8a070;"></div>
+                        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.25rem; flex-wrap: wrap;">
+                            <span style="display: inline-block; background: #8a7a62; color: #fff; font-family: 'Cinzel', Georgia, serif; font-size: 0.65rem; font-weight: 700; padding: 0.3rem 0.75rem; border-radius: 3px; letter-spacing: 0.1em;">PHASE 3 &bull; COMING</span>
+                        </div>
+                        <h4 style="font-family: 'Cinzel', Georgia, serif; font-size: 1.5rem; font-weight: 900; color: #3A2820; margin: 0 0 0.75rem 0;">Live the Story</h4>
+                        <p style="color: #5a4a3a; line-height: 1.8; margin: 0 0 1.25rem 0;">Enter the land. Walk the towns, run your business, test your luck in the saloons, and live life in the 1880s West.</p>
+                        <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                            <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                <span style="color: #8a7a62; font-size: 1rem;">&#9675;</span>
+                                <span style="color: #7a6a5a; font-size: 0.9rem;">Secure main land target for El Paso Verse</span>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                <span style="color: #8a7a62; font-size: 1rem;">&#9675;</span>
+                                <span style="color: #7a6a5a; font-size: 0.9rem;">Construct the Hub — HQ for film productions, then visitor portal</span>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                <span style="color: #8a7a62; font-size: 1rem;">&#9675;</span>
+                                <span style="color: #7a6a5a; font-size: 0.9rem;">Build Level 1 &amp; Level 2 western towns</span>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                <span style="color: #8a7a62; font-size: 1rem;">&#9675;</span>
+                                <span style="color: #7a6a5a; font-size: 0.9rem;">Railway construction connecting Hub with towns</span>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                <span style="color: #8a7a62; font-size: 1rem;">&#9675;</span>
+                                <span style="color: #7a6a5a; font-size: 0.9rem;">Complete 10+ films within the cinematic universe</span>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                <span style="color: #8a7a62; font-size: 1rem;">&#9675;</span>
+                                <span style="color: #7a6a5a; font-size: 0.9rem;">Activate land-based PASO economy — purchases, leases, business operations</span>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                <span style="color: #8a7a62; font-size: 1rem;">&#9675;</span>
+                                <span style="color: #7a6a5a; font-size: 0.9rem;">Grow community to 1M+ members</span>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                <span style="color: #8a7a62; font-size: 1rem;">&#9675;</span>
+                                <span style="color: #7a6a5a; font-size: 0.9rem;">Open El Paso Verse land to the public</span>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                <span style="color: #8a7a62; font-size: 1rem;">&#9675;</span>
+                                <span style="color: #7a6a5a; font-size: 0.9rem;">Explore development of Lvl 3 villages</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
             </div>
 
             <!-- Governance Tab -->
