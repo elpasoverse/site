@@ -502,61 +502,27 @@
             event.preventDefault();
 
             const email = document.getElementById('emailInput').value;
-            const submitButton = document.querySelector('.email-bar-submit');
-            const originalButtonText = submitButton.textContent;
 
-            // Show loading state
-            submitButton.textContent = 'Submitting...';
-            submitButton.disabled = true;
+            // Mark as submitted
+            localStorage.setItem('emailSubmitted', 'true');
+            localStorage.setItem('userEmail', email);
 
-            try {
-                // GOOGLE FORMS INTEGRATION
-                const formURL = 'https://docs.google.com/forms/d/e/1FAIpQLSdgBN_4kKKwNxah9h2qJInXgYlGexgp12XYFphfvwqtID8sTg/formResponse';
-
-                // Create form data
-                const formData = new FormData();
-                formData.append('entry.1894748129', email);
-
-                // Submit to Google Forms
-                await fetch(formURL, {
-                    method: 'POST',
-                    mode: 'no-cors',
-                    body: formData
-                });
-
-                // Mark as submitted
-                localStorage.setItem('emailSubmitted', 'true');
-                localStorage.setItem('userEmail', email);
-
-                // Show success message briefly, then redirect to signup
-                const barContainer = document.querySelector('.email-bar-container');
-                barContainer.innerHTML = `
-                    <div style="display: flex; align-items: center; justify-content: center; gap: 1rem; padding: 0.5rem;">
-                        <div style="font-size: 2rem; color: #D4A745;">✓</div>
-                        <div>
-                            <strong style="color: #3A2820; font-size: 1.05rem;">Welcome, Pioneer!</strong>
-                            <p style="color: #8B4513; font-size: 0.9rem; margin: 0.25rem 0 0 0;">Creating your account to claim 25 PASO...</p>
-                        </div>
+            // Show success message briefly, then redirect to signup
+            const barContainer = document.querySelector('.email-bar-container');
+            barContainer.innerHTML = `
+                <div style="display: flex; align-items: center; justify-content: center; gap: 1rem; padding: 0.5rem;">
+                    <div style="font-size: 2rem; color: #D4A745;">&#10003;</div>
+                    <div>
+                        <strong style="color: #3A2820; font-size: 1.05rem;">Welcome, Pioneer!</strong>
+                        <p style="color: #8B4513; font-size: 0.9rem; margin: 0.25rem 0 0 0;">Creating your account to claim 25 PASO...</p>
                     </div>
-                `;
+                </div>
+            `;
 
-                console.log('Email successfully submitted:', email);
-
-                // Redirect to signup page with email pre-filled
-                setTimeout(() => {
-                    window.location.href = 'login.html?signup=true&email=' + encodeURIComponent(email);
-                }, 2000);
-
-            } catch (error) {
-                console.error('Error submitting email:', error);
-
-                // Show error message
-                alert('Oops! There was an issue submitting your email. Please try again or contact us directly.');
-
-                // Reset button
-                submitButton.textContent = originalButtonText;
-                submitButton.disabled = false;
-            }
+            // Redirect to signup page with email pre-filled
+            setTimeout(() => {
+                window.location.href = 'login.html?signup=true&email=' + encodeURIComponent(email);
+            }, 1500);
         }
 
         // Show bar 3 seconds after page load
@@ -600,8 +566,6 @@
             event.preventDefault();
 
             const email = document.getElementById('contactEmailInput').value;
-            const submitButton = document.querySelector('.contact-email-submit');
-            const originalButtonText = submitButton.textContent;
 
             // Check if already submitted
             const emailSubmitted = localStorage.getItem('emailSubmitted');
@@ -610,59 +574,27 @@
                 return;
             }
 
-            // Show loading state
-            submitButton.textContent = 'Submitting...';
-            submitButton.disabled = true;
+            // Mark as submitted
+            localStorage.setItem('emailSubmitted', 'true');
+            localStorage.setItem('userEmail', email);
 
-            try {
-                // GOOGLE FORMS INTEGRATION
-                const formURL = 'https://docs.google.com/forms/d/e/1FAIpQLSdgBN_4kKKwNxah9h2qJInXgYlGexgp12XYFphfvwqtID8sTg/formResponse';
+            // Show success message briefly, then redirect to signup
+            const signupBox = document.querySelector('.contact-signup-box');
+            signupBox.innerHTML = `
+                <img src="assets/paso-token.png" alt="PASO Coin" class="contact-coin" style="width: 100px; height: 100px;">
+                <h3 style="color: #2d8a2d; margin-bottom: 1rem;">Welcome, Pioneer!</h3>
+                <p style="font-size: 1.1rem; color: #3A2820; margin-bottom: 1rem;">
+                    <strong>Creating your account to claim 25 PASO...</strong>
+                </p>
+                <p style="color: #8B4513;">
+                    Redirecting you to complete signup...
+                </p>
+            `;
 
-                // Create form data
-                const formData = new FormData();
-                formData.append('entry.1894748129', email);
-
-                // Submit to Google Forms
-                await fetch(formURL, {
-                    method: 'POST',
-                    mode: 'no-cors',
-                    body: formData
-                });
-
-                // Mark as submitted
-                localStorage.setItem('emailSubmitted', 'true');
-                localStorage.setItem('userEmail', email);
-
-                // Show success message briefly, then redirect to signup
-                const signupBox = document.querySelector('.contact-signup-box');
-                signupBox.innerHTML = `
-                    <img src="assets/paso-token.png" alt="PASO Coin" class="contact-coin" style="width: 100px; height: 100px;">
-                    <h3 style="color: #2d8a2d; margin-bottom: 1rem;">Welcome, Pioneer!</h3>
-                    <p style="font-size: 1.1rem; color: #3A2820; margin-bottom: 1rem;">
-                        <strong>Creating your account to claim 25 PASO...</strong>
-                    </p>
-                    <p style="color: #8B4513;">
-                        Redirecting you to complete signup...
-                    </p>
-                `;
-
-                console.log('Email successfully submitted:', email);
-
-                // Redirect to signup page with email pre-filled
-                setTimeout(() => {
-                    window.location.href = 'login.html?signup=true&email=' + encodeURIComponent(email);
-                }, 2000);
-
-            } catch (error) {
-                console.error('Error submitting email:', error);
-
-                // Show error message
-                alert('Oops! There was an issue submitting your email. Please try again or contact us directly.');
-
-                // Reset button
-                submitButton.textContent = originalButtonText;
-                submitButton.disabled = false;
-            }
+            // Redirect to signup page with email pre-filled
+            setTimeout(() => {
+                window.location.href = 'login.html?signup=true&email=' + encodeURIComponent(email);
+            }, 1500);
         }
 
         // Four Pillars Toggle Functionality

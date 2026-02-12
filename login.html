@@ -762,19 +762,14 @@
             }
         });
 
-        // Check if already authenticated and redirect
+        // Check if already authenticated and redirect (allow unverified users through)
         waitForAuthState().then(authenticated => {
-            if (authenticated && auth.currentUser && auth.currentUser.emailVerified) {
+            if (authenticated && auth.currentUser) {
                 window.location.href = 'members.html';
             }
         });
 
-        // Check URL params for verification pending
         const urlParams = new URLSearchParams(window.location.search);
-        if (urlParams.get('verify') === 'pending') {
-            showError('Please verify your email before accessing the community. Check your inbox for the verification link.');
-            document.getElementById('resendVerification').classList.remove('hidden');
-        }
 
         // Check if redirected from email capture — auto-switch to Sign Up with email pre-filled
         if (urlParams.get('signup') === 'true') {
@@ -882,9 +877,14 @@
             const result = await signIn(email, password);
 
             if (result.success) {
-                // Grant signup bonus if not yet granted (only runs after email verification)
+                // Grant signup bonus for old unverified users who never got their 25 PASO
                 if (typeof grantSignupBonusIfEligible === 'function') {
-                    await grantSignupBonusIfEligible(auth.currentUser.uid);
+                    const bonusGranted = await grantSignupBonusIfEligible(auth.currentUser.uid);
+                    if (bonusGranted) {
+                        // Old user just got their bonus — show the grant modal
+                        showGrantModal(email);
+                        return;
+                    }
                 }
 
                 // Check if user has already claimed their grant
@@ -892,10 +892,8 @@
                     if (db && auth.currentUser) {
                         const userDoc = await db.collection('users').doc(auth.currentUser.uid).get();
                         if (userDoc.exists && userDoc.data().grantAccepted) {
-                            // Already claimed, go to members
                             window.location.href = 'members.html';
                         } else {
-                            // First time, show grant modal
                             showGrantModal(email);
                         }
                     } else {
@@ -908,9 +906,6 @@
             } else {
                 showError(result.error);
                 setButtonLoading(submitButton, false);
-                if (result.needsVerification) {
-                    document.getElementById('resendVerification').classList.remove('hidden');
-                }
             }
         });
 
@@ -946,14 +941,22 @@
             const result = await signUp(email, password);
 
             if (result.success) {
-                if (result.needsVerification) {
-                    showSuccess('Account created! Please check your email and click the verification link to continue.');
-                    setButtonLoading(submitButton, false);
-                    // Show resend option
-                    document.getElementById('resendVerification').classList.remove('hidden');
-                } else {
-                    // Show PASO grant modal for new signups
+                if (result.isNewUser) {
+                    // Record waiver acceptance for new signups
+                    try {
+                        if (auth.currentUser && db) {
+                            await db.collection('users').doc(auth.currentUser.uid).update({
+                                waiverAccepted: true,
+                                waiverAcceptedAt: firebase.firestore.FieldValue.serverTimestamp()
+                            });
+                        }
+                    } catch (e) {
+                        console.log('Could not record waiver acceptance:', e);
+                    }
+                    // Show PASO grant modal immediately
                     showGrantModal(email);
+                } else {
+                    window.location.href = 'members.html';
                 }
             } else {
                 showError(result.error);

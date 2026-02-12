@@ -80,6 +80,14 @@
         </div>
     </header>
 
+    <!-- Email Verification Banner -->
+    <div id="verifyEmailBanner" style="display: none; background: linear-gradient(135deg, #8B4513, #6d3610); color: #F5E6D3; padding: 0.75rem 1.5rem; text-align: center; font-size: 0.9rem; position: relative; z-index: 50;">
+        <span>Verify your email to unlock all features.</span>
+        <button id="resendVerifyBtn" style="background: #C9A961; color: #3A2820; border: none; padding: 0.35rem 0.75rem; margin-left: 0.75rem; font-size: 0.8rem; font-weight: 600; cursor: pointer; text-transform: uppercase; letter-spacing: 0.05em;">Resend</button>
+        <button id="dismissVerifyBtn" style="background: transparent; color: #F5E6D3; border: 1px solid rgba(245,230,211,0.4); padding: 0.35rem 0.75rem; margin-left: 0.5rem; font-size: 0.8rem; cursor: pointer; text-transform: uppercase; letter-spacing: 0.05em;">Dismiss</button>
+        <span id="verifyBannerMsg" style="margin-left: 0.75rem; font-size: 0.8rem; display: none;"></span>
+    </div>
+
     <!-- Main Container -->
     <div class="members-container">
         <!-- Welcome Section -->
@@ -1426,6 +1434,33 @@
     <script src="wallet-connect.js"></script>
     <script src="community.js"></script>
     <script>
+        // Email verification banner logic
+        window.addEventListener('emailNotVerified', function() {
+            if (localStorage.getItem('verifyBannerDismissed')) return;
+            document.getElementById('verifyEmailBanner').style.display = 'block';
+        });
+
+        document.getElementById('resendVerifyBtn').addEventListener('click', async function() {
+            const msgEl = document.getElementById('verifyBannerMsg');
+            if (typeof resendVerificationEmail === 'function') {
+                const result = await resendVerificationEmail();
+                msgEl.style.display = 'inline';
+                if (result.success) {
+                    msgEl.textContent = 'Verification email sent!';
+                    msgEl.style.color = '#90EE90';
+                } else {
+                    msgEl.textContent = result.error || 'Could not send email.';
+                    msgEl.style.color = '#FFB4B4';
+                }
+                setTimeout(() => { msgEl.style.display = 'none'; }, 4000);
+            }
+        });
+
+        document.getElementById('dismissVerifyBtn').addEventListener('click', function() {
+            document.getElementById('verifyEmailBanner').style.display = 'none';
+            localStorage.setItem('verifyBannerDismissed', 'true');
+        });
+
         // Initialize the page
         document.addEventListener('DOMContentLoaded', async function() {
             // Wait for auth state and display username

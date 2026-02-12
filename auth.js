@@ -43,7 +43,7 @@ async function signUp(email, password) {
             window.SheetLogger.logUserSignup(currentUser.uid, email, email.split('@')[0], 'email', 25);
         }
 
-        return { success: true, needsVerification: true };
+        return { success: true, needsVerification: false, isNewUser: true };
     } catch (error) {
         let errorMessage = 'An error occurred during sign up.';
 
@@ -81,15 +81,11 @@ async function signIn(email, password) {
         const userCredential = await auth.signInWithEmailAndPassword(email, password);
         currentUser = userCredential.user;
 
-        // Check if email is verified
-        if (!currentUser.emailVerified) {
-            return { success: false, needsVerification: true, error: 'Please verify your email before signing in. Check your inbox for the verification link.' };
-        }
-
         // Store user ID for legacy compatibility
         localStorage.setItem(USER_ID_KEY, currentUser.uid);
 
-        return { success: true };
+        // Return needsVerification flag (don't block sign-in)
+        return { success: true, needsVerification: !currentUser.emailVerified };
     } catch (error) {
         let errorMessage = 'An error occurred during sign in.';
 
@@ -284,12 +280,11 @@ async function requireAuth() {
         return;
     }
 
-    // Check email verification (skip for Google sign-in users as they're already verified)
+    // Check email verification — dispatch event for banner instead of blocking
     if (currentUser && !currentUser.emailVerified) {
-        // Check if user signed in with Google (provider data)
         const isGoogleUser = currentUser.providerData.some(p => p.providerId === 'google.com');
         if (!isGoogleUser) {
-            window.location.href = 'login.html?verify=pending';
+            window.dispatchEvent(new CustomEvent('emailNotVerified'));
         }
     }
 }
