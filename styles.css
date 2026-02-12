@@ -643,7 +643,7 @@ p {
     background-color: #1a1a1a;
     background-image: url('assets/film-crew-silhouette.png');
     background-size: cover;
-    background-position: center;
+    background-position: left center;
     background-repeat: no-repeat;
     padding: 4rem 0 5rem 0;
     position: relative;
