@@ -182,98 +182,105 @@
                     </div>
                 </div>
 
-                <!-- El Paso Pass Status -->
-                <div style="background: linear-gradient(135deg, #1a1a1a 0%, #2d2416 100%); border: 2px solid #c9a860; padding: 1.5rem; margin-bottom: 2rem; border-radius: 8px;">
-                    <div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;">
+                <!-- Pass, Badges & Collectibles — single collapsible card -->
+                <details style="background: linear-gradient(135deg, #1a1a1a 0%, #2d2416 100%); border: 2px solid #c9a860; padding: 1.5rem; border-radius: 8px;">
+                    <summary style="cursor: pointer; outline: none; user-select: none; display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;">
                         <span style="font-size: 2rem;">🎟️</span>
                         <div style="flex: 1; min-width: 200px;">
                             <h4 style="font-family: 'Cinzel', Georgia, serif; font-size: 1.3rem; font-weight: 700; color: #f9f3e3; margin: 0;">El Paso Pass</h4>
-                            <p style="color: #a89178; font-size: 0.85rem; margin: 0.25rem 0 0 0;">Early film access, streaming, screenings & events</p>
+                            <p style="color: #a89178; font-size: 0.85rem; margin: 0.25rem 0 0 0;">Pass status, badges & collectibles</p>
                         </div>
                         <div id="elPasoPassStatus">
                             <div style="background: rgba(0,0,0,0.4); border-left: 3px solid #8a2d2d; padding: 0.75rem 1rem; border-radius: 4px;">
                                 <span style="color: #ff9090; font-weight: 600; font-size: 0.85rem;">Inactive</span>
-                                <span style="color: #d4c4a8; font-size: 0.85rem;"> · Hold 1,000 PASO or own a Genesis frame to activate</span>
                             </div>
                         </div>
-                    </div>
-                </div>
-
-                <!-- Badge System (Collapsible) -->
-                <details style="background: #2c1810; border: 1px solid #c9a860; padding: 1rem 1.5rem; margin-bottom: 2rem; border-radius: 8px;">
-                    <summary style="cursor: pointer; color: #f9f3e3; font-size: 0.9rem; outline: none; user-select: none; display: flex; align-items: center; gap: 0.75rem;">
-                        <span style="font-size: 1.25rem;">🏅</span>
-                        <span>Badges & Recognition</span>
-                        <span style="color: #c9a860; font-size: 0.8rem; margin-left: auto;">0 of 3 unlocked</span>
                     </summary>
-                    <div id="userBadges" style="display: flex; gap: 1rem; margin-top: 1.25rem; padding-top: 1rem; border-top: 1px solid rgba(201, 168, 97, 0.2); flex-wrap: wrap;">
-                        <div style="background: rgba(44, 24, 16, 0.8); border: 2px solid #5a5a5a; padding: 1.25rem; border-radius: 6px; flex: 1; min-width: 200px;">
-                            <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem;">
-                                <span style="font-size: 1.75rem; filter: grayscale(100%);">🎬</span>
-                                <div>
-                                    <div style="color: #d4c4a8; font-weight: 700; font-size: 1rem;">Exclusive Screener</div>
-                                    <div style="color: #888; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em;">Locked</div>
+
+                    <div style="margin-top: 1.5rem; padding-top: 1.25rem; border-top: 1px solid rgba(201, 168, 97, 0.25);">
+
+                        <!-- Pass Details -->
+                        <div style="margin-bottom: 1.5rem;">
+                            <p style="color: #d4c4a8; font-size: 0.9rem; line-height: 1.5; margin: 0;">Early film access, streaming, screenings & events. Hold 1,000 PASO or own a Genesis frame to activate.</p>
+                        </div>
+
+                        <!-- Badges -->
+                        <div style="margin-bottom: 1.5rem;">
+                            <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
+                                <span style="font-size: 1.25rem;">🏅</span>
+                                <span style="color: #f9f3e3; font-size: 0.95rem; font-weight: 600;">Badges & Recognition</span>
+                                <span style="color: #c9a860; font-size: 0.8rem; margin-left: auto;">0 of 3 unlocked</span>
+                            </div>
+                            <div id="userBadges" style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                                <div style="background: rgba(44, 24, 16, 0.8); border: 2px solid #5a5a5a; padding: 1.25rem; border-radius: 6px; flex: 1; min-width: 200px;">
+                                    <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem;">
+                                        <span style="font-size: 1.75rem; filter: grayscale(100%);">🎬</span>
+                                        <div>
+                                            <div style="color: #d4c4a8; font-weight: 700; font-size: 1rem;">Exclusive Screener</div>
+                                            <div style="color: #888; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em;">Locked</div>
+                                        </div>
+                                    </div>
+                                    <div style="color: #a89178; font-size: 0.85rem; line-height: 1.4;">Requires Motion Prints and PASO balance</div>
+                                </div>
+                                <div style="background: rgba(44, 24, 16, 0.8); border: 2px solid #5a5a5a; padding: 1.25rem; border-radius: 6px; flex: 1; min-width: 200px;">
+                                    <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem;">
+                                        <span style="font-size: 1.75rem; filter: grayscale(100%);">⭐</span>
+                                        <div>
+                                            <div style="color: #d4c4a8; font-weight: 700; font-size: 1rem;">Genesis Ranger</div>
+                                            <div style="color: #888; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em;">Locked</div>
+                                        </div>
+                                    </div>
+                                    <div style="color: #a89178; font-size: 0.85rem; line-height: 1.4;">Requires full Genesis + Motion Print collections and PASO balance</div>
+                                </div>
+                                <div style="background: rgba(44, 24, 16, 0.8); border: 2px solid #5a5a5a; padding: 1.25rem; border-radius: 6px; flex: 1; min-width: 200px;">
+                                    <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem;">
+                                        <span style="font-size: 1.75rem; filter: grayscale(100%);">🎞️</span>
+                                        <div>
+                                            <div style="color: #d4c4a8; font-weight: 700; font-size: 1rem;">Director's Cut</div>
+                                            <div style="color: #888; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em;">Locked</div>
+                                        </div>
+                                    </div>
+                                    <div style="color: #a89178; font-size: 0.85rem; line-height: 1.4;">Requires physical Director's Cut reel ownership</div>
                                 </div>
                             </div>
-                            <div style="color: #a89178; font-size: 0.85rem; line-height: 1.4;">Requires Motion Prints and PASO balance</div>
                         </div>
-                        <div style="background: rgba(44, 24, 16, 0.8); border: 2px solid #5a5a5a; padding: 1.25rem; border-radius: 6px; flex: 1; min-width: 200px;">
-                            <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem;">
-                                <span style="font-size: 1.75rem; filter: grayscale(100%);">⭐</span>
-                                <div>
-                                    <div style="color: #d4c4a8; font-weight: 700; font-size: 1rem;">Genesis Ranger</div>
-                                    <div style="color: #888; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em;">Locked</div>
-                                </div>
+
+                        <!-- Collectors -->
+                        <div style="padding-top: 1.25rem; border-top: 1px solid rgba(201, 168, 97, 0.15);">
+                            <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
+                                <span style="font-size: 1.25rem;">🖼️</span>
+                                <span style="color: #f9f3e3; font-size: 0.95rem; font-weight: 600;">Collectibles & Wallet</span>
                             </div>
-                            <div style="color: #a89178; font-size: 0.85rem; line-height: 1.4;">Requires full Genesis + Motion Print collections and PASO balance</div>
-                        </div>
-                        <div style="background: rgba(44, 24, 16, 0.8); border: 2px solid #5a5a5a; padding: 1.25rem; border-radius: 6px; flex: 1; min-width: 200px;">
-                            <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem;">
-                                <span style="font-size: 1.75rem; filter: grayscale(100%);">🎞️</span>
-                                <div>
-                                    <div style="color: #d4c4a8; font-weight: 700; font-size: 1rem;">Director's Cut</div>
-                                    <div style="color: #888; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em;">Locked</div>
-                                </div>
+                            <p style="color: #f0e6d3; font-size: 0.95rem; margin-bottom: 1.25rem; line-height: 1.5;">
+                                Own Genesis Collection film frames? Verify ownership to unlock badges, exclusive content, and streaming access.
+                            </p>
+
+                            <div id="walletInfo" style="display: none;"></div>
+                            <div id="nftStatus"></div>
+
+                            <button id="verifyCollectiblesBtn" onclick="showWalletSelector()" style="background: #c9a860; border: none; color: #1a1a1a; padding: 0.75rem 1.5rem; font-weight: 700; border-radius: 4px; cursor: pointer; transition: all 0.3s ease; font-size: 0.9rem;">
+                                Verify Collectibles
+                            </button>
+
+                            <p style="color: #d4c4a8; font-size: 0.85rem; margin-top: 1rem;">
+                                Don't have any? <a href="https://book.io/series/el-paso-verse/" target="_blank" style="color: #c9a860; text-decoration: underline;">Browse the Genesis Collection on Book.io</a>
+                            </p>
+
+                            <div style="margin-top: 1.5rem; padding-top: 1.25rem; border-top: 1px solid rgba(201, 168, 97, 0.25);">
+                                <details style="cursor: pointer;">
+                                    <summary style="color: #c9b896; font-size: 0.9rem; outline: none; user-select: none;">Advanced: Withdraw PASO to external wallet</summary>
+                                    <div style="margin-top: 1rem; padding: 1rem; background: rgba(0,0,0,0.3); border-radius: 4px;">
+                                        <p style="color: #f0e6d3; font-size: 0.9rem; margin-bottom: 1rem; line-height: 1.5;">
+                                            For Cardano wallet users: transfer your PASO to an on-chain wallet for use within the El Paso Verse ecosystem. <span style="color: #c9a860;">Requires admin review.</span>
+                                        </p>
+                                        <button onclick="showWithdrawModal()" style="background: transparent; border: 1px solid #c9a860; color: #c9a860; padding: 0.5rem 1rem; font-size: 0.85rem; cursor: pointer; border-radius: 4px; transition: all 0.3s;">
+                                            Withdraw to Wallet
+                                        </button>
+                                    </div>
+                                </details>
                             </div>
-                            <div style="color: #a89178; font-size: 0.85rem; line-height: 1.4;">Requires physical Director's Cut reel ownership</div>
                         </div>
-                    </div>
-                </details>
 
-                <!-- Collectors Section (Subtle) -->
-                <details style="background: #2c1810; border: 1px solid #c9a860; padding: 1rem 1.5rem; border-radius: 8px;">
-                    <summary style="cursor: pointer; color: #f9f3e3; font-size: 0.9rem; outline: none; user-select: none;">
-                        For Collectors: Verify film frames & manage wallet
-                    </summary>
-                    <div style="margin-top: 1.25rem; padding-top: 1.25rem; border-top: 1px solid rgba(201, 168, 97, 0.25);">
-                        <p style="color: #f0e6d3; font-size: 0.95rem; margin-bottom: 1.25rem; line-height: 1.5;">
-                            Own Genesis Collection film frames? Verify ownership to unlock badges, exclusive content, and streaming access.
-                        </p>
-
-                        <div id="walletInfo" style="display: none;"></div>
-                        <div id="nftStatus"></div>
-
-                        <button id="verifyCollectiblesBtn" onclick="showWalletSelector()" style="background: #c9a860; border: none; color: #1a1a1a; padding: 0.75rem 1.5rem; font-weight: 700; border-radius: 4px; cursor: pointer; transition: all 0.3s ease; font-size: 0.9rem;">
-                            Verify Collectibles
-                        </button>
-
-                        <p style="color: #d4c4a8; font-size: 0.85rem; margin-top: 1rem;">
-                            Don't have any? <a href="https://book.io/series/el-paso-verse/" target="_blank" style="color: #c9a860; text-decoration: underline;">Browse the Genesis Collection on Book.io</a>
-                        </p>
-
-                        <div style="margin-top: 1.5rem; padding-top: 1.25rem; border-top: 1px solid rgba(201, 168, 97, 0.25);">
-                            <details style="cursor: pointer;">
-                                <summary style="color: #c9b896; font-size: 0.9rem; outline: none; user-select: none;">Advanced: Withdraw PASO to external wallet</summary>
-                                <div style="margin-top: 1rem; padding: 1rem; background: rgba(0,0,0,0.3); border-radius: 4px;">
-                                    <p style="color: #f0e6d3; font-size: 0.9rem; margin-bottom: 1rem; line-height: 1.5;">
-                                        For Cardano wallet users: transfer your PASO to an on-chain wallet for use within the El Paso Verse ecosystem. <span style="color: #c9a860;">Requires admin review.</span>
-                                    </p>
-                                    <button onclick="showWithdrawModal()" style="background: transparent; border: 1px solid #c9a860; color: #c9a860; padding: 0.5rem 1rem; font-size: 0.85rem; cursor: pointer; border-radius: 4px; transition: all 0.3s;">
-                                        Withdraw to Wallet
-                                    </button>
-                                </div>
-                            </details>
-                        </div>
                     </div>
                 </details>
             </div>
@@ -1524,9 +1531,8 @@
             if (hasNFT) {
                 // Genesis Collection holder gets automatic El Paso Pass
                 elPasoPassStatus.innerHTML = `
-                    <div style="background: rgba(45, 138, 45, 0.2); border-left: 3px solid #2d8a2d; padding: 1rem; border-radius: 4px;">
-                        <div style="color: #90ee90; font-weight: 700; margin-bottom: 0.5rem;">✓ El Paso Pass Active</div>
-                        <div style="color: #d0f0d0; font-size: 0.9rem;">Your Genesis Collection grants you automatic El Paso Pass access with all benefits!</div>
+                    <div style="background: rgba(45, 138, 45, 0.2); border-left: 3px solid #2d8a2d; padding: 0.75rem 1rem; border-radius: 4px;">
+                        <span style="color: #90ee90; font-weight: 600; font-size: 0.85rem;">Active</span>
                     </div>
                 `;
 
@@ -1535,17 +1541,15 @@
             } else if (balance >= 1000) {
                 // Sufficient PASO balance for Pass (TBD threshold)
                 elPasoPassStatus.innerHTML = `
-                    <div style="background: rgba(45, 138, 45, 0.2); border-left: 3px solid #2d8a2d; padding: 1rem; border-radius: 4px;">
-                        <div style="color: #90ee90; font-weight: 700; margin-bottom: 0.5rem;">✓ El Paso Pass Active</div>
-                        <div style="color: #d0f0d0; font-size: 0.9rem;">Your PASO holdings qualify you for El Paso Pass access!</div>
+                    <div style="background: rgba(45, 138, 45, 0.2); border-left: 3px solid #2d8a2d; padding: 0.75rem 1rem; border-radius: 4px;">
+                        <span style="color: #90ee90; font-weight: 600; font-size: 0.85rem;">Active</span>
                     </div>
                 `;
             } else {
                 // No pass access
                 elPasoPassStatus.innerHTML = `
-                    <div style="background: rgba(0,0,0,0.4); border-left: 3px solid #8a2d2d; padding: 1rem; border-radius: 4px;">
-                        <div style="color: #ff9090; font-weight: 700; margin-bottom: 0.5rem;">⚠ Pass Inactive</div>
-                        <div style="color: #d4c4a8; font-size: 0.9rem;">Connect your wallet or acquire PASO to activate your El Paso Pass</div>
+                    <div style="background: rgba(0,0,0,0.4); border-left: 3px solid #8a2d2d; padding: 0.75rem 1rem; border-radius: 4px;">
+                        <span style="color: #ff9090; font-weight: 600; font-size: 0.85rem;">Inactive</span>
                     </div>
                 `;
             }
