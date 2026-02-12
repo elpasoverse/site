@@ -1,0 +1,1013 @@
+/* ===================================
+   El Paso Verse - Land Target Pages
+   Matches members.css design system
+   =================================== */
+
+/* Body - Members-style parchment texture */
+.land-body {
+    background-color: #f4ead5;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    font-family: Georgia, 'Times New Roman', serif;
+    background-image:
+        repeating-linear-gradient(0deg, transparent, transparent 1px, rgba(139, 69, 19, 0.015) 1px, rgba(139, 69, 19, 0.015) 2px),
+        repeating-linear-gradient(90deg, transparent, transparent 1px, rgba(139, 69, 19, 0.015) 1px, rgba(139, 69, 19, 0.015) 2px),
+        radial-gradient(circle at 20% 50%, rgba(139, 69, 19, 0.02) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(139, 69, 19, 0.02) 0%, transparent 50%);
+    color: #1a1a1a;
+    line-height: 1.8;
+    font-size: 18px;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+.land-body * {
+    box-sizing: border-box;
+}
+
+.land-body h1,
+.land-body h2,
+.land-body h3,
+.land-body h4,
+.land-body h5,
+.land-body h6 {
+    font-family: 'Cinzel', Georgia, serif;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    margin: 0;
+}
+
+/* Header - matches members-header */
+.land-header {
+    background: linear-gradient(135deg, #3A2820 0%, #2a1c16 100%);
+    color: #F5E6D3;
+    padding: 1rem 0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    border-bottom: 3px solid #C9A961;
+}
+
+.land-header-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.land-header-title {
+    font-family: 'Cinzel', Georgia, serif;
+    font-size: 1.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #C9A961;
+    text-decoration: none;
+}
+
+.land-header-title:hover {
+    color: #D4A745;
+}
+
+.land-header-back {
+    color: #C9A961;
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: color 0.3s ease;
+}
+
+.land-header-back:hover {
+    color: #F5E6D3;
+}
+
+/* Hero Banner */
+.land-hero {
+    position: relative;
+    width: 100%;
+    min-height: 550px;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: flex-end;
+}
+
+.land-hero-bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    transition: opacity 1.2s ease-in-out;
+    z-index: 0;
+}
+
+.land-hero-bg.fade-out {
+    opacity: 0;
+}
+
+.land-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.45) 40%, rgba(0,0,0,0.82) 100%);
+    z-index: 1;
+}
+
+.land-hero-content {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    padding: 0 clamp(2rem, 8vw, 10rem) 3rem;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.land-hero-content.collapsed .land-hero-location,
+.land-hero-content.collapsed .land-hero-tagline {
+    opacity: 0;
+    max-height: 0;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    transition: opacity 0.3s ease, max-height 0.4s ease, margin 0.4s ease;
+}
+
+.land-hero-content .land-hero-location,
+.land-hero-content .land-hero-tagline {
+    transition: opacity 0.4s ease 0.1s, max-height 0.4s ease, margin 0.4s ease;
+    max-height: 200px;
+    overflow: hidden;
+}
+
+/* Hero Badge - Top Right Corner */
+.land-hero-badge-corner {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    z-index: 3;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+}
+
+/* Hero Navigation Arrows */
+.land-hero-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 3;
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(201, 169, 97, 0.4);
+    color: #C9A961;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    font-size: 1.4rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(4px);
+    padding: 0;
+    line-height: 1;
+}
+
+.land-hero-nav:hover {
+    background: rgba(0, 0, 0, 0.6);
+    border-color: #C9A961;
+    color: #F5E6D3;
+}
+
+.land-hero-prev {
+    left: 1.5rem;
+}
+
+.land-hero-next {
+    right: 1.5rem;
+}
+
+/* Hero Controls (pause / fullscreen) */
+.land-hero-controls {
+    position: absolute;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    z-index: 3;
+    display: flex;
+    gap: 0.5rem;
+}
+
+.land-hero-ctrl {
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(201, 169, 97, 0.4);
+    color: #C9A961;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(4px);
+    padding: 0;
+    line-height: 1;
+}
+
+.land-hero-ctrl:hover {
+    background: rgba(0, 0, 0, 0.6);
+    border-color: #C9A961;
+    color: #F5E6D3;
+}
+
+/* Fullscreen gallery overlay */
+.land-lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: rgba(0, 0, 0, 0.95);
+    align-items: center;
+    justify-content: center;
+}
+
+.land-lightbox.open {
+    display: flex;
+}
+
+.land-lightbox img {
+    max-width: 92vw;
+    max-height: 88vh;
+    object-fit: contain;
+    border-radius: 4px;
+}
+
+.land-lightbox-close {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    background: none;
+    border: none;
+    color: #F5E6D3;
+    font-size: 2rem;
+    cursor: pointer;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.3s;
+}
+
+.land-lightbox-close:hover {
+    color: #C9A961;
+}
+
+.land-lightbox-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(201, 169, 97, 0.4);
+    color: #C9A961;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    font-size: 1.6rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    padding: 0;
+    line-height: 1;
+}
+
+.land-lightbox-nav:hover {
+    background: rgba(0, 0, 0, 0.7);
+    border-color: #C9A961;
+    color: #F5E6D3;
+}
+
+.land-lightbox-prev {
+    left: 1.5rem;
+}
+
+.land-lightbox-next {
+    right: 1.5rem;
+}
+
+.land-lightbox-counter {
+    position: absolute;
+    bottom: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #a89a8a;
+    font-size: 0.9rem;
+    letter-spacing: 0.1em;
+}
+
+.land-hero-badge {
+    display: inline-block;
+    border: 1px solid #C9A961;
+    color: #C9A961;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    padding: 0.35rem 1.2rem;
+    margin-bottom: 1.25rem;
+}
+
+.land-hero-title {
+    font-size: clamp(2.5rem, 5vw, 3.8rem);
+    color: #F5E6D3;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    line-height: 1.1;
+    margin-bottom: 0.5rem;
+}
+
+.land-hero-location {
+    color: #C9A961;
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    margin-bottom: 1rem;
+}
+
+.land-hero-tagline {
+    color: rgba(245, 230, 211, 0.85);
+    font-size: 1.1rem;
+    font-style: italic;
+    line-height: 1.6;
+    max-width: 620px;
+}
+
+/* Stats Bar - members style (parchment + brown border) */
+.land-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    max-width: 1000px;
+    margin: 2rem auto;
+    padding: 0 2rem;
+}
+
+.land-stats.cols-3 {
+    grid-template-columns: repeat(3, 1fr);
+    max-width: 800px;
+}
+
+.land-stat {
+    text-align: center;
+    padding: 1.75rem 1rem;
+    background: linear-gradient(135deg, #F5E6D3 0%, #EDD9C0 100%);
+    border: 2px solid #8B4513;
+    margin-left: -2px;
+}
+
+.land-stat:first-child {
+    margin-left: 0;
+    border-radius: 4px 0 0 4px;
+}
+
+.land-stat:last-child {
+    border-radius: 0 4px 4px 0;
+}
+
+.land-stat-value {
+    display: block;
+    font-family: 'Cinzel', Georgia, serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #3A2820;
+    margin-bottom: 0.25rem;
+}
+
+.land-stat-label {
+    display: block;
+    font-size: 0.78rem;
+    color: #8B4513;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+/* Content Container */
+.land-content {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 3rem 2rem;
+}
+
+/* Section */
+.land-section {
+    margin-bottom: 3.5rem;
+}
+
+.land-section-title {
+    font-size: 1.8rem;
+    color: #3A2820;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 0.5rem;
+    text-align: center;
+}
+
+/* Ornament Divider - matches members ornament-divider */
+.land-ornament {
+    width: 150px;
+    height: 2px;
+    background: linear-gradient(to right, transparent, #C9A961, transparent);
+    margin: 1rem auto 2rem;
+    position: relative;
+}
+
+.land-ornament::after {
+    content: '\2605';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    color: #C9A961;
+    background-color: #f4ead5;
+    padding: 0 0.75rem;
+    font-size: 1.2rem;
+}
+
+.dark-band .land-ornament::after {
+    background: linear-gradient(180deg, #1a1410, #1a1410);
+}
+
+/* Section Text */
+.land-text {
+    font-size: 1.05rem;
+    line-height: 1.9;
+    color: #3A2820;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.land-text p {
+    margin-bottom: 1.5rem;
+    text-align: left;
+}
+
+/* Feature Cards Grid */
+.land-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+.land-card {
+    background: linear-gradient(135deg, #F5E6D3 0%, #EDD9C0 100%);
+    border: 2px solid #8B4513;
+    border-radius: 4px;
+    padding: 1.75rem;
+    transition: all 0.3s ease;
+}
+
+.land-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 16px rgba(58, 40, 32, 0.15);
+    border-color: #C9A961;
+}
+
+.land-card h4 {
+    font-size: 1.05rem;
+    color: #3A2820;
+    margin-bottom: 0.6rem;
+}
+
+.land-card p {
+    font-size: 0.9rem;
+    color: #5a4a3a;
+    line-height: 1.7;
+    margin: 0;
+    text-align: left;
+}
+
+/* Note Callout */
+.land-note {
+    margin-top: 2rem;
+    padding: 1.5rem 1.75rem;
+    background: linear-gradient(135deg, rgba(201, 169, 97, 0.15) 0%, rgba(201, 169, 97, 0.05) 100%);
+    border-left: 4px solid #C9A961;
+    border-radius: 0 4px 4px 0;
+}
+
+.land-note p {
+    font-size: 0.95rem;
+    color: #3A2820;
+    line-height: 1.7;
+    margin: 0;
+    text-align: left;
+}
+
+.land-note.caution {
+    background: rgba(224, 120, 80, 0.06);
+    border-left-color: #E07850;
+}
+
+/* Vote Panel */
+.land-vote-panel {
+    text-align: center;
+    padding: 3rem 2rem;
+    background: linear-gradient(135deg, #2c1810, #4a2511);
+    border: 1px solid rgba(201, 169, 97, 0.3);
+    position: relative;
+    margin-top: 2rem;
+    border-radius: 4px;
+}
+
+.land-vote-panel::before,
+.land-vote-panel::after {
+    content: '';
+    position: absolute;
+    width: 18px;
+    height: 18px;
+}
+
+.land-vote-panel::before {
+    top: -1px;
+    left: -1px;
+    border-top: 2px solid rgba(201, 169, 97, 0.5);
+    border-left: 2px solid rgba(201, 169, 97, 0.5);
+}
+
+.land-vote-panel::after {
+    bottom: -1px;
+    right: -1px;
+    border-bottom: 2px solid rgba(201, 169, 97, 0.5);
+    border-right: 2px solid rgba(201, 169, 97, 0.5);
+}
+
+.land-vote-panel h4 {
+    font-size: 2rem;
+    color: #F5E6D3;
+    margin-bottom: 0.75rem;
+    font-weight: 400;
+}
+
+.land-vote-panel p {
+    color: #a89a8a;
+    margin-bottom: 1.5rem;
+    font-size: 1rem;
+    font-style: italic;
+    line-height: 1.7;
+    text-align: center;
+}
+
+.land-vote-count {
+    display: block;
+    font-family: 'Cinzel', Georgia, serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #C9A961;
+    margin-bottom: 1.5rem;
+}
+
+.land-vote-btn {
+    display: inline-block;
+    padding: 0.9rem 3rem;
+    background: linear-gradient(135deg, #C9A961 0%, #D4A745 100%);
+    color: #1a1a1a;
+    border: none;
+    border-radius: 4px;
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-family: Georgia, 'Times New Roman', serif;
+    transition: all 0.3s ease;
+}
+
+.land-vote-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(201, 169, 97, 0.4);
+}
+
+.land-vote-btn:disabled {
+    cursor: default;
+    transform: none;
+    box-shadow: none;
+}
+
+.land-vote-btn.voted {
+    background: linear-gradient(135deg, #2d8a2d 0%, #3a9a3a 100%);
+    color: #FFFFFF;
+}
+
+.land-vote-btn.needs-login {
+    background: transparent;
+    color: #C9A961;
+    border: 2px solid #C9A961;
+}
+
+.land-vote-btn.needs-login:hover {
+    background-color: #C9A961;
+    color: #3A2820;
+}
+
+.land-vote-status {
+    display: block;
+    margin-top: 1rem;
+    font-size: 0.85rem;
+    color: #a89a8a;
+}
+
+.land-vote-status a {
+    color: #C9A961;
+    text-decoration: none;
+}
+
+.land-vote-status a:hover {
+    color: #D4A745;
+    text-decoration: underline;
+}
+
+/* Dark Band (Video + Acquisition) */
+.dark-band {
+    background: linear-gradient(180deg, #1a1410 0%, #0f0c09 100%);
+    padding: 4rem 0;
+    margin: 1rem 0;
+}
+
+.dark-band-inner {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.dark-band .land-section-title {
+    color: #F5E6D3;
+}
+
+/* Video Embed */
+.land-video {
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+    padding-bottom: min(56.25%, 450px);
+    border-radius: 4px;
+    overflow: hidden;
+    border: 2px solid rgba(201, 169, 97, 0.3);
+    background: #000;
+}
+
+.land-video iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/* Acquisition Panel */
+.land-acquisition {
+    position: relative;
+    background: linear-gradient(135deg, rgba(0,0,0,0.85), rgba(0,0,0,0.95));
+    border: 2px solid rgba(201, 169, 97, 0.4);
+    padding: 2.5rem;
+    max-width: 500px;
+    margin-top: 2.5rem;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.5), inset 0 1px 0 rgba(201,169,97,0.2);
+}
+
+.land-acquisition::before,
+.land-acquisition::after {
+    content: '';
+    position: absolute;
+    width: 18px;
+    height: 18px;
+}
+
+.land-acquisition::before {
+    top: -2px;
+    left: -2px;
+    border-top: 2px solid rgba(201, 169, 97, 0.6);
+    border-left: 2px solid rgba(201, 169, 97, 0.6);
+}
+
+.land-acquisition::after {
+    bottom: -2px;
+    right: -2px;
+    border-bottom: 2px solid rgba(201, 169, 97, 0.6);
+    border-right: 2px solid rgba(201, 169, 97, 0.6);
+}
+
+.land-acquisition h4 {
+    color: #C9A961;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-bottom: 1.25rem;
+}
+
+.land-acq-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.6rem 0;
+    border-bottom: 1px solid rgba(201, 169, 97, 0.12);
+}
+
+.land-acq-row:last-child {
+    border-bottom: none;
+}
+
+.land-acq-row span {
+    color: rgba(237, 217, 192, 0.7);
+    font-size: 0.9rem;
+}
+
+.land-acq-row strong {
+    color: #D4A745;
+    font-size: 0.9rem;
+}
+
+/* Other Targets */
+.land-targets-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+.land-target-link {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.25rem;
+    background: linear-gradient(135deg, #F5E6D3 0%, #EDD9C0 100%);
+    border: 2px solid #8B4513;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.land-target-link:hover {
+    border-color: #C9A961;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px rgba(58, 40, 32, 0.15);
+}
+
+.land-target-link img {
+    width: 80px;
+    height: 55px;
+    object-fit: cover;
+    border-radius: 3px;
+    border: 1px solid #8B4513;
+}
+
+.land-target-link h5 {
+    font-size: 0.95rem;
+    color: #3A2820;
+    margin-bottom: 0.2rem;
+}
+
+.land-target-link p {
+    font-size: 0.8rem;
+    color: #8B4513;
+    margin: 0;
+    text-align: left;
+}
+
+/* CTA Section */
+.land-cta {
+    text-align: center;
+    padding: 3.5rem 2rem;
+    background: linear-gradient(135deg, #2c1810, #4a2511);
+    border: 1px solid rgba(201, 169, 97, 0.3);
+    position: relative;
+    margin-top: 2rem;
+    border-radius: 4px;
+}
+
+.land-cta::before,
+.land-cta::after {
+    content: '';
+    position: absolute;
+    width: 18px;
+    height: 18px;
+}
+
+.land-cta::before {
+    top: -1px;
+    left: -1px;
+    border-top: 2px solid rgba(201, 169, 97, 0.5);
+    border-left: 2px solid rgba(201, 169, 97, 0.5);
+}
+
+.land-cta::after {
+    bottom: -1px;
+    right: -1px;
+    border-bottom: 2px solid rgba(201, 169, 97, 0.5);
+    border-right: 2px solid rgba(201, 169, 97, 0.5);
+}
+
+.land-cta h4 {
+    font-size: 2rem;
+    color: #F5E6D3;
+    margin-bottom: 0.75rem;
+    font-weight: 400;
+}
+
+.land-cta p {
+    color: #a89a8a;
+    margin-bottom: 2rem;
+    font-size: 1rem;
+    font-style: italic;
+    line-height: 1.7;
+    text-align: center;
+}
+
+.land-cta-btn {
+    display: inline-block;
+    padding: 0.85rem 2.5rem;
+    background: transparent;
+    color: #C9A961;
+    text-decoration: none;
+    border: 2px solid #C9A961;
+    font-weight: 700;
+    font-size: 0.95rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    font-family: Georgia, 'Times New Roman', serif;
+}
+
+.land-cta-btn:hover {
+    background-color: #C9A961;
+    color: #3A2820;
+}
+
+/* Footer - matches members-footer */
+.land-footer {
+    background: linear-gradient(135deg, #3A2820 0%, #2a1c16 100%);
+    color: #F5E6D3;
+    text-align: center;
+    padding: 2rem;
+    margin-top: auto;
+    border-top: 3px solid #C9A961;
+}
+
+.land-footer p {
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+.land-footer-credits {
+    margin-top: 1rem;
+}
+
+.land-footer-credits p {
+    margin-bottom: 0.5rem;
+    font-size: 0.75rem;
+    color: #C9A961;
+}
+
+.land-footer-logo {
+    height: 20px;
+    width: auto;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+}
+
+.land-footer-logo:hover {
+    opacity: 1;
+}
+
+/* ===================================
+   Responsive
+   =================================== */
+
+@media (max-width: 768px) {
+    .land-header-inner {
+        flex-direction: column;
+        gap: 0.75rem;
+        text-align: center;
+    }
+
+    .land-header-title {
+        font-size: 1.5rem;
+    }
+
+    .land-hero {
+        min-height: 420px;
+    }
+
+    .land-hero-content {
+        padding: 0 1.5rem 2.5rem;
+    }
+
+    .land-hero-nav {
+        width: 36px;
+        height: 36px;
+        font-size: 1.2rem;
+    }
+
+    .land-hero-prev {
+        left: 0.75rem;
+    }
+
+    .land-hero-next {
+        right: 0.75rem;
+    }
+
+    .land-stats {
+        grid-template-columns: repeat(2, 1fr);
+        padding: 0 1.5rem;
+    }
+
+    .land-stats.cols-3 {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .land-stat:first-child {
+        border-radius: 4px 0 0 0;
+    }
+
+    .land-stat:last-child {
+        border-radius: 0 0 4px 0;
+    }
+
+    .land-stat:nth-child(2) {
+        border-radius: 0 4px 0 0;
+    }
+
+    .land-stat:nth-child(3) {
+        border-radius: 0 0 0 4px;
+    }
+
+    .land-content {
+        padding: 2.5rem 1.5rem;
+    }
+
+    .land-cards {
+        grid-template-columns: 1fr;
+    }
+
+    .land-targets-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .dark-band-inner {
+        padding: 0 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .land-hero {
+        min-height: 350px;
+    }
+
+    .land-hero-title {
+        font-size: 2rem;
+    }
+
+    .land-section-title {
+        font-size: 1.4rem;
+    }
+
+    .land-stat-value {
+        font-size: 1.4rem;
+    }
+
+    .land-stats {
+        grid-template-columns: 1fr;
+    }
+
+    .land-stats.cols-3 {
+        grid-template-columns: 1fr;
+    }
+
+    .land-stat {
+        margin-left: 0;
+        margin-top: -2px;
+        border-radius: 0;
+    }
+
+    .land-stat:first-child {
+        margin-top: 0;
+        border-radius: 4px 4px 0 0;
+    }
+
+    .land-stat:last-child {
+        border-radius: 0 0 4px 4px;
+    }
+
+    .land-stat:nth-child(2),
+    .land-stat:nth-child(3) {
+        border-radius: 0;
+    }
+
+    .land-cta h4 {
+        font-size: 1.5rem;
+    }
+
+    .land-cta-btn {
+        width: 100%;
+    }
+}

@@ -387,8 +387,9 @@ function initAuthObserver() {
     // Handle clean URLs (without .html extension) from static servers
     currentPage = currentPage.replace(/\.html$/, '');
     const publicPages = ['index', 'login', '', 'gazette', 'gazette-v2',
-                         'film-three-graves', 'film-sombra-de-lobo', 'film-the-visionary',
-                         'index-newspaper', 'motion-print-stream'];
+                         'film-three-graves', 'film-sombra-del-lobo', 'film-the-visionary',
+                         'index-newspaper', 'motion-print-stream',
+                         'land-rio-texaco', 'land-verse-hotel', 'land-western-leone'];
 
     if (!publicPages.includes(currentPage)) {
         requireAuth();
