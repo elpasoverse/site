@@ -271,7 +271,7 @@ p {
 
 .vision-closing {
     margin-top: 2.5rem !important;
-    font-style: italic;
+    font-style: normal;
 }
 
 .vision-signature {
@@ -428,13 +428,7 @@ p {
 
 .tagline-emphasis {
     text-align: center !important;
-    font-style: normal;
-    font-family: 'Cinzel', Georgia, serif;
-    color: #F5E6D3;
-    font-size: 1.1rem;
-    margin-top: 6rem;
-    font-weight: 700;
-    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.9);
+    margin-top: 3rem;
 }
 
 /* Four Pillars Section */
@@ -1829,9 +1823,9 @@ p {
     }
 
     .tagline-emphasis {
-        font-size: 1.3rem;
+        font-size: 0.95rem;
         line-height: 1.5;
-        margin-top: 3rem;
+        margin-top: 2rem;
     }
 
     .el-paso-verse {
@@ -2016,8 +2010,8 @@ p {
     }
 
     .tagline-emphasis {
-        font-size: 1.1rem;
-        margin-top: 4rem;
+        font-size: 0.9rem;
+        margin-top: 2rem;
     }
 
     .pillar-card {

@@ -744,6 +744,31 @@
         order: -1;
         margin-bottom: 1.5rem;
     }
+
+    /* Fix collectible section overflow */
+    .exclusive-content-flex h4 {
+        font-size: 1.4rem !important;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+    }
+
+    /* Fix album card layout on mobile */
+    .exclusive-content-flex div[style*="display: flex"][style*="gap: 1.5rem"] {
+        flex-direction: column !important;
+    }
+
+    .exclusive-content-flex img[alt="Vol. I Album Cover"] {
+        width: 100% !important;
+        height: auto !important;
+    }
+
+    /* Fix Kamara logo overflow */
+    .exclusive-content-flex img[alt="Kamara"],
+    div[style*="kamara"] img,
+    img[alt="Kamara"] {
+        max-width: 100% !important;
+        height: auto !important;
+    }
 }
 
 @media (max-width: 480px) {
