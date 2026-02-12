@@ -92,7 +92,7 @@ p {
 /* Hero Section */
 .hero {
     text-align: center;
-    background-image: url('assets/hero-bg.jpg');
+    background-image: url('assets/canyon-background.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -387,9 +387,9 @@ p {
 
 /* About Section */
 .about {
-    background-image: url('assets/canyon-background.jpg');
+    background-image: url('assets/not-virtual-bg.jpg');
     background-size: cover;
-    background-position: center center;
+    background-position: center 40%;
     background-repeat: no-repeat;
     background-attachment: fixed;
     position: relative;
@@ -418,7 +418,7 @@ p {
 }
 
 .about .divider {
-    margin-bottom: 8rem;
+    margin-bottom: 2rem;
 }
 
 .about p {
@@ -428,10 +428,11 @@ p {
 
 .tagline-emphasis {
     text-align: center !important;
-    font-style: italic;
+    font-style: normal;
+    font-family: 'Cinzel', Georgia, serif;
     color: #F5E6D3;
     font-size: 1.1rem;
-    margin-top: 2rem;
+    margin-top: 6rem;
     font-weight: 700;
     text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.9);
 }
@@ -1826,7 +1827,7 @@ p {
     .tagline-emphasis {
         font-size: 1.3rem;
         line-height: 1.5;
-        margin-top: 1.5rem;
+        margin-top: 3rem;
     }
 
     .el-paso-verse {
@@ -2012,6 +2013,7 @@ p {
 
     .tagline-emphasis {
         font-size: 1.1rem;
+        margin-top: 4rem;
     }
 
     .pillar-card {
