@@ -83,31 +83,6 @@
     </script>
 </head>
 <body>
-    <!-- Email Capture Bar -->
-    <div id="emailBar" class="email-bar">
-        <div class="email-bar-container">
-            <div class="email-bar-content">
-                <img src="assets/paso-token.png" alt="PASO" class="email-bar-coin">
-                <div class="email-bar-text">
-                    <strong>Join the Frontier</strong>
-                    <span>Get 25 PASO • First 1,500 pioneers only</span>
-                </div>
-            </div>
-            <form id="emailCaptureForm" onsubmit="submitEmail(event)" class="email-bar-form">
-                <input
-                    type="email"
-                    id="emailInput"
-                    placeholder="Enter your email"
-                    required
-                    class="email-bar-input"
-                />
-                <button type="submit" class="email-bar-submit">
-                    Claim PASO
-                </button>
-            </form>
-            <button class="email-bar-close" onclick="closeEmailBar()" aria-label="Close">&times;</button>
-        </div>
-    </div>
 
     <!-- Hero Section -->
     <section id="hero" class="section hero">
@@ -140,7 +115,7 @@
 
                     <p style="margin-bottom: 1.5rem; line-height: 1.9; font-size: 1rem; color: #4a3828;">While it's been possible to recreate these moments on film, there is a deeper yearning to discover something more... What if there was a place — 100% authentic to that time period — where you could not only experience it on the silver screen but walk the land yourself, feeling the elements with all your senses and live your story as if it would have been in the year 1880?</p>
 
-                    <div id="visionMore" style="max-height: 0; overflow: hidden; transition: max-height 0.6s ease;">
+                    <div id="visionMore" style="max-height: 2000px; overflow: hidden; transition: max-height 0.6s ease;">
                         <p style="margin-bottom: 1.5rem; line-height: 1.9; font-size: 1rem; color: #4a3828;">There is a way to deliver this adventure to those who seek it. And I believe there is no one who wouldn't want to step into this world, if only for a moment... For those ready to immerse themselves in a longer, more profound experience, we invite you to become part of the El Paso Verse — a world where you can spend years living the adventure.</p>
 
                         <p style="margin-bottom: 1.5rem; line-height: 1.9; font-size: 1rem; color: #4a3828;"><strong>A land so vast that traveling across it on horseback would take days in any direction</strong>, or you could choose to hop aboard an interconnected steam train to visit distant towns. It's a place where you can choose to thrive as an entrepreneur, build a business, maybe fall in love, make meaningful friendships or simply explore as a man or woman passing through it.</p>
@@ -152,7 +127,7 @@
 
                     <p style="text-align: right; font-family: 'Cinzel', Georgia, serif; font-size: 1.1rem; margin-top: 1.5rem; color: #3A2820;">— Harry West</p>
                 </blockquote>
-                <button id="visionToggle" onclick="toggleVisionLetter()" style="display: block; margin: 1.5rem auto 0; background: transparent; border: none; font-family: Georgia, 'Times New Roman', serif; font-size: 0.85rem; color: #C9A961; cursor: pointer; letter-spacing: 0.08em; padding: 0.5rem 1rem; border-bottom: 1px solid rgba(201, 169, 97, 0.4); transition: all 0.2s;">Read more</button>
+                <button id="visionToggle" onclick="toggleVisionLetter()" style="display: block; margin: 1.5rem auto 0; background: transparent; border: none; font-family: Georgia, 'Times New Roman', serif; font-size: 0.85rem; color: #C9A961; cursor: pointer; letter-spacing: 0.08em; padding: 0.5rem 1rem; border-bottom: 1px solid rgba(201, 169, 97, 0.4); transition: all 0.2s;">Read less</button>
             </div>
 
             <div class="vision-link-section">
@@ -222,16 +197,16 @@
                     </div>
                 </div>
 
-                <!-- Coin Pillar -->
-                <div class="pillar-card pillar-token">
+                <!-- Land Pillar -->
+                <div class="pillar-card pillar-land">
                     <div class="pillar-text-box">
-                        <h3>COIN</h3>
-                        <p class="pillar-subtitle">PASO is the reward currency of the 1880 frontier</p>
-                        <p class="pillar-description">PASO unlock everything—exclusive film frames, community voting, land access, and entry to the physical frontier.</p>
+                        <h3>LAND</h3>
+                        <p class="pillar-subtitle">Real Frontier towns built in desert</p>
+                        <p class="pillar-description">Plan to develop up to 90,000 acres of authentic Western territory transformed into living, breathing towns. Adventure, live, work as it was in 1880.</p>
                     </div>
                 </div>
 
-                <!-- Partake Pillar -->
+                <!-- Community Pillar -->
                 <div class="pillar-card pillar-participation">
                     <div class="pillar-text-box">
                         <h3>COMMUNITY</h3>
@@ -240,12 +215,12 @@
                     </div>
                 </div>
 
-                <!-- Land Pillar -->
-                <div class="pillar-card pillar-land">
+                <!-- Coin Pillar -->
+                <div class="pillar-card pillar-token">
                     <div class="pillar-text-box">
-                        <h3>LAND</h3>
-                        <p class="pillar-subtitle">Real Frontier towns built in desert</p>
-                        <p class="pillar-description">Plan to develop up to 90,000 acres of authentic Western territory transformed into living, breathing towns. Adventure, live, work as it was in 1880.</p>
+                        <h3>COIN</h3>
+                        <p class="pillar-subtitle">PASO is the reward currency of the 1880 frontier</p>
+                        <p class="pillar-description">PASO unlock everything—exclusive film frames, community voting, land access, and entry to the physical frontier.</p>
                     </div>
                 </div>
             </div>
@@ -255,7 +230,7 @@
     <!-- About Section -->
     <section id="about" class="section about" style="min-height: 50vh; display: flex; align-items: center; justify-content: center;">
         <div class="container" style="text-align: center;">
-            <p style="font-family: 'Cinzel', Georgia, serif; font-size: 2rem; color: #F5E6D3; letter-spacing: 0.08em; text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7); margin: 0; line-height: 1.4;">Not a virtual world.<br>It's a place.</p>
+            <p style="font-family: 'Cinzel', Georgia, serif; font-size: 2rem; color: #F5E6D3; letter-spacing: 0.08em; text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7); margin: 0; line-height: 1.4;">Not a virtual world. It's a place.</p>
         </div>
     </section>
 
@@ -465,53 +440,6 @@
 
     <!-- JavaScript -->
     <script>
-        // Email Capture Bar Functions
-        function showEmailBar() {
-            // Check if user has already submitted email or dismissed
-            const emailSubmitted = localStorage.getItem('emailSubmitted');
-            const barDismissed = localStorage.getItem('emailBarDismissed');
-
-            if (!emailSubmitted && !barDismissed) {
-                document.getElementById('emailBar').classList.add('show');
-            }
-        }
-
-        function closeEmailBar() {
-            document.getElementById('emailBar').classList.remove('show');
-            localStorage.setItem('emailBarDismissed', 'true');
-        }
-
-        async function submitEmail(event) {
-            event.preventDefault();
-
-            const email = document.getElementById('emailInput').value;
-
-            // Mark as submitted
-            localStorage.setItem('emailSubmitted', 'true');
-            localStorage.setItem('userEmail', email);
-
-            // Show success message briefly, then redirect to signup
-            const barContainer = document.querySelector('.email-bar-container');
-            barContainer.innerHTML = `
-                <div style="display: flex; align-items: center; justify-content: center; gap: 1rem; padding: 0.5rem;">
-                    <div style="font-size: 2rem; color: #D4A745;">&#10003;</div>
-                    <div>
-                        <strong style="color: #3A2820; font-size: 1.05rem;">Welcome, Pioneer!</strong>
-                        <p style="color: #8B4513; font-size: 0.9rem; margin: 0.25rem 0 0 0;">Creating your account to claim 25 PASO...</p>
-                    </div>
-                </div>
-            `;
-
-            // Redirect to signup page with email pre-filled
-            setTimeout(() => {
-                window.location.href = 'login.html?signup=true&email=' + encodeURIComponent(email);
-            }, 1500);
-        }
-
-        // Show bar 3 seconds after page load
-        window.addEventListener('load', function() {
-            setTimeout(showEmailBar, 3000);
-        });
 
         function toggleVisionLetter() {
             const content = document.getElementById('visionMore');
