@@ -197,7 +197,9 @@ p {
     color: #F5E6D3;
     border: 2px solid #C9A961;
     text-decoration: none;
+    font-family: 'Avenir Next Condensed', 'Avenir Next', Avenir, sans-serif;
     font-size: 1rem;
+    font-weight: 700;
     letter-spacing: 0.1em;
     text-transform: uppercase;
     transition: all 0.3s ease;
@@ -1417,6 +1419,7 @@ p {
     color: #3A2820;
     border: 2px solid #C9A961;
     text-decoration: none;
+    font-family: 'Avenir Next Condensed', 'Avenir Next', Avenir, sans-serif;
     font-size: 1rem;
     font-weight: 700;
     letter-spacing: 0.1em;
