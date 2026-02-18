@@ -231,7 +231,33 @@ p {
 
 /* Vision Section */
 .vision {
-    background-color: #F5E6D3;
+    background-image: url('assets/unidentified-man-river.jpg');
+    background-size: cover;
+    background-position: center right;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    position: relative;
+}
+
+.vision::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    z-index: 1;
+}
+
+.vision .container {
+    position: relative;
+    z-index: 2;
+}
+
+.vision h2 {
+    color: #f0ead6;
+}
+
+.vision .divider {
+    background-color: #C9A961;
 }
 
 .vision-intro {
@@ -243,7 +269,7 @@ p {
     font-family: Georgia, 'Times New Roman', serif;
     font-size: 1.3rem;
     font-style: italic;
-    color: #8B4513;
+    color: #F5E6D3;
     text-align: center !important;
     margin-bottom: 2rem;
 }
@@ -258,6 +284,7 @@ p {
     margin-bottom: 1.8rem;
     line-height: 1.9;
     font-size: 1.05rem;
+    color: #F5E6D3;
 }
 
 .vision-content p em {
@@ -1701,6 +1728,10 @@ p {
 
     .about h2 {
         font-size: 1.8rem;
+    }
+
+    .vision {
+        background-attachment: scroll;
     }
 
     .hero-subtitle {
