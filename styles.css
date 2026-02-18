@@ -436,6 +436,7 @@ p {
 /* Four Pillars Section */
 .pillars {
     background-color: #F5E6D3;
+    padding: 5rem 0;
 }
 
 .pillars-grid {
@@ -681,7 +682,7 @@ p {
 
 .collection-intro {
     text-align: center;
-    color: #EDD9C0;
+    color: #F5E6D3;
     font-size: 1.1rem;
     margin-bottom: 4rem;
     line-height: 1.8;
